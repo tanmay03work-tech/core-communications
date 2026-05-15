@@ -1,0 +1,258 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ═══════════════════════════════════
+   CORE COMMUNICATIONS — GLOBAL STYLES
+   Production Design System v3.0
+   ═══════════════════════════════════ */
+
+@layer base {
+  :root {
+    --font-sans:    Inter;
+    --navy:         #1C2E4A;
+    --deep:         #1C2E4A;
+    --steel:        #1C2E4A;
+    --accent:       #5BC0EB;
+    --accent-light: #5BC0EB;
+    --accent-glow:  #5BC0EB;
+    --surface-light:#F5F7FA;
+    --white:        #F5F7FA;
+    --mist:         rgba(255, 255, 255, 0.06);
+    --ink:          #1C2E4A;
+
+    /* Modular spacing scale: 8 / 16 / 24 / 32 / 48 / 64 / 96 */
+    --sp-1: 8px;
+    --sp-2: 16px;
+    --sp-3: 24px;
+    --sp-4: 32px;
+    --sp-6: 48px;
+    --sp-8: 64px;
+    --sp-12: 96px;
+  }
+
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Lenis smooth scroll */
+  html.lenis, html.lenis body { height: auto; }
+  .lenis.lenis-smooth            { scroll-behavior: auto !important; }
+  .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+  .lenis.lenis-stopped           { overflow: hidden; }
+
+  body {
+    font-family: var(--font-sans), Helvetica, Arial, sans-serif;
+    background: var(--navy);
+    color: var(--white);
+    overflow-x: hidden;
+    line-height: 1.65;
+  }
+
+  ::selection {
+    background: rgba(91, 192, 235, 0.25);
+    color: var(--navy);
+  }
+
+  ::-webkit-scrollbar       { width: 5px; }
+  ::-webkit-scrollbar-track { background: var(--navy); }
+  ::-webkit-scrollbar-thumb { background: var(--steel); border-radius: 2px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+}
+
+@layer components {
+
+  /* ─── Section Tag ──────────────────────────────────── */
+  .section-tag {
+    @apply inline-flex items-center gap-3 uppercase font-bold tracking-[0.22em];
+    font-size: 0.7rem;
+    color: var(--accent);
+  }
+  .section-tag::before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 1px;
+    background: currentColor;
+    flex-shrink: 0;
+  }
+  /* Variant: on light surfaces */
+  .section-tag-dark {
+    color: var(--deep);
+  }
+  .section-tag-dark::before {
+    background: var(--deep);
+  }
+
+  /* ─── Section Heading ──────────────────────────────── */
+  .section-heading {
+    @apply font-display font-semibold;
+    font-size: clamp(2.25rem, 3.5vw, 3.75rem);
+    line-height: 1.08;
+    letter-spacing: -0.015em;
+  }
+  .section-heading em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  /* ─── Primary Button ───────────────────────────────── */
+  /* Solid accent fill, navy text — "SEE OUR WORK" style from references */
+  .btn-primary {
+    @apply relative inline-flex items-center gap-3 overflow-hidden font-bold uppercase;
+    padding: 16px 36px;
+    font-size: 0.78rem;
+    letter-spacing: 0.2em;
+    background: var(--accent);
+    color: var(--navy);
+    border: 1px solid transparent;
+    transition: color 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .btn-primary::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--navy);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 0;
+  }
+  .btn-primary:hover::after  { transform: scaleX(1); transform-origin: left; }
+  .btn-primary:hover         { color: var(--accent); }
+  .btn-primary span, .btn-primary svg { position: relative; z-index: 1; }
+
+  /* ─── Ghost Button (light bg) ──────────────────────── */
+  .btn-ghost {
+    @apply inline-flex items-center gap-3 font-bold uppercase;
+    padding: 16px 36px;
+    font-size: 0.78rem;
+    letter-spacing: 0.2em;
+    border: 1px solid rgba(11, 31, 51, 0.25);
+    color: rgba(11, 31, 51, 0.75);
+    transition: background 0.35s ease, border-color 0.35s ease, color 0.35s ease;
+  }
+  .btn-ghost:hover {
+    background: var(--navy);
+    border-color: var(--navy);
+    color: var(--white);
+  }
+
+  /* ─── Outline White Button (dark bg) ──────────────── */
+  .btn-outline-white {
+    @apply inline-flex items-center gap-3 font-bold uppercase;
+    padding: 16px 36px;
+    font-size: 0.78rem;
+    letter-spacing: 0.2em;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    color: rgba(255, 255, 255, 0.85);
+    transition: background 0.35s ease, border-color 0.35s ease, color 0.35s ease;
+  }
+  .btn-outline-white:hover {
+    border-color: rgba(255, 255, 255, 0.85);
+    background: rgba(255, 255, 255, 0.07);
+    color: #fff;
+  }
+
+  /* ─── Pill Chip (sectors) ──────────────────────────── */
+  .chip {
+    @apply inline-flex items-center font-bold uppercase;
+    padding: 10px 20px;
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: rgba(255, 255, 255, 0.5);
+    transition: border-color 0.3s ease, color 0.3s ease, background 0.3s ease;
+  }
+  .chip:hover {
+    border-color: rgba(255, 255, 255, 0.35);
+    color: rgba(255, 255, 255, 0.85);
+  }
+  .chip-active {
+    background: rgba(91, 192, 235, 0.15);
+    border-color: rgba(91, 192, 235, 0.45);
+    color: var(--accent-glow);
+  }
+  .chip-active:hover {
+    background: rgba(91, 192, 235, 0.22);
+    border-color: rgba(91, 192, 235, 0.65);
+    color: var(--navy);
+  }
+
+  /* ─── Light Card (case studies, team) ─────────────── */
+  .card-light {
+    @apply bg-white border border-navy/[0.08];
+    transition: border-color 0.35s ease, box-shadow 0.35s ease, transform 0.35s ease;
+  }
+  .card-light:hover {
+    border-color: rgba(91, 192, 235, 0.35);
+    box-shadow: 0 8px 32px rgba(28, 46, 74, 0.08);
+    transform: translateY(-2px);
+  }
+
+  /* ─── Dark Feature Card (services) ────────────────── */
+  .card-dark {
+    background: rgba(255, 255, 255, 0.025);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    transition: background 0.35s ease, border-color 0.35s ease;
+  }
+  .card-dark:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(91, 192, 235, 0.3);
+  }
+
+  /* ─── About Feature Card (light, left-border accent) ─ */
+  .card-feature {
+    @apply bg-white/70 border border-navy/[0.09];
+    border-left: 2px solid var(--accent);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  .card-feature:hover {
+    box-shadow: 0 4px 24px rgba(28, 46, 74, 0.06);
+  }
+
+  /* ─── Divider line ────────────────────────────────── */
+  .divider-mist {
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+  }
+  .divider-navy {
+    border: none;
+    border-top: 1px solid rgba(11, 31, 51, 0.1);
+  }
+}
+
+@layer utilities {
+  @media (pointer: coarse) {
+    .custom-cursor { display: none !important; }
+    body           { cursor: auto !important; }
+  }
+
+  .text-balance { text-wrap: balance; }
+
+  /* Gradient accent vertical line */
+  .accent-line-v {
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, var(--accent), transparent);
+    opacity: 0.35;
+  }
+
+  /* Atmospheric vertical grid helper */
+  .bg-vgrid {
+    background-image: linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+    background-size: 10vw 100%;
+  }
+}
