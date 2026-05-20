@@ -8,7 +8,8 @@ import SectionRenderer from '@/components/sections/SectionRenderer';
 import SectionLabel from '@/components/ui/SectionLabel';
 import {CASE_STUDIES, TICKER_CLIENTS} from '@/lib/constants';
 import {buildMetadata, buildOgImageUrl, getAbsoluteUrl, getSiteUrl} from '@/lib/metadata';
-import {getCaseStudyBySlug, getCaseStudySlugs} from '@/lib/sanity/content';
+import {sanityFetch} from '@/lib/sanity/client';
+import {getCaseStudyBySlug} from '@/lib/sanity/content';
 import {getSanityImageUrl} from '@/lib/sanity/image';
 import type {CaseStudy as SanityCaseStudy} from '@/types';
 
@@ -17,6 +18,8 @@ type CaseStudyPageProps = {
 };
 
 type StaticCaseStudy = (typeof CASE_STUDIES.items)[number];
+type CaseStudyRouteParams = {slug: string};
+type CaseStudySlugResult = {slug?: string | null};
 
 function getStaticCaseStudy(slug: string) {
   return CASE_STUDIES.items.find((item) => item.slug === slug) ?? null;
@@ -62,15 +65,57 @@ function getStudyImage(study: SanityCaseStudy | StaticCaseStudy) {
   return null;
 }
 
-export async function generateStaticParams() {
-  const cmsSlugs = (await getCaseStudySlugs()) ?? [];
-  const staticSlugs = CASE_STUDIES.items.map((study) => study.slug);
+function normalizeSlug(slug: string | null | undefined) {
+  if (typeof slug !== 'string') {
+    return null;
+  }
+
+  const trimmedSlug = slug.trim();
+  return trimmedSlug.length > 0 ? trimmedSlug : null;
+}
+
+async function getSafeCaseStudyBySlug(slug: string) {
+  try {
+    return (await getCaseStudyBySlug(slug)) ?? getStaticCaseStudy(slug);
+  } catch (error) {
+    console.error(`getCaseStudyBySlug error for "${slug}":`, error);
+    return getStaticCaseStudy(slug);
+  }
+}
+
+async function getSanityCaseStudySlugs(): Promise<string[]> {
+  try {
+    const works = await sanityFetch<CaseStudySlugResult[]>({
+      query: `*[_type == "caseStudy" && defined(slug.current)]{
+        "slug": slug.current
+      }`,
+      tags: ['caseStudies'],
+    });
+
+    if (!Array.isArray(works)) {
+      return [];
+    }
+
+    return works
+      .map((work) => normalizeSlug(work?.slug))
+      .filter((slug): slug is string => Boolean(slug));
+  } catch (error) {
+    console.error('generateStaticParams error:', error);
+    return [];
+  }
+}
+
+export async function generateStaticParams(): Promise<CaseStudyRouteParams[]> {
+  const cmsSlugs = await getSanityCaseStudySlugs();
+  const staticSlugs = CASE_STUDIES.items
+    .map((study) => normalizeSlug(study.slug))
+    .filter((slug): slug is string => Boolean(slug));
 
   return [...new Set([...staticSlugs, ...cmsSlugs])].map((slug) => ({slug}));
 }
 
 export async function generateMetadata({params}: CaseStudyPageProps): Promise<Metadata> {
-  const study = (await getCaseStudyBySlug(params.slug)) ?? getStaticCaseStudy(params.slug);
+  const study = await getSafeCaseStudyBySlug(params.slug);
   const pathname = `/work/${params.slug}`;
 
   if (!study) {
@@ -90,7 +135,7 @@ export async function generateMetadata({params}: CaseStudyPageProps): Promise<Me
 }
 
 export default async function CaseStudyPage({params}: CaseStudyPageProps) {
-  const study = (await getCaseStudyBySlug(params.slug)) ?? getStaticCaseStudy(params.slug);
+  const study = await getSafeCaseStudyBySlug(params.slug);
 
   if (!study) {
     notFound();
