@@ -1,60 +1,104 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { ABOUT } from '@/lib/constants';
+import {LazyMotion, domAnimation, m, useReducedMotion} from 'framer-motion';
+import Link from 'next/link';
+import SplitText from '@/components/animations/SplitText';
 import ScrollReveal from '@/components/motion/ScrollReveal';
-import { fadeUp, staggerContainer } from '@/lib/motion-variants';
+import SectionLabel from '@/components/ui/SectionLabel';
+import {ABOUT} from '@/lib/constants';
+
+const containerVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.08,
+      delayChildren: 0.1,
+    },
+  },
+};
+
+const fadeUpChild = {
+  hidden: {opacity: 0, y: 32, filter: 'blur(4px)'},
+  visible: {
+    opacity: 1,
+    y: 0,
+    filter: 'blur(0px)',
+    transition: {duration: 0.65, ease: [0.22, 1, 0.36, 1]},
+  },
+};
 
 export default function AboutSection() {
+  const prefersReducedMotion = useReducedMotion();
+
   return (
-    <section id="about" className="bg-surface-light text-navy py-section px-6 lg:px-16">
-      <ScrollReveal>
-        <div className="max-w-7xl mx-auto">
-          <div className="section-tag text-deep before:bg-deep mb-6">{ABOUT.tag}</div>
+    <LazyMotion features={domAnimation}>
+      <section id="about" className="section-wrap bg-surface text-navy">
+        <div className="mx-auto max-w-7xl">
+          <div className="section-header">
+            <SectionLabel className="text-primary">{ABOUT.tag}</SectionLabel>
+            <SplitText
+              by="word"
+              stagger={60}
+              className="section-heading max-w-3xl text-navy"
+              text={ABOUT.heading.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim()}
+            />
+            <ScrollReveal className="mt-6 max-w-4xl border-l-4 border-accent pl-6" direction="left">
+              <blockquote className="text-xl font-medium leading-relaxed text-navy">
+                “Communications with credibility, clarity, and commercial context.”
+              </blockquote>
+            </ScrollReveal>
+          </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start mt-4">
-            {/* Left — Text */}
-            <div>
-              <h2
-                className="section-heading text-navy mb-6"
-                dangerouslySetInnerHTML={{ __html: ABOUT.heading }}
-              />
-              {ABOUT.paragraphs.map((p, i) => (
-                <p
-                  key={i}
-                  className="text-base leading-relaxed text-navy/70 mb-5 last:mb-0"
-                >
-                  {p}
-                </p>
-              ))}
-            </div>
+          <div className="grid-split-wide">
+            <ScrollReveal>
+              <div className="max-w-xl">
+                {ABOUT.paragraphs.slice(0, 3).map((paragraph) => (
+                  <p key={paragraph} className="mb-4 text-base leading-8 text-navy/70 last:mb-0">
+                    {paragraph}
+                  </p>
+                ))}
+                <div className="pt-4">
+                  <Link href="/about" className="btn-ghost">
+                    <span>Know More</span>
+                  </Link>
+                </div>
+              </div>
+            </ScrollReveal>
 
-            {/* Right — Pillar Cards */}
-            <motion.div
-              className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2"
-              variants={staggerContainer}
+            <m.div
+              className="grid grid-cols-2 gap-4"
+              variants={containerVariants}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, margin: '-100px' }}
+              viewport={{once: true, margin: '-60px'}}
             >
-              {ABOUT.pillars.map((pillar, i) => (
-                <motion.div
+              {ABOUT.pillars.slice(0, 4).map((pillar, index) => (
+                <m.article
                   key={pillar.title}
-                  className="bg-white p-6 border-l-[3px] border-deep transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_12px_30px_rgba(28,46,74,0.12)]"
-                  variants={fadeUp}
+                  variants={prefersReducedMotion ? undefined : fadeUpChild}
+                  whileHover={
+                    prefersReducedMotion
+                      ? undefined
+                      : {
+                          y: -6,
+                          borderBottomColor: '#1C2E4A',
+                          transition: {duration: 0.3, ease: [0.22, 1, 0.36, 1]},
+                        }
+                  }
+                  className="border border-navy/10 border-b-2 border-b-transparent bg-white p-5"
+                  style={prefersReducedMotion ? undefined : {willChange: 'transform'}}
                 >
-                  <div className="font-title text-[0.95rem] font-bold text-navy mb-2">
-                    {pillar.title}
+                  <div className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-accent">
+                    0{index + 1}
                   </div>
-                  <p className="text-[0.8rem] text-navy/60 leading-relaxed">
-                    {pillar.text}
-                  </p>
-                </motion.div>
+                  <h3 className="mb-2 text-base font-semibold text-navy">{pillar.title}</h3>
+                  <p className="text-sm leading-7 text-navy/62">{pillar.text}</p>
+                </m.article>
               ))}
-            </motion.div>
+            </m.div>
           </div>
         </div>
-      </ScrollReveal>
-    </section>
+      </section>
+    </LazyMotion>
   );
 }

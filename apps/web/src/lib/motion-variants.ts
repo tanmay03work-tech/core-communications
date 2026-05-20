@@ -191,3 +191,72 @@ export const defaultViewport = {
   once: true,
   margin: '-100px' as const,
 };
+
+// Navbar
+export const navbarSpring: Transition = {
+  type: 'spring',
+  stiffness: 280,
+  damping: 26,
+  mass: 0.8,
+};
+
+export const navbarItemVariants: Variants = {
+  rest: { y: 0, opacity: 1 },
+  hover: {
+    y: -1.5,
+    opacity: 1,
+    transition: {
+      duration: 0.24,
+      ease: [0.16, 1, 0.3, 1],
+    },
+  },
+};
+
+export const mobileMenuVariants: Variants = {
+  hidden: {
+    opacity: 0,
+    clipPath: 'inset(0 0 100% 0 round 2rem)',
+  },
+  visible: {
+    opacity: 1,
+    clipPath: 'inset(0 0 0% 0 round 0rem)',
+    transition: {
+      duration: 0.5,
+      ease: [0.16, 1, 0.3, 1],
+      when: 'beforeChildren',
+      staggerChildren: 0.07,
+      delayChildren: 0.08,
+    },
+  },
+  exit: {
+    opacity: 0,
+    clipPath: 'inset(0 0 100% 0 round 2rem)',
+    transition: {
+      duration: 0.28,
+      ease: [0.7, 0, 0.84, 0],
+      when: 'afterChildren',
+      staggerChildren: 0.04,
+      staggerDirection: -1,
+    },
+  },
+};
+
+export const mobileMenuItemVariants: Variants = {
+  hidden: { opacity: 0, y: 18 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.42,
+      ease: [0.16, 1, 0.3, 1],
+    },
+  },
+  exit: {
+    opacity: 0,
+    y: 12,
+    transition: {
+      duration: 0.2,
+      ease: 'easeInOut',
+    },
+  },
+};

@@ -1,180 +1,302 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
+import {useEffect, useMemo, useState, type MouseEvent as ReactMouseEvent} from 'react';
+import {LayoutGroup, motion, useMotionValueEvent, useReducedMotion, useScroll, useSpring} from 'framer-motion';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { Menu, X } from 'lucide-react';
-import { NAV_LINKS } from '@/lib/constants';
-import { Container } from './Container';
-import BrandLockup from './BrandLockup';
+import {NAV_LINKS} from '@/lib/constants';
+import {useActiveSection} from '@/hooks/useActiveSection';
+import {useCurrentLocation} from '@/hooks/useCurrentLocation';
+import {useMagnetic} from '@/hooks/useMagnetic';
+import {navbarItemVariants, navbarSpring} from '@/lib/motion-variants';
+import {cn} from '@/lib/utils';
+import {Container} from './Container';
+import MobileMenu from './MobileMenu';
+import AnimatedLogoMark from './AnimatedLogoMark';
+
+type NavLinkItem = (typeof NAV_LINKS)[number] & {
+  active: boolean;
+};
+
+type Ripple = {
+  id: number;
+  x: number;
+  y: number;
+};
+
+function NavbarLogo({compact}: {compact: boolean}) {
+  return (
+    <Link href="/" aria-label="Core Communications Home" className="inline-flex items-center gap-3 no-underline">
+      <motion.span
+        className="flex shrink-0 items-center justify-center"
+        animate={{scale: compact ? 0.92 : 1}}
+        transition={navbarSpring}
+      >
+        <AnimatedLogoMark size={compact ? 38 : 42} />
+      </motion.span>
+      <div className="flex min-w-0 flex-col">
+        <span className="text-[0.88rem] font-semibold uppercase tracking-[0.28em] text-[var(--navy)]">Core</span>
+        <span className="text-[0.6rem] uppercase tracking-[0.24em] text-[rgba(28,46,74,0.56)]">Communications</span>
+      </div>
+    </Link>
+  );
+}
+
+function isRouteActive(pathname: string, href: string) {
+  if (href === '/work') {
+    return pathname === '/work' || pathname.startsWith('/work/');
+  }
+
+  if (href === '/') {
+    return pathname === '/';
+  }
+
+  return href === pathname;
+}
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
+  const reducedMotion = useReducedMotion();
+  const {pathname} = useCurrentLocation();
+  const {activeHref} = useActiveSection(NAV_LINKS);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const pathname = usePathname();
-  const { scrollY } = useScroll();
-
-  useMotionValueEvent(scrollY, 'change', (latest) => {
-    setScrolled(latest > 40);
+  const [compact, setCompact] = useState(false);
+  const [lowPowerMode, setLowPowerMode] = useState(false);
+  const [ripples, setRipples] = useState<Ripple[]>([]);
+  const magnetic = useMagnetic<HTMLDivElement>(10);
+  const {scrollY, scrollYProgress} = useScroll();
+  const progressScale = useSpring(scrollYProgress, {
+    stiffness: 150,
+    damping: 30,
+    restDelta: 0.001,
   });
 
-  // Close mobile menu on route change
+  useMotionValueEvent(scrollY, 'change', (latest) => {
+    setCompact(latest > 28);
+  });
+
   useEffect(() => {
     setMobileOpen(false);
   }, [pathname]);
 
-  // Lock body scroll when mobile menu is open
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? 'hidden' : '';
-    return () => { document.body.style.overflow = ''; };
+    return () => {
+      document.body.style.overflow = '';
+    };
   }, [mobileOpen]);
 
-  const isHome = pathname === '/';
+  useEffect(() => {
+    const connection = (navigator as Navigator & {connection?: {saveData?: boolean}}).connection;
+    const coarsePointer = window.matchMedia('(pointer: coarse)').matches;
+    const constrainedCpu = typeof navigator.hardwareConcurrency === 'number' && navigator.hardwareConcurrency <= 4;
 
-  const navLinkClass = (isActive: boolean) =>
-    `group relative inline-flex items-center justify-center text-[0.84rem] tracking-[0.16em] uppercase font-extrabold no-underline transition-all duration-200 ${
-      isActive ? 'text-white' : 'text-white/70 hover:text-white'
-    }`;
+    setLowPowerMode(Boolean(reducedMotion || connection?.saveData || (coarsePointer && constrainedCpu)));
+  }, [reducedMotion]);
 
-  const isLinkActive = (href: string) => {
-    if (href === '/work') {
-      return pathname === '/work' || pathname.startsWith('/work/');
+  const navLinks = useMemo<NavLinkItem[]>(
+    () =>
+      NAV_LINKS.map((link) => {
+        const isHashLink = link.href.includes('#');
+        return {
+          ...link,
+          active: isHashLink ? activeHref === link.href : isRouteActive(pathname, link.href),
+        };
+      }),
+    [activeHref, pathname],
+  );
+
+  const handleCtaClick = (event: ReactMouseEvent<HTMLAnchorElement>) => {
+    if (reducedMotion || lowPowerMode) {
+      return;
     }
 
-    return isHome && href.startsWith('/#');
+    const bounds = event.currentTarget.getBoundingClientRect();
+    const ripple = {
+      id: Date.now(),
+      x: event.clientX - bounds.left,
+      y: event.clientY - bounds.top,
+    };
+
+    setRipples((current) => [...current, ripple]);
+    window.setTimeout(() => {
+      setRipples((current) => current.filter((item) => item.id !== ripple.id));
+    }, 650);
   };
 
   return (
     <>
-      <motion.nav
-        className="fixed top-0 left-0 right-0 z-[100] border-b border-white/6 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
-        animate={{
-          backgroundColor: scrolled ? 'rgba(39, 41, 76, 0.78)' : 'rgba(45, 47, 88, 0.98)',
-          backdropFilter: scrolled ? 'blur(18px)' : 'blur(0px)',
-          boxShadow: scrolled
-            ? '0 14px 36px rgba(10, 14, 32, 0.28)'
-            : '0 0 0 rgba(10, 14, 32, 0.00)',
-        }}
-      >
-        <Container className="max-w-[1900px] px-0">
-          <motion.div
-            className="flex items-stretch justify-between gap-0"
-            animate={{
-              minHeight: scrolled ? 74 : 104,
-            }}
-          >
-            <div className="flex min-w-0 flex-1 items-center bg-white/[0.02] pl-12 pr-10 lg:pl-20 lg:pr-14">
-              <BrandLockup compact />
-            </div>
+      <motion.div
+        className="fixed inset-x-0 top-0 z-[120] h-[2px] origin-left bg-[linear-gradient(90deg,rgba(28,46,74,0.92),rgba(91,192,235,0.96),rgba(61,183,242,0.92))]"
+        style={{scaleX: progressScale}}
+      />
 
-            <div className="hidden lg:flex items-center border-l border-black/18 bg-white/[0.015] px-14 shadow-[-18px_0_30px_rgba(20,23,46,0.22)]">
-              <ul className="flex items-center gap-14 list-none">
-                {NAV_LINKS.map((link) => {
-                  const isActive = isLinkActive(link.href);
-                  return (
-                    <li key={link.href}>
-                      <motion.div
-                        whileHover={{ y: -1 }}
-                        whileTap={{ scale: 0.96, y: 0 }}
-                        transition={{ duration: 0.16, ease: 'easeOut' }}
+      <motion.header
+        className="fixed inset-x-0 top-0 z-[110]"
+        animate={reducedMotion ? undefined : {y: compact ? -2 : 0}}
+        transition={navbarSpring}
+      >
+        <Container className="max-w-[1540px] pt-4 md:pt-5">
+          <motion.nav
+            aria-label="Primary"
+            className="glass-nav relative overflow-hidden rounded-full"
+            animate={reducedMotion ? undefined : {scale: compact ? 0.985 : 1}}
+            transition={navbarSpring}
+          >
+            <motion.div
+              className="pointer-events-none absolute inset-0 rounded-full"
+              animate={{opacity: compact ? 1 : 0.66}}
+              transition={{duration: 0.28, ease: 'easeOut'}}
+            >
+              <div className="absolute inset-[1px] rounded-full backdrop-blur-[10px]" />
+              <motion.div
+                className={cn(
+                  'absolute inset-[1px] rounded-full bg-white/[0.34]',
+                  lowPowerMode ? '' : 'backdrop-blur-[24px]',
+                )}
+                animate={{opacity: compact ? 1 : 0.5}}
+                transition={{duration: 0.28, ease: 'easeOut'}}
+              />
+            </motion.div>
+
+            <div className="glass-nav__border pointer-events-none absolute inset-0 rounded-full" />
+            <div className="glass-nav__glow pointer-events-none absolute inset-x-10 -top-px h-px" />
+            <div className="nav-noise pointer-events-none absolute inset-0 rounded-full opacity-[0.18]" />
+            <div className="pointer-events-none absolute inset-x-12 top-0 h-10 rounded-full bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.72),transparent_72%)] opacity-45" />
+
+            <div
+              className={cn(
+                'relative flex items-center justify-between gap-4 px-4 md:px-5 lg:px-6',
+                compact ? 'py-2.5' : 'py-3',
+              )}
+            >
+              <NavbarLogo compact={compact} />
+
+              <LayoutGroup id="desktop-navbar">
+                <div className="hidden items-center gap-1.5 lg:flex">
+                  {navLinks.map((link) => (
+                    <motion.div
+                      key={link.href}
+                      className="relative"
+                      initial="rest"
+                      animate="rest"
+                      whileHover={reducedMotion ? undefined : 'hover'}
+                      variants={navbarItemVariants}
+                    >
+                      <Link
+                        href={link.href}
+                        aria-current={link.active ? 'page' : undefined}
+                        className={cn(
+                          'group relative inline-flex items-center justify-center overflow-hidden rounded-full px-4 py-2.5 text-[0.74rem] font-semibold uppercase tracking-[0.2em] no-underline transition-colors duration-200',
+                          link.active ? 'text-[var(--navy)]' : 'text-[rgba(28,46,74,0.72)] hover:text-[var(--navy)]',
+                        )}
                       >
-                        <Link
-                          href={link.href}
-                          className={navLinkClass(isActive)}
-                        >
-                          <span>{link.label}</span>
-                          <span
-                            className={`absolute -bottom-4 left-1/2 h-[2px] -translate-x-1/2 rounded-full bg-accent transition-all duration-300 ${
-                              isActive ? 'w-9 opacity-100' : 'w-0 opacity-0 group-hover:w-9 group-hover:opacity-100'
-                            }`}
-                          />
-                          {isActive && (
+                        {link.active ? (
+                          <>
                             <motion.span
-                              layoutId="nav-underline-glow"
-                              className="absolute -bottom-4 left-1/2 h-[2px] w-9 -translate-x-1/2 rounded-full bg-accent shadow-[0_0_18px_rgba(91,192,235,0.45)]"
-                              transition={{ type: 'spring', stiffness: 320, damping: 28 }}
+                              layoutId="navbar-active-pill"
+                              className="absolute inset-0 rounded-full bg-[linear-gradient(180deg,rgba(91,192,235,0.18),rgba(91,192,235,0.12))]"
+                              transition={navbarSpring}
                             />
-                          )}
-                        </Link>
-                      </motion.div>
-                    </li>
-                  );
-                })}
-                <li>
+                            <motion.span
+                              layoutId="navbar-active-border"
+                              className="absolute inset-0 rounded-full border border-[rgba(91,192,235,0.34)]"
+                              transition={navbarSpring}
+                            />
+                          </>
+                        ) : null}
+
+                        <span className="relative z-[1]">{link.label}</span>
+                        <motion.span
+                          className="absolute inset-x-4 bottom-[7px] h-px origin-left rounded-full bg-[linear-gradient(90deg,rgba(91,192,235,0.96),rgba(61,183,242,0.62))]"
+                          variants={{
+                            rest: {
+                              scaleX: link.active ? 1 : 0,
+                              opacity: link.active ? 1 : 0.72,
+                            },
+                            hover: {
+                              scaleX: 1,
+                              opacity: 1,
+                            },
+                          }}
+                          transition={{duration: 0.24, ease: [0.16, 1, 0.3, 1]}}
+                        />
+                      </Link>
+                    </motion.div>
+                  ))}
+
                   <motion.div
-                    whileHover={{ y: -1 }}
-                    whileTap={{ scale: 0.97 }}
-                    transition={{ duration: 0.16, ease: 'easeOut' }}
+                    ref={magnetic.ref}
+                    className="ml-2"
+                    style={lowPowerMode ? undefined : magnetic.style}
+                    onMouseMove={lowPowerMode ? undefined : magnetic.onMouseMove}
+                    onMouseLeave={lowPowerMode ? undefined : magnetic.onMouseLeave}
                   >
                     <Link
                       href="/contact"
-                      className="inline-flex items-center justify-center border border-accent bg-transparent px-10 py-4 text-[0.82rem] tracking-[0.18em] uppercase font-extrabold text-accent no-underline transition-all duration-300 hover:bg-accent hover:text-navy hover:shadow-[0_12px_28px_rgba(91,192,235,0.18)] active:scale-[0.98]"
+                      onClick={handleCtaClick}
+                      className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full border border-[rgba(91,192,235,0.22)] bg-[linear-gradient(180deg,rgba(25,46,78,0.96),rgba(18,35,61,0.96))] px-5 py-2.5 text-[0.72rem] font-semibold uppercase tracking-[0.2em] text-white no-underline shadow-[0_10px_30px_rgba(12,26,48,0.18)]"
                     >
-                      Get in Touch
+                      <span className="pointer-events-none absolute inset-0 rounded-full bg-[radial-gradient(circle_at_top,rgba(91,192,235,0.22),transparent_60%)] opacity-80" />
+                      <span className="pointer-events-none absolute inset-x-6 bottom-0 h-px bg-[linear-gradient(90deg,rgba(91,192,235,0),rgba(91,192,235,0.95),rgba(91,192,235,0))] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                      {ripples.map((ripple) => (
+                        <motion.span
+                          key={ripple.id}
+                          className="pointer-events-none absolute rounded-full bg-white/25"
+                          initial={{opacity: 0.5, scale: 0, x: ripple.x - 6, y: ripple.y - 6, width: 12, height: 12}}
+                          animate={{opacity: 0, scale: 12}}
+                          transition={{duration: 0.6, ease: 'easeOut'}}
+                        />
+                      ))}
+                      <span className="relative z-[1]">Start a Conversation</span>
+                      <motion.span
+                        className="relative z-[1] inline-flex"
+                        animate={reducedMotion ? undefined : {x: compact ? 2 : 0}}
+                        whileHover={reducedMotion ? undefined : {x: 4}}
+                        transition={navbarSpring}
+                      >
+                        →
+                      </motion.span>
                     </Link>
                   </motion.div>
-                </li>
-              </ul>
-            </div>
+                </div>
+              </LayoutGroup>
 
-            <button
-              className="lg:hidden relative z-[110] mr-5 flex h-11 w-11 items-center justify-center border border-white/15 bg-white/5 text-white transition-all hover:border-accent/50 hover:text-accent active:scale-95"
-              onClick={() => setMobileOpen(!mobileOpen)}
-              aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
-            >
-              {mobileOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
-          </motion.div>
-        </Container>
-      </motion.nav>
-
-      {/* Mobile Menu Overlay */}
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            className="fixed inset-0 z-[99] flex flex-col items-center justify-center bg-[rgba(34,36,68,0.94)] backdrop-blur-2xl"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-          >
-            <nav className="flex flex-col items-center gap-8">
-              {NAV_LINKS.map((link, i) => (
-                <motion.div
-                  key={link.href}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 10 }}
-                  transition={{ delay: i * 0.06, duration: 0.4 }}
-                >
-                  <Link
-                    href={link.href}
-                    onClick={() => setMobileOpen(false)}
-                    className="font-sans text-3xl font-semibold text-white no-underline tracking-[0.08em] uppercase transition-colors hover:text-accent active:text-white/70"
-                  >
-                    {link.label}
-                  </Link>
-                </motion.div>
-              ))}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 10 }}
-                transition={{ delay: NAV_LINKS.length * 0.06, duration: 0.4 }}
+              <button
+                type="button"
+                aria-label={mobileOpen ? 'Close navigation menu' : 'Open navigation menu'}
+                aria-expanded={mobileOpen}
+                aria-controls="mobile-navigation"
+                onClick={() => setMobileOpen((open) => !open)}
+                className="relative flex h-11 w-11 items-center justify-center overflow-hidden rounded-full border border-[rgba(28,46,74,0.08)] bg-white/55 text-[var(--navy)] shadow-[0_8px_24px_rgba(28,46,74,0.08)] transition-colors duration-200 hover:border-[rgba(91,192,235,0.32)] lg:hidden"
               >
-                <Link
-                  href="/contact"
-                  onClick={() => setMobileOpen(false)}
-                  className="mt-4 inline-flex items-center border border-accent bg-transparent px-6 py-3 text-[0.75rem] font-bold uppercase tracking-[0.18em] text-accent no-underline transition-all hover:bg-accent hover:text-navy active:scale-[0.98]"
-                >
-                  <span>Get in Touch</span>
-                </Link>
-              </motion.div>
-            </nav>
-          </motion.div>
-        )}
-      </AnimatePresence>
+                <span className="sr-only">{mobileOpen ? 'Close menu' : 'Open menu'}</span>
+                <motion.span
+                  className="absolute h-[1.5px] w-[18px] rounded-full bg-current"
+                  animate={{rotate: mobileOpen ? 45 : 0, y: mobileOpen ? 0 : -5}}
+                  transition={navbarSpring}
+                />
+                <motion.span
+                  className="absolute h-[1.5px] w-[18px] rounded-full bg-current"
+                  animate={{opacity: mobileOpen ? 0 : 1, scaleX: mobileOpen ? 0.4 : 1}}
+                  transition={{duration: 0.18, ease: 'easeOut'}}
+                />
+                <motion.span
+                  className="absolute h-[1.5px] w-[18px] rounded-full bg-current"
+                  animate={{rotate: mobileOpen ? -45 : 0, y: mobileOpen ? 0 : 5}}
+                  transition={navbarSpring}
+                />
+              </button>
+            </div>
+          </motion.nav>
+        </Container>
+      </motion.header>
+
+      <MobileMenu
+        open={mobileOpen}
+        links={navLinks}
+        onClose={() => setMobileOpen(false)}
+        reducedMotion={Boolean(reducedMotion)}
+        lowPowerMode={lowPowerMode}
+      />
     </>
   );
 }

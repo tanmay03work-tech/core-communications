@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 
 type BrandLockupProps = {
@@ -11,45 +12,33 @@ export default function BrandLockup({
   compact = false,
   footer = false,
 }: BrandLockupProps) {
-  const iconSize = compact ? 'h-[3.35rem] w-[3.35rem]' : 'h-[3.8rem] w-[3.8rem]';
-  const titleSize = compact ? 'text-[2.15rem]' : 'text-[2.45rem]';
-  const subtitleSize = compact ? 'text-[0.86rem]' : 'text-[0.94rem]';
+  const logoWidth = footer
+    ? 'w-[170px] md:w-[210px] lg:w-[240px]'
+    : 'w-[170px] md:w-[210px] lg:w-[240px]';
+  const logoHeight = footer
+    ? 'h-[200px] md:h-[248px] lg:h-[296px]'
+    : 'h-[50px] md:h-[62px] lg:h-[72px]';
 
   return (
     <Link
       href={href}
       aria-label="Core Communications Home"
-      className="inline-flex items-center gap-4 no-underline"
+      className={`inline-flex no-underline ${footer ? 'flex-col items-start' : 'items-center'}`}
     >
-      <span className={`relative shrink-0 ${iconSize}`}>
-        <svg
-          viewBox="0 0 64 64"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-full w-full"
-          aria-hidden="true"
-        >
-          <circle cx="32" cy="32" r="22" stroke="#5BC0EB" strokeWidth="2.4" />
-          <circle cx="32" cy="32" r="10" stroke="#5BC0EB" strokeWidth="2.4" />
-          <path d="M32 7.5V20.5" stroke="#5BC0EB" strokeWidth="2.4" strokeLinecap="round" />
-          <circle cx="32" cy="8" r="3.2" fill="#5BC0EB" />
-          <circle cx="32" cy="32" r="2.6" fill="#5BC0EB" />
-        </svg>
+      <span className={`relative block shrink-0 ${logoWidth} ${logoHeight}`}>
+        <Image
+          src="/core_logo_clean.svg"
+          alt="Core Communications logo"
+          fill
+          className="object-contain object-left"
+          priority={compact}
+        />
       </span>
-
-      <span className="flex flex-col justify-center leading-none">
-        <span className={`font-title font-black uppercase tracking-[0.08em] text-white ${titleSize}`}>
-          CORE
+      {footer && (
+        <span className="mt-8 inline-flex w-fit rounded-full border border-[#3DB7F2]/20 bg-[#3DB7F2]/5 px-3 py-1.5 text-[0.58rem] uppercase tracking-[0.24em] text-[#3DB7F2]">
+          APAC Tech Communications
         </span>
-        <span className={`mt-1.5 font-sans uppercase tracking-[0.29em] text-accent ${subtitleSize}`}>
-          Communications
-        </span>
-        {footer && (
-          <span className="mt-3 inline-flex w-fit rounded-full border border-accent/20 bg-accent/8 px-3 py-1 text-[0.58rem] uppercase tracking-[0.24em] text-accent">
-            APAC Tech Communications
-          </span>
-        )}
-      </span>
+      )}
     </Link>
   );
 }

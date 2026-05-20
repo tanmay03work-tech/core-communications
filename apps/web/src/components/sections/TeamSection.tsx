@@ -1,56 +1,85 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { TEAM } from '@/lib/constants';
+import {LazyMotion, domAnimation, m, useReducedMotion} from 'framer-motion';
 import ScrollReveal from '@/components/motion/ScrollReveal';
-import { staggerContainer, fadeUp } from '@/lib/motion-variants';
+import SectionLabel from '@/components/ui/SectionLabel';
+import {TEAM} from '@/lib/constants';
+
+const containerVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.15,
+      delayChildren: 0.1,
+    },
+  },
+};
 
 export default function TeamSection() {
-  return (
-    <section id="team" className="bg-ink py-section px-6 lg:px-16">
-      <ScrollReveal>
-        <div className="max-w-7xl mx-auto">
-          <div className="section-tag mb-6">{TEAM.tag}</div>
-          <h2
-            className="section-heading mb-12"
-            dangerouslySetInnerHTML={{ __html: TEAM.heading }}
-          />
+  const prefersReducedMotion = useReducedMotion();
 
-          <motion.div
-            className="grid grid-cols-1 md:grid-cols-2 gap-8"
-            variants={staggerContainer}
+  return (
+    <LazyMotion features={domAnimation}>
+      <section id="team" className="section-wrap bg-ink text-white">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-10">
+            <SectionLabel>{TEAM.tag}</SectionLabel>
+            <ScrollReveal>
+              <h2 className="section-heading text-white" dangerouslySetInnerHTML={{__html: TEAM.heading}} />
+            </ScrollReveal>
+          </div>
+
+          <m.div
+            className="grid grid-cols-1 gap-5 lg:grid-cols-2"
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: '-100px' }}
+            viewport={{once: true, margin: '-60px'}}
+            variants={containerVariants}
           >
-            {TEAM.members.map((member) => (
-              <motion.div
+            {TEAM.members.map((member, index) => (
+              <m.article
                 key={member.name}
-                className="bg-white/[0.03] border border-white/[0.08] p-10 grid grid-cols-[90px_1fr] gap-7 items-start transition-all duration-300 hover:border-accent-glow/30 hover:bg-deep/20"
-                variants={fadeUp}
+                variants={{
+                  hidden: prefersReducedMotion ? {opacity: 0} : {opacity: 0, x: index === 0 ? -32 : 32, filter: 'blur(4px)'},
+                  visible: {
+                    opacity: 1,
+                    x: 0,
+                    filter: 'blur(0px)',
+                    transition: prefersReducedMotion ? {duration: 0} : {duration: 0.65, ease: [0.22, 1, 0.36, 1]},
+                  },
+                }}
+                whileHover={prefersReducedMotion ? undefined : {borderColor: 'rgba(91, 192, 235, 0.3)', transition: {duration: 0.3}}}
+                className="relative flex items-start gap-6 border border-white/8 bg-white/3 p-card-pad"
               >
-                {/* Avatar */}
-                <div className="w-[90px] h-[90px] rounded-full bg-deep overflow-hidden flex-shrink-0 border-2 border-accent-glow/20 flex items-center justify-center font-title text-2xl font-extrabold text-accent-glow">
+                <m.div
+                  className="absolute inset-y-6 left-0 w-px bg-accent/50"
+                  initial={{scaleY: 0, transformOrigin: 'top'}}
+                  whileHover={prefersReducedMotion ? undefined : {scaleY: 1}}
+                  transition={prefersReducedMotion ? {duration: 0} : {duration: 0.4, ease: [0.22, 1, 0.36, 1]}}
+                />
+                <m.div
+                  className="flex h-[78px] w-[78px] shrink-0 items-center justify-center overflow-hidden rounded-full border border-accent/25 bg-deep text-xl font-bold text-accent"
+                  initial={prefersReducedMotion ? {opacity: 0} : {clipPath: 'circle(0% at 50% 50%)', scale: 0.8}}
+                  whileInView={prefersReducedMotion ? {opacity: 1} : {clipPath: 'circle(50% at 50% 50%)', scale: 1}}
+                  viewport={{once: true}}
+                  transition={prefersReducedMotion ? {duration: 0} : {duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1]}}
+                >
                   {member.initials}
-                </div>
-
-                {/* Info */}
-                <div>
-                  <h3 className="font-title text-[1.1rem] font-bold mb-0.5">
-                    {member.name}
-                  </h3>
-                  <div className="text-[0.72rem] tracking-[0.15em] uppercase text-accent-glow mb-3">
+                </m.div>
+                <div className="min-w-0 flex-1">
+                  <h3 className="text-[1.1rem] font-bold text-white">{member.name}</h3>
+                  <div className="mb-3 text-[0.72rem] uppercase tracking-[0.15em] text-accent">
                     {member.role}
                   </div>
-                  <p className="text-[0.82rem] leading-relaxed text-white/55">
+                  <p className="line-clamp-4 text-[0.82rem] leading-7 text-white/60">
                     {member.bio}
                   </p>
                 </div>
-              </motion.div>
+              </m.article>
             ))}
-          </motion.div>
+          </m.div>
         </div>
-      </ScrollReveal>
-    </section>
+      </section>
+    </LazyMotion>
   );
 }

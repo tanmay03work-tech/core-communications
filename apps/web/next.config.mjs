@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  transpilePackages: ['@repo/ui'],
   images: {
     formats: ['image/avif', 'image/webp'],
     remotePatterns: [
@@ -11,7 +12,8 @@ const nextConfig = {
     ],
   },
   experimental: {
-    optimizePackageImports: ['framer-motion', 'lucide-react'],
+    optimizeCss: true,
+    optimizePackageImports: ['framer-motion'],
   },
 };
 
