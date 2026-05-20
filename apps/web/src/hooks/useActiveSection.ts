@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
-import { useCurrentLocation } from './useCurrentLocation';
+import { usePathname } from 'next/navigation';
 
 type NavLink = {
   href: string;
@@ -15,12 +15,26 @@ function getSectionId(href: string) {
 }
 
 export function useActiveSection(links: readonly NavLink[]) {
-  const { pathname, hash } = useCurrentLocation();
+  const pathname = usePathname();
   const sectionIds = useMemo(
     () => links.map((link) => getSectionId(link.href)).filter((value): value is string => Boolean(value)),
     [links],
   );
   const [activeSection, setActiveSection] = useState<string | null>(null);
+  const [hash, setHash] = useState('');
+
+  useEffect(() => {
+    const updateHash = () => {
+      setHash(window.location.hash);
+    };
+
+    updateHash();
+    window.addEventListener('hashchange', updateHash);
+
+    return () => {
+      window.removeEventListener('hashchange', updateHash);
+    };
+  }, []);
 
   useEffect(() => {
     if (pathname !== '/') {
@@ -81,11 +95,9 @@ export function useActiveSection(links: readonly NavLink[]) {
     );
 
     sections.forEach((section) => observer.observe(section));
-    window.addEventListener('hashchange', updateFromHash);
 
     return () => {
       observer.disconnect();
-      window.removeEventListener('hashchange', updateFromHash);
     };
   }, [hash, pathname, sectionIds]);
 

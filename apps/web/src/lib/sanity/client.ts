@@ -51,13 +51,17 @@ export async function sanityFetch<T>({
   const {isEnabled} = draftMode();
   const activeClient = isEnabled ? previewClient : client;
 
-  return activeClient.fetch<T>(query, params, {
-    next: {
-      revalidate: 60,
-      tags: ['sanity', ...tags],
-    },
-    perspective: isEnabled ? 'previewDrafts' : 'published',
-    useCdn: !isEnabled,
-    token: isEnabled ? token : undefined,
-  });
+  try {
+    return await activeClient.fetch<T>(query, params, {
+      next: {
+        revalidate: 60,
+        tags: ['sanity', ...tags],
+      },
+      perspective: isEnabled ? 'previewDrafts' : 'published',
+      useCdn: !isEnabled,
+      token: isEnabled ? token : undefined,
+    });
+  } catch {
+    return null;
+  }
 }

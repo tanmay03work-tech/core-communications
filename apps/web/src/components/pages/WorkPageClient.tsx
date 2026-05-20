@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
-import { m, useReducedMotion, AnimatePresence } from 'framer-motion';
+import { m, useReducedMotion } from 'framer-motion';
 import { Container } from '@/components/layout/Container';
 import ScrollReveal from '@/components/motion/ScrollReveal';
 import SectionLabel from '@/components/ui/SectionLabel';
@@ -52,24 +52,24 @@ export default function WorkPageClient({ studies }: WorkPageClientProps) {
               className="section-tag mb-6"
               initial={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.36, ease: [0.22, 1, 0.36, 1] }}
             >
               Our Work
             </m.div>
             <m.h1
               className="font-semibold leading-[1.02] tracking-[-0.03em] text-white"
               style={{ fontSize: 'var(--step-h1)' }}
-              initial={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y: 28 }}
+              initial={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.75, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.42, delay: 0.04, ease: [0.22, 1, 0.36, 1] }}
             >
               Results that move credibility, reach, and business momentum.
             </m.h1>
             <m.p
               className="mt-6 max-w-xl text-[1rem] font-light leading-[1.85] text-white/60"
-              initial={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y: 16 }}
+              initial={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.22, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.38, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
             >
               We measure success in institutional credibility, market authority, and outcomes that keep compounding beyond the first headline.
             </m.p>
@@ -105,21 +105,15 @@ export default function WorkPageClient({ studies }: WorkPageClientProps) {
       {/* ─── Work Cards Grid ─────────────────────────────── */}
       <section className="bg-[linear-gradient(180deg,#F5F7FA_0%,#ffffff_50%,#F5F7FA_100%)] py-[clamp(4rem,7vw,6.5rem)] text-navy">
         <Container className="max-w-7xl">
-          <m.div 
-            layout={!prefersReducedMotion}
-            className="grid grid-cols-1 gap-6 md:grid-cols-2"
-          >
-            <AnimatePresence mode="popLayout">
-              {filteredStudies.map((study, index) => (
-                <m.div
-                  key={getStudySlug(study)}
-                  layout={!prefersReducedMotion}
-                  initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, scale: 0.96 }}
-                  animate={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, scale: 1 }}
-                  exit={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, scale: 0.96 }}
-                  transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-                >
-                  <ScrollReveal delay={index * 0.05}>
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+            {filteredStudies.map((study, index) => (
+              <m.div
+                key={getStudySlug(study)}
+                initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.26, delay: prefersReducedMotion ? 0 : index * 0.03, ease: [0.16, 1, 0.3, 1] }}
+              >
+                <ScrollReveal delay={index * 0.03}>
                     <Link
                       href={`/work/${getStudySlug(study)}`}
                       className="card-work group flex h-full flex-col justify-between border border-navy/8 bg-white p-[clamp(1.5rem,3vw,2.5rem)] no-underline rounded-[1.5rem] shadow-[0_4px_20px_rgba(28,46,74,0.02)] transition-all duration-300 hover:-translate-y-1 hover:border-accent/28 hover:shadow-[0_16px_48px_rgba(28,46,74,0.08)]"
@@ -158,11 +152,10 @@ export default function WorkPageClient({ studies }: WorkPageClientProps) {
                         ))}
                       </div>
                     </Link>
-                  </ScrollReveal>
-                </m.div>
-              ))}
-            </AnimatePresence>
-          </m.div>
+                </ScrollReveal>
+              </m.div>
+            ))}
+          </div>
         </Container>
       </section>
 

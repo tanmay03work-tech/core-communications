@@ -8,7 +8,14 @@ export const metadata = {
 };
 
 export default async function WorkPage() {
-  const cmsStudies = await getCaseStudies();
+  let cmsStudies = null;
+
+  try {
+    cmsStudies = await getCaseStudies();
+  } catch {
+    cmsStudies = null;
+  }
+
   const studies = cmsStudies?.length ? cmsStudies : CASE_STUDIES.items;
 
   return <WorkPageClient studies={studies} />;

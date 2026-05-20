@@ -15,24 +15,24 @@ type ScrollRevealProps = {
 
 const directionVariants: Record<ScrollRevealDirection, Variants> = {
   up: {
-    hidden: {opacity: 0, y: 48, filter: 'blur(6px)'},
-    visible: {opacity: 1, y: 0, filter: 'blur(0px)'},
+    hidden: {opacity: 0, y: 24},
+    visible: {opacity: 1, y: 0},
   },
   left: {
-    hidden: {opacity: 0, x: -48, filter: 'blur(4px)'},
-    visible: {opacity: 1, x: 0, filter: 'blur(0px)'},
+    hidden: {opacity: 0, x: -24},
+    visible: {opacity: 1, x: 0},
   },
   right: {
-    hidden: {opacity: 0, x: 48, filter: 'blur(4px)'},
-    visible: {opacity: 1, x: 0, filter: 'blur(0px)'},
+    hidden: {opacity: 0, x: 24},
+    visible: {opacity: 1, x: 0},
   },
   fade: {
     hidden: {opacity: 0},
     visible: {opacity: 1},
   },
   scale: {
-    hidden: {opacity: 0, scale: 0.92, filter: 'blur(4px)'},
-    visible: {opacity: 1, scale: 1, filter: 'blur(0px)'},
+    hidden: {opacity: 0, scale: 0.97},
+    visible: {opacity: 1, scale: 1},
   },
 };
 
@@ -57,8 +57,8 @@ export default function ScrollReveal({
     prefersReducedMotion
       ? {duration: 0}
       : direction === 'scale'
-        ? {duration: 0.65, ease: [0.22, 1, 0.36, 1], delay}
-        : {duration: 0.75, ease: [0.22, 1, 0.36, 1], delay};
+        ? {duration: 0.4, ease: [0.22, 1, 0.36, 1], delay}
+        : {duration: 0.48, ease: [0.22, 1, 0.36, 1], delay};
 
   return (
     <LazyMotion features={domAnimation}>
@@ -69,7 +69,7 @@ export default function ScrollReveal({
         variants={resolvedVariants}
         transition={resolvedTransition}
         className={className}
-        style={prefersReducedMotion ? undefined : {willChange: 'transform, opacity, filter'}}
+        style={prefersReducedMotion ? undefined : {willChange: 'transform, opacity'}}
       >
         {children}
       </m.div>

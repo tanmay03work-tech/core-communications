@@ -3,9 +3,9 @@
 import {useEffect, useMemo, useState, type MouseEvent as ReactMouseEvent} from 'react';
 import {LayoutGroup, m, useMotionValueEvent, useReducedMotion, useScroll, useSpring} from 'framer-motion';
 import Link from 'next/link';
+import {usePathname} from 'next/navigation';
 import {NAV_LINKS} from '@/lib/constants';
 import {useActiveSection} from '@/hooks/useActiveSection';
-import {useCurrentLocation} from '@/hooks/useCurrentLocation';
 import {useMagnetic} from '@/hooks/useMagnetic';
 import {navbarItemVariants, navbarSpring} from '@/lib/motion-variants';
 import {cn} from '@/lib/utils';
@@ -55,7 +55,7 @@ function isRouteActive(pathname: string, href: string) {
 
 export default function Navbar() {
   const reducedMotion = useReducedMotion();
-  const {pathname} = useCurrentLocation();
+  const pathname = usePathname();
   const {activeHref} = useActiveSection(NAV_LINKS);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [compact, setCompact] = useState(false);
@@ -321,4 +321,3 @@ export default function Navbar() {
     </>
   );
 }
-

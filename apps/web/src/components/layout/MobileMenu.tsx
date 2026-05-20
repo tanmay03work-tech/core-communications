@@ -124,8 +124,8 @@ export default function MobileMenu({
                 >
                   Start
                   <m.span
-                    animate={reducedMotion ? undefined : {x: [0, 3, 0]}}
-                    transition={{duration: 1.8, ease: 'easeInOut', repeat: Infinity, repeatDelay: 1.2}}
+                    animate={reducedMotion ? undefined : {x: [0, 2, 0]}}
+                    transition={{duration: 1.1, ease: 'easeInOut', repeat: Infinity, repeatDelay: 2.2}}
                   >
                     →
                   </m.span>

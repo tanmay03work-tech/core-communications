@@ -39,24 +39,24 @@ export default function ContactPageClient() {
               className="section-tag mb-6"
               initial={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.36, ease: [0.22, 1, 0.36, 1] }}
             >
               Contact
             </m.div>
             <m.h1
               className="font-semibold leading-[1.02] tracking-[-0.03em] text-white"
               style={{ fontSize: 'var(--step-h1)' }}
-              initial={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y: 28 }}
+              initial={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.75, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.42, delay: 0.04, ease: [0.22, 1, 0.36, 1] }}
             >
               Let&apos;s build the right kind of attention.
             </m.h1>
             <m.p
               className="mt-6 text-[1rem] font-light leading-[1.85] text-white/60"
-              initial={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y: 16 }}
+              initial={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.22, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.38, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
             >
               Strategic conversations, not cold calls. Tell us what you&apos;re launching, shifting, or trying to unlock.
             </m.p>
