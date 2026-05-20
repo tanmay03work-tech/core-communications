@@ -4,7 +4,15 @@
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
-      "outputs": [".next/**", "!.next/cache/**", "dist/**"]
+      "outputs": [".next/**", "!.next/cache/**", "dist/**"],
+      "env": [
+        "SANITY_API_TOKEN",
+        "CLOUDFLARE_TURNSTILE_SECRET",
+        "RESEND_API_KEY",
+        "NEXT_PUBLIC_SANITY_PROJECT_ID",
+        "NEXT_PUBLIC_SANITY_DATASET",
+        "NEXT_PUBLIC_TURNSTILE_SITE_KEY"
+      ]
     },
     "lint": {
       "dependsOn": ["build", "^lint"]
