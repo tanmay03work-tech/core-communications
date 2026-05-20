@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import {motion} from 'framer-motion';
+import {m} from 'framer-motion';
 import TiltCard from '@/components/animations/TiltCard';
 
 type FeaturedSectorCardProps = {
@@ -28,7 +28,7 @@ export default function FeaturedSectorCard({
       }}
     >
       <article className="group relative h-full overflow-hidden border-2 border-accent bg-[linear-gradient(135deg,rgba(91,192,235,0.15),rgba(28,46,74,0.2))] p-8">
-        <motion.div
+        <m.div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(91,192,235,0.22),transparent_62%)] opacity-0 transition-opacity duration-400 group-hover:opacity-100"
         />

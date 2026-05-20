@@ -1,6 +1,6 @@
 'use client';
 
-import {motion} from 'framer-motion';
+import {m} from 'framer-motion';
 import ScrollReveal from '@/components/motion/ScrollReveal';
 import SplitText from '@/components/animations/SplitText';
 import {fadeUp, staggerContainer} from '@/lib/framer/variants';
@@ -48,7 +48,7 @@ export default function ServicesProcessSection() {
             </p>
           </div>
 
-          <motion.div
+          <m.div
             className="mt-14 space-y-10"
             variants={staggerContainer(0.12, 0.2)}
             initial="hidden"
@@ -56,7 +56,7 @@ export default function ServicesProcessSection() {
             viewport={{once: true, margin: '-100px'}}
           >
             {steps.map((step, index) => (
-              <motion.div
+              <m.div
                 key={step.number}
                 variants={fadeUp}
                 className="relative grid gap-6 md:grid-cols-[96px_minmax(0,1fr)] md:gap-10"
@@ -79,9 +79,9 @@ export default function ServicesProcessSection() {
                     {step.description}
                   </p>
                 </div>
-              </motion.div>
+              </m.div>
             ))}
-          </motion.div>
+          </m.div>
         </div>
       </ScrollReveal>
     </section>

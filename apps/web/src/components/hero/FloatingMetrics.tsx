@@ -1,6 +1,6 @@
 'use client';
 
-import {motion} from 'framer-motion';
+import {m} from 'framer-motion';
 
 type Metric = {
   _key?: string;
@@ -20,7 +20,7 @@ export default function FloatingMetrics({metrics}: FloatingMetricsProps) {
   return (
     <div className="absolute bottom-8 right-4 z-20 hidden w-full max-w-[26rem] flex-col gap-3 lg:flex">
       {metrics.map((metric, index) => (
-        <motion.div
+        <m.div
           key={metric._key ?? `${metric.label}-${metric.value}`}
           initial={{opacity: 0, x: 20, y: 18}}
           animate={{opacity: 1, x: 0, y: 0}}
@@ -31,7 +31,7 @@ export default function FloatingMetrics({metrics}: FloatingMetricsProps) {
           <span className="metric-dot" />
           <span className="font-mono text-lg text-white">{metric.value}</span>
           <span className="text-sm uppercase tracking-[0.18em] text-white/55">{metric.label}</span>
-        </motion.div>
+        </m.div>
       ))}
       <style jsx>{`
         .metric-pill {
@@ -52,7 +52,7 @@ export default function FloatingMetrics({metrics}: FloatingMetricsProps) {
           width: 10px;
           height: 10px;
           border-radius: 9999px;
-          background: linear-gradient(135deg, rgba(91, 192, 235, 1), rgba(145, 112, 255, 1));
+          background: linear-gradient(135deg, rgba(91, 192, 235, 1), rgba(61, 175, 217, 1));
           animation: metricPulse 1.9s ease-in-out infinite;
           flex-shrink: 0;
         }

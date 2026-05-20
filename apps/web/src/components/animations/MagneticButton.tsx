@@ -1,6 +1,6 @@
 'use client';
 
-import {motion, useMotionValue, useSpring} from 'framer-motion';
+import {m, useMotionValue, useSpring} from 'framer-motion';
 import type {MouseEvent, PropsWithChildren} from 'react';
 import {useRef} from 'react';
 
@@ -35,7 +35,7 @@ export default function MagneticButton({children, className}: MagneticButtonProp
   };
 
   return (
-    <motion.div
+    <m.div
       ref={ref}
       className={className ?? 'inline-block'}
       style={{x: springX, y: springY}}
@@ -43,6 +43,6 @@ export default function MagneticButton({children, className}: MagneticButtonProp
       onMouseLeave={handleMouseLeave}
     >
       {children}
-    </motion.div>
+    </m.div>
   );
 }

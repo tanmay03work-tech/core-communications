@@ -80,22 +80,28 @@ export default function MobileMenu({
                 exit="exit"
                 variants={mobileMenuVariants}
               >
-                <div className="flex flex-col gap-5">
-                  {links.map((link) => (
+                <div className="flex flex-col gap-4">
+                  {links.map((link, idx) => (
                     <m.div key={link.href} variants={mobileMenuItemVariants}>
                       <Link
                         href={link.href}
                         onClick={onClose}
                         className={cn(
-                          'group relative inline-flex w-fit items-center gap-3 text-[clamp(2rem,9vw,3.65rem)] font-semibold uppercase tracking-[0.14em] no-underline',
-                          link.active ? 'text-white' : 'text-white/70',
+                          'group relative flex w-fit items-center gap-5 no-underline',
+                          link.active ? 'text-white' : 'text-white/62',
                         )}
                       >
-                        <span>{link.label}</span>
+                        <span className="text-[0.62rem] font-bold uppercase tracking-[0.26em] text-accent/60 tabular-nums">
+                          {String(idx + 1).padStart(2, '0')}
+                        </span>
+                        <span className={cn('text-[clamp(1.85rem,8vw,3.25rem)] font-semibold uppercase tracking-[0.1em] transition-colors duration-200 group-hover:text-white')}>
+                          {link.label}
+                        </span>
                         <m.span
-                          className="h-px w-10 origin-left rounded-full bg-[rgba(91,192,235,0.92)]"
-                          animate={{scaleX: link.active ? 1 : 0.4, opacity: link.active ? 1 : 0.45}}
-                          whileHover={reducedMotion ? undefined : {scaleX: 1, opacity: 1}}
+                          className="h-px origin-left rounded-full bg-[rgba(91,192,235,0.88)]"
+                          style={{ width: '2rem' }}
+                          animate={{ scaleX: link.active ? 1 : 0.35, opacity: link.active ? 1 : 0.4 }}
+                          whileHover={reducedMotion ? undefined : { scaleX: 1, opacity: 1 }}
                           transition={navbarSpring}
                         />
                       </Link>

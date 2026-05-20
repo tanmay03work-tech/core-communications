@@ -1,7 +1,7 @@
 'use client';
 
 import {useState} from 'react';
-import {motion} from 'framer-motion';
+import {m} from 'framer-motion';
 import ScrollReveal from '@/components/motion/ScrollReveal';
 import ServiceDetailCard from '@/components/services/ServiceDetailCard';
 import {SERVICES} from '@/lib/constants';
@@ -119,7 +119,7 @@ export default function ExpandedServicesGrid() {
     <section className="bg-surface px-6 py-24 lg:px-16 lg:py-28">
       <ScrollReveal direction="up">
         <div className="mx-auto max-w-7xl">
-          <motion.div
+          <m.div
             variants={staggerContainer(0.12, 0.3)}
             initial="hidden"
             whileInView="visible"
@@ -136,7 +136,7 @@ export default function ExpandedServicesGrid() {
               const serviceId = index + 1;
 
               return (
-                <motion.div key={service.slug} id={service.slug} variants={fadeUp}>
+                <m.div key={service.slug} id={service.slug} variants={fadeUp}>
                   <ServiceDetailCard
                     number={service.num}
                     icon={service.num}
@@ -151,10 +151,10 @@ export default function ExpandedServicesGrid() {
                       setExpandedId((current) => (current === serviceId ? null : serviceId))
                     }
                   />
-                </motion.div>
+                </m.div>
               );
             })}
-          </motion.div>
+          </m.div>
         </div>
       </ScrollReveal>
     </section>

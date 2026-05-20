@@ -1,6 +1,6 @@
 'use client';
 
-import {motion} from 'framer-motion';
+import {m} from 'framer-motion';
 import CounterAnimation from '@/components/animations/CounterAnimation';
 import SplitText from '@/components/animations/SplitText';
 import {fadeIn, fadeUp, slideLeft} from '@/lib/framer/variants';
@@ -16,7 +16,7 @@ export default function SectorsHero() {
     <section className="relative min-h-[70vh] overflow-hidden bg-[linear-gradient(180deg,rgba(245,247,250,1)_0%,rgba(28,46,74,0.06)_100%)]">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(91,192,235,0.18),transparent_45%)]" aria-hidden="true" />
       <div className="relative mx-auto flex min-h-[70vh] max-w-[900px] flex-col items-center justify-center px-6 py-32 text-center lg:px-16">
-        <motion.div
+        <m.div
           initial="hidden"
           animate="visible"
           variants={fadeIn}
@@ -25,11 +25,11 @@ export default function SectorsHero() {
         >
           <span className="h-px w-8 bg-accent" aria-hidden="true" />
           <span className="text-xs font-semibold uppercase tracking-[0.28em] text-accent">
-            Deep Industry Expertise
+            Our Deep Industry Expertise
           </span>
-        </motion.div>
+        </m.div>
 
-        <motion.div
+        <m.div
           initial="hidden"
           animate="visible"
           variants={slideLeft}
@@ -42,9 +42,9 @@ export default function SectorsHero() {
             delay={400}
             className="font-sans text-[clamp(2.8rem,6vw,5.5rem)] font-bold leading-[1.05] tracking-[-0.02em] text-primary"
           />
-        </motion.div>
+        </m.div>
 
-        <motion.p
+        <m.p
           initial="hidden"
           animate="visible"
           variants={fadeUp}
@@ -53,11 +53,11 @@ export default function SectorsHero() {
         >
           16 sectors. 15+ years of media relationships. Every industry has unique
           challenges, regulatory nuances, and media ecosystems. We know them all.
-        </motion.p>
+        </m.p>
 
         <div className="mt-12 flex flex-col gap-8 md:flex-row md:justify-center">
           {stats.map((stat, index) => (
-            <motion.div
+            <m.div
               key={stat.label}
               initial="hidden"
               animate="visible"
@@ -71,7 +71,7 @@ export default function SectorsHero() {
               <p className="mt-2 text-xs font-semibold uppercase tracking-[0.18em] text-primary/58">
                 {stat.label}
               </p>
-            </motion.div>
+            </m.div>
           ))}
         </div>
       </div>

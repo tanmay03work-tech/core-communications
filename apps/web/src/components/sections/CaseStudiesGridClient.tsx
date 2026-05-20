@@ -38,16 +38,15 @@ export default function CaseStudiesGridClient({caseStudies}: CaseStudiesGridClie
             <m.div
               key={caseStudy._id ?? slug ?? caseStudy.title}
               variants={{
-                hidden: prefersReducedMotion ? {opacity: 0} : {opacity: 0, y: 32, filter: 'blur(4px)', clipPath: 'inset(8% round 0px)'},
+                hidden: prefersReducedMotion ? {opacity: 0} : {opacity: 0, y: 28, filter: 'blur(4px)'},
                 visible: {
                   opacity: 1,
                   y: 0,
                   filter: 'blur(0px)',
-                  clipPath: 'inset(0% round 0px)',
                   transition: prefersReducedMotion ? {duration: 0} : {duration: 0.65, ease: [0.22, 1, 0.36, 1]},
                 },
               }}
-              whileHover={prefersReducedMotion ? undefined : {y: -8, transition: {duration: 0.35, ease: [0.22, 1, 0.36, 1]}}}
+              whileHover={prefersReducedMotion ? undefined : {y: -5, transition: {duration: 0.3, ease: [0.22, 1, 0.36, 1]}}}
               onHoverStart={() => {
                 void statsControls.start('visible');
               }}
@@ -55,39 +54,45 @@ export default function CaseStudiesGridClient({caseStudies}: CaseStudiesGridClie
             >
               <Link
                 href={slug ? `/work/${slug}` : '/work'}
-                className="group flex h-full flex-col justify-between border border-white/8 bg-white/3 p-card-pad text-left no-underline"
+                className="card-work group flex h-full flex-col justify-between border border-navy/8 bg-white p-[var(--card-pad)] text-left no-underline"
               >
                 <div>
-                  <div className="mb-2 flex items-center justify-between gap-4">
-                    <div className="text-[0.68rem] font-semibold uppercase tracking-[0.22em] text-accent">
+                  {/* Top: tag + arrow */}
+                  <div className="mb-3 flex items-center justify-between gap-4">
+                    <div className="text-[0.66rem] font-bold uppercase tracking-[0.24em] text-primary">
                       {caseStudy.tag || caseStudy.client}
                     </div>
-                    <ArrowUpRight className="h-5 w-5 text-white/65 transition-transform duration-300 group-hover:rotate-45" />
+                    <ArrowUpRight className="h-5 w-5 flex-shrink-0 text-navy/30 transition-all duration-300 group-hover:rotate-45 group-hover:text-accent" />
                   </div>
-                  <h3 className="mb-2 text-[1.5rem] font-semibold leading-tight text-white">
+
+                  {/* Title */}
+                  <h3 className="mb-3 text-[1.4rem] font-semibold leading-snug text-navy">
                     {caseStudy.title}
                   </h3>
-                  <p className="line-clamp-3 text-[0.92rem] leading-8 text-white/62">
+
+                  {/* Description */}
+                  <p className="line-clamp-3 text-[0.92rem] font-light leading-[1.85] text-navy/60">
                     {caseStudy.description}
                   </p>
                 </div>
 
-                <div className="mt-auto border-t border-white/8 pt-6">
-                  <m.div className="grid grid-cols-2 gap-4" initial="hidden" animate={statsControls}>
+                {/* Stats row */}
+                <div className="mt-6 border-t border-navy/[0.07] pt-6">
+                  <m.div className="grid grid-cols-2 gap-5" initial="hidden" animate={statsControls}>
                     {(caseStudy.stats ?? []).slice(0, 4).map((stat, index) => (
                       <m.div
                         key={stat._key ?? stat.label}
                         variants={{
-                          hidden: prefersReducedMotion ? {opacity: 0} : {opacity: 0, y: 12},
+                          hidden: prefersReducedMotion ? {opacity: 0} : {opacity: 0, y: 10},
                           visible: {
                             opacity: 1,
                             y: 0,
-                            transition: prefersReducedMotion ? {duration: 0} : {duration: 0.35, delay: index * 0.1, ease: [0.22, 1, 0.36, 1]},
+                            transition: prefersReducedMotion ? {duration: 0} : {duration: 0.3, delay: index * 0.08, ease: [0.22, 1, 0.36, 1]},
                           },
                         }}
                       >
-                        <div className="text-2xl font-semibold leading-none text-white">{stat.value}</div>
-                        <div className="mt-2 text-[0.68rem] uppercase tracking-[0.18em] text-white/52">{stat.label}</div>
+                        <div className="text-[1.9rem] font-semibold leading-none tracking-[-0.02em] text-navy">{stat.value}</div>
+                        <div className="mt-1.5 text-[0.64rem] font-bold uppercase tracking-[0.2em] text-navy/44">{stat.label}</div>
                       </m.div>
                     ))}
                   </m.div>

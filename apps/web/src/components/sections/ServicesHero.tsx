@@ -1,6 +1,6 @@
 'use client';
 
-import {motion} from 'framer-motion';
+import {m} from 'framer-motion';
 import HeroBackground from '@/components/hero/HeroBackground';
 import SplitText from '@/components/animations/SplitText';
 import {fadeIn, fadeUp, slideRight} from '@/lib/framer/variants';
@@ -10,7 +10,7 @@ export default function ServicesHero() {
     <section className="relative min-h-[70vh] overflow-hidden bg-ink">
       <HeroBackground />
       <div className="relative mx-auto flex min-h-[70vh] max-w-[900px] flex-col items-center justify-center px-6 py-32 text-center lg:px-16">
-        <motion.div
+        <m.div
           initial="hidden"
           animate="visible"
           variants={fadeIn}
@@ -21,9 +21,9 @@ export default function ServicesHero() {
           <span className="text-xs font-semibold uppercase tracking-[0.28em] text-accent">
             Our Approach
           </span>
-        </motion.div>
+        </m.div>
 
-        <motion.div
+        <m.div
           initial="hidden"
           animate="visible"
           variants={slideRight}
@@ -36,9 +36,9 @@ export default function ServicesHero() {
             delay={400}
             className="font-sans text-[clamp(2.8rem,6vw,5.5rem)] font-bold leading-[1.05] tracking-[-0.02em] text-white"
           />
-        </motion.div>
+        </m.div>
 
-        <motion.p
+        <m.p
           initial="hidden"
           animate="visible"
           variants={fadeUp}
@@ -47,9 +47,9 @@ export default function ServicesHero() {
         >
           Six integrated services. One outcome: your brand cut through the noise,
           conversations that convert, and media that moves markets.
-        </motion.p>
+        </m.p>
 
-        <motion.div
+        <m.div
           className="absolute bottom-20 left-1/2 h-px w-16 -translate-x-1/2 bg-gradient-to-r from-accent to-transparent"
           initial={{scaleX: 0, originX: 0.5}}
           whileInView={{scaleX: 1}}

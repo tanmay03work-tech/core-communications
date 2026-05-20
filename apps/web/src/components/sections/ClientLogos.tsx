@@ -6,19 +6,34 @@ import {ClientWordmark} from '@/components/sections/ClientWordmarks';
 
 export default function ClientLogos() {
   return (
-    <section className="section-wrap bg-white text-navy">
-      <div className="mx-auto max-w-7xl">
+    <section className="relative overflow-hidden bg-[linear-gradient(180deg,#ffffff_0%,#F5F7FA_100%)] py-[clamp(4rem,7vw,6.5rem)] text-navy">
+      {/* Top thin accent line */}
+      <div className="absolute inset-x-0 top-0 h-px bg-[linear-gradient(90deg,transparent,rgba(28,46,74,0.1),transparent)]" />
+
+      <div className="mx-auto max-w-7xl px-5 md:px-8 lg:px-16 xl:px-24">
         <ScrollReveal>
-          <div className="mb-8 text-center text-[0.7rem] uppercase tracking-[0.25em] text-navy/38">
-            Brands we&apos;ve worked with
+          {/* Label */}
+          <div className="mb-10 text-center">
+            <div className="inline-flex items-center gap-3">
+              <div className="h-px w-10 bg-navy/18" />
+              <span className="text-[0.68rem] font-bold uppercase tracking-[0.28em] text-navy/38">
+                Brands we've worked with
+              </span>
+              <div className="h-px w-10 bg-navy/18" />
+            </div>
           </div>
-          <div className="grid grid-cols-2 gap-3 md:grid-cols-3 xl:grid-cols-6">
+
+          {/* Logo grid */}
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-6">
             {TICKER_CLIENTS.map((client) => (
               <div
                 key={client}
-                className="flex min-h-[6rem] items-center justify-center rounded-[1.5rem] border border-navy/10 bg-white px-5 py-4 shadow-[0_14px_40px_rgba(28,46,74,0.05)] transition-all duration-200 hover:-translate-y-0.5 hover:border-accent/35 hover:shadow-[0_20px_50px_rgba(28,46,74,0.09)]"
+                className="group flex min-h-[7rem] items-center justify-center rounded-none border border-navy/[0.07] bg-white px-5 py-5 shadow-[0_8px_28px_rgba(28,46,74,0.04)] transition-all duration-300 hover:-translate-y-1 hover:border-accent/28 hover:shadow-[0_16px_48px_rgba(28,46,74,0.09)]"
               >
-                <ClientWordmark client={client} className="h-8 w-auto max-w-[9.5rem] md:h-10 md:max-w-[10.5rem]" />
+                <ClientWordmark
+                  client={client}
+                  className="h-8 w-auto max-w-[9rem] grayscale opacity-50 transition-all duration-400 group-hover:grayscale-0 group-hover:opacity-90 md:h-9 md:max-w-[10rem]"
+                />
               </div>
             ))}
           </div>

@@ -11,9 +11,17 @@ const nextConfig = {
       },
     ],
   },
+  ...(process.env.NODE_ENV === 'production'
+    ? {
+        compiler: {
+          removeConsole: { exclude: ['error', 'warn'] },
+        },
+      }
+    : {}),
   experimental: {
     optimizeCss: true,
     optimizePackageImports: ['framer-motion'],
+    turbo: {},
   },
 };
 

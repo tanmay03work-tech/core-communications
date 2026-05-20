@@ -1,6 +1,6 @@
 'use client';
 
-import {motion, useMotionValue, useSpring, type MotionProps} from 'framer-motion';
+import {m, useMotionValue, useSpring, type MotionProps} from 'framer-motion';
 import type {MouseEvent, PropsWithChildren} from 'react';
 import {useRef} from 'react';
 
@@ -43,7 +43,7 @@ export default function TiltCard({
   };
 
   return (
-    <motion.div
+    <m.div
       {...motionProps}
       ref={ref}
       className={className}
@@ -57,9 +57,9 @@ export default function TiltCard({
       onMouseMove={disabled ? undefined : handleMouseMove}
       onMouseLeave={disabled ? undefined : handleMouseLeave}
     >
-      <motion.div className={innerClassName} style={{transform: 'translateZ(20px)', transformStyle: 'preserve-3d'}}>
+      <m.div className={innerClassName} style={{transform: 'translateZ(20px)', transformStyle: 'preserve-3d'}}>
         {children}
-      </motion.div>
-    </motion.div>
+      </m.div>
+    </m.div>
   );
 }

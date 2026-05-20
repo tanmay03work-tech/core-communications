@@ -1,6 +1,6 @@
 'use client';
 
-import {motion} from 'framer-motion';
+import {m} from 'framer-motion';
 import ScrollReveal from '@/components/motion/ScrollReveal';
 import FeaturedSectorCard from '@/components/sectors/FeaturedSectorCard';
 import {fadeUp, staggerContainer} from '@/lib/framer/variants';
@@ -57,7 +57,7 @@ export default function FeaturedSectorsStrip() {
     <section className="bg-ink px-6 py-28 lg:px-16">
       <ScrollReveal direction="up">
         <div className="mx-auto max-w-7xl">
-          <motion.div
+          <m.div
             variants={staggerContainer(0.12, 0.3)}
             initial="hidden"
             whileInView="visible"
@@ -65,13 +65,14 @@ export default function FeaturedSectorsStrip() {
             className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4"
           >
             {featuredSectors.map((sector) => (
-              <motion.div key={sector.title} variants={fadeUp}>
+              <m.div key={sector.title} variants={fadeUp}>
                 <FeaturedSectorCard {...sector} />
-              </motion.div>
+              </m.div>
             ))}
-          </motion.div>
+          </m.div>
         </div>
       </ScrollReveal>
     </section>
   );
 }
+

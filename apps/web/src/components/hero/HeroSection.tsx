@@ -1,7 +1,7 @@
 'use client';
 
 import dynamic from 'next/dynamic';
-import {motion, useScroll, useTransform} from 'framer-motion';
+import {m, useScroll, useTransform} from 'framer-motion';
 import {Play} from 'lucide-react';
 import Link from 'next/link';
 import {useEffect, useMemo, useRef, useState} from 'react';
@@ -114,23 +114,23 @@ export default function HeroSection({siteSettings}: HeroSectionProps) {
         <ParticleCanvas />
         <div className="hero-grid" aria-hidden="true" />
         <div className="hero-noise" aria-hidden="true" />
-        <motion.div className="hero-blob hero-blob-one" style={{x: blobOneX, y: blobOneY}} aria-hidden="true" />
-        <motion.div className="hero-blob hero-blob-two" style={{x: blobTwoX, y: blobTwoY}} aria-hidden="true" />
-        <motion.div className="hero-blob hero-blob-three" style={{x: blobThreeX, y: blobThreeY}} aria-hidden="true" />
+        <m.div className="hero-blob hero-blob-one" style={{x: blobOneX, y: blobOneY}} aria-hidden="true" />
+        <m.div className="hero-blob hero-blob-two" style={{x: blobTwoX, y: blobTwoY}} aria-hidden="true" />
+        <m.div className="hero-blob hero-blob-three" style={{x: blobThreeX, y: blobThreeY}} aria-hidden="true" />
         <RadarAnimation />
 
         <div className="relative z-10 mx-auto grid min-h-screen max-w-[1440px] grid-cols-1 gap-16 px-container-padding pb-16 pt-28 lg:grid-cols-[minmax(0,1fr)_minmax(20rem,0.82fr)] lg:items-center lg:pb-20 lg:pt-32">
           <div className="max-w-4xl">
-            <motion.div
+            <m.div
               initial={{opacity: 0, y: 22}}
               animate={{opacity: 1, y: 0}}
               transition={{duration: 0.7, ease: [0.22, 1, 0.36, 1]}}
               className="section-tag mb-8"
             >
               {siteSettings?.tagline ?? HERO.tag}
-            </motion.div>
+            </m.div>
 
-            <motion.h1
+            <m.h1
               initial="hidden"
               animate="visible"
               variants={{
@@ -142,7 +142,7 @@ export default function HeroSection({siteSettings}: HeroSectionProps) {
               className="font-display text-hero leading-[0.98] tracking-[-0.03em] text-white"
             >
               <span className="mb-2 block overflow-hidden">
-                <motion.span
+                <m.span
                   className="block"
                   variants={{
                     hidden: {y: '110%'},
@@ -153,10 +153,10 @@ export default function HeroSection({siteSettings}: HeroSectionProps) {
                   }}
                 >
                   {headlineLines[0]}
-                </motion.span>
+                </m.span>
               </span>
               <span className="mb-2 block overflow-hidden">
-                <motion.span
+                <m.span
                   className="block"
                   variants={{
                     hidden: {y: '110%'},
@@ -168,10 +168,10 @@ export default function HeroSection({siteSettings}: HeroSectionProps) {
                 >
                   <MorphingWord words={morphWords} fallback={HERO.headline.line2.replace(',', '')} />
                   <span className="text-white">,</span>
-                </motion.span>
+                </m.span>
               </span>
               <span className="block overflow-hidden">
-                <motion.span
+                <m.span
                   className="block"
                   variants={{
                     hidden: {y: '110%'},
@@ -182,26 +182,26 @@ export default function HeroSection({siteSettings}: HeroSectionProps) {
                   }}
                 >
                   {headlineLines[2]}
-                </motion.span>
+                </m.span>
               </span>
-            </motion.h1>
+            </m.h1>
 
-            <motion.p
+            <m.p
               initial={{opacity: 0, y: 28}}
               animate={{opacity: 1, y: 0}}
               transition={{duration: 0.8, delay: 0.5, ease: [0.22, 1, 0.36, 1]}}
               className="mt-8 max-w-[42rem] text-body-lg text-white/68"
             >
               {HERO.subtitle}
-            </motion.p>
+            </m.p>
 
-            <motion.div
+            <m.div
               initial={{opacity: 0, y: 28}}
               animate={{opacity: 1, y: 0}}
               transition={{duration: 0.8, delay: 0.62, ease: [0.22, 1, 0.36, 1]}}
               className="mt-10 flex flex-wrap items-center gap-8 lg:gap-10"
             >
-              <motion.div
+              <m.div
                 ref={primaryMagnetic.ref}
                 style={primaryMagnetic.style}
                 onMouseMove={primaryMagnetic.onMouseMove}
@@ -211,14 +211,14 @@ export default function HeroSection({siteSettings}: HeroSectionProps) {
                 <Link href={HERO.cta.secondary.href} className="hero-primary-button">
                   <span className="relative z-[1]">Start a Conversation</span>
                 </Link>
-              </motion.div>
+              </m.div>
               <Link href={HERO.cta.primary.href} className="hero-secondary-link">
                 <span>See Our Work</span>
                 <span aria-hidden="true" className="hero-secondary-arrow">→</span>
               </Link>
-            </motion.div>
+            </m.div>
 
-            <motion.div
+            <m.div
               initial={{opacity: 0, y: 20}}
               animate={{opacity: 1, y: 0}}
               transition={{duration: 0.7, delay: 0.78, ease: [0.22, 1, 0.36, 1]}}
@@ -239,7 +239,7 @@ export default function HeroSection({siteSettings}: HeroSectionProps) {
                 </span>
                 <span>Watch reel</span>
               </button>
-            </motion.div>
+            </m.div>
           </div>
 
           <div className="relative flex min-h-[34rem] items-end justify-end">
@@ -247,7 +247,7 @@ export default function HeroSection({siteSettings}: HeroSectionProps) {
           </div>
         </div>
 
-        <motion.div
+        <m.div
           initial={{opacity: 0, y: 20}}
           animate={{opacity: 1, y: 0}}
           transition={{duration: 0.7, delay: 1, ease: [0.22, 1, 0.36, 1]}}
@@ -255,17 +255,14 @@ export default function HeroSection({siteSettings}: HeroSectionProps) {
         >
           <span className="hero-scroll-line" aria-hidden="true" />
           <span className="text-[0.7rem] uppercase tracking-[0.24em]">Scroll to explore</span>
-        </motion.div>
+        </m.div>
       </section>
 
       {isVideoOpen ? <VideoModal open={isVideoOpen} onClose={() => setIsVideoOpen(false)} /> : null}
 
       <style jsx>{`
         .hero-shell {
-          background:
-            radial-gradient(circle at top left, rgba(91, 192, 235, 0.1), transparent 30%),
-            linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 22%),
-            #1c2e4a;
+          background: var(--gradient-hero);
         }
 
         .hero-grid {
@@ -309,7 +306,7 @@ export default function HeroSection({siteSettings}: HeroSectionProps) {
           top: 18%;
           width: 30rem;
           height: 30rem;
-          background: radial-gradient(circle, rgba(145, 112, 255, 0.2), transparent 70%);
+          background: radial-gradient(circle, rgba(91, 192, 235, 0.14), transparent 70%);
         }
 
         .hero-blob-three {
@@ -333,7 +330,7 @@ export default function HeroSection({siteSettings}: HeroSectionProps) {
           border: 1px solid rgba(255, 255, 255, 0.18);
           background:
             linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.04)),
-            linear-gradient(135deg, rgba(91, 192, 235, 0.18), rgba(145, 112, 255, 0.12));
+            linear-gradient(135deg, rgba(91, 192, 235, 0.18), rgba(17, 30, 48, 0.28));
           backdrop-filter: blur(18px);
           padding: 1rem 1.45rem;
           line-height: 1;
@@ -409,7 +406,7 @@ export default function HeroSection({siteSettings}: HeroSectionProps) {
           bottom: -0.3rem;
           width: 100%;
           height: 1px;
-          background: linear-gradient(90deg, rgba(91, 192, 235, 0.95), rgba(145, 112, 255, 0.85));
+          background: linear-gradient(90deg, rgba(91, 192, 235, 0.95), rgba(61, 175, 217, 0.7));
           transform: scaleX(0);
           transform-origin: left;
           transition: transform 0.35s ease;

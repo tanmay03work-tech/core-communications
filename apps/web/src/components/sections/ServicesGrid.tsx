@@ -17,7 +17,7 @@ const containerVariants = {
 };
 
 const fadeUpChild = {
-  hidden: {opacity: 0, y: 32, filter: 'blur(4px)'},
+  hidden: {opacity: 0, y: 28, filter: 'blur(4px)'},
   visible: {
     opacity: 1,
     y: 0,
@@ -31,9 +31,22 @@ export default function ServicesGrid() {
 
   return (
     <LazyMotion features={domAnimation}>
-      <section id="services" className="section-wrap bg-ink text-white">
-        <div className="mx-auto max-w-7xl">
-          <div className="mb-12 grid grid-cols-1 items-end gap-8 lg:grid-cols-2">
+      <section id="services" className="relative overflow-hidden bg-[#0D1B2E] py-[clamp(5rem,9vw,8rem)] text-white">
+        {/* Grid pattern */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0"
+          style={{
+            backgroundImage:
+              'linear-gradient(rgba(91,192,235,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(91,192,235,0.06) 1px, transparent 1px)',
+            backgroundSize: '52px 52px',
+            maskImage: 'linear-gradient(180deg, transparent, rgba(0,0,0,0.6) 20%, rgba(0,0,0,0.6) 80%, transparent)',
+          }}
+        />
+
+        <div className="relative z-10 mx-auto max-w-7xl px-5 md:px-8 lg:px-16 xl:px-24">
+          {/* Section header — 2-column: heading left, subtitle + link right */}
+          <div className="mb-14 grid grid-cols-1 items-end gap-8 md:mb-16 lg:grid-cols-2 lg:gap-16">
             <div>
               <SectionLabel>{SERVICES.tag}</SectionLabel>
               <SplitText
@@ -43,11 +56,17 @@ export default function ServicesGrid() {
                 text={SERVICES.heading.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim()}
               />
             </div>
-            <p className="text-[0.92rem] leading-8 text-white/58">{SERVICES.subtitle}</p>
+            <div className="flex flex-col justify-end gap-6">
+              <p className="text-[0.92rem] font-light leading-[1.85] text-white/52">{SERVICES.subtitle}</p>
+              <Link href="/services" className="btn-outline-white self-start">
+                <span>View All Services</span>
+              </Link>
+            </div>
           </div>
 
+          {/* Services cards grid */}
           <m.div
-            className="grid grid-cols-1 gap-px bg-white/8 md:grid-cols-2 lg:grid-cols-3"
+            className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3"
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
@@ -57,42 +76,40 @@ export default function ServicesGrid() {
               <m.div
                 key={service.num}
                 variants={prefersReducedMotion ? undefined : fadeUpChild}
-                whileHover={
-                  prefersReducedMotion
-                    ? undefined
-                    : {
-                        backgroundColor: 'rgba(91, 192, 235, 0.04)',
-                        transition: {duration: 0.25},
-                      }
-                }
-                className="group relative flex h-full min-h-[19rem] flex-col overflow-hidden bg-ink p-card-pad"
+                className="card-service group relative flex min-h-[22rem] flex-col overflow-hidden border border-white/7 bg-white/[0.025] p-[var(--card-pad)]"
                 style={prefersReducedMotion ? undefined : {willChange: 'transform, background-color'}}
               >
+                {/* Hover fill gradient */}
                 <m.div
-                  className="absolute inset-y-0 left-0 w-full origin-left bg-[linear-gradient(90deg,rgba(91,192,235,0.08),transparent)]"
+                  className="absolute inset-y-0 left-0 w-full origin-left bg-[linear-gradient(90deg,rgba(91,192,235,0.07),transparent_60%)]"
                   initial={{scaleX: 0}}
                   whileHover={prefersReducedMotion ? undefined : {scaleX: 1}}
-                  transition={prefersReducedMotion ? {duration: 0} : {duration: 0.35, ease: [0.22, 1, 0.36, 1]}}
+                  transition={prefersReducedMotion ? {duration: 0} : {duration: 0.4, ease: [0.22, 1, 0.36, 1]}}
                 />
-                <div className="absolute right-4 top-4 text-[3rem] leading-none text-white/10">
+
+                {/* Large decorative number */}
+                <div className="absolute right-4 top-4 font-bold leading-none text-white/[0.06] text-[4rem]">
                   {service.num}
                 </div>
-                <h3 className="relative z-[1] mb-3 max-w-[18ch] pr-10 text-[1.05rem] font-bold leading-snug text-white">
-                  {service.title}
-                </h3>
-                <p className="relative z-[1] flex-1 text-[0.82rem] leading-7 text-white/55">
-                  {service.desc}
-                </p>
-                <Link href={`/services#${service.slug}`} className="absolute bottom-6 left-6 z-[1] text-[0.72rem] font-semibold uppercase tracking-[0.15em] text-accent no-underline">
-                  <m.span
-                    initial={{opacity: 0, x: -8}}
-                    whileHover={prefersReducedMotion ? undefined : {opacity: 1, x: 0}}
-                    transition={prefersReducedMotion ? {duration: 0} : {duration: 0.25, ease: 'easeOut'}}
-                    className="inline-flex"
+
+                <div className="relative z-[1] flex flex-1 flex-col">
+                  <div className="mb-3 text-[0.65rem] font-bold uppercase tracking-[0.22em] text-accent">
+                    {service.num}
+                  </div>
+                  <h3 className="mb-4 text-[1.1rem] font-semibold leading-snug text-white pr-8">
+                    {service.title}
+                  </h3>
+                  <p className="flex-1 text-[0.85rem] font-light leading-[1.85] text-white/52">
+                    {service.desc}
+                  </p>
+                  <Link
+                    href={`/services#${service.slug}`}
+                    className="mt-6 inline-flex items-center gap-2 text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-accent no-underline transition-all duration-200 hover:gap-3"
                   >
-                    Learn More →
-                  </m.span>
-                </Link>
+                    Learn More
+                    <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
+                  </Link>
+                </div>
               </m.div>
             ))}
           </m.div>

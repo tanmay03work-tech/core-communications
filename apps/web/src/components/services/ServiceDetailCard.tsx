@@ -1,6 +1,6 @@
 'use client';
 
-import {AnimatePresence, motion} from 'framer-motion';
+import {AnimatePresence, m} from 'framer-motion';
 import {ArrowUpRight, ChevronDown} from 'lucide-react';
 import {useRouter} from 'next/navigation';
 import TiltCard from '@/components/animations/TiltCard';
@@ -40,7 +40,7 @@ export default function ServiceDetailCard({
         transition: {duration: 0.3, ease: 'easeOut'},
       }}
     >
-      <motion.article
+      <m.article
         className="group h-full border-2 border-neutral-100 bg-white p-8 transition-[border-color,box-shadow] duration-300 hover:border-b-primary hover:shadow-[0_20px_50px_rgba(28,46,74,0.12)] lg:p-10"
       >
         <div className="flex items-start justify-between gap-4">
@@ -78,7 +78,7 @@ export default function ServiceDetailCard({
 
         <AnimatePresence initial={false}>
           {isExpanded ? (
-            <motion.div
+            <m.div
               key="expanded"
               initial={{height: 0, opacity: 0}}
               animate={{height: 'auto', opacity: 1}}
@@ -95,7 +95,7 @@ export default function ServiceDetailCard({
                   </p>
                   <ul className="mt-3 space-y-3">
                     {approach.map((item) => (
-                      <motion.li
+                      <m.li
                         key={item}
                         initial={{opacity: 0, y: 10}}
                         animate={{opacity: 1, y: 0}}
@@ -103,7 +103,7 @@ export default function ServiceDetailCard({
                       >
                         <span className="mt-2 h-1.5 w-1.5 rounded-full bg-accent" aria-hidden="true" />
                         <span>{item}</span>
-                      </motion.li>
+                      </m.li>
                     ))}
                   </ul>
                 </div>
@@ -139,10 +139,10 @@ export default function ServiceDetailCard({
                   </div>
                 ) : null}
               </div>
-            </motion.div>
+            </m.div>
           ) : null}
         </AnimatePresence>
-      </motion.article>
+      </m.article>
     </TiltCard>
   );
 }

@@ -1,7 +1,7 @@
 'use client';
 
 import {useEffect, useMemo, useState, type MouseEvent as ReactMouseEvent} from 'react';
-import {LayoutGroup, motion, useMotionValueEvent, useReducedMotion, useScroll, useSpring} from 'framer-motion';
+import {LayoutGroup, m, useMotionValueEvent, useReducedMotion, useScroll, useSpring} from 'framer-motion';
 import Link from 'next/link';
 import {NAV_LINKS} from '@/lib/constants';
 import {useActiveSection} from '@/hooks/useActiveSection';
@@ -23,19 +23,19 @@ type Ripple = {
   y: number;
 };
 
-function NavbarLogo({compact}: {compact: boolean}) {
+function NavbarLogo({compact, scrolled}: {compact: boolean; scrolled: boolean}) {
   return (
     <Link href="/" aria-label="Core Communications Home" className="inline-flex items-center gap-3 no-underline">
-      <motion.span
+      <m.span
         className="flex shrink-0 items-center justify-center"
         animate={{scale: compact ? 0.92 : 1}}
         transition={navbarSpring}
       >
         <AnimatedLogoMark size={compact ? 38 : 42} />
-      </motion.span>
+      </m.span>
       <div className="flex min-w-0 flex-col">
-        <span className="text-[0.88rem] font-semibold uppercase tracking-[0.28em] text-[var(--navy)]">Core</span>
-        <span className="text-[0.6rem] uppercase tracking-[0.24em] text-[rgba(28,46,74,0.56)]">Communications</span>
+        <span className={cn('text-[0.88rem] font-semibold uppercase tracking-[0.28em]', scrolled ? 'text-white' : 'text-[var(--navy)]')}>Core</span>
+        <span className={cn('text-[0.6rem] uppercase tracking-[0.24em]', scrolled ? 'text-white/58' : 'text-[rgba(28,46,74,0.56)]')}>Communications</span>
       </div>
     </Link>
   );
@@ -59,6 +59,7 @@ export default function Navbar() {
   const {activeHref} = useActiveSection(NAV_LINKS);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [compact, setCompact] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const [lowPowerMode, setLowPowerMode] = useState(false);
   const [ripples, setRipples] = useState<Ripple[]>([]);
   const magnetic = useMagnetic<HTMLDivElement>(10);
@@ -71,6 +72,7 @@ export default function Navbar() {
 
   useMotionValueEvent(scrollY, 'change', (latest) => {
     setCompact(latest > 28);
+    setScrolled(latest > 60);
   });
 
   useEffect(() => {
@@ -124,30 +126,30 @@ export default function Navbar() {
 
   return (
     <>
-      <motion.div
+      <m.div
         className="fixed inset-x-0 top-0 z-[120] h-[2px] origin-left bg-[linear-gradient(90deg,rgba(28,46,74,0.92),rgba(91,192,235,0.96),rgba(61,183,242,0.92))]"
         style={{scaleX: progressScale}}
       />
 
-      <motion.header
+      <m.header
         className="fixed inset-x-0 top-0 z-[110]"
         animate={reducedMotion ? undefined : {y: compact ? -2 : 0}}
         transition={navbarSpring}
       >
         <Container className="max-w-[1540px] pt-4 md:pt-5">
-          <motion.nav
+          <m.nav
             aria-label="Primary"
-            className="glass-nav relative overflow-hidden rounded-full"
+            className={cn('site-nav glass-nav relative overflow-hidden rounded-full', scrolled && 'scrolled')}
             animate={reducedMotion ? undefined : {scale: compact ? 0.985 : 1}}
             transition={navbarSpring}
           >
-            <motion.div
+            <m.div
               className="pointer-events-none absolute inset-0 rounded-full"
               animate={{opacity: compact ? 1 : 0.66}}
               transition={{duration: 0.28, ease: 'easeOut'}}
             >
               <div className="absolute inset-[1px] rounded-full backdrop-blur-[10px]" />
-              <motion.div
+              <m.div
                 className={cn(
                   'absolute inset-[1px] rounded-full bg-white/[0.34]',
                   lowPowerMode ? '' : 'backdrop-blur-[24px]',
@@ -155,7 +157,7 @@ export default function Navbar() {
                 animate={{opacity: compact ? 1 : 0.5}}
                 transition={{duration: 0.28, ease: 'easeOut'}}
               />
-            </motion.div>
+            </m.div>
 
             <div className="glass-nav__border pointer-events-none absolute inset-0 rounded-full" />
             <div className="glass-nav__glow pointer-events-none absolute inset-x-10 -top-px h-px" />
@@ -168,12 +170,12 @@ export default function Navbar() {
                 compact ? 'py-2.5' : 'py-3',
               )}
             >
-              <NavbarLogo compact={compact} />
+              <NavbarLogo compact={compact} scrolled={scrolled} />
 
               <LayoutGroup id="desktop-navbar">
                 <div className="hidden items-center gap-1.5 lg:flex">
                   {navLinks.map((link) => (
-                    <motion.div
+                    <m.div
                       key={link.href}
                       className="relative"
                       initial="rest"
@@ -186,26 +188,40 @@ export default function Navbar() {
                         aria-current={link.active ? 'page' : undefined}
                         className={cn(
                           'group relative inline-flex items-center justify-center overflow-hidden rounded-full px-4 py-2.5 text-[0.74rem] font-semibold uppercase tracking-[0.2em] no-underline transition-colors duration-200',
-                          link.active ? 'text-[var(--navy)]' : 'text-[rgba(28,46,74,0.72)] hover:text-[var(--navy)]',
+                          link.active
+                            ? scrolled
+                              ? 'text-white'
+                              : 'text-[var(--navy)]'
+                            : scrolled
+                              ? 'text-white/72 hover:text-white'
+                              : 'text-[rgba(28,46,74,0.72)] hover:text-[var(--navy)]',
                         )}
                       >
                         {link.active ? (
                           <>
-                            <motion.span
+                            <m.span
                               layoutId="navbar-active-pill"
-                              className="absolute inset-0 rounded-full bg-[linear-gradient(180deg,rgba(91,192,235,0.18),rgba(91,192,235,0.12))]"
+                              className={cn(
+                                'absolute inset-0 rounded-full',
+                                scrolled
+                                  ? 'bg-[linear-gradient(180deg,rgba(91,192,235,0.24),rgba(91,192,235,0.14))]'
+                                  : 'bg-[linear-gradient(180deg,rgba(91,192,235,0.18),rgba(91,192,235,0.12))]',
+                              )}
                               transition={navbarSpring}
                             />
-                            <motion.span
+                            <m.span
                               layoutId="navbar-active-border"
-                              className="absolute inset-0 rounded-full border border-[rgba(91,192,235,0.34)]"
+                              className={cn(
+                                'absolute inset-0 rounded-full',
+                                scrolled ? 'border border-[rgba(91,192,235,0.42)]' : 'border border-[rgba(91,192,235,0.34)]',
+                              )}
                               transition={navbarSpring}
                             />
                           </>
                         ) : null}
 
                         <span className="relative z-[1]">{link.label}</span>
-                        <motion.span
+                        <m.span
                           className="absolute inset-x-4 bottom-[7px] h-px origin-left rounded-full bg-[linear-gradient(90deg,rgba(91,192,235,0.96),rgba(61,183,242,0.62))]"
                           variants={{
                             rest: {
@@ -220,10 +236,10 @@ export default function Navbar() {
                           transition={{duration: 0.24, ease: [0.16, 1, 0.3, 1]}}
                         />
                       </Link>
-                    </motion.div>
+                    </m.div>
                   ))}
 
-                  <motion.div
+                  <m.div
                     ref={magnetic.ref}
                     className="ml-2"
                     style={lowPowerMode ? undefined : magnetic.style}
@@ -238,7 +254,7 @@ export default function Navbar() {
                       <span className="pointer-events-none absolute inset-0 rounded-full bg-[radial-gradient(circle_at_top,rgba(91,192,235,0.22),transparent_60%)] opacity-80" />
                       <span className="pointer-events-none absolute inset-x-6 bottom-0 h-px bg-[linear-gradient(90deg,rgba(91,192,235,0),rgba(91,192,235,0.95),rgba(91,192,235,0))] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                       {ripples.map((ripple) => (
-                        <motion.span
+                        <m.span
                           key={ripple.id}
                           className="pointer-events-none absolute rounded-full bg-white/25"
                           initial={{opacity: 0.5, scale: 0, x: ripple.x - 6, y: ripple.y - 6, width: 12, height: 12}}
@@ -247,16 +263,16 @@ export default function Navbar() {
                         />
                       ))}
                       <span className="relative z-[1]">Start a Conversation</span>
-                      <motion.span
+                      <m.span
                         className="relative z-[1] inline-flex"
                         animate={reducedMotion ? undefined : {x: compact ? 2 : 0}}
                         whileHover={reducedMotion ? undefined : {x: 4}}
                         transition={navbarSpring}
                       >
                         →
-                      </motion.span>
+                      </m.span>
                     </Link>
-                  </motion.div>
+                  </m.div>
                 </div>
               </LayoutGroup>
 
@@ -266,29 +282,34 @@ export default function Navbar() {
                 aria-expanded={mobileOpen}
                 aria-controls="mobile-navigation"
                 onClick={() => setMobileOpen((open) => !open)}
-                className="relative flex h-11 w-11 items-center justify-center overflow-hidden rounded-full border border-[rgba(28,46,74,0.08)] bg-white/55 text-[var(--navy)] shadow-[0_8px_24px_rgba(28,46,74,0.08)] transition-colors duration-200 hover:border-[rgba(91,192,235,0.32)] lg:hidden"
+                className={cn(
+                  'relative flex h-11 w-11 items-center justify-center overflow-hidden rounded-full transition-colors duration-200 lg:hidden',
+                  scrolled
+                    ? 'border border-[rgba(91,192,235,0.24)] bg-white/8 text-white shadow-[0_8px_24px_rgba(4,10,20,0.22)] hover:border-[rgba(91,192,235,0.45)]'
+                    : 'border border-[rgba(28,46,74,0.08)] bg-white/55 text-[var(--navy)] shadow-[0_8px_24px_rgba(28,46,74,0.08)] hover:border-[rgba(91,192,235,0.32)]',
+                )}
               >
                 <span className="sr-only">{mobileOpen ? 'Close menu' : 'Open menu'}</span>
-                <motion.span
+                <m.span
                   className="absolute h-[1.5px] w-[18px] rounded-full bg-current"
                   animate={{rotate: mobileOpen ? 45 : 0, y: mobileOpen ? 0 : -5}}
                   transition={navbarSpring}
                 />
-                <motion.span
+                <m.span
                   className="absolute h-[1.5px] w-[18px] rounded-full bg-current"
                   animate={{opacity: mobileOpen ? 0 : 1, scaleX: mobileOpen ? 0.4 : 1}}
                   transition={{duration: 0.18, ease: 'easeOut'}}
                 />
-                <motion.span
+                <m.span
                   className="absolute h-[1.5px] w-[18px] rounded-full bg-current"
                   animate={{rotate: mobileOpen ? -45 : 0, y: mobileOpen ? 0 : 5}}
                   transition={navbarSpring}
                 />
               </button>
             </div>
-          </motion.nav>
+          </m.nav>
         </Container>
-      </motion.header>
+      </m.header>
 
       <MobileMenu
         open={mobileOpen}
@@ -300,3 +321,4 @@ export default function Navbar() {
     </>
   );
 }
+

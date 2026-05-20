@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import {motion} from 'framer-motion';
+import {m} from 'framer-motion';
 import {scaleIn} from '@/lib/framer/variants';
 
 type SectorCardProps = {
@@ -20,7 +20,7 @@ export default function SectorCard({
   relatedCaseStudy,
 }: SectorCardProps) {
   return (
-    <motion.article
+    <m.article
       variants={scaleIn}
       className="relative overflow-hidden border border-neutral-100 bg-white p-6 transition-all duration-300 hover:-translate-y-1.5 hover:border-primary hover:shadow-[0_16px_40px_rgba(28,46,74,0.1)]"
     >
@@ -47,6 +47,6 @@ export default function SectorCard({
           {relatedCaseStudy.title}
         </Link>
       ) : null}
-    </motion.article>
+    </m.article>
   );
 }

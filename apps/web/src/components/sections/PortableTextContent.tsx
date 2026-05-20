@@ -101,7 +101,7 @@ export default function PortableTextContent({value, className, invert = false}: 
         if (node._type === 'image') {
           return (
             <figure key={node._key} className="space-y-3">
-              <ResponsiveSanityImage image={node} />
+              <ResponsiveSanityImage image={node} sizes="(max-width: 768px) 100vw, 800px" />
               {node.caption ? (
                 <figcaption className={cn('text-sm leading-6', invert ? 'text-white/55' : 'text-navy/55')}>
                   {node.caption}

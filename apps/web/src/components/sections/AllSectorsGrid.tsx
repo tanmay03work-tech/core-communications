@@ -1,6 +1,6 @@
 'use client';
 
-import {motion} from 'framer-motion';
+import {m} from 'framer-motion';
 import ScrollReveal from '@/components/motion/ScrollReveal';
 import SectorCard from '@/components/sectors/SectorCard';
 import {staggerContainer} from '@/lib/framer/variants';
@@ -122,7 +122,7 @@ export default function AllSectorsGrid() {
             </p>
           </div>
 
-          <motion.div
+          <m.div
             className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
             variants={staggerContainer(0.12, 0.2)}
             initial="hidden"
@@ -132,9 +132,10 @@ export default function AllSectorsGrid() {
             {sectors.map((sector) => (
               <SectorCard key={sector.title} {...sector} />
             ))}
-          </motion.div>
+          </m.div>
         </div>
       </ScrollReveal>
     </section>
   );
 }
+

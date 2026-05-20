@@ -40,7 +40,7 @@ export default function GallerySection({section}: Props) {
                     data-lightbox-src={getSanityImageUrl(item.image, {width: 2200, fit: 'max'})}
                     className="block overflow-hidden rounded-[1.75rem]"
                   >
-                    <ResponsiveSanityImage image={item.image} className="rounded-[1.75rem]" imageClassName="h-auto w-full transition-transform duration-700 group-hover:scale-[1.03]" />
+                    <ResponsiveSanityImage image={item.image} sizes="(min-width: 1280px) 33vw, (min-width: 768px) 50vw, 100vw" className="rounded-[1.75rem]" imageClassName="h-auto w-full transition-transform duration-700 group-hover:scale-[1.03]" />
                   </a>
                   {item.caption || item.image.caption ? <figcaption className={cn('text-sm leading-6', getSectionSubtleTextClass(section.theme))}>{item.caption || item.image.caption}</figcaption> : null}
                 </figure>

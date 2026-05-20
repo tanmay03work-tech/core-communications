@@ -1,6 +1,6 @@
 'use client';
 
-import {motion, useScroll, useTransform} from 'framer-motion';
+import {m, useScroll, useTransform} from 'framer-motion';
 import type {PropsWithChildren} from 'react';
 import {useRef} from 'react';
 
@@ -29,8 +29,8 @@ export default function ParallaxWrapper({
   );
 
   return (
-    <motion.div ref={ref} className={className} style={{y}}>
+    <m.div ref={ref} className={className} style={{y}}>
       {children}
-    </motion.div>
+    </m.div>
   );
 }

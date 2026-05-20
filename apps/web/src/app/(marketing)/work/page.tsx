@@ -1,1 +1,1 @@
-export {default, generateMetadata} from '@/app/_views/WorkPage';
+export {default, metadata} from '@/app/_views/WorkPage';

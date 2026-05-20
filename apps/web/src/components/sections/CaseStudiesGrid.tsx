@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import SplitText from '@/components/animations/SplitText';
 import CaseStudiesGridClient from '@/components/sections/CaseStudiesGridClient';
 import SectionLabel from '@/components/ui/SectionLabel';
 import {CASE_STUDIES} from '@/lib/constants';
@@ -24,17 +25,31 @@ export default async function CaseStudiesGrid({caseStudies}: CaseStudiesGridProp
   const resolvedCaseStudies = fetchedCaseStudies?.length ? fetchedCaseStudies : fallbackCaseStudies;
 
   return (
-    <section id="cases" className="section-wrap bg-ink text-white">
-      <div className="mx-auto max-w-7xl">
-        <div className="mb-12 flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
+    <section id="cases" className="relative overflow-hidden bg-[linear-gradient(180deg,#F5F7FA_0%,#ffffff_50%,#F5F7FA_100%)] py-[clamp(5rem,9vw,8rem)] text-navy">
+      {/* Top accent line */}
+      <div className="absolute inset-x-0 top-0 h-px bg-[linear-gradient(90deg,transparent,rgba(28,46,74,0.1),transparent)]" />
+
+      <div className="relative z-10 mx-auto max-w-7xl px-5 md:px-8 lg:px-16 xl:px-24">
+        {/* Header row */}
+        <div className="mb-12 flex flex-col justify-between gap-6 md:mb-14 lg:flex-row lg:items-end">
           <div>
-            <SectionLabel>{CASE_STUDIES.tag}</SectionLabel>
-            <h2 className="section-heading text-white" dangerouslySetInnerHTML={{__html: CASE_STUDIES.heading}} />
+            <SectionLabel className="text-primary">{CASE_STUDIES.tag}</SectionLabel>
+            <SplitText
+              by="word"
+              stagger={55}
+              className="section-heading text-navy"
+              text={CASE_STUDIES.heading.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim()}
+            />
           </div>
-          <Link href="/work" className="text-[0.72rem] font-semibold uppercase tracking-[0.2em] text-accent no-underline">
-            View All Work →
+          <Link
+            href="/work"
+            className="group inline-flex items-center gap-2 self-start text-[0.72rem] font-bold uppercase tracking-[0.22em] text-navy/55 no-underline transition-colors duration-200 hover:text-navy lg:self-auto"
+          >
+            View All Work
+            <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
           </Link>
         </div>
+
         <CaseStudiesGridClient caseStudies={resolvedCaseStudies.slice(0, 4)} />
       </div>
     </section>
