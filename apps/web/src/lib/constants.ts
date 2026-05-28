@@ -8,7 +8,7 @@ export const SITE = {
   tagline: 'Clarity. Credibility. Cut-through.',
   description:
     'B2B PR and communications for tech-led companies across APAC. Sydney - Mumbai.',
-  email: 'bharatcorecommunication@gmail.com',
+  email: 'bharat.joshi@corecommunication.biz',
   phone: '+61 452 330 923',
   locations: ['Sydney, Australia', 'Mumbai, India'],
 } as const;
