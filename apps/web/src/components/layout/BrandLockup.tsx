@@ -12,6 +12,36 @@ export default function BrandLockup({
   compact = false,
   footer = false,
 }: BrandLockupProps) {
+  if (footer) {
+    return (
+      <Link href={href} aria-label="Core Communications Home" className="inline-flex flex-col items-start gap-4 no-underline">
+        <span className="inline-flex items-center gap-3">
+          <span className="relative block h-14 w-14 shrink-0 overflow-hidden rounded-full">
+            <Image
+              src="/core_logo_final.svg"
+              alt="Core Communications logo"
+              fill
+              sizes="56px"
+              className="object-contain"
+              priority={compact}
+            />
+          </span>
+          <span className="flex min-w-0 flex-col">
+            <span className="text-[1.08rem] font-bold uppercase leading-none tracking-[0.28em] text-white">
+              Core
+            </span>
+            <span className="mt-1 text-[0.68rem] font-semibold uppercase leading-none tracking-[0.22em] text-white/78">
+              Communications
+            </span>
+          </span>
+        </span>
+        <span className="inline-flex w-fit rounded-full border border-[#3DB7F2]/20 bg-[#3DB7F2]/5 px-3 py-1.5 text-[0.58rem] uppercase tracking-[0.24em] text-[#3DB7F2]">
+          APAC Tech Communications
+        </span>
+      </Link>
+    );
+  }
+
   const logoWidth = footer
     ? 'w-[170px] md:w-[210px] lg:w-[240px]'
     : 'w-[170px] md:w-[210px] lg:w-[240px]';

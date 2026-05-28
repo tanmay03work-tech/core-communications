@@ -5,12 +5,15 @@ import Link from 'next/link';
 import SplitText from '@/components/animations/SplitText';
 import SectionLabel from '@/components/ui/SectionLabel';
 import {CTA} from '@/lib/constants';
+import {cn} from '@/lib/utils';
+import type {SectionTheme} from '@/types';
 
 type CTASectionData = {
   title?: string;
   body?: string;
   eyebrow?: string;
   actions?: Array<{ label: string; href: string }>;
+  theme?: SectionTheme;
 };
 
 type CTASectionProps = {
@@ -24,19 +27,28 @@ export default function CTASection({section}: CTASectionProps) {
   const primary = section?.actions?.[0] ?? CTA.primary;
   const secondary = section?.actions?.[1] ?? CTA.secondary;
   const eyebrow = section?.eyebrow ?? "Let's Talk";
+  const invertedTheme = section?.theme === 'light' ? 'dark' : 'light';
+  const isDark = invertedTheme === 'dark';
 
   return (
     <LazyMotion features={domAnimation}>
       <section
         id="contact"
-        className="relative overflow-hidden bg-[linear-gradient(160deg,#1C2E4A_0%,#0D1B2E_60%,#0B1F33_100%)] py-[clamp(5rem,9vw,8rem)] text-white"
+        className={cn(
+          'relative overflow-hidden py-[clamp(5rem,9vw,8rem)]',
+          isDark
+            ? 'bg-[linear-gradient(160deg,#1C2E4A_0%,#0D1B2E_60%,#0B1F33_100%)] text-white'
+            : 'bg-[linear-gradient(160deg,#F5F7FA_0%,#ffffff_56%,#E8F4FA_100%)] text-navy',
+        )}
       >
         {/* Diagonal stripe texture */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 opacity-[0.04]"
+          className={cn('pointer-events-none absolute inset-0', isDark ? 'opacity-[0.04]' : 'opacity-[0.12]')}
           style={{
-            backgroundImage: 'repeating-linear-gradient(-38deg, rgba(255,255,255,0.22) 0 1px, transparent 1px 20px)',
+            backgroundImage: isDark
+              ? 'repeating-linear-gradient(-38deg, rgba(255,255,255,0.22) 0 1px, transparent 1px 20px)'
+              : 'repeating-linear-gradient(-38deg, rgba(28,46,74,0.16) 0 1px, transparent 1px 20px)',
           }}
         />
 
@@ -47,18 +59,28 @@ export default function CTASection({section}: CTASectionProps) {
           style={{
             width: '56rem',
             height: '56rem',
-            background: 'radial-gradient(circle, rgba(91,192,235,0.1), transparent 60%)',
+            background: isDark
+              ? 'radial-gradient(circle, rgba(91,192,235,0.1), transparent 60%)'
+              : 'radial-gradient(circle, rgba(91,192,235,0.18), transparent 60%)',
             filter: 'blur(20px)',
           }}
         />
 
         {/* Top accent line */}
-        <div className="absolute inset-x-0 top-0 h-[2px] bg-[linear-gradient(90deg,transparent,rgba(91,192,235,0.5),transparent)]" />
+        <div className={cn(
+          'absolute inset-x-0 top-0 h-[2px]',
+          isDark
+            ? 'bg-[linear-gradient(90deg,transparent,rgba(91,192,235,0.5),transparent)]'
+            : 'bg-[linear-gradient(90deg,transparent,rgba(28,46,74,0.18),rgba(91,192,235,0.45),transparent)]',
+        )} />
 
         {/* Decorative large quote mark */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute right-[8%] top-[10%] font-serif text-[14rem] leading-none text-white/[0.025] select-none"
+          className={cn(
+            'pointer-events-none absolute right-[8%] top-[10%] font-serif text-[14rem] leading-none select-none',
+            isDark ? 'text-white/[0.025]' : 'text-navy/[0.04]',
+          )}
         >
           "
         </div>
@@ -67,20 +89,23 @@ export default function CTASection({section}: CTASectionProps) {
           <SectionLabel className="justify-center">{eyebrow}</SectionLabel>
 
           {title === CTA.heading ? (
-            <h2 className="section-heading text-white">
+            <h2 className={cn('section-heading', isDark ? 'text-white' : 'text-navy')}>
               Ready to cut <span className="font-serif italic">through</span>?
             </h2>
           ) : (
             <SplitText
               by="word"
               stagger={70}
-              className="section-heading text-white"
+              className={cn('section-heading', isDark ? 'text-white' : 'text-navy')}
               text={title.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim()}
             />
           )}
 
           <m.p
-            className="mx-auto mb-10 mt-6 max-w-lg font-sans text-[1rem] font-normal leading-relaxed text-white/72"
+            className={cn(
+              'mx-auto mb-10 mt-6 max-w-lg font-sans text-[1rem] font-normal leading-relaxed',
+              isDark ? 'text-white/72' : 'text-navy/72',
+            )}
             initial={prefersReducedMotion ? {opacity: 0} : {opacity: 0, y: 16}}
             whileInView={prefersReducedMotion ? {opacity: 1} : {opacity: 1, y: 0}}
             viewport={{once: true, margin: '-60px'}}
@@ -99,7 +124,7 @@ export default function CTASection({section}: CTASectionProps) {
             <Link href={primary.href} className="btn-primary">
               <span>{primary.label}</span>
             </Link>
-            <Link href={secondary.href} className="btn-outline-white">
+            <Link href={secondary.href} className={isDark ? 'btn-outline-white' : 'btn-ghost'}>
               <span>{secondary.label}</span>
             </Link>
           </m.div>

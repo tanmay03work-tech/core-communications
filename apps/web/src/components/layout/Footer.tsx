@@ -48,34 +48,34 @@ export default function Footer() {
 
       <Container className="relative z-10">
         {/* Main footer content */}
-        <div className="grid grid-cols-1 gap-12 py-16 md:py-20 md:grid-cols-[1.4fr_0.9fr_1.1fr] lg:py-24">
+        <div className="grid grid-cols-1 items-start gap-8 py-10 md:grid-cols-[1.1fr_0.75fr_1fr] md:gap-10 md:py-12 lg:py-14">
 
           {/* Brand column */}
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-4">
             <BrandLockup footer />
-            <p className="max-w-[300px] font-sans text-[0.92rem] font-normal leading-relaxed text-white/74">
+            <p className="max-w-[320px] font-sans text-[0.88rem] font-normal leading-[1.65] text-white/78">
               {SITE.description}
             </p>
             <div className="flex items-center gap-3">
               <span className="h-2 w-2 rounded-full bg-accent shadow-[0_0_12px_rgba(91,192,235,0.5)]" />
-              <span className="text-[0.65rem] uppercase tracking-[0.2em] text-white/62">
+              <span className="text-[0.64rem] font-bold uppercase tracking-[0.2em] text-white/72">
                 Sydney · Mumbai
               </span>
             </div>
           </div>
 
           {/* Navigation */}
-          <div className="flex flex-col gap-5">
-            <h4 className="text-[0.62rem] font-bold uppercase tracking-[0.24em] text-white/58">
+          <div className="flex flex-col gap-4 md:pt-1">
+            <h4 className="text-[0.64rem] font-bold uppercase tracking-[0.24em] text-white">
               Navigation
             </h4>
-            <ul className="flex list-none flex-col gap-3">
+            <ul className="flex list-none flex-col gap-2.5">
               {FOOTER.services.map((link) => (
                 <li key={link.label}>
                   <Link
                     href={link.href}
                     onClick={(event) => handleFooterClick(event, link.href)}
-                    className="group inline-flex items-center gap-2 font-sans text-[0.9rem] font-normal text-white/72 no-underline transition-colors duration-200 hover:text-white"
+                    className="group inline-flex items-center gap-2 font-sans text-[0.88rem] font-semibold text-white/78 no-underline transition-colors duration-200 hover:text-white"
                   >
                     <span className="h-px w-0 rounded-full bg-accent transition-all duration-300 group-hover:w-4" />
                     {link.label}
@@ -86,31 +86,31 @@ export default function Footer() {
           </div>
 
           {/* Contact card */}
-          <div className="flex flex-col gap-5">
-            <h4 className="text-[0.62rem] font-bold uppercase tracking-[0.24em] text-white/58">
-              Contact
+          <div className="flex flex-col gap-4 md:pt-1">
+            <h4 className="text-[0.64rem] font-bold uppercase tracking-[0.24em] text-white">
+              Contacts
             </h4>
-            <div className="rounded-[1.25rem] border border-white/8 bg-white/[0.04] p-5 backdrop-blur-sm">
+            <div className="rounded-[1rem] border border-white/12 bg-white/[0.04] p-4 backdrop-blur-sm">
               {/* Top gradient line */}
-              <div className="mb-4 h-px w-full bg-[linear-gradient(90deg,rgba(91,192,235,0.6),transparent)]" />
-              <div className="flex flex-col gap-3">
+              <div className="mb-3 h-px w-full bg-[linear-gradient(90deg,rgba(91,192,235,0.6),transparent)]" />
+              <div className="flex flex-col gap-2.5">
                 <a
                   href={`mailto:${SITE.email}`}
-                  className="break-all font-sans text-[0.9rem] font-normal text-white/78 no-underline transition-colors hover:text-white"
+                  className="break-all font-sans text-[0.88rem] font-semibold text-white/84 no-underline transition-colors hover:text-white"
                 >
                   {SITE.email}
                 </a>
                 <a
                   href={`tel:${SITE.phone}`}
-                  className="font-sans text-[0.9rem] font-normal text-white/78 no-underline transition-colors hover:text-white"
+                  className="font-sans text-[0.88rem] font-semibold text-white/84 no-underline transition-colors hover:text-white"
                 >
                   {SITE.phone}
                 </a>
               </div>
-              <div className="my-4 h-px w-full bg-white/8" />
-              <div className="flex flex-col gap-1.5">
+              <div className="my-3 h-px w-full bg-white/8" />
+              <div className="flex flex-col gap-1">
                 {SITE.locations.map((loc) => (
-                  <span key={loc} className="font-sans text-[0.82rem] font-normal text-white/64">
+                  <span key={loc} className="font-sans text-[0.82rem] font-semibold text-white/72">
                     {loc}
                   </span>
                 ))}
@@ -120,7 +120,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="flex flex-col items-center justify-between gap-4 border-t border-white/[0.07] py-7 sm:flex-row">
+        <div className="flex flex-col items-center justify-between gap-4 border-t border-white/[0.07] py-5 sm:flex-row">
           <p className="text-[0.64rem] uppercase tracking-[0.18em] text-white/50">
             © {year} {SITE.name}. All rights reserved.
           </p>

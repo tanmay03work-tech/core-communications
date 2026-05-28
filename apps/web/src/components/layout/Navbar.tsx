@@ -154,7 +154,7 @@ export default function Navbar() {
         animate={reducedMotion ? undefined : {y: compact ? -2 : 0}}
         transition={navbarSpring}
       >
-        <Container className="max-w-[1540px] pt-4 md:pt-5">
+        <Container className="max-w-[1440px] px-4 pt-4 sm:px-6 md:pt-5 lg:px-8">
           <m.nav
             aria-label="Primary"
             className={cn('site-nav glass-nav relative overflow-hidden rounded-full', scrolled && 'scrolled')}
@@ -205,14 +205,14 @@ export default function Navbar() {
                         onClick={(event) => handleNavClick(event, link.href)}
                         aria-current={link.active ? 'page' : undefined}
                         className={cn(
-                          'group relative inline-flex items-center justify-center overflow-hidden rounded-full px-4 py-2.5 text-[0.74rem] font-semibold uppercase tracking-[0.2em] no-underline transition-colors duration-200',
+                          'group relative inline-flex items-center justify-center overflow-hidden rounded-full px-4 py-2.5 text-[0.78rem] font-bold uppercase tracking-[0.2em] no-underline transition-colors duration-200',
                           link.active
                             ? scrolled
                               ? 'text-white'
                               : 'text-[var(--navy)]'
                             : scrolled
-                              ? 'text-white/72 hover:text-white'
-                              : 'text-[rgba(28,46,74,0.72)] hover:text-[var(--navy)]',
+                              ? 'text-white/84 hover:text-white'
+                              : 'text-[rgba(28,46,74,0.84)] hover:text-[var(--navy)]',
                         )}
                       >
                         <span className="relative z-[1]">{link.label}</span>
@@ -244,7 +244,7 @@ export default function Navbar() {
                     <Link
                       href="/contact"
                       onClick={handleCtaClick}
-                      className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full border border-[rgba(91,192,235,0.22)] bg-[linear-gradient(180deg,rgba(25,46,78,0.96),rgba(18,35,61,0.96))] px-5 py-2.5 text-[0.72rem] font-semibold uppercase tracking-[0.2em] text-white no-underline shadow-[0_10px_30px_rgba(12,26,48,0.18)]"
+                      className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full border border-[rgba(91,192,235,0.22)] bg-[linear-gradient(180deg,rgba(25,46,78,0.96),rgba(18,35,61,0.96))] px-5 py-2.5 text-[0.74rem] font-bold uppercase tracking-[0.2em] text-white no-underline shadow-[0_10px_30px_rgba(12,26,48,0.18)]"
                     >
                       <span className="pointer-events-none absolute inset-0 rounded-full bg-[radial-gradient(circle_at_top,rgba(91,192,235,0.22),transparent_60%)] opacity-80" />
                       <span className="pointer-events-none absolute inset-x-6 bottom-0 h-px bg-[linear-gradient(90deg,rgba(91,192,235,0),rgba(91,192,235,0.95),rgba(91,192,235,0))] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
