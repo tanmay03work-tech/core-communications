@@ -18,7 +18,7 @@ export default function FloatingMetrics({metrics}: FloatingMetricsProps) {
   }
 
   return (
-    <div className="relative z-20 hidden w-full max-w-[22rem] flex-col gap-4 lg:flex">
+    <div className="relative z-20 flex w-full max-w-[22rem] flex-col gap-4">
       {metrics.map((metric, index) => (
         <m.div
           key={metric._key ?? `${metric.label}-${metric.value}`}

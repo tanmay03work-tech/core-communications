@@ -249,7 +249,7 @@ export default async function CaseStudyPage({params}: CaseStudyPageProps) {
     <main className="bg-[#f7f9fc] text-navy">
       <StructuredData data={structuredData} />
 
-      <section className="border-y border-navy/12 bg-white py-8 md:py-10">
+      <section className="border-y border-navy/12 bg-white pb-8 pt-32 md:pb-10 md:pt-36">
         <Container className="max-w-7xl">
           <div className="flex flex-col gap-3">
             <SectionLabel className="text-primary">{caseNumber ? `Case Study ${caseNumber}` : client}</SectionLabel>
@@ -257,10 +257,10 @@ export default async function CaseStudyPage({params}: CaseStudyPageProps) {
             {kicker ? <p className="max-w-4xl font-sans text-[0.88rem] leading-relaxed text-[#8ba4c0]">{kicker}</p> : null}
             {intro ? <p className="max-w-5xl text-[0.95rem] italic leading-relaxed text-black">{intro}</p> : null}
           </div>
-          <div className="mt-5 flex flex-wrap gap-2.5">
-            {tag ? <span className="border border-neutral-100 px-4 py-2 text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-navy/72">{tag}</span> : null}
-            {sector ? <span className="border border-neutral-100 px-4 py-2 text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-navy/72">{sector}</span> : null}
-            {publishedAt ? <span className="border border-neutral-100 px-4 py-2 text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-navy/72">{new Date(publishedAt).getFullYear()}</span> : null}
+          <div className="mobile-scroll-pane -mx-5 mt-5 flex gap-2.5 px-5 pb-2 sm:mx-0 sm:flex-wrap sm:px-0">
+            {tag ? <span className="shrink-0 border border-neutral-100 px-4 py-2 text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-navy/72">{tag}</span> : null}
+            {sector ? <span className="shrink-0 border border-neutral-100 px-4 py-2 text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-navy/72">{sector}</span> : null}
+            {publishedAt ? <span className="shrink-0 border border-neutral-100 px-4 py-2 text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-navy/72">{new Date(publishedAt).getFullYear()}</span> : null}
           </div>
         </Container>
       </section>
@@ -268,7 +268,7 @@ export default async function CaseStudyPage({params}: CaseStudyPageProps) {
       <section className="py-8 md:py-10">
         <Container className="max-w-7xl">
           {stats.length ? (
-            <div className="mb-5 grid grid-cols-2 gap-3 md:grid-cols-4 lg:grid-cols-5">
+            <div className="mb-5 grid grid-cols-1 gap-3 min-[420px]:grid-cols-2 md:grid-cols-4 lg:grid-cols-5">
               {stats.map((stat) => (
                 <div key={('_key' in stat ? stat._key : undefined) ?? stat.label} className="border border-navy/10 bg-white p-4 text-center">
                   <div className="font-heading text-[clamp(1.9rem,4vw,3rem)] font-semibold leading-none tracking-tight text-navy">{stat.value}</div>

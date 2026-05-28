@@ -113,8 +113,8 @@ export default function HeroSection({siteSettings}: HeroSectionProps) {
         <m.div className="hero-blob hero-blob-three" style={{x: blobThreeX, y: blobThreeY}} aria-hidden="true" />
         <RadarAnimation />
 
-        <div className="relative z-10 mx-auto grid min-h-screen w-full max-w-[1540px] grid-cols-1 gap-12 px-container-padding pb-16 pt-28 lg:grid-cols-[minmax(0,1fr)_minmax(19rem,23rem)] lg:items-center lg:pb-20 lg:pt-32 xl:grid-cols-[minmax(0,1fr)_minmax(22rem,27rem)] xl:gap-16">
-          <div className="max-w-[72rem] lg:justify-self-start">
+        <div className="relative z-10 mx-auto grid min-h-screen w-full max-w-[1540px] grid-cols-1 gap-10 px-5 pb-16 pt-28 sm:px-container-padding lg:grid-cols-[minmax(0,1fr)_minmax(19rem,23rem)] lg:items-center lg:gap-12 lg:pb-20 lg:pt-32 xl:grid-cols-[minmax(0,1fr)_minmax(22rem,27rem)] xl:gap-16">
+          <div className="min-w-0 max-w-[72rem] lg:justify-self-start">
             <m.div
               initial={{opacity: 0, y: 22}}
               animate={{opacity: 1, y: 0}}
@@ -133,11 +133,11 @@ export default function HeroSection({siteSettings}: HeroSectionProps) {
                   transition: {staggerChildren: 0.12, delayChildren: 0.14},
                 },
               }}
-              className="font-heading text-hero leading-[0.98] text-white xl:text-[clamp(4.05rem,4.45vw,5.45rem)]"
+              className="max-w-full font-heading text-[clamp(2.45rem,11.5vw,3.2rem)] leading-[1.06] text-white sm:text-hero sm:leading-[0.98] xl:text-[clamp(4.05rem,4.45vw,5.45rem)]"
             >
-              <span className="mb-2 block overflow-hidden">
+              <span className="mb-2 block overflow-x-visible overflow-y-hidden">
                 <m.span
-                  className="block xl:whitespace-nowrap"
+                  className="block max-w-full break-words xl:whitespace-nowrap"
                   variants={{
                     hidden: {y: '110%'},
                     visible: {
@@ -149,9 +149,9 @@ export default function HeroSection({siteSettings}: HeroSectionProps) {
                   {headlineLines[0]}
                 </m.span>
               </span>
-              <span className="mb-2 block overflow-hidden">
+              <span className="mb-2 block overflow-x-visible overflow-y-hidden">
                 <m.span
-                  className="block"
+                  className="block max-w-full break-words"
                   variants={{
                     hidden: {y: '110%'},
                     visible: {
@@ -164,9 +164,9 @@ export default function HeroSection({siteSettings}: HeroSectionProps) {
                   <MorphingWord words={morphWords} fallback={DEFAULT_MORPH_WORDS[0]} />
                 </m.span>
               </span>
-              <span className="block overflow-hidden">
+              <span className="block overflow-x-visible overflow-y-hidden">
                 <m.span
-                  className="block"
+                  className="block max-w-full break-words"
                   variants={{
                     hidden: {y: '110%'},
                     visible: {
@@ -193,7 +193,7 @@ export default function HeroSection({siteSettings}: HeroSectionProps) {
               initial={{opacity: 0, y: 28}}
               animate={{opacity: 1, y: 0}}
               transition={{duration: 0.8, delay: 0.62, ease: [0.22, 1, 0.36, 1]}}
-              className="mt-10 flex flex-wrap items-center gap-8 lg:gap-10"
+              className="mt-10 flex flex-wrap items-center gap-4 sm:gap-8 lg:gap-10"
             >
               <m.div
                 ref={primaryMagnetic.ref}
@@ -202,14 +202,32 @@ export default function HeroSection({siteSettings}: HeroSectionProps) {
                 onMouseLeave={primaryMagnetic.onMouseLeave}
                 className="shrink-0"
               >
-                <Link href={HERO.cta.secondary.href} className="inline-flex min-h-12 shrink-0 items-center justify-center rounded-full border border-white/15 bg-white/[0.08] px-6 text-xs font-semibold uppercase tracking-[0.18em] text-white shadow-[0_14px_32px_rgba(5,12,24,0.22)] backdrop-blur-xl transition hover:-translate-y-0.5 hover:border-accent/40 hover:bg-accent/15">
+                <Link href={HERO.cta.secondary.href} className="inline-flex min-h-12 shrink-0 items-center justify-center rounded-full border border-white/15 bg-white/[0.08] px-5 text-xs font-semibold uppercase tracking-[0.14em] text-white shadow-[0_14px_32px_rgba(5,12,24,0.22)] backdrop-blur-xl transition hover:-translate-y-0.5 hover:border-accent/40 hover:bg-accent/15 sm:px-6 sm:tracking-[0.18em]">
                   <span className="relative z-[1]">Start a Conversation</span>
                 </Link>
               </m.div>
-              <Link href={HERO.cta.primary.href} className="inline-flex min-h-12 shrink-0 items-center justify-center gap-2 rounded-full border border-white/15 bg-white/[0.06] px-6 text-xs font-semibold uppercase tracking-[0.18em] text-white/90 shadow-[0_14px_32px_rgba(5,12,24,0.18)] backdrop-blur-xl transition hover:-translate-y-0.5 hover:border-accent/40 hover:bg-white/[0.1] hover:text-white">
+              <Link href={HERO.cta.primary.href} className="inline-flex min-h-12 shrink-0 items-center justify-center gap-2 rounded-full border border-white/15 bg-white/[0.06] px-5 text-xs font-semibold uppercase tracking-[0.14em] text-white/90 shadow-[0_14px_32px_rgba(5,12,24,0.18)] backdrop-blur-xl transition hover:-translate-y-0.5 hover:border-accent/40 hover:bg-white/[0.1] hover:text-white sm:px-6 sm:tracking-[0.18em]">
                 <span>See Our Work</span>
                 <span aria-hidden="true">→</span>
               </Link>
+            </m.div>
+
+            <m.div
+              initial={{opacity: 0, y: 20}}
+              animate={{opacity: 1, y: 0}}
+              transition={{duration: 0.7, delay: 0.7, ease: [0.22, 1, 0.36, 1]}}
+              className="mobile-scroll-pane -mx-5 mt-8 flex gap-3 px-5 pb-2 lg:hidden"
+            >
+              {metrics.map((metric, index) => (
+                <div
+                  key={`${metric.label}-${metric.value}-${index}`}
+                  className="flex min-h-[5rem] w-[17rem] shrink-0 items-center gap-3 rounded-full border border-white/10 bg-white/[0.06] px-4 py-3 text-white backdrop-blur-xl"
+                >
+                  <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-accent shadow-[0_0_0_6px_rgba(91,192,235,0.12)]" />
+                  <span className="font-heading text-lg font-bold tracking-tight">{metric.value}</span>
+                  <span className="text-[0.68rem] uppercase leading-snug tracking-[0.14em] text-white/58">{metric.label}</span>
+                </div>
+              ))}
             </m.div>
 
             <m.div

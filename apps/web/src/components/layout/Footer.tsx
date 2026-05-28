@@ -58,7 +58,7 @@ export default function Footer() {
             </p>
             <div className="flex items-center gap-3">
               <span className="h-2 w-2 rounded-full bg-accent shadow-[0_0_12px_rgba(91,192,235,0.5)]" />
-              <span className="text-[0.64rem] font-bold uppercase tracking-[0.2em] text-white/72">
+              <span className="text-[0.64rem] font-bold uppercase tracking-[0.16em] text-white/72 sm:tracking-[0.2em]">
                 Sydney · Mumbai
               </span>
             </div>
@@ -66,7 +66,7 @@ export default function Footer() {
 
           {/* Navigation */}
           <div className="flex flex-col gap-4 md:pt-1">
-            <h4 className="text-[0.64rem] font-bold uppercase tracking-[0.24em] text-white">
+            <h4 className="break-words text-[0.64rem] font-bold uppercase tracking-[0.2em] text-white sm:tracking-[0.24em]">
               Navigation
             </h4>
             <ul className="flex list-none flex-col gap-2.5">
@@ -87,7 +87,7 @@ export default function Footer() {
 
           {/* Contact card */}
           <div className="flex flex-col gap-4 md:pt-1">
-            <h4 className="text-[0.64rem] font-bold uppercase tracking-[0.24em] text-white">
+            <h4 className="break-words text-[0.64rem] font-bold uppercase tracking-[0.2em] text-white sm:tracking-[0.24em]">
               Contacts
             </h4>
             <div className="rounded-[1rem] border border-white/12 bg-white/[0.04] p-4 backdrop-blur-sm">

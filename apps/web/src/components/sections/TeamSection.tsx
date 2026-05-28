@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import {LazyMotion, domAnimation, m, useReducedMotion} from 'framer-motion';
 import ScrollReveal from '@/components/motion/ScrollReveal';
 import SectionLabel from '@/components/ui/SectionLabel';
@@ -14,6 +15,16 @@ const containerVariants = {
     },
   },
 };
+
+type TeamCardMember = {
+  initials: string;
+  name: string;
+  role: string;
+  bio: string;
+  photo?: string;
+};
+
+const teamMembers = TEAM.members as readonly TeamCardMember[];
 
 export default function TeamSection() {
   const prefersReducedMotion = useReducedMotion();
@@ -51,7 +62,7 @@ export default function TeamSection() {
             viewport={{once: true, margin: '-60px'}}
             variants={containerVariants}
           >
-            {TEAM.members.map((member, index) => (
+            {teamMembers.map((member, index) => (
               <m.article
                 key={member.name}
                 variants={{
@@ -82,7 +93,18 @@ export default function TeamSection() {
                   viewport={{once: true}}
                   transition={prefersReducedMotion ? {duration: 0} : {duration: 0.55, delay: 0.18, ease: [0.22, 1, 0.36, 1]}}
                 >
-                  {member.initials}
+                  {member.photo ? (
+                    <Image
+                      src={member.photo}
+                      alt={member.name}
+                      width={84}
+                      height={84}
+                      className="h-full w-full object-cover"
+                      priority={index === 0}
+                    />
+                  ) : (
+                    member.initials
+                  )}
                 </m.div>
 
                 {/* Content */}

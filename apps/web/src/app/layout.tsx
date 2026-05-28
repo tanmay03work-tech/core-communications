@@ -52,55 +52,52 @@ const CustomCursor = dynamic(() => import('@/components/layout/CustomCursor'), {
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL || 'https://www.corecommunication.biz'
+  ),
   title: {
-    default: 'Core Communications - Clarity. Credibility. Cut-through.',
     template: '%s | Core Communications',
+    default:
+      'Core Communications — B2B PR for Cybersecurity, Healthtech & Tech Companies',
   },
   description:
-    'B2B PR and communications for tech-led companies specialising in cybersecurity, identity, healthtech, and XaaS across APAC. Sydney and Mumbai.',
+    'B2B PR and communications agency specialising in XaaS, SMBs, Cybersecurity, Identity, Healthtech and Tech-enabled companies. Strategic communications across APAC — Sydney and Mumbai.',
   keywords: [
-    'B2B PR', 'public relations', 'cybersecurity PR', 'healthtech PR',
-    'digital PR', 'GEO', 'APAC communications', 'India Australia',
-    'tech PR agency', 'Core Communications',
+    'B2B PR agency Australia',
+    'cybersecurity PR',
+    'healthtech PR',
+    'tech PR agency Sydney',
+    'XaaS communications',
+    'SMB PR',
+    'digital PR agency',
+    'GEO services',
+    'media relations Australia',
+    'APAC communications',
+    'India Australia PR',
+    'thought leadership B2B',
+    'content marketing tech',
+    'influencer marketing B2B',
+    'B2B communications Sydney Mumbai',
+    'GEO AI search optimisation',
   ],
-  alternates: {
-    canonical: canonicalUrl,
-  },
   openGraph: {
     type: 'website',
-    locale: 'en_AU',
-    url: canonicalUrl,
+    locale: 'en',
     siteName: 'Core Communications',
-    title: 'Core Communications - Clarity. Credibility. Cut-through.',
-    description:
-      'B2B PR and communications for tech-led companies across APAC.',
     images: [
       {
-        url: defaultOgImage,
+        url: '/og-default.png',
         width: 1200,
         height: 630,
-        alt: 'Core Communications',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Core Communications - Clarity. Credibility. Cut-through.',
-    description:
-      'B2B PR and communications for tech-led companies across APAC.',
-    images: [defaultOgImage],
   },
   robots: {
     index: true,
     follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-      'max-video-preview': -1,
-    },
   },
 };
 

@@ -125,8 +125,13 @@ If your Cloudflare plan does not expose `cf.threat_score`, skip this custom rule
 Create a Turnstile site in Cloudflare:
 
 - Name: `Core Communications Contact Form`
-- Domain: your production domain
-- Widget type: `Managed`
+- Domains:
+  - your production domain, for example `corecommunications.example`
+  - `www.your-production-domain`
+  - the active Vercel deployment domain used for testing, for example `your-project.vercel.app`
+- Widget type: `Invisible`
+
+The contact form renders Turnstile with `size: 'invisible'`. A Managed widget or a site key that does not allow the current hostname will cause the browser to reject the challenge before the message reaches `/api/contact`.
 
 Add these Vercel environment variables:
 
@@ -156,29 +161,35 @@ Suggested sender format:
 
 ## 9. Vercel environment checklist
 
+The app already reads configuration from `process.env`, so production secrets should live in Vercel rather than committed files. Keep local-only values in ignored `.env.local` files, or pull them with `vercel env pull`.
+
 Set these values in Vercel for production:
 
 ```bash
+NEXT_PUBLIC_SANITY_PROJECT_ID=
 NEXT_PUBLIC_SITE_URL=
 RESEND_API_KEY=
-RESEND_FROM_EMAIL=
-CONTACT_EMAIL_TO=
+RESEND_FROM_EMAIL="Core Communications <contact@yourdomain.com>"
+CONTACT_EMAIL_TO=contact@yourdomain.com
 CLOUDFLARE_TURNSTILE_SECRET=
 NEXT_PUBLIC_TURNSTILE_SITE_KEY=
 REVALIDATE_SECRET=
 KV_REST_API_URL=
 KV_REST_API_TOKEN=
-NEXT_PUBLIC_SANITY_PROJECT_ID=
-NEXT_PUBLIC_SANITY_DATASET=
 SANITY_API_READ_TOKEN=
-SANITY_API_TOKEN=
 ```
 
 Notes:
 
+- `NEXT_PUBLIC_SANITY_DATASET` is optional because the app defaults to `production`.
 - `SANITY_API_TOKEN` is typically used by Studio or webhook flows.
+- `SANITY_API_TOKEN` is not used by the current web runtime, so do not add it unless a Studio workflow or script actually needs it.
+- `CONTACT_EMAIL_TO` is optional because the contact route falls back to the public site email constant.
+- `CLOUDFLARE_TURNSTILE_SECRET` and `NEXT_PUBLIC_TURNSTILE_SITE_KEY` are optional together; leaving them unset disables Turnstile verification.
+- `REVALIDATE_SECRET` is required only if you enable Sanity webhooks or other on-demand revalidation calls.
 - `SANITY_API_READ_TOKEN` is used for preview/draft reads when needed.
 - `KV_REST_API_URL` and `KV_REST_API_TOKEN` are optional, but recommended for more durable rate limiting across serverless instances.
+- `EDGE_CONFIG` is optional; if unset, feature flags fall back to hardcoded defaults in the app.
 
 ## 10. Verify after deploy
 

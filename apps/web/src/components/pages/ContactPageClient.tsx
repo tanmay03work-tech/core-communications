@@ -53,7 +53,7 @@ export default function ContactPageClient() {
               Let&apos;s build the right kind of attention.
             </m.h1>
             <m.p
-              className="mt-6 font-sans text-[1rem] font-normal leading-relaxed text-white/74"
+              className="mt-6 max-w-xl font-sans text-[1rem] font-normal leading-relaxed text-white/74"
               initial={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.38, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
@@ -87,9 +87,9 @@ export default function ContactPageClient() {
                       <div className="flex h-10 w-10 shrink-0 items-center justify-center border border-navy/10 bg-[#F5F7FA] text-primary transition-colors duration-300 group-hover:border-accent/28 group-hover:bg-accent/8">
                         <Icon size={18} strokeWidth={1.5} />
                       </div>
-                      <div>
+                      <div className="min-w-0">
                         <div className="text-[0.62rem] font-bold uppercase tracking-[0.18em] text-navy/62">{label}</div>
-                        <div className="mt-1 text-[0.95rem] font-medium text-navy transition-colors duration-200 group-hover:text-primary group-hover:underline">
+                        <div className="mt-1 break-words text-[0.95rem] font-medium text-navy transition-colors duration-200 group-hover:text-primary group-hover:underline">
                           {value}
                         </div>
                       </div>

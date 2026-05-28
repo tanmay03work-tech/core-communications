@@ -31,7 +31,7 @@ async function getWorkSlugs() {
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const staticPages = ['/', '/work', '/contact'];
+  const staticPages = ['', '/work', '/contact'];
   const workSlugs = await getWorkSlugs();
 
   return [

@@ -81,7 +81,7 @@ export default function WorkPageClient({ studies }: WorkPageClientProps) {
       {/* ─── Sticky Filter Bar ───────────────────────────── */}
       <div className="sticky top-[72px] z-20 border-b border-navy/8 bg-white/90 py-3 backdrop-blur-md">
         <Container className="max-w-7xl">
-          <div className="flex gap-2.5 overflow-x-auto pb-0.5 hide-scrollbar">
+          <div className="mobile-scroll-pane -mx-5 flex gap-2.5 px-5 pb-2 sm:mx-0 sm:px-0">
             {filterTabs.map((filter) => {
               const isActive = activeTab === filter;
               return (
@@ -89,7 +89,7 @@ export default function WorkPageClient({ studies }: WorkPageClientProps) {
                   key={filter}
                   type="button"
                   onClick={() => setActiveTab(filter)}
-                  className={`relative shrink-0 px-5 py-2 text-[0.68rem] font-bold uppercase tracking-[0.2em] transition-all duration-300 ${
+                  className={`relative shrink-0 px-5 py-2 text-[0.68rem] font-bold uppercase tracking-[0.18em] transition-all duration-300 ${
                     isActive
                       ? 'text-white bg-navy'
                       : 'border border-navy/12 bg-transparent text-navy/55 hover:border-navy/28 hover:text-navy'
@@ -117,12 +117,12 @@ export default function WorkPageClient({ studies }: WorkPageClientProps) {
                 <ScrollReveal delay={index * 0.03}>
                     <Link
                       href={`/work/${getStudySlug(study)}`}
-                      className="card-work group flex h-full flex-col justify-between border border-navy/8 bg-white p-[clamp(1.5rem,3vw,2.5rem)] no-underline rounded-[1.5rem] shadow-[0_4px_20px_rgba(28,46,74,0.02)] transition-all duration-300 hover:-translate-y-1 hover:border-accent/28 hover:shadow-[0_16px_48px_rgba(28,46,74,0.08)]"
+                      className="card-work group flex h-full min-w-0 flex-col justify-between rounded-[1.25rem] border border-navy/8 bg-white p-[clamp(1.25rem,5vw,2.5rem)] no-underline shadow-[0_4px_20px_rgba(28,46,74,0.02)] transition-all duration-300 hover:-translate-y-1 hover:border-accent/28 hover:shadow-[0_16px_48px_rgba(28,46,74,0.08)] sm:rounded-[1.5rem]"
                     >
                       <div>
                         {/* Tag + arrow */}
                         <div className="mb-3 flex items-center justify-between gap-4">
-                          <div className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-primary/72">
+                          <div className="min-w-0 break-words text-[0.65rem] font-bold uppercase tracking-[0.16em] text-primary/72">
                             {study.client}
                           </div>
                           <ArrowUpRight className="h-5 w-5 shrink-0 text-navy/28 transition-all duration-300 group-hover:rotate-45 group-hover:text-accent" />
@@ -140,7 +140,7 @@ export default function WorkPageClient({ studies }: WorkPageClientProps) {
                       </div>
 
                       {/* Stats */}
-                      <div className="mt-6 grid grid-cols-2 gap-5 border-t border-navy/[0.07] pt-6">
+                      <div className="mt-6 grid grid-cols-2 gap-4 border-t border-navy/[0.07] pt-6 sm:gap-5">
                         {getStudyStats(study).slice(0, 4).map((stat: any) => (
                           <div key={stat.label}>
                             <div className="font-heading text-[1.8rem] font-semibold leading-none tracking-tight text-navy">

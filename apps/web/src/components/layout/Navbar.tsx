@@ -154,7 +154,7 @@ export default function Navbar() {
         animate={reducedMotion ? undefined : {y: compact ? -2 : 0}}
         transition={navbarSpring}
       >
-        <Container className="max-w-[1440px] px-4 pt-4 sm:px-6 md:pt-5 lg:px-8">
+        <Container className="max-w-[1440px] !px-4 pt-4 sm:!px-6 md:pt-5 lg:!px-8">
           <m.nav
             aria-label="Primary"
             className={cn('site-nav glass-nav relative overflow-hidden rounded-full', scrolled && 'scrolled')}
@@ -184,7 +184,7 @@ export default function Navbar() {
 
             <div
               className={cn(
-                'relative flex items-center justify-between gap-4 px-4 md:px-5 lg:px-6',
+                'relative flex items-center justify-between gap-3 px-3 sm:gap-4 sm:px-4 md:px-5 lg:px-6',
                 compact ? 'py-2.5' : 'py-3',
               )}
             >

@@ -7,6 +7,7 @@ export default function CustomCursor() {
   const [isVisible, setIsVisible] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
   const [isPressed, setIsPressed] = useState(false);
+  const [isCoarsePointer, setIsCoarsePointer] = useState(false);
 
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
@@ -16,15 +17,27 @@ export default function CustomCursor() {
   const ringY = useSpring(cursorY, springConfig);
 
   useEffect(() => {
-    // Hide on touch devices
-    if (typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches) {
-      return;
-    }
+    const coarsePointer = window.matchMedia('(pointer: coarse)').matches;
+    let hideTimer: number | undefined;
+
+    setIsCoarsePointer(coarsePointer);
 
     const moveCursor = (e: MouseEvent) => {
       cursorX.set(e.clientX);
       cursorY.set(e.clientY);
       if (!isVisible) setIsVisible(true);
+    };
+
+    const movePointer = (e: PointerEvent) => {
+      if (e.pointerType === 'mouse') {
+        return;
+      }
+
+      cursorX.set(e.clientX);
+      cursorY.set(e.clientY);
+      setIsVisible(true);
+      window.clearTimeout(hideTimer);
+      hideTimer = window.setTimeout(() => setIsVisible(false), 650);
     };
 
     const handleMouseOver = (e: MouseEvent) => {
@@ -44,18 +57,38 @@ export default function CustomCursor() {
     const handleMouseLeave = () => setIsVisible(false);
     const handleMouseEnter = () => setIsVisible(true);
     const handlePointerDown = () => setIsPressed(true);
-    const handlePointerUp = () => setIsPressed(false);
+    const handlePointerUp = () => {
+      setIsPressed(false);
+      if (coarsePointer) {
+        window.clearTimeout(hideTimer);
+        hideTimer = window.setTimeout(() => setIsVisible(false), 420);
+      }
+    };
 
-    window.addEventListener('mousemove', moveCursor);
-    document.addEventListener('mouseover', handleMouseOver);
-    document.addEventListener('mouseout', handleMouseOut);
-    window.addEventListener('mousedown', handlePointerDown);
-    window.addEventListener('mouseup', handlePointerUp);
-    document.documentElement.addEventListener('mouseleave', handleMouseLeave);
-    document.documentElement.addEventListener('mouseenter', handleMouseEnter);
+    if (coarsePointer) {
+      window.addEventListener('pointermove', movePointer);
+      window.addEventListener('pointerdown', movePointer);
+      window.addEventListener('pointerdown', handlePointerDown);
+      window.addEventListener('pointerup', handlePointerUp);
+      window.addEventListener('pointercancel', handlePointerUp);
+    } else {
+      window.addEventListener('mousemove', moveCursor);
+      document.addEventListener('mouseover', handleMouseOver);
+      document.addEventListener('mouseout', handleMouseOut);
+      window.addEventListener('mousedown', handlePointerDown);
+      window.addEventListener('mouseup', handlePointerUp);
+      document.documentElement.addEventListener('mouseleave', handleMouseLeave);
+      document.documentElement.addEventListener('mouseenter', handleMouseEnter);
+    }
 
     return () => {
+      window.clearTimeout(hideTimer);
       window.removeEventListener('mousemove', moveCursor);
+      window.removeEventListener('pointermove', movePointer);
+      window.removeEventListener('pointerdown', movePointer);
+      window.removeEventListener('pointerdown', handlePointerDown);
+      window.removeEventListener('pointerup', handlePointerUp);
+      window.removeEventListener('pointercancel', handlePointerUp);
       document.removeEventListener('mouseover', handleMouseOver);
       document.removeEventListener('mouseout', handleMouseOut);
       window.removeEventListener('mousedown', handlePointerDown);
@@ -64,10 +97,6 @@ export default function CustomCursor() {
       document.documentElement.removeEventListener('mouseenter', handleMouseEnter);
     };
   }, [cursorX, cursorY, isVisible]);
-
-  if (typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches) {
-    return null;
-  }
 
   return (
     <>
@@ -79,8 +108,8 @@ export default function CustomCursor() {
           y: cursorY,
         }}
         animate={{
-          width: isPressed ? 10 : isHovering ? 22 : 12,
-          height: isPressed ? 10 : isHovering ? 22 : 12,
+          width: isCoarsePointer ? (isPressed ? 18 : 14) : isPressed ? 10 : isHovering ? 22 : 12,
+          height: isCoarsePointer ? (isPressed ? 18 : 14) : isPressed ? 10 : isHovering ? 22 : 12,
           opacity: isVisible ? 1 : 0,
           backgroundColor: isPressed ? '#1C2E4A' : '#31728e',
           boxShadow: isPressed
@@ -98,8 +127,8 @@ export default function CustomCursor() {
           borderColor: '#5BC0EB',
         }}
         animate={{
-          width: isPressed ? 30 : isHovering ? 54 : 38,
-          height: isPressed ? 30 : isHovering ? 54 : 38,
+          width: isCoarsePointer ? (isPressed ? 46 : 38) : isPressed ? 30 : isHovering ? 54 : 38,
+          height: isCoarsePointer ? (isPressed ? 46 : 38) : isPressed ? 30 : isHovering ? 54 : 38,
           opacity: isVisible ? (isPressed ? 0.9 : 0.55) : 0,
           scale: isPressed ? 0.9 : 1,
         }}

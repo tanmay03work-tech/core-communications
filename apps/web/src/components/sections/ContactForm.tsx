@@ -49,6 +49,8 @@ export function ContactForm() {
   const turnstileId = useId().replace(/:/g, '');
   const widgetIdRef = useRef<string | null>(null);
   const executeResolverRef = useRef<((token: string) => void) | null>(null);
+  const executeRejecterRef = useRef<((error: Error) => void) | null>(null);
+  const executeTimeoutRef = useRef<number | null>(null);
   const [submitState, setSubmitState] = useState<SubmitState>({ status: 'idle' });
   const [toast, setToast] = useState<ToastState>(null);
 
@@ -97,17 +99,44 @@ export function ContactForm() {
         sitekey: turnstileSiteKey,
         size: 'invisible',
         callback: (token) => {
+          if (executeTimeoutRef.current) {
+            window.clearTimeout(executeTimeoutRef.current);
+            executeTimeoutRef.current = null;
+          }
+
           executeResolverRef.current?.(token);
           executeResolverRef.current = null;
+          executeRejecterRef.current = null;
         },
         'expired-callback': () => {
+          if (executeTimeoutRef.current) {
+            window.clearTimeout(executeTimeoutRef.current);
+            executeTimeoutRef.current = null;
+          }
+
           executeResolverRef.current = null;
+          executeRejecterRef.current?.(
+            new Error('Spam protection expired. Please try again.'),
+          );
+          executeRejecterRef.current = null;
         },
         'error-callback': () => {
+          const error = new Error(
+            'Spam protection could not be verified. Please try again.',
+          );
+
           executeResolverRef.current = null;
+          executeRejecterRef.current?.(error);
+          executeRejecterRef.current = null;
+
+          if (executeTimeoutRef.current) {
+            window.clearTimeout(executeTimeoutRef.current);
+            executeTimeoutRef.current = null;
+          }
+
           setToast({
             tone: 'error',
-            message: 'Spam protection could not be verified. Please try again.',
+            message: error.message,
           });
         },
       });
@@ -128,6 +157,10 @@ export function ContactForm() {
         return () => {
           existingScript.removeEventListener('load', onLoad);
           cancelled = true;
+          if (executeTimeoutRef.current) {
+            window.clearTimeout(executeTimeoutRef.current);
+            executeTimeoutRef.current = null;
+          }
           if (widgetIdRef.current && window.turnstile) {
             window.turnstile.remove(widgetIdRef.current);
             widgetIdRef.current = null;
@@ -146,6 +179,10 @@ export function ContactForm() {
       return () => {
         script.removeEventListener('load', onLoad);
         cancelled = true;
+        if (executeTimeoutRef.current) {
+          window.clearTimeout(executeTimeoutRef.current);
+          executeTimeoutRef.current = null;
+        }
         if (widgetIdRef.current && window.turnstile) {
           window.turnstile.remove(widgetIdRef.current);
           widgetIdRef.current = null;
@@ -155,6 +192,10 @@ export function ContactForm() {
 
     return () => {
       cancelled = true;
+      if (executeTimeoutRef.current) {
+        window.clearTimeout(executeTimeoutRef.current);
+        executeTimeoutRef.current = null;
+      }
       if (widgetIdRef.current && window.turnstile) {
         window.turnstile.remove(widgetIdRef.current);
         widgetIdRef.current = null;
@@ -173,12 +214,15 @@ export function ContactForm() {
 
     return new Promise<string>((resolve, reject) => {
       executeResolverRef.current = resolve;
+      executeRejecterRef.current = reject;
       window.turnstile?.reset(widgetIdRef.current!);
       window.turnstile?.execute(widgetIdRef.current!);
 
-      window.setTimeout(() => {
+      executeTimeoutRef.current = window.setTimeout(() => {
         if (executeResolverRef.current) {
           executeResolverRef.current = null;
+          executeRejecterRef.current = null;
+          executeTimeoutRef.current = null;
           reject(new Error('Turnstile verification timed out.'));
         }
       }, 10000);
