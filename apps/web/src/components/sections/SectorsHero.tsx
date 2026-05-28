@@ -40,7 +40,7 @@ export default function SectorsHero() {
             text="We speak every industry's language"
             by="word"
             delay={400}
-            className="font-sans font-heading text-[clamp(2.8rem,6vw,5.5rem)] font-bold leading-[1.05] tracking-[-0.02em] text-primary"
+            className="font-heading text-[clamp(2.8rem,6vw,5.5rem)] font-bold leading-[1.05] tracking-[-0.02em] text-primary"
           />
         </m.div>
 

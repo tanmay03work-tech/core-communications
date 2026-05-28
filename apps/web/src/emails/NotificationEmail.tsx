@@ -60,7 +60,7 @@ function Detail({ label, value }: { label: string; value: string }) {
 
 const body = {
   backgroundColor: '#eef4f8',
-  fontFamily: 'Arial, sans-serif',
+  fontFamily: 'Open Sans',
   margin: 0,
   padding: '32px 16px',
 };
@@ -85,6 +85,7 @@ const eyebrow = {
 
 const heading = {
   color: '#081931',
+  fontFamily: 'Poppins',
   fontSize: '30px',
   fontWeight: '700',
   lineHeight: '1.2',

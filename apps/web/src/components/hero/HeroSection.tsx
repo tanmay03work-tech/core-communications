@@ -2,7 +2,6 @@
 
 import dynamic from 'next/dynamic';
 import {m, useScroll, useTransform} from 'framer-motion';
-import {Play} from 'lucide-react';
 import Link from 'next/link';
 import {useEffect, useMemo, useRef, useState} from 'react';
 import FloatingMetrics from '@/components/hero/FloatingMetrics';
@@ -22,10 +21,6 @@ const DEFAULT_METRICS = HERO.stats.map((stat) => ({
   label: stat.label,
 }));
 const ParticleCanvas = dynamic(() => import('@/components/hero/ParticleCanvas'), {
-  ssr: false,
-  loading: () => null,
-});
-const VideoModal = dynamic(() => import('@/components/global/VideoModal'), {
   ssr: false,
   loading: () => null,
 });
@@ -75,7 +70,6 @@ function useTypedTagline(phrases: string[]) {
 }
 
 export default function HeroSection({siteSettings}: HeroSectionProps) {
-  const [isVideoOpen, setIsVideoOpen] = useState(false);
   const sectionRef = useRef<HTMLElement | null>(null);
   const primaryMagnetic = useMagnetic<HTMLDivElement>(10);
   const typedTagline = useTypedTagline(TAGLINES);
@@ -119,12 +113,8 @@ export default function HeroSection({siteSettings}: HeroSectionProps) {
         <m.div className="hero-blob hero-blob-three" style={{x: blobThreeX, y: blobThreeY}} aria-hidden="true" />
         <RadarAnimation />
 
-        <div className="relative z-10 mx-auto grid min-h-screen w-full max-w-[1540px] grid-cols-1 gap-12 px-container-padding pb-16 pt-28 lg:grid-cols-[minmax(15rem,20rem)_minmax(0,1fr)] lg:items-center lg:pb-20 lg:pt-32 xl:grid-cols-[minmax(18rem,23rem)_minmax(0,1fr)] xl:gap-16">
-          <div className="order-2 hidden lg:order-1 lg:flex lg:min-h-[34rem] lg:items-center lg:justify-start">
-            <FloatingMetrics metrics={metrics} />
-          </div>
-
-          <div className="order-1 max-w-[82rem] lg:order-2 lg:justify-self-start">
+        <div className="relative z-10 mx-auto grid min-h-screen w-full max-w-[1540px] grid-cols-1 gap-12 px-container-padding pb-16 pt-28 lg:grid-cols-[minmax(0,1fr)_minmax(19rem,23rem)] lg:items-center lg:pb-20 lg:pt-32 xl:grid-cols-[minmax(0,1fr)_minmax(22rem,27rem)] xl:gap-16">
+          <div className="max-w-[72rem] lg:justify-self-start">
             <m.div
               initial={{opacity: 0, y: 22}}
               animate={{opacity: 1, y: 0}}
@@ -143,11 +133,11 @@ export default function HeroSection({siteSettings}: HeroSectionProps) {
                   transition: {staggerChildren: 0.12, delayChildren: 0.14},
                 },
               }}
-              className="font-heading text-hero leading-[0.98] tracking-[-0.03em] text-white xl:text-[clamp(5rem,5.55vw,6.6rem)]"
+              className="font-heading text-hero leading-[0.98] text-white xl:text-[clamp(4.05rem,4.45vw,5.45rem)]"
             >
               <span className="mb-2 block overflow-hidden">
                 <m.span
-                  className="block lg:whitespace-nowrap"
+                  className="block xl:whitespace-nowrap"
                   variants={{
                     hidden: {y: '110%'},
                     visible: {
@@ -161,7 +151,7 @@ export default function HeroSection({siteSettings}: HeroSectionProps) {
               </span>
               <span className="mb-2 block overflow-hidden">
                 <m.span
-                  className="block lg:whitespace-nowrap"
+                  className="block"
                   variants={{
                     hidden: {y: '110%'},
                     visible: {
@@ -212,13 +202,13 @@ export default function HeroSection({siteSettings}: HeroSectionProps) {
                 onMouseLeave={primaryMagnetic.onMouseLeave}
                 className="shrink-0"
               >
-                <Link href={HERO.cta.secondary.href} className="hero-primary-button">
+                <Link href={HERO.cta.secondary.href} className="inline-flex min-h-12 shrink-0 items-center justify-center rounded-full border border-white/15 bg-white/[0.08] px-6 text-xs font-semibold uppercase tracking-[0.18em] text-white shadow-[0_14px_32px_rgba(5,12,24,0.22)] backdrop-blur-xl transition hover:-translate-y-0.5 hover:border-accent/40 hover:bg-accent/15">
                   <span className="relative z-[1]">Start a Conversation</span>
                 </Link>
               </m.div>
-              <Link href={HERO.cta.primary.href} className="hero-secondary-link">
+              <Link href={HERO.cta.primary.href} className="inline-flex min-h-12 shrink-0 items-center justify-center gap-2 rounded-full border border-white/15 bg-white/[0.06] px-6 text-xs font-semibold uppercase tracking-[0.18em] text-white/90 shadow-[0_14px_32px_rgba(5,12,24,0.18)] backdrop-blur-xl transition hover:-translate-y-0.5 hover:border-accent/40 hover:bg-white/[0.1] hover:text-white">
                 <span>See Our Work</span>
-                <span aria-hidden="true" className="hero-secondary-arrow">→</span>
+                <span aria-hidden="true">→</span>
               </Link>
             </m.div>
 
@@ -233,17 +223,11 @@ export default function HeroSection({siteSettings}: HeroSectionProps) {
                 {typedTagline}
                 <span className="ml-1 inline-block h-[1.05em] w-px animate-pulse bg-accent/80 align-middle" />
               </span>
-              <button
-                type="button"
-                onClick={() => setIsVideoOpen(true)}
-                className="hero-tertiary-link"
-              >
-                <span className="hero-tertiary-icon">
-                  <Play size={12} fill="currentColor" />
-                </span>
-                <span>Watch reel</span>
-              </button>
             </m.div>
+          </div>
+
+          <div className="hidden lg:flex lg:min-h-[34rem] lg:items-center lg:justify-end">
+            <FloatingMetrics metrics={metrics} />
           </div>
         </div>
 
@@ -257,8 +241,6 @@ export default function HeroSection({siteSettings}: HeroSectionProps) {
           <span className="text-[0.7rem] uppercase tracking-[0.24em]">Scroll to explore</span>
         </m.div>
       </section>
-
-      {isVideoOpen ? <VideoModal open={isVideoOpen} onClose={() => setIsVideoOpen(false)} /> : null}
 
       <style jsx>{`
         .hero-shell {
@@ -426,36 +408,6 @@ export default function HeroSection({siteSettings}: HeroSectionProps) {
 
         .hero-secondary-link:hover .hero-secondary-arrow {
           transform: translateX(4px);
-        }
-
-        .hero-tertiary-link {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.55rem;
-          border: 0;
-          background: transparent;
-          color: rgba(255, 255, 255, 0.58);
-          font-size: 0.8rem;
-          letter-spacing: 0.12em;
-          text-transform: uppercase;
-          transition: color 0.3s ease, transform 0.3s ease;
-        }
-
-        .hero-tertiary-link:hover {
-          color: rgba(255, 255, 255, 0.9);
-          transform: translateY(-1px);
-        }
-
-        .hero-tertiary-icon {
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          width: 1.6rem;
-          height: 1.6rem;
-          border-radius: 9999px;
-          border: 1px solid rgba(255, 255, 255, 0.12);
-          background: rgba(255, 255, 255, 0.04);
-          color: rgba(91, 192, 235, 0.9);
         }
 
         .hero-scroll-line {

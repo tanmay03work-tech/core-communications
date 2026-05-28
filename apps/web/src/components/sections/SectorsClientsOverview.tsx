@@ -26,7 +26,7 @@ export default function SectorsClientsOverview() {
     <section className="bg-white px-6 py-20 lg:px-16 lg:py-24">
       <ScrollReveal direction="up">
         <div className="mx-auto max-w-[1280px]">
-          <h2 className="text-center font-sans font-heading text-[clamp(3rem,7vw,5.9rem)] font-bold leading-[0.94] tracking-[-0.03em] text-primary">
+          <h2 className="text-center font-heading text-[clamp(3rem,7vw,5.9rem)] font-bold leading-[0.94] tracking-[-0.03em] text-primary">
             {SECTORS_AND_CLIENTS.title}
           </h2>
 

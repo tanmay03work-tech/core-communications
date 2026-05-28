@@ -255,7 +255,7 @@ export default async function CaseStudyPage({params}: CaseStudyPageProps) {
             <SectionLabel className="text-primary">{caseNumber ? `Case Study ${caseNumber}` : client}</SectionLabel>
             <h1 className="max-w-5xl font-heading text-[clamp(2rem,4vw,3.9rem)] font-semibold leading-[0.98] tracking-[-0.035em] text-navy">{title}</h1>
             {kicker ? <p className="max-w-4xl font-sans text-[0.88rem] leading-relaxed text-[#8ba4c0]">{kicker}</p> : null}
-            {intro ? <p className="max-w-5xl font-sans text-[0.95rem] italic leading-relaxed text-black">{intro}</p> : null}
+            {intro ? <p className="max-w-5xl text-[0.95rem] italic leading-relaxed text-black">{intro}</p> : null}
           </div>
           <div className="mt-5 flex flex-wrap gap-2.5">
             {tag ? <span className="border border-neutral-100 px-4 py-2 text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-navy/72">{tag}</span> : null}
@@ -278,7 +278,7 @@ export default async function CaseStudyPage({params}: CaseStudyPageProps) {
             </div>
           ) : null}
 
-          {resultNote ? <div className="mb-5 border border-navy/10 bg-white px-5 py-4 font-sans text-[0.86rem] italic leading-relaxed text-navy/76">{resultNote}</div> : null}
+          {resultNote ? <div className="mb-5 border border-navy/10 bg-white px-5 py-4 text-[0.86rem] italic leading-relaxed text-navy/76">{resultNote}</div> : null}
 
           {milestoneBlocks.length ? (
             <div className="grid gap-5 lg:grid-cols-[1fr_1.15fr]">

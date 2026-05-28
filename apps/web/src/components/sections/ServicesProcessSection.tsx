@@ -41,7 +41,7 @@ export default function ServicesProcessSection() {
             <SplitText
               text="How we work"
               by="word"
-              className="font-sans font-heading text-[clamp(2.4rem,4vw,4rem)] font-bold leading-[1.05] tracking-[-0.02em] text-primary"
+              className="font-heading text-[clamp(2.4rem,4vw,4rem)] font-bold leading-[1.05] tracking-[-0.02em] text-primary"
             />
             <p className="mt-4 text-base leading-relaxed text-muted">
               From discovery to results: a transparent process.

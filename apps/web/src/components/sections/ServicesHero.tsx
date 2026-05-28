@@ -34,7 +34,7 @@ export default function ServicesHero() {
             text="Services engineered for B2B impact"
             by="word"
             delay={400}
-            className="font-sans font-heading text-[clamp(2.8rem,6vw,5.5rem)] font-bold leading-[1.05] tracking-[-0.02em] text-white"
+            className="font-heading text-[clamp(2.8rem,6vw,5.5rem)] font-bold leading-[1.05] tracking-[-0.02em] text-white"
           />
         </m.div>
 

@@ -2,16 +2,14 @@ import {ImageResponse} from 'next/og';
 
 export const runtime = 'edge';
 
-const fontPromise = fetch(
-  'https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap',
-  {
-    headers: {
-      'User-Agent':
-        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
-    },
-  },
-)
-  .then(async (response) => {
+async function fetchGoogleFont(url: string) {
+  try {
+    const response = await fetch(url, {
+      headers: {
+        'User-Agent':
+          'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
+      },
+    });
     const css = await response.text();
     const match = css.match(/src: url\(([^)]+)\) format\('(opentype|truetype|woff2?)'\)/);
 
@@ -21,8 +19,15 @@ const fontPromise = fetch(
 
     const fontResponse = await fetch(match[1]);
     return fontResponse.arrayBuffer();
-  })
-  .catch(() => null);
+  } catch {
+    return null;
+  }
+}
+
+const fontPromise = Promise.all([
+  fetchGoogleFont('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap'),
+  fetchGoogleFont('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap'),
+]);
 
 function truncate(value: string, length: number) {
   return value.length > length ? `${value.slice(0, length - 1).trimEnd()}…` : value;
@@ -36,7 +41,7 @@ export async function GET(request: Request) {
     180,
   );
   const type = truncate(searchParams.get('type') ?? 'Case Study', 24).toUpperCase();
-  const dmSerif = await fontPromise;
+  const [poppins, openSans] = await fontPromise;
 
   return new ImageResponse(
     (
@@ -50,6 +55,7 @@ export async function GET(request: Request) {
           background:
             'radial-gradient(circle at top right, rgba(91, 192, 235, 0.16), transparent 30%), linear-gradient(135deg, #071428 0%, #102947 52%, #17375d 100%)',
           color: 'white',
+          fontFamily: 'Open Sans',
           padding: '56px 64px',
           position: 'relative',
         }}
@@ -163,7 +169,7 @@ export async function GET(request: Request) {
           />
           <div
             style={{
-              fontFamily: '"DM Serif Display", Georgia, serif',
+              fontFamily: 'Poppins',
               fontSize: 74,
               lineHeight: 1.02,
               letterSpacing: '-0.04em',
@@ -200,16 +206,28 @@ export async function GET(request: Request) {
     {
       width: 1200,
       height: 630,
-      fonts: dmSerif
-        ? [
-            {
-              name: 'DM Serif Display',
-              data: dmSerif,
-              style: 'normal',
-              weight: 400,
-            },
-          ]
-        : [],
+      fonts: [
+        ...(poppins
+          ? [
+              {
+                name: 'Poppins',
+                data: poppins,
+                style: 'normal' as const,
+                weight: 700 as const,
+              },
+            ]
+          : []),
+        ...(openSans
+          ? [
+              {
+                name: 'Open Sans',
+                data: openSans,
+                style: 'normal' as const,
+                weight: 400 as const,
+              },
+            ]
+          : []),
+      ],
     },
   );
 }

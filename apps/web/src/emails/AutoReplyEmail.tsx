@@ -67,7 +67,7 @@ export function AutoReplyEmail({ name }: AutoReplyEmailProps) {
 
 const body = {
   backgroundColor: '#edf3f8',
-  fontFamily: 'Arial, sans-serif',
+  fontFamily: 'Open Sans',
   margin: 0,
   padding: '32px 16px',
 };
@@ -103,6 +103,7 @@ const eyebrow = {
 
 const heading = {
   color: '#ffffff',
+  fontFamily: 'Poppins',
   fontSize: '30px',
   fontWeight: '700',
   lineHeight: '1.2',

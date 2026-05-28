@@ -47,8 +47,10 @@
     --color-navy-80:  rgba(28,46,74,0.08);
 
     /* ── Font ────────────────────────────────────────── */
-    --font-sans:      var(--font-open-sans), 'Helvetica Neue', Arial, sans-serif;
-    --font-Sans-serif:var(--font-open-sans), 'Helvetica Neue', Arial, sans-serif;
+    --font-sans:      var(--font-open-sans);
+    --font-Sans-serif:var(--font-open-sans);
+    --font-heading:   var(--font-poppins);
+    --font-accent:    var(--font-merriweather);
 
     /* ── Typography Scale (fluid, modular) ───────────── */
     --step-hero:   clamp(3.25rem, 6vw, 5.75rem);
@@ -157,7 +159,7 @@
   .lenis.lenis-stopped { overflow: hidden; }
 
   body {
-    font-family: var(--font-open-sans), 'Helvetica Neue', Arial, sans-serif;
+    font-family: var(--font-open-sans);
     font-size: var(--step-body);
     background: var(--gradient-section-blend);
     color: var(--color-primary);
@@ -170,7 +172,7 @@
   body, button, input, textarea, select { font: inherit; }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-poppins), 'Helvetica Neue', Arial, sans-serif;
+    font-family: var(--font-poppins);
     color: inherit;
     letter-spacing: -0.02em;
     text-wrap: balance;
@@ -183,6 +185,11 @@
 
   p, li { font-size: var(--step-body); line-height: 1.75; }
   small  { font-size: var(--step-small); line-height: 1.55; }
+
+  em, i, cite, blockquote {
+    font-family: var(--font-merriweather);
+    font-style: italic;
+  }
 
   ::selection {
     background: rgba(91, 192, 235, 0.28);
@@ -306,13 +313,13 @@
   /* ─── Section Heading ──────────────────────────────── */
   .section-heading {
     @apply font-heading font-semibold tracking-tight;
-    font-family: var(--font-poppins), 'Helvetica Neue', Arial, sans-serif;
+    font-family: var(--font-poppins);
     font-size: var(--step-h2);
     line-height: 1.08;
     letter-spacing: -0.025em;
   }
   .section-heading em {
-    font-family: var(--font-merriweather), Georgia, serif;
+    font-family: var(--font-merriweather);
     font-style: italic;
     color: var(--accent);
   }
@@ -557,6 +564,10 @@
    UTILITIES
    ═══════════════════════════════════════════════════════ */
 @layer utilities {
+  .italic {
+    font-family: var(--font-merriweather);
+  }
+
   @media (pointer: coarse) {
     .custom-cursor { display: none !important; }
     body           { cursor: auto !important; }

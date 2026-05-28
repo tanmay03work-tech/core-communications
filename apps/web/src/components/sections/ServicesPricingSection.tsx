@@ -44,7 +44,7 @@ export default function ServicesPricingSection() {
             <p className="text-xs font-semibold uppercase tracking-[0.28em] text-accent">
               Packaging
             </p>
-            <h2 className="mt-5 font-sans font-heading text-[clamp(2.4rem,4vw,4rem)] font-bold leading-[1.05] tracking-[-0.02em]">
+            <h2 className="mt-5 font-heading text-[clamp(2.4rem,4vw,4rem)] font-bold leading-[1.05] tracking-[-0.02em]">
               Built around scope, speed, and market complexity
             </h2>
             <p className="mt-4 text-base leading-relaxed text-white/68">
