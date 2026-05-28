@@ -39,6 +39,14 @@ type SanityFetchOptions = {
   tags?: string[];
 };
 
+function isDraftModeEnabled() {
+  try {
+    return draftMode().isEnabled;
+  } catch {
+    return false;
+  }
+}
+
 export async function sanityFetch<T>({
   query,
   params = {},
@@ -48,7 +56,7 @@ export async function sanityFetch<T>({
     return null;
   }
 
-  const {isEnabled} = draftMode();
+  const isEnabled = isDraftModeEnabled();
   const activeClient = isEnabled ? previewClient : client;
 
   try {
