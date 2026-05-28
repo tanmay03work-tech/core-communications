@@ -59,19 +59,19 @@ export default function CaseStudiesGridClient({caseStudies}: CaseStudiesGridClie
                 <div>
                   {/* Top: tag + arrow */}
                   <div className="mb-3 flex items-center justify-between gap-4">
-                    <div className="text-[0.66rem] font-bold uppercase tracking-[0.24em] text-primary">
+                    <div className="text-[0.66rem] font-bold uppercase tracking-[0.2em] text-primary/72">
                       {caseStudy.tag || caseStudy.client}
                     </div>
                     <ArrowUpRight className="h-5 w-5 flex-shrink-0 text-navy/30 transition-all duration-300 group-hover:rotate-45 group-hover:text-accent" />
                   </div>
 
                   {/* Title */}
-                  <h3 className="mb-3 text-[1.4rem] font-semibold leading-snug text-navy">
+                  <h3 className="mb-3 font-heading text-[1.4rem] font-semibold leading-snug tracking-tight text-navy">
                     {caseStudy.title}
                   </h3>
 
                   {/* Description */}
-                  <p className="line-clamp-3 text-[0.92rem] font-light leading-[1.85] text-navy/60">
+                  <p className="line-clamp-3 font-sans text-[0.92rem] font-normal leading-relaxed text-navy/74">
                     {caseStudy.description}
                   </p>
                 </div>
@@ -91,8 +91,8 @@ export default function CaseStudiesGridClient({caseStudies}: CaseStudiesGridClie
                           },
                         }}
                       >
-                        <div className="text-[1.9rem] font-semibold leading-none tracking-[-0.02em] text-navy">{stat.value}</div>
-                        <div className="mt-1.5 text-[0.64rem] font-bold uppercase tracking-[0.2em] text-navy/44">{stat.label}</div>
+                        <div className="font-heading text-[1.9rem] font-semibold leading-none tracking-tight text-navy">{stat.value}</div>
+                        <div className="mt-1.5 text-[0.64rem] font-bold uppercase tracking-[0.16em] text-navy/62">{stat.label}</div>
                       </m.div>
                     ))}
                   </m.div>

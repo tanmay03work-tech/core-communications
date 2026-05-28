@@ -1,7 +1,7 @@
 'use client';
 
 import {useEffect, useMemo, useState, type MouseEvent as ReactMouseEvent} from 'react';
-import {LayoutGroup, m, useMotionValueEvent, useReducedMotion, useScroll, useSpring} from 'framer-motion';
+import {m, useMotionValueEvent, useReducedMotion, useScroll, useSpring} from 'framer-motion';
 import Link from 'next/link';
 import {usePathname} from 'next/navigation';
 import {NAV_LINKS} from '@/lib/constants';
@@ -55,7 +55,7 @@ function isRouteActive(pathname: string, href: string) {
 
 export default function Navbar() {
   const reducedMotion = useReducedMotion();
-  const pathname = usePathname();
+  const pathname = usePathname() ?? '/';
   const {activeHref} = useActiveSection(NAV_LINKS);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [compact, setCompact] = useState(false);
@@ -124,6 +124,24 @@ export default function Navbar() {
     }, 650);
   };
 
+  const handleNavClick = (event: ReactMouseEvent<HTMLAnchorElement>, href: string) => {
+    if (!href.startsWith('/#')) {
+      return;
+    }
+
+    const id = href.slice(2);
+
+    if (pathname === '/') {
+      event.preventDefault();
+      const element = document.getElementById(id);
+
+      if (element) {
+        window.history.pushState(null, '', href);
+        element.scrollIntoView({behavior: 'smooth', block: 'start'});
+      }
+    }
+  };
+
   return (
     <>
       <m.div
@@ -172,7 +190,6 @@ export default function Navbar() {
             >
               <NavbarLogo compact={compact} scrolled={scrolled} />
 
-              <LayoutGroup id="desktop-navbar">
                 <div className="hidden items-center gap-1.5 lg:flex">
                   {navLinks.map((link) => (
                     <m.div
@@ -185,6 +202,7 @@ export default function Navbar() {
                     >
                       <Link
                         href={link.href}
+                        onClick={(event) => handleNavClick(event, link.href)}
                         aria-current={link.active ? 'page' : undefined}
                         className={cn(
                           'group relative inline-flex items-center justify-center overflow-hidden rounded-full px-4 py-2.5 text-[0.74rem] font-semibold uppercase tracking-[0.2em] no-underline transition-colors duration-200',
@@ -197,36 +215,13 @@ export default function Navbar() {
                               : 'text-[rgba(28,46,74,0.72)] hover:text-[var(--navy)]',
                         )}
                       >
-                        {link.active ? (
-                          <>
-                            <m.span
-                              layoutId="navbar-active-pill"
-                              className={cn(
-                                'absolute inset-0 rounded-full',
-                                scrolled
-                                  ? 'bg-[linear-gradient(180deg,rgba(91,192,235,0.24),rgba(91,192,235,0.14))]'
-                                  : 'bg-[linear-gradient(180deg,rgba(91,192,235,0.18),rgba(91,192,235,0.12))]',
-                              )}
-                              transition={navbarSpring}
-                            />
-                            <m.span
-                              layoutId="navbar-active-border"
-                              className={cn(
-                                'absolute inset-0 rounded-full',
-                                scrolled ? 'border border-[rgba(91,192,235,0.42)]' : 'border border-[rgba(91,192,235,0.34)]',
-                              )}
-                              transition={navbarSpring}
-                            />
-                          </>
-                        ) : null}
-
                         <span className="relative z-[1]">{link.label}</span>
                         <m.span
                           className="absolute inset-x-4 bottom-[7px] h-px origin-left rounded-full bg-[linear-gradient(90deg,rgba(91,192,235,0.96),rgba(61,183,242,0.62))]"
                           variants={{
                             rest: {
-                              scaleX: link.active ? 1 : 0,
-                              opacity: link.active ? 1 : 0.72,
+                              scaleX: 0,
+                              opacity: 0.72,
                             },
                             hover: {
                               scaleX: 1,
@@ -274,7 +269,6 @@ export default function Navbar() {
                     </Link>
                   </m.div>
                 </div>
-              </LayoutGroup>
 
               <button
                 type="button"
@@ -315,6 +309,7 @@ export default function Navbar() {
         open={mobileOpen}
         links={navLinks}
         onClose={() => setMobileOpen(false)}
+        onLinkClick={handleNavClick}
         reducedMotion={Boolean(reducedMotion)}
         lowPowerMode={lowPowerMode}
       />

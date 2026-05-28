@@ -53,12 +53,12 @@ export default function ContactPageClient() {
               Let&apos;s build the right kind of attention.
             </m.h1>
             <m.p
-              className="mt-6 text-[1rem] font-light leading-[1.85] text-white/60"
+              className="mt-6 font-sans text-[1rem] font-normal leading-relaxed text-white/74"
               initial={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.38, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
             >
-              Strategic conversations, not cold calls. Tell us what you&apos;re launching, shifting, or trying to unlock.
+              Send your name and email. Add a message only if there is helpful context.
             </m.p>
           </div>
         </Container>
@@ -72,8 +72,8 @@ export default function ContactPageClient() {
             {/* Left — contact info */}
             <div className="flex flex-col gap-5">
               <SectionLabel className="text-primary">Get in Touch</SectionLabel>
-              <p className="text-[1rem] font-light leading-[1.85] text-navy/68">
-                Tell us what you&apos;re launching, shifting, or trying to unlock. We&apos;ll come back with the sharpest next step.
+              <p className="font-sans text-[1rem] font-normal leading-relaxed text-navy/74">
+                Reach out directly or use the quick form. We&apos;ll come back with the sharpest next step.
               </p>
 
                {/* Contact cards */}
@@ -88,7 +88,7 @@ export default function ContactPageClient() {
                         <Icon size={18} strokeWidth={1.5} />
                       </div>
                       <div>
-                        <div className="text-[0.62rem] font-bold uppercase tracking-[0.26em] text-navy/40">{label}</div>
+                        <div className="text-[0.62rem] font-bold uppercase tracking-[0.18em] text-navy/62">{label}</div>
                         <div className="mt-1 text-[0.95rem] font-medium text-navy transition-colors duration-200 group-hover:text-primary group-hover:underline">
                           {value}
                         </div>
@@ -104,10 +104,10 @@ export default function ContactPageClient() {
                       <MapPin size={18} strokeWidth={1.5} />
                     </div>
                     <div>
-                      <div className="text-[0.62rem] font-bold uppercase tracking-[0.26em] text-navy/40">Locations</div>
+                      <div className="text-[0.62rem] font-bold uppercase tracking-[0.18em] text-navy/62">Locations</div>
                       <div className="mt-1 flex flex-col gap-1">
                         {SITE.locations.map((location) => (
-                          <span key={location} className="text-[0.95rem] font-medium text-navy/70">
+                          <span key={location} className="font-sans text-[0.95rem] font-normal text-navy/74">
                             {location}
                           </span>
                         ))}
@@ -131,8 +131,8 @@ export default function ContactPageClient() {
                 {/* Top gradient bar */}
                 <div className="h-[3px] w-full bg-[linear-gradient(90deg,#1C2E4A,#5BC0EB)]" />
                 <div className="p-8 lg:p-10">
-                  <SectionLabel className="text-primary">Project Enquiry</SectionLabel>
-                  <h2 className="mb-6 text-[1.35rem] font-semibold leading-snug text-navy">
+                  <SectionLabel className="text-primary">Quick Contact</SectionLabel>
+                  <h2 className="mb-6 font-heading text-[1.35rem] font-semibold leading-snug tracking-tight text-navy">
                     Start a conversation
                   </h2>
                   <ContactForm />

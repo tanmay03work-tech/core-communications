@@ -23,7 +23,7 @@ export default function LogoCloudSection({section}: Props) {
           {(section.eyebrow || section.title) ? (
             <div className="max-w-3xl space-y-4">
               {section.eyebrow ? <div className={getEyebrowClass(section.theme)}>{section.eyebrow}</div> : null}
-              {section.title ? <h2 className="font-display text-section text-balance">{section.title}</h2> : null}
+              {section.title ? <h2 className="font-heading text-section text-balance">{section.title}</h2> : null}
             </div>
           ) : null}
           <div className={cn('grid grid-cols-2 gap-4 md:grid-cols-3 lg:gap-5', count >= 8 ? 'xl:grid-cols-5' : count >= 6 ? 'xl:grid-cols-4' : 'xl:grid-cols-3')}>

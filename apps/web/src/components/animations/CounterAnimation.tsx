@@ -95,8 +95,7 @@ export default function CounterAnimation({
     <LazyMotion features={domAnimation}>
       <m.span
         ref={ref}
-        className="inline-flex items-baseline font-display leading-none"
-        style={{fontFamily: '"Bebas Neue", var(--font-sans), sans-serif'}}
+        className="inline-flex items-baseline font-heading font-bold leading-none tracking-tight"
         animate={
           isInView && !prefersReducedMotion
             ? {scale: [1, 1.12, 1]}

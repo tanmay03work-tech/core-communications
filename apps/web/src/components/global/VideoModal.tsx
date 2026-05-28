@@ -75,7 +75,7 @@ export default function VideoModal({
               ) : (
                 <div className="flex h-full w-full flex-col items-center justify-center gap-3 bg-[radial-gradient(circle_at_top,rgba(91,192,235,0.22),transparent_46%),linear-gradient(135deg,rgba(28,46,74,0.3),rgba(8,17,31,0.92))] px-6 text-center">
                   <p className="text-xs uppercase tracking-[0.3em] text-accent/80">Video Preview</p>
-                  <h3 className="font-display text-3xl text-white">{title}</h3>
+                  <h3 className="font-heading text-3xl text-white">{title}</h3>
                   <p className="max-w-md text-sm leading-7 text-white/60">
                     Add a `videoUrl` prop when this hero is wired into real content and the play trigger will open the embedded reel here.
                   </p>

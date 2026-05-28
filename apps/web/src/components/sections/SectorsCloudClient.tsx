@@ -53,8 +53,8 @@ export default function SectorsCloudClient({sectors}: SectorsCloudClientProps) {
               }}
               whileTap={{scale: 0.97}}
               className={[
-                'rounded-full px-5 py-2.5 text-[0.8rem] uppercase tracking-[0.12em]',
-                isActive ? 'bg-primary text-white' : 'border border-white/15 text-white/50',
+                'rounded-full px-5 py-2.5 text-[0.8rem] uppercase tracking-[0.1em]',
+                isActive ? 'bg-primary text-white' : 'border border-white/15 text-white/72',
               ].join(' ')}
             >
               {sector}

@@ -46,7 +46,7 @@ export default function SectorsPageClient() {
               Sector expertise shaped for complex B2B markets.
             </m.h1>
             <m.p
-              className="mt-6 max-w-xl text-[1rem] font-light leading-[1.85] text-white/60"
+              className="mt-6 max-w-xl font-sans text-[1rem] font-normal leading-relaxed text-white/74"
               initial={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.22, ease: [0.22, 1, 0.36, 1] }}
@@ -77,8 +77,8 @@ export default function SectorsPageClient() {
                     <div className={isReversed ? 'lg:[direction:ltr]' : ''}>
                       <div className="h-full border border-navy/8 bg-white p-8 shadow-[0_8px_32px_rgba(28,46,74,0.05)] transition-shadow duration-300 hover:shadow-[0_16px_48px_rgba(28,46,74,0.09)]">
                         <SectionLabel className="text-primary">Featured Sector</SectionLabel>
-                        <h3 className="mb-3 text-[1.5rem] font-semibold leading-snug text-navy">{sector}</h3>
-                        <p className="text-[0.95rem] font-light leading-[1.85] text-navy/65">{context}</p>
+                        <h3 className="mb-3 font-heading text-[1.5rem] font-semibold leading-snug tracking-tight text-navy">{sector}</h3>
+                        <p className="font-sans text-[0.95rem] font-normal leading-relaxed text-navy/74">{context}</p>
                         <Link href="/contact" className="mt-6 inline-flex items-center gap-2 text-[0.7rem] font-bold uppercase tracking-[0.2em] text-accent no-underline hover:gap-3 transition-all duration-200">
                           Enquire <span>→</span>
                         </Link>
@@ -90,14 +90,14 @@ export default function SectorsPageClient() {
                       <div
                         className="flex h-full min-h-[18rem] flex-col justify-between border border-navy/[0.07] bg-[linear-gradient(135deg,rgba(28,46,74,0.06),rgba(91,192,235,0.08))] p-8"
                       >
-                        <div className="text-[0.62rem] font-bold uppercase tracking-[0.28em] text-navy/35">
+                        <div className="text-[0.62rem] font-bold uppercase tracking-[0.18em] text-navy/60">
                           Sector Context
                         </div>
                         <div className="mt-4 space-y-2">
                           {['Media coverage', 'Thought leadership', 'Industry analysts', 'Executive profiling', 'Crisis readiness'].map((kw) => (
                             <div
                               key={kw}
-                              className="inline-flex items-center gap-2 border border-navy/10 bg-white/80 px-3 py-1.5 text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-navy/62 mr-2"
+                              className="mr-2 inline-flex items-center gap-2 border border-navy/10 bg-white/80 px-3 py-1.5 text-[0.72rem] font-semibold uppercase tracking-[0.1em] text-navy/70"
                             >
                               <span className="h-1.5 w-1.5 rounded-full bg-accent" />
                               {kw}
@@ -139,7 +139,7 @@ export default function SectorsPageClient() {
               <ScrollReveal key={sector} delay={index * 0.04}>
                 <div className="group flex items-center gap-3 border border-white/[0.07] bg-white/[0.025] px-5 py-4 transition-all duration-300 hover:-translate-y-1 hover:border-accent/28 hover:bg-white/[0.04]">
                   <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-accent/50 transition-colors duration-200 group-hover:bg-accent" />
-                  <span className="text-[0.82rem] font-medium text-white/65 transition-colors duration-200 group-hover:text-white">
+                  <span className="font-sans text-[0.82rem] font-normal text-white/74 transition-colors duration-200 group-hover:text-white">
                     {sector}
                   </span>
                 </div>
@@ -154,10 +154,10 @@ export default function SectorsPageClient() {
         <Container className="max-w-7xl">
           <div className="flex flex-col items-start gap-6 md:flex-row md:items-center md:justify-between">
             <div>
-              <h2 className="text-[1.5rem] font-semibold leading-snug text-white">
+              <h2 className="font-heading text-[1.5rem] font-semibold leading-snug tracking-tight text-white">
                 Don't see your sector?
               </h2>
-              <p className="mt-2 text-[0.95rem] font-light text-white/52">
+              <p className="mt-2 font-sans text-[0.95rem] font-normal leading-relaxed text-white/72">
                 We work across complex B2B industries. Let's talk.
               </p>
             </div>

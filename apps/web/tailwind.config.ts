@@ -68,10 +68,9 @@ const config: Config = {
         mist: 'rgba(255,255,255,0.07)',
       },
       fontFamily: {
-        sans: ['var(--font-inter)', 'Helvetica Neue', 'Arial', 'sans-serif'],
-        display: ['var(--font-Sans-serif)', 'Helvetica', 'Arial', 'sans-serif'],
-        title: ['var(--font-Sans-serif)', 'Helvetica', 'Arial', 'sans-serif'],
-        mono: ['var(--font-Sans-serif)', 'Helvetica', 'Arial', 'sans-serif'],
+        sans: ['var(--font-open-sans)', 'Helvetica Neue', 'Arial', 'sans-serif'],
+        heading: ['var(--font-poppins)', 'Helvetica Neue', 'Arial', 'sans-serif'],
+        serif: ['var(--font-merriweather)', 'Georgia', 'serif'],
       },
       fontSize: {
         '2xs': ['0.65rem', { lineHeight: '1rem', letterSpacing: '0.08em' }],

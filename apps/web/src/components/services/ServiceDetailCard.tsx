@@ -49,7 +49,7 @@ export default function ServiceDetailCard({
             onClick={onToggle}
             className="flex min-w-0 flex-1 items-start gap-4 text-left"
           >
-            <span className="font-sans text-[3.5rem] font-bold leading-none text-primary/10">
+            <span className="font-heading text-[3.5rem] font-bold leading-none tracking-tight text-primary/10">
               {number}
             </span>
             <span className="text-2xl font-semibold leading-none text-accent" aria-hidden="true">

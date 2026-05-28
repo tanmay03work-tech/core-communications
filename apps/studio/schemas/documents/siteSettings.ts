@@ -64,6 +64,7 @@ export const siteSettings = defineType({
       name: 'heroMorphWords',
       title: 'Hero morph words',
       type: 'array',
+      initialValue: ['clarity', 'credibility', 'cut-through'],
       of: [defineArrayMember({type: 'string'})],
       validation: (rule) => rule.required().min(2).max(8),
     }),

@@ -1,10 +1,74 @@
 'use client';
 
 import {LazyMotion, domAnimation, m, useReducedMotion} from 'framer-motion';
-import Link from 'next/link';
-import SplitText from '@/components/animations/SplitText';
 import SectionLabel from '@/components/ui/SectionLabel';
 import {SERVICES} from '@/lib/constants';
+
+const SERVICES_DATA = [
+  {
+    number: '01',
+    category: 'Media Relations',
+    icon: '\u{1F4E1}',
+    items: [
+      'Media Strategy',
+      'Editorial Engagement',
+      'Issues & Crisis Communications',
+      'Media and Trends Research',
+    ],
+  },
+  {
+    number: '02',
+    category: 'Content Marketing',
+    icon: '\u{270D}\u{FE0F}',
+    items: [
+      'Press Releases & Leadership Articles',
+      'Blogs, Newsletters & Whitepapers',
+      'Website Content & Research Papers',
+      'Case Studies & Social Media Posts',
+      'Product, Animated & Social Videos',
+    ],
+  },
+  {
+    number: '03',
+    category: 'Digital Marketing',
+    icon: '\u{1F4CA}',
+    items: [
+      'Social Media Management',
+      'Graphic Designing',
+      'SEO / SEM Services',
+    ],
+  },
+  {
+    number: '04',
+    category: 'GEO Services',
+    icon: '\u{1F50D}',
+    items: [
+      'GEO Content Audit & Visibility Analysis',
+      'Campaign Strategy',
+      'AI Search Optimisation',
+    ],
+  },
+  {
+    number: '05',
+    category: 'Influencer & Creator Marketing',
+    icon: '\u{1F3AF}',
+    items: [
+      'Influencer Strategy & Selection',
+      'Creator Campaigns',
+      'Trends & Virality Programs',
+    ],
+  },
+  {
+    number: '06',
+    category: 'Website Development',
+    icon: '\u{1F4BB}',
+    items: [
+      'Website Development & Management',
+      'Landing Pages',
+      'Performance Optimisation',
+    ],
+  },
+] as const;
 
 const containerVariants = {
   hidden: {},
@@ -16,22 +80,12 @@ const containerVariants = {
   },
 };
 
-const fadeUpChild = {
-  hidden: {opacity: 0, y: 28, filter: 'blur(4px)'},
-  visible: {
-    opacity: 1,
-    y: 0,
-    filter: 'blur(0px)',
-    transition: {duration: 0.65, ease: [0.22, 1, 0.36, 1]},
-  },
-};
-
 export default function ServicesGrid() {
   const prefersReducedMotion = useReducedMotion();
 
   return (
     <LazyMotion features={domAnimation}>
-      <section id="services" className="relative overflow-hidden bg-[#0D1B2E] py-[clamp(5rem,9vw,8rem)] text-white">
+      <section className="relative overflow-hidden bg-[#0D1B2E] py-[clamp(5rem,9vw,8rem)] text-white">
         {/* Grid pattern */}
         <div
           aria-hidden="true"
@@ -45,22 +99,16 @@ export default function ServicesGrid() {
         />
 
         <div className="relative z-10 mx-auto max-w-7xl px-5 md:px-8 lg:px-16 xl:px-24">
-          {/* Section header — 2-column: heading left, subtitle + link right */}
+          {/* Section header - 2-column: heading left, subtitle + link right */}
           <div className="mb-14 grid grid-cols-1 items-end gap-8 md:mb-16 lg:grid-cols-2 lg:gap-16">
             <div>
-              <SectionLabel>{SERVICES.tag}</SectionLabel>
-              <SplitText
-                by="word"
-                stagger={60}
-                className="section-heading text-white"
-                text={SERVICES.heading.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim()}
-              />
+              <SectionLabel>What We Do</SectionLabel>
+              <h2 className="section-heading text-white">
+                Services built for <span className="font-serif italic">growth.</span>
+              </h2>
             </div>
             <div className="flex flex-col justify-end gap-6">
-              <p className="text-[0.92rem] font-light leading-[1.85] text-white/52">{SERVICES.subtitle}</p>
-              <Link href="/services" className="btn-outline-white self-start">
-                <span>View All Services</span>
-              </Link>
+              <p className="font-sans text-[0.92rem] font-normal leading-relaxed text-white/72">{SERVICES.subtitle}</p>
             </div>
           </div>
 
@@ -72,44 +120,59 @@ export default function ServicesGrid() {
             whileInView="visible"
             viewport={{once: true, margin: '-60px'}}
           >
-            {SERVICES.items.map((service) => (
+            {SERVICES_DATA.map((service, index) => (
               <m.div
-                key={service.num}
-                variants={prefersReducedMotion ? undefined : fadeUpChild}
-                className="card-service group relative flex min-h-[22rem] flex-col overflow-hidden border border-white/7 bg-white/[0.025] p-[var(--card-pad)]"
-                style={prefersReducedMotion ? undefined : {willChange: 'transform, background-color'}}
+                key={service.number}
+                className="relative flex cursor-default flex-col gap-4 overflow-hidden border border-white/8 bg-white/3 p-7"
+                initial={prefersReducedMotion ? {opacity: 1, y: 0} : {opacity: 0, y: 24}}
+                whileInView={{opacity: 1, y: 0}}
+                viewport={{once: true, margin: '-60px'}}
+                transition={{
+                  duration: prefersReducedMotion ? 0 : 0.6,
+                  delay: prefersReducedMotion ? 0 : index * 0.07,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                whileHover={{
+                  borderColor: 'rgba(91,192,235,0.3)',
+                  backgroundColor: 'rgba(91,192,235,0.03)',
+                  transition: {duration: prefersReducedMotion ? 0 : 0.25},
+                }}
               >
-                {/* Hover fill gradient */}
-                <m.div
-                  className="absolute inset-y-0 left-0 w-full origin-left bg-[linear-gradient(90deg,rgba(91,192,235,0.07),transparent_60%)]"
-                  initial={{scaleX: 0}}
-                  whileHover={prefersReducedMotion ? undefined : {scaleX: 1}}
-                  transition={prefersReducedMotion ? {duration: 0} : {duration: 0.4, ease: [0.22, 1, 0.36, 1]}}
-                />
+                {/* Ghost number - background */}
+                <span className="absolute right-4 top-3 hidden select-none font-heading text-[3.5rem] font-bold leading-none text-white/5 sm:block">
+                  {service.number}
+                </span>
 
-                {/* Large decorative number */}
-                <div className="absolute right-4 top-4 font-bold leading-none text-white/[0.06] text-[4rem]">
-                  {service.num}
-                </div>
-
-                <div className="relative z-[1] flex flex-1 flex-col">
-                  <div className="mb-3 text-[0.65rem] font-bold uppercase tracking-[0.22em] text-accent">
-                    {service.num}
-                  </div>
-                  <h3 className="mb-4 text-[1.1rem] font-semibold leading-snug text-white pr-8">
-                    {service.title}
+                {/* Icon + Title row */}
+                <div className="relative z-10 flex items-start gap-3">
+                  <span className="mt-0.5 text-xl">{service.icon}</span>
+                  <h3 className="font-heading text-base font-semibold leading-snug text-white">
+                    {service.category}
                   </h3>
-                  <p className="flex-1 text-[0.85rem] font-light leading-[1.85] text-white/52">
-                    {service.desc}
-                  </p>
-                  <Link
-                    href={`/services#${service.slug}`}
-                    className="mt-6 inline-flex items-center gap-2 text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-accent no-underline transition-all duration-200 hover:gap-3"
-                  >
-                    Learn More
-                    <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
-                  </Link>
                 </div>
+
+                {/* Sub-items list */}
+                <ul className="relative z-10 flex flex-col gap-1.5">
+                  {service.items.map((item, i) => (
+                    <m.li
+                      key={item}
+                      className="flex items-start gap-2 font-sans text-sm leading-relaxed text-white/55"
+                      initial={prefersReducedMotion ? {opacity: 1, x: 0} : {opacity: 0, x: -8}}
+                      whileInView={{opacity: 1, x: 0}}
+                      viewport={{once: true}}
+                      transition={{
+                        duration: prefersReducedMotion ? 0 : 0.3,
+                        delay: prefersReducedMotion ? 0 : 0.15 + index * 0.07 + i * 0.04,
+                        ease: 'easeOut',
+                      }}
+                    >
+                      <span className="mt-1.5 shrink-0 text-[0.6rem] text-accent">
+                        {'\u25C6'}
+                      </span>
+                      {item}
+                    </m.li>
+                  ))}
+                </ul>
               </m.div>
             ))}
           </m.div>

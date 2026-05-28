@@ -47,8 +47,8 @@
     --color-navy-80:  rgba(28,46,74,0.08);
 
     /* ── Font ────────────────────────────────────────── */
-    --font-sans:      var(--font-inter), 'Inter', Helvetica, Arial, sans-serif;
-    --font-Sans-serif:var(--font-inter), 'Inter', Helvetica, Arial, sans-serif;
+    --font-sans:      var(--font-open-sans), 'Helvetica Neue', Arial, sans-serif;
+    --font-Sans-serif:var(--font-open-sans), 'Helvetica Neue', Arial, sans-serif;
 
     /* ── Typography Scale (fluid, modular) ───────────── */
     --step-hero:   clamp(3.25rem, 6vw, 5.75rem);
@@ -157,7 +157,7 @@
   .lenis.lenis-stopped { overflow: hidden; }
 
   body {
-    font-family: var(--font-inter);
+    font-family: var(--font-open-sans), 'Helvetica Neue', Arial, sans-serif;
     font-size: var(--step-body);
     background: var(--gradient-section-blend);
     color: var(--color-primary);
@@ -170,7 +170,7 @@
   body, button, input, textarea, select { font: inherit; }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-inter);
+    font-family: var(--font-poppins), 'Helvetica Neue', Arial, sans-serif;
     color: inherit;
     letter-spacing: -0.02em;
     text-wrap: balance;
@@ -305,13 +305,14 @@
 
   /* ─── Section Heading ──────────────────────────────── */
   .section-heading {
-    @apply font-semibold;
-    font-family: var(--font-inter);
+    @apply font-heading font-semibold tracking-tight;
+    font-family: var(--font-poppins), 'Helvetica Neue', Arial, sans-serif;
     font-size: var(--step-h2);
     line-height: 1.08;
     letter-spacing: -0.025em;
   }
   .section-heading em {
+    font-family: var(--font-merriweather), Georgia, serif;
     font-style: italic;
     color: var(--accent);
   }

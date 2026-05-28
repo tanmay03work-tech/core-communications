@@ -1,6 +1,6 @@
 'use client';
 
-import {useEffect} from 'react';
+import {useEffect, type MouseEvent as ReactMouseEvent} from 'react';
 import {AnimatePresence, LazyMotion, domAnimation, m} from 'framer-motion';
 import Link from 'next/link';
 import {mobileMenuItemVariants, mobileMenuVariants, navbarSpring} from '@/lib/motion-variants';
@@ -16,6 +16,7 @@ type MobileMenuProps = {
   open: boolean;
   links: NavItem[];
   onClose: () => void;
+  onLinkClick: (event: ReactMouseEvent<HTMLAnchorElement>, href: string) => void;
   reducedMotion: boolean;
   lowPowerMode: boolean;
 };
@@ -24,6 +25,7 @@ export default function MobileMenu({
   open,
   links,
   onClose,
+  onLinkClick,
   reducedMotion,
   lowPowerMode,
 }: MobileMenuProps) {
@@ -85,7 +87,10 @@ export default function MobileMenu({
                     <m.div key={link.href} variants={mobileMenuItemVariants}>
                       <Link
                         href={link.href}
-                        onClick={onClose}
+                        onClick={(event) => {
+                          onLinkClick(event, link.href);
+                          onClose();
+                        }}
                         className={cn(
                           'group relative flex w-fit items-center gap-5 no-underline',
                           link.active ? 'text-white' : 'text-white/62',

@@ -13,7 +13,7 @@ interface WorkPageClientProps {
   studies: readonly any[];
 }
 
-const filterTabs = ['All', 'Cybersecurity', 'Healthtech', 'Fintech', 'Leadership'];
+const filterTabs = ['All', 'Cybersecurity', 'Identity', 'Infrastructure', 'AI', 'Fintech'];
 
 function getStudyDescription(study: any) {
   return 'desc' in study ? study.desc : study.description ?? '';
@@ -35,9 +35,10 @@ export default function WorkPageClient({ studies }: WorkPageClientProps) {
     
     const studyTag = (study.tag ?? '').toLowerCase();
     const studyClient = (study.client ?? '').toLowerCase();
+    const studySector = (study.sector ?? '').toLowerCase();
     const target = activeTab.toLowerCase();
     
-    return studyTag.includes(target) || studyClient.includes(target);
+    return studyTag.includes(target) || studyClient.includes(target) || studySector.includes(target);
   });
 
   return (
@@ -66,7 +67,7 @@ export default function WorkPageClient({ studies }: WorkPageClientProps) {
               Results that move credibility, reach, and business momentum.
             </m.h1>
             <m.p
-              className="mt-6 max-w-xl text-[1rem] font-light leading-[1.85] text-white/60"
+              className="mt-6 max-w-xl font-sans text-[1rem] font-normal leading-relaxed text-white/74"
               initial={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.38, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
@@ -121,19 +122,19 @@ export default function WorkPageClient({ studies }: WorkPageClientProps) {
                       <div>
                         {/* Tag + arrow */}
                         <div className="mb-3 flex items-center justify-between gap-4">
-                          <div className="text-[0.65rem] font-bold uppercase tracking-[0.24em] text-primary">
+                          <div className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-primary/72">
                             {study.client}
                           </div>
                           <ArrowUpRight className="h-5 w-5 shrink-0 text-navy/28 transition-all duration-300 group-hover:rotate-45 group-hover:text-accent" />
                         </div>
 
                         {/* Title */}
-                        <h3 className="mb-3 text-[1.35rem] font-semibold leading-snug text-navy">
+                        <h3 className="mb-3 font-heading text-[1.35rem] font-semibold leading-snug tracking-tight text-navy">
                           {study.title}
                         </h3>
 
                         {/* Description */}
-                        <p className="line-clamp-3 text-[0.88rem] font-light leading-[1.8] text-navy/60">
+                        <p className="line-clamp-3 font-sans text-[0.9rem] font-normal leading-relaxed text-navy/74">
                           {getStudyDescription(study)}
                         </p>
                       </div>
@@ -142,10 +143,10 @@ export default function WorkPageClient({ studies }: WorkPageClientProps) {
                       <div className="mt-6 grid grid-cols-2 gap-5 border-t border-navy/[0.07] pt-6">
                         {getStudyStats(study).slice(0, 4).map((stat: any) => (
                           <div key={stat.label}>
-                            <div className="text-[1.8rem] font-semibold leading-none tracking-[-0.02em] text-navy">
+                            <div className="font-heading text-[1.8rem] font-semibold leading-none tracking-tight text-navy">
                               {stat.value}
                             </div>
-                            <div className="mt-1.5 text-[0.62rem] font-bold uppercase tracking-[0.2em] text-navy/40">
+                            <div className="mt-1.5 text-[0.62rem] font-bold uppercase tracking-[0.16em] text-navy/62">
                               {stat.label}
                             </div>
                           </div>
@@ -169,7 +170,7 @@ export default function WorkPageClient({ studies }: WorkPageClientProps) {
         <Container className="relative z-10 max-w-3xl text-center">
           <SectionLabel className="justify-center">Next Step</SectionLabel>
           <h2 className="section-heading mt-2 text-white">Ready for outcomes like these?</h2>
-          <p className="mx-auto mt-5 max-w-md text-[1rem] font-light leading-[1.85] text-white/55">{CTA.subtitle}</p>
+          <p className="mx-auto mt-5 max-w-md font-sans text-[1rem] font-normal leading-relaxed text-white/72">{CTA.subtitle}</p>
           <div className="mt-8 flex flex-wrap justify-center gap-4">
             <Link href={CTA.primary.href} className="btn-primary">
               <span>{CTA.primary.label}</span>

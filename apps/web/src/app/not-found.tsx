@@ -6,7 +6,7 @@ export default function NotFound() {
     <section className="bg-surface-light text-navy min-h-[70vh] flex items-center py-24">
       <Container className="text-center">
         <div className="section-tag section-tag-dark mb-8">Not Found</div>
-        <h1 className="font-display text-hero text-balance max-w-3xl mx-auto">
+        <h1 className="font-heading text-hero text-balance max-w-3xl mx-auto">
           This page doesn&apos;t exist anymore.
         </h1>
         <p className="mt-6 text-lg leading-[1.8] text-navy/70 max-w-2xl mx-auto">
@@ -22,4 +22,3 @@ export default function NotFound() {
     </section>
   );
 }
-

@@ -46,8 +46,8 @@ export default async function SectorsCloud({sectors}: SectorsCloudProps) {
               className="section-heading text-white"
               dangerouslySetInnerHTML={{__html: "We speak <em>your</em> industry's language."}}
             />
-            <p className="mt-5 text-[0.95rem] font-light leading-[1.85] text-white/52">
-              Sector context, market nuance, and credibility signals tailored to the industries where complex stories need sharper translation.
+            <p className="mt-5 font-sans text-[0.95rem] font-normal leading-relaxed text-white/72">
+              Sector context, market nuance, and credibility signals tailored to the industries where <span className="font-serif italic">complex</span> stories need sharper translation.
             </p>
           </div>
 

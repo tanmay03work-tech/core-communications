@@ -18,7 +18,7 @@ export default function FloatingMetrics({metrics}: FloatingMetricsProps) {
   }
 
   return (
-    <div className="absolute bottom-8 right-4 z-20 hidden w-full max-w-[26rem] flex-col gap-3 lg:flex">
+    <div className="relative z-20 hidden w-full max-w-[22rem] flex-col gap-4 lg:flex">
       {metrics.map((metric, index) => (
         <m.div
           key={metric._key ?? `${metric.label}-${metric.value}`}
@@ -26,11 +26,11 @@ export default function FloatingMetrics({metrics}: FloatingMetricsProps) {
           animate={{opacity: 1, x: 0, y: 0}}
           transition={{duration: 0.6, delay: index * 0.12, ease: [0.22, 1, 0.36, 1]}}
           whileHover={{x: -6, borderColor: 'rgba(91, 192, 235, 0.4)'}}
-          className="metric-pill flex items-center gap-4 self-end rounded-full border border-white/10 bg-white/[0.05] px-5 py-3 backdrop-blur-xl"
+          className="metric-pill flex min-h-[5.2rem] w-full items-center gap-4 rounded-full border border-white/10 bg-white/[0.06] px-5 py-3 backdrop-blur-xl"
         >
           <span className="metric-dot" />
-          <span className="font-mono text-lg text-white">{metric.value}</span>
-          <span className="text-sm uppercase tracking-[0.18em] text-white/55">{metric.label}</span>
+          <span className="font-heading text-lg font-bold tracking-tight text-white">{metric.value}</span>
+          <span className="text-sm uppercase leading-snug tracking-[0.18em] text-white/55">{metric.label}</span>
         </m.div>
       ))}
       <style jsx>{`

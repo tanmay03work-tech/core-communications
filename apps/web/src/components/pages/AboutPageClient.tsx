@@ -56,10 +56,10 @@ export default function AboutPageClient() {
             <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-center">
               <div className="lg:col-span-7">
                 <SectionLabel className="text-accent/90">{ABOUT.tag}</SectionLabel>
-                <h1 className="mt-3 text-[clamp(2.5rem,5vw,4.5rem)] font-semibold leading-[1.05] tracking-[-0.03em] text-white">
+                <h1 className="mt-3 font-heading text-[clamp(2.5rem,5vw,4.5rem)] font-semibold leading-[1.05] tracking-tight text-white">
                   About <span className="bg-gradient-to-r from-white via-white to-accent bg-clip-text text-transparent">Core Communication</span>
                 </h1>
-                <p className="mt-6 max-w-xl text-base md:text-lg leading-relaxed text-white/70">
+                <p className="mt-6 max-w-xl font-sans text-base font-normal leading-relaxed text-white/74 md:text-lg">
                   We shape reputations, navigate complex media landscapes, and connect enterprises to high-value markets with credibility and precision.
                 </p>
                 <div className="mt-8 flex flex-wrap gap-4">
@@ -90,9 +90,9 @@ export default function AboutPageClient() {
                     className="border border-white/8 bg-white/[0.04] backdrop-blur-md p-6 rounded-[1rem] relative overflow-hidden group"
                   >
                     <div className="absolute inset-y-0 left-0 w-[2px] bg-accent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-                    <div className="text-[2.2rem] font-semibold leading-none text-accent">{item.value}</div>
-                    <div className="mt-2 text-[0.7rem] font-bold uppercase tracking-[0.22em] text-white/80">{item.label}</div>
-                    <p className="mt-2 text-[0.82rem] leading-relaxed text-white/60">{item.detail}</p>
+                    <div className="font-heading text-[2.2rem] font-semibold leading-none tracking-tight text-accent">{item.value}</div>
+                    <div className="mt-2 text-[0.7rem] font-bold uppercase tracking-[0.16em] text-white/80">{item.label}</div>
+                    <p className="mt-2 font-sans text-[0.84rem] font-normal leading-relaxed text-white/72">{item.detail}</p>
                   </m.div>
                 ))}
               </m.div>
@@ -108,11 +108,11 @@ export default function AboutPageClient() {
               <ScrollReveal>
                 <div className="max-w-xl">
                   <SectionLabel className="text-primary">Our Story</SectionLabel>
-                  <h2 className="mt-3 text-[clamp(1.8rem,3vw,2.5rem)] font-semibold leading-tight tracking-[-0.02em] text-navy mb-6">
+                  <h2 className="mt-3 mb-6 font-heading text-[clamp(1.8rem,3vw,2.5rem)] font-semibold leading-tight tracking-tight text-navy">
                     A modern advisory for fast-growing enterprises.
                   </h2>
                   {ABOUT.paragraphs.slice(0, 3).map((paragraph, index) => (
-                    <p key={index} className="mb-5 text-[1rem] font-light leading-[1.85] text-navy/68 last:mb-0">
+                    <p key={index} className="mb-5 font-sans text-[1rem] font-normal leading-relaxed text-navy/74 last:mb-0">
                       {paragraph}
                     </p>
                   ))}
@@ -124,10 +124,10 @@ export default function AboutPageClient() {
                 <div className="relative border border-navy/8 bg-surface p-[clamp(1.5rem,3vw,2.5rem)] rounded-[2rem] shadow-[0_12px_40px_rgba(28,46,74,0.03)] overflow-hidden group">
                   <div className="absolute inset-y-0 left-0 w-[4px] bg-gradient-to-b from-primary to-accent" />
                   <SectionLabel className="text-primary mb-3 block">India-Australia Corridor</SectionLabel>
-                  <h3 className="text-[1.25rem] font-semibold leading-snug text-navy mb-4">
+                  <h3 className="mb-4 font-heading text-[1.25rem] font-semibold leading-snug tracking-tight text-navy">
                     Connecting APAC's most dynamic growth engines.
                   </h3>
-                  <p className="text-base leading-8 text-navy/68">
+                  <p className="font-sans text-base font-normal leading-relaxed text-navy/74">
                     Core operates across the India-Australia corridor with communications shaped for enterprise audiences, local nuance, and cross-market credibility. We bridge the gap between high-level policy and real-world commercial outcomes.
                   </p>
                 </div>
@@ -147,10 +147,10 @@ export default function AboutPageClient() {
           <div className="relative z-10 mx-auto max-w-7xl px-5 md:px-8 lg:px-16 xl:px-24">
             <div className="mb-14 max-w-3xl">
               <SectionLabel className="text-accent/90">Core Focus</SectionLabel>
-              <h2 className="mt-3 text-[clamp(2rem,3.5vw,3.25rem)] font-semibold leading-[1.08] tracking-[-0.02em]">
+              <h2 className="mt-3 font-heading text-[clamp(2rem,3.5vw,3.25rem)] font-semibold leading-[1.08] tracking-tight">
                 The strategic pillars of our communication.
               </h2>
-              <p className="mt-4 text-white/60">
+              <p className="mt-4 font-sans font-normal leading-relaxed text-white/72">
                 Every campaign, strategy, and deliverable is anchored on our proven methodology for high-impact communication.
               </p>
             </div>
@@ -182,8 +182,8 @@ export default function AboutPageClient() {
                   <div className="mb-6 text-[3rem] font-bold leading-none text-accent/10 transition-colors duration-300 group-hover:text-accent/20">
                     0{index + 1}
                   </div>
-                  <h3 className="mb-3 text-[1.25rem] font-semibold leading-tight text-white">{pillar.title}</h3>
-                  <p className="text-[0.92rem] leading-[1.8] text-white/64">{pillar.text}</p>
+                  <h3 className="mb-3 font-heading text-[1.25rem] font-semibold leading-tight tracking-tight text-white">{pillar.title}</h3>
+                  <p className="font-sans text-[0.92rem] font-normal leading-relaxed text-white/74">{pillar.text}</p>
                 </m.article>
               ))}
             </m.div>
@@ -196,11 +196,11 @@ export default function AboutPageClient() {
             <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-16 items-end mb-14">
               <div>
                 <SectionLabel className="text-accent/90">Our Leadership</SectionLabel>
-                <h2 className="mt-3 text-[clamp(2rem,3.5vw,3.25rem)] font-semibold leading-[1.08] tracking-[-0.02em]">
+                <h2 className="mt-3 font-heading text-[clamp(2rem,3.5vw,3.25rem)] font-semibold leading-[1.08] tracking-tight">
                   A senior team built for sharp messaging.
                 </h2>
               </div>
-              <p className="text-base leading-8 text-white/68">
+              <p className="font-sans text-base font-normal leading-relaxed text-white/74">
                 Strategy, earned visibility, and B2B market fluency led by practitioners who understand high-stakes storytelling across the Asia-Pacific region.
               </p>
             </div>

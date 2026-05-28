@@ -63,7 +63,7 @@ export default function ServicesPageClient() {
               Services that turn visibility into business relevance.
             </m.h1>
             <m.p
-              className="mt-6 max-w-xl text-[1rem] font-light leading-[1.85] text-white/60"
+              className="mt-6 max-w-xl font-sans text-[1rem] font-normal leading-relaxed text-white/74"
               initial={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.22, ease: [0.22, 1, 0.36, 1] }}
@@ -90,12 +90,12 @@ export default function ServicesPageClient() {
                   </div>
 
                   <div className="mb-3 text-[0.65rem] font-bold uppercase tracking-[0.22em] text-accent">{service.num}</div>
-                  <h2 className="mb-3 text-[1.1rem] font-semibold leading-snug text-navy pr-8">{service.title}</h2>
-                  <p className="flex-1 text-[0.88rem] font-light leading-[1.85] text-navy/62">{service.desc}</p>
-                  <p className="mt-3 text-[0.8rem] italic text-navy/44">{serviceDetails[index]}</p>
+                  <h2 className="mb-3 pr-8 font-heading text-[1.1rem] font-semibold leading-snug tracking-tight text-navy">{service.title}</h2>
+                  <p className="flex-1 font-sans text-[0.88rem] font-normal leading-relaxed text-navy/74">{service.desc}</p>
+                  <p className="mt-3 text-[0.8rem] font-serif italic text-navy/60">{serviceDetails[index]}</p>
 
                   <Link
-                    href={`/services#${service.slug}`}
+                    href="/#services"
                     className="mt-5 inline-flex items-center gap-2 text-[0.68rem] font-bold uppercase tracking-[0.2em] text-accent no-underline transition-all duration-200 hover:gap-3"
                   >
                     Learn More
@@ -138,8 +138,8 @@ export default function ServicesPageClient() {
                   <div className="text-[0.65rem] font-bold uppercase tracking-[0.26em] text-accent/70 lg:w-8">
                     {String(index + 1).padStart(2, '0')}
                   </div>
-                  <h3 className="text-[1.15rem] font-semibold leading-snug text-white">{service.title}</h3>
-                  <p className="text-[0.9rem] font-light leading-[1.85] text-white/52">{service.desc}</p>
+                  <h3 className="font-heading text-[1.15rem] font-semibold leading-snug tracking-tight text-white">{service.title}</h3>
+                  <p className="font-sans text-[0.9rem] font-normal leading-relaxed text-white/72">{service.desc}</p>
                 </article>
               </ScrollReveal>
             ))}
@@ -173,8 +173,8 @@ export default function ServicesPageClient() {
                     <div className="h-px flex-1 bg-white/10" />
                   </div>
                   <div className="mb-3 text-[0.65rem] font-bold uppercase tracking-[0.22em] text-accent">{step.num}</div>
-                  <h3 className="mb-3 text-[1.05rem] font-semibold text-white">{step.title}</h3>
-                  <p className="text-[0.85rem] font-light leading-[1.85] text-white/52">{step.desc}</p>
+                  <h3 className="mb-3 font-heading text-[1.05rem] font-semibold tracking-tight text-white">{step.title}</h3>
+                  <p className="font-sans text-[0.85rem] font-normal leading-relaxed text-white/72">{step.desc}</p>
                 </article>
               </ScrollReveal>
             ))}
@@ -187,10 +187,10 @@ export default function ServicesPageClient() {
         <Container className="max-w-7xl">
           <div className="flex flex-col items-start gap-6 md:flex-row md:items-center md:justify-between">
             <div>
-              <h2 className="text-[1.5rem] font-semibold leading-snug text-white">
+              <h2 className="font-heading text-[1.5rem] font-semibold leading-snug tracking-tight text-white">
                 Ready to turn complexity into clarity?
               </h2>
-              <p className="mt-2 text-[0.95rem] font-light text-white/52">
+              <p className="mt-2 font-sans text-[0.95rem] font-normal leading-relaxed text-white/72">
                 Start with a conversation. No pitch, no pressure.
               </p>
             </div>

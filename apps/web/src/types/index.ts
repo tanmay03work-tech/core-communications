@@ -108,6 +108,20 @@ export type CaseStudyStat = {
   label: string;
 };
 
+export type CaseStudyDetailBlock = {
+  _key?: string;
+  title: string;
+  body?: string;
+  bullets?: string[];
+};
+
+export type CaseStudyOutcome = {
+  _key?: string;
+  title?: string;
+  body?: string;
+  bullets?: string[];
+};
+
 export type StatsSection = {
   _key?: string;
   _type: 'statsSection';
@@ -240,6 +254,14 @@ export type CaseStudy = {
   sector: string;
   tag: string;
   description: string;
+  caseNumber?: string;
+  kicker?: string;
+  intro?: string;
+  detailBlocks?: CaseStudyDetailBlock[];
+  milestoneBlocks?: CaseStudyDetailBlock[];
+  outcome?: CaseStudyOutcome;
+  mediaPlacements?: string[];
+  resultNote?: string;
   stats?: CaseStudyStat[];
   sections?: ModularSection[];
   coverImage?: SanityImage;

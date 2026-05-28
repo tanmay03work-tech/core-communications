@@ -1,10 +1,8 @@
 'use client';
 
-import {LazyMotion, domAnimation, m, useReducedMotion} from 'framer-motion';
-import Link from 'next/link';
+import {LazyMotion, domAnimation, m} from 'framer-motion';
 import SplitText from '@/components/animations/SplitText';
 import ScrollReveal from '@/components/motion/ScrollReveal';
-import SectionLabel from '@/components/ui/SectionLabel';
 import {ABOUT} from '@/lib/constants';
 
 const containerVariants = {
@@ -28,96 +26,66 @@ const fadeUpChild = {
 };
 
 export default function AboutSection() {
-  const prefersReducedMotion = useReducedMotion();
-
   return (
     <LazyMotion features={domAnimation}>
-      <section id="about" className="relative overflow-hidden bg-[linear-gradient(180deg,#F5F7FA_0%,#ffffff_60%,#F5F7FA_100%)] py-[clamp(5rem,9vw,8rem)] text-navy">
-        {/* Subtle vertical grid lines */}
+      <section className="relative overflow-hidden bg-[radial-gradient(circle_at_12%_18%,rgba(91,192,235,0.18),transparent_30%),linear-gradient(180deg,#F5F7FA_0%,#ffffff_58%,#F5F7FA_100%)] py-[clamp(5rem,9vw,8rem)] text-navy">
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0"
           style={{
-            backgroundImage: 'linear-gradient(90deg, rgba(28,46,74,0.025) 1px, transparent 1px)',
-            backgroundSize: '12vw 100%',
+            backgroundImage:
+              'linear-gradient(90deg, rgba(28,46,74,0.03) 1px, transparent 1px), linear-gradient(180deg, rgba(28,46,74,0.025) 1px, transparent 1px)',
+            backgroundSize: '11vw 100%, 100% 90px',
           }}
+        />
+        <div
+          aria-hidden="true"
+          className="absolute right-[-12rem] top-20 h-[30rem] w-[30rem] rounded-full bg-accent/10 blur-3xl"
         />
 
         <div className="relative z-10 mx-auto max-w-7xl px-5 md:px-8 lg:px-16 xl:px-24">
-          {/* Section header */}
-          <div className="mb-14 md:mb-16">
-            <SectionLabel className="text-primary">
-              {ABOUT.tag}
-            </SectionLabel>
-            <SplitText
-              by="word"
-              stagger={60}
-              className="section-heading max-w-3xl text-navy"
-              text={ABOUT.heading.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim()}
-            />
-            <ScrollReveal className="mt-7 max-w-4xl" direction="left">
-              <div className="flex gap-5 border-l-2 border-accent pl-6">
-                <blockquote className="text-lg font-medium leading-relaxed text-navy/78">
-                  "Communications with credibility, clarity, and commercial context."
-                </blockquote>
-              </div>
-            </ScrollReveal>
-          </div>
-
-          {/* Split layout */}
-          <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:gap-16">
-            {/* Left: paragraphs + CTA */}
-            <ScrollReveal>
-              <div className="max-w-xl">
-                {ABOUT.paragraphs.slice(0, 3).map((paragraph) => (
-                  <p key={paragraph} className="mb-5 text-[1rem] font-light leading-[1.85] text-navy/68 last:mb-0">
-                    {paragraph}
-                  </p>
-                ))}
-                <div className="mt-8">
-                  <Link href="/about" className="btn-ghost">
-                    <span>Know More</span>
-                  </Link>
-                </div>
-              </div>
-            </ScrollReveal>
-
-            {/* Right: pillars grid */}
+          <ScrollReveal>
             <m.div
-              className="grid grid-cols-1 gap-4 sm:grid-cols-2"
+              className="relative overflow-hidden border border-navy/10 bg-white/88 p-[clamp(1.75rem,4.5vw,4.75rem)] shadow-[0_24px_80px_rgba(28,46,74,0.10)] backdrop-blur"
               variants={containerVariants}
               initial="hidden"
               whileInView="visible"
               viewport={{once: true, margin: '-60px'}}
             >
-              {ABOUT.pillars.slice(0, 4).map((pillar, index) => (
-                <m.article
-                  key={pillar.title}
-                  variants={prefersReducedMotion ? undefined : fadeUpChild}
-                  whileHover={
-                    prefersReducedMotion
-                      ? undefined
-                      : {
-                          y: -5,
-                          borderColor: 'rgba(91,192,235,0.35)',
-                          boxShadow: '0 8px 32px rgba(28,46,74,0.08)',
-                          transition: {duration: 0.3, ease: [0.22, 1, 0.36, 1]},
-                        }
-                  }
-                  className="group relative overflow-hidden border border-navy/8 bg-white p-6"
-                  style={prefersReducedMotion ? undefined : {willChange: 'transform'}}
-                >
-                  {/* Accent left bar that slides in on hover */}
-                  <div className="absolute inset-y-0 left-0 w-[2px] bg-accent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-                  <div className="mb-3 text-[0.65rem] font-bold uppercase tracking-[0.22em] text-accent">
-                    0{index + 1}
-                  </div>
-                  <h3 className="mb-2.5 text-[1rem] font-semibold leading-snug text-navy">{pillar.title}</h3>
-                  <p className="text-[0.85rem] leading-[1.8] text-navy/60">{pillar.text}</p>
-                </m.article>
-              ))}
+              <div
+                aria-hidden="true"
+                className="absolute inset-x-0 top-0 h-1 bg-[linear-gradient(90deg,#1C2E4A,#5BC0EB,#1C2E4A)]"
+              />
+              <div
+                aria-hidden="true"
+                className="absolute -right-20 -top-20 h-52 w-52 rounded-full border border-accent/25"
+              />
+              <div className="relative mx-auto max-w-5xl">
+                <SplitText
+                  by="word"
+                  stagger={60}
+                  className="section-heading mb-10 max-w-4xl text-navy"
+                  text="About Core Communications"
+                />
+
+                <div className="space-y-7">
+                  {ABOUT.paragraphs.map((paragraph, index) => (
+                    <m.p
+                      key={paragraph}
+                      variants={fadeUpChild}
+                      className={`font-sans leading-[1.78] text-navy/76 ${
+                        index === 0
+                          ? 'text-[clamp(1.35rem,2.4vw,2.25rem)] font-semibold leading-[1.35] tracking-[-0.03em] text-navy'
+                          : 'text-[clamp(1rem,1.25vw,1.12rem)]'
+                      }`}
+                    >
+                      {paragraph}
+                    </m.p>
+                  ))}
+                </div>
+              </div>
             </m.div>
-          </div>
+          </ScrollReveal>
         </div>
       </section>
     </LazyMotion>

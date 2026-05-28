@@ -27,7 +27,7 @@ export default function TextSection({section}: Props) {
       <Container>
         <ScrollReveal className={cn(widthClasses[section.maxWidth ?? 'medium'], 'space-y-5')}>
           {section.eyebrow ? <div className={cn(getEyebrowClass(section.theme), 'mb-5')}>{section.eyebrow}</div> : null}
-          {section.title ? <h2 className="font-display text-section text-balance">{section.title}</h2> : null}
+          {section.title ? <h2 className="font-heading text-section text-balance">{section.title}</h2> : null}
           <PortableTextContent value={section.body} invert={isInverseTheme(section.theme)} />
         </ScrollReveal>
       </Container>

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import dynamic from 'next/dynamic';
 import Script from 'next/script';
-import {Inter} from 'next/font/google';
+import {Poppins, Open_Sans, Merriweather} from 'next/font/google';
 import { LazyMotion, domAnimation } from 'framer-motion';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
@@ -13,11 +13,26 @@ import PageTransition from '@/components/layout/PageTransition';
 import LenisProvider from '@/components/layout/LenisProvider';
 import {getAbsoluteUrl, getSiteUrl} from '@/lib/metadata';
 
-const inter = Inter({
+const poppins = Poppins({
   subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-poppins',
   display: 'swap',
-  preload: true,
-  variable: '--font-inter',
+});
+
+const openSans = Open_Sans({
+  subsets: ['latin'],
+  weight: ['300', '400', '600'],
+  variable: '--font-open-sans',
+  display: 'swap',
+});
+
+const merriweather = Merriweather({
+  subsets: ['latin'],
+  weight: ['300', '700'],
+  style: ['normal', 'italic'],
+  variable: '--font-merriweather',
+  display: 'swap',
 });
 
 const siteUrl = getSiteUrl();
@@ -95,8 +110,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={`${inter.variable} min-h-screen cursor-none bg-navy text-white flex flex-col`}>
+    <html lang="en" className={`${poppins.variable} ${openSans.variable} ${merriweather.variable}`}>
+      <body className="min-h-screen cursor-none bg-navy text-white flex flex-col">
         <Script
           id="core-communications-organization-schema"
           type="application/ld+json"

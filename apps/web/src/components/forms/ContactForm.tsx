@@ -28,7 +28,6 @@ export function ContactForm() {
     defaultValues: {
       name: '',
       email: '',
-      company: '',
       message: '',
     },
   });
@@ -89,20 +88,11 @@ export function ContactForm() {
         </Field>
       </div>
 
-      <Field label="Company" error={errors.company?.message}>
-        <input
-          {...register('company')}
-          autoComplete="organization"
-          className={baseInputClassName}
-          placeholder="Company name"
-        />
-      </Field>
-
       <Field label="Message" error={errors.message?.message}>
         <textarea
           {...register('message')}
           className={`${baseInputClassName} min-h-[180px] resize-y`}
-          placeholder="Tell us what you're building, what you need, and what success looks like."
+          placeholder="Anything you want to share? This is optional."
         />
       </Field>
 

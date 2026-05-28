@@ -34,12 +34,11 @@ function StatItem({
       className="group flex flex-col border-l border-white/10 pl-6 first:border-none first:pl-0"
     >
       <div
-        className="font-display text-[clamp(2.5rem,4.5vw,4rem)] font-semibold leading-none tracking-[-0.03em] text-accent"
-        style={{ fontFamily: 'var(--font-inter)' }}
+        className="font-heading text-[clamp(2.5rem,4.5vw,4rem)] font-bold leading-none tracking-tight text-accent"
       >
         {stat.value}
       </div>
-      <p className="mt-3 text-[0.7rem] font-bold uppercase tracking-[0.22em] text-white/52">
+      <p className="mt-3 text-[0.72rem] font-bold uppercase tracking-[0.16em] text-white/72">
         {stat.label}
       </p>
     </m.div>

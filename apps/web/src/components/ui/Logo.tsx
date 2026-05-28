@@ -31,7 +31,7 @@ export function Logo({ className, theme = 'dark' }: { className?: string; theme?
       {/* Typography Lockup */}
       <div className="flex flex-col justify-center translate-y-[1px]">
         <span className={cn(
-          "font-title text-[1.1rem] font-bold tracking-[0.1em] leading-none mb-[2px]",
+          "font-heading text-[1.1rem] font-bold tracking-[0.1em] leading-none mb-[2px]",
           isLight ? "text-navy" : "text-white"
         )}>
           CORE

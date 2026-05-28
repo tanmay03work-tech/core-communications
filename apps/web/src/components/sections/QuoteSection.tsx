@@ -24,11 +24,11 @@ export default function QuoteSection({section}: Props) {
                 <ResponsiveSanityImage image={section.image} width={320} height={320} sizes="120px" className="w-20 rounded-full md:w-24 lg:w-[120px]" imageClassName="aspect-square" />
               ) : null}
               <div className="space-y-5">
-                <blockquote className="font-display text-[clamp(2rem,5vw,3.5rem)] leading-[1.08] text-balance">
+                <blockquote className="font-serif text-[clamp(2rem,5vw,3.5rem)] italic leading-[1.12] text-balance">
                   "{section.quote}"
                 </blockquote>
                 {(section.attribution || section.role || section.company) ? (
-                  <div className={cn('flex flex-wrap gap-x-2 gap-y-1 text-sm font-bold uppercase tracking-[0.18em]', getSectionSubtleTextClass(section.theme))}>
+                  <div className={cn('flex flex-wrap gap-x-2 gap-y-1 text-sm font-bold uppercase tracking-[0.16em]', getSectionSubtleTextClass(section.theme))}>
                     {section.attribution ? <span>{section.attribution}</span> : null}
                     {section.role ? <span>{section.attribution ? '/ ' : ''}{section.role}</span> : null}
                     {section.company ? <span>{section.attribution || section.role ? '/ ' : ''}{section.company}</span> : null}

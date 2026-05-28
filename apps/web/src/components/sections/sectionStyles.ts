@@ -29,11 +29,11 @@ export function isInverseTheme(theme?: SectionTheme) {
 }
 
 export function getSectionMutedTextClass(theme?: SectionTheme) {
-  return isInverseTheme(theme) ? 'text-white/68' : 'text-navy/70';
+  return isInverseTheme(theme) ? 'text-white/72' : 'text-navy/74';
 }
 
 export function getSectionSubtleTextClass(theme?: SectionTheme) {
-  return isInverseTheme(theme) ? 'text-white/55' : 'text-navy/55';
+  return isInverseTheme(theme) ? 'text-white/68' : 'text-navy/64';
 }
 
 export function getSectionCardClass(theme?: SectionTheme) {

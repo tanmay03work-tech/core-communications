@@ -14,10 +14,9 @@ import { getSiteUrl } from '@/lib/resend';
 
 type AutoReplyEmailProps = {
   name: string;
-  service: string;
 };
 
-export function AutoReplyEmail({ name, service }: AutoReplyEmailProps) {
+export function AutoReplyEmail({ name }: AutoReplyEmailProps) {
   const siteUrl = getSiteUrl();
   const logoUrl = `${siteUrl}/core_logo_clean.svg`;
 
@@ -38,8 +37,8 @@ export function AutoReplyEmail({ name, service }: AutoReplyEmailProps) {
             <Text style={eyebrow}>Core Communications</Text>
             <Heading style={heading}>Thank you for reaching out</Heading>
             <Text style={lede}>
-              Hi {name}, thanks for getting in touch about {service}. We have received your note
-              and will come back with the sharpest next step as soon as possible.
+              Hi {name}, thanks for getting in touch. We have received your note and will come
+              back with the sharpest next step as soon as possible.
             </Text>
           </Section>
 

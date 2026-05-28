@@ -35,8 +35,8 @@ export default function HeroSection({section}: Props) {
         >
           <ScrollReveal className={cn('max-w-3xl space-y-5 lg:space-y-6', alignCenter && !hasImage ? 'mx-auto max-w-4xl' : '')}>
             {section.eyebrow ? <div className={cn(getEyebrowClass(section.theme), 'mb-2')}>{section.eyebrow}</div> : null}
-            <h2 className="font-display text-hero text-balance">{section.title}</h2>
-            {section.subtitle ? <p className={cn('max-w-[60ch] text-[clamp(1rem,1.8vw,1.125rem)] leading-[1.8] font-light', getSectionMutedTextClass(section.theme))}>{section.subtitle}</p> : null}
+            <h2 className="font-heading text-hero text-balance">{section.title}</h2>
+            {section.subtitle ? <p className={cn('max-w-[60ch] font-sans text-[clamp(1rem,1.8vw,1.125rem)] font-normal leading-relaxed', getSectionMutedTextClass(section.theme))}>{section.subtitle}</p> : null}
             {section.actions?.length ? (
               <div className={cn('flex flex-wrap gap-4 pt-2', alignCenter && !hasImage ? 'justify-center' : '')}>
                 {section.actions.map((action) => (

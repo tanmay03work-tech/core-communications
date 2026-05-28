@@ -16,7 +16,7 @@ type HeroSectionProps = {
   siteSettings?: SiteSettings | null;
 };
 
-const DEFAULT_MORPH_WORDS = HERO.headline.line2 ? [HERO.headline.line2.replace(',', ''), 'authority', 'cut-through'] : ['credibility', 'authority', 'cut-through'];
+const DEFAULT_MORPH_WORDS = ['clarity', 'credibility', 'cut-through'];
 const DEFAULT_METRICS = HERO.stats.map((stat) => ({
   value: `${stat.value}${stat.suffix}`,
   label: stat.label,
@@ -119,8 +119,12 @@ export default function HeroSection({siteSettings}: HeroSectionProps) {
         <m.div className="hero-blob hero-blob-three" style={{x: blobThreeX, y: blobThreeY}} aria-hidden="true" />
         <RadarAnimation />
 
-        <div className="relative z-10 mx-auto grid min-h-screen max-w-[1440px] grid-cols-1 gap-16 px-container-padding pb-16 pt-28 lg:grid-cols-[minmax(0,1fr)_minmax(20rem,0.82fr)] lg:items-center lg:pb-20 lg:pt-32">
-          <div className="max-w-4xl">
+        <div className="relative z-10 mx-auto grid min-h-screen w-full max-w-[1540px] grid-cols-1 gap-12 px-container-padding pb-16 pt-28 lg:grid-cols-[minmax(15rem,20rem)_minmax(0,1fr)] lg:items-center lg:pb-20 lg:pt-32 xl:grid-cols-[minmax(18rem,23rem)_minmax(0,1fr)] xl:gap-16">
+          <div className="order-2 hidden lg:order-1 lg:flex lg:min-h-[34rem] lg:items-center lg:justify-start">
+            <FloatingMetrics metrics={metrics} />
+          </div>
+
+          <div className="order-1 max-w-[82rem] lg:order-2 lg:justify-self-start">
             <m.div
               initial={{opacity: 0, y: 22}}
               animate={{opacity: 1, y: 0}}
@@ -139,11 +143,11 @@ export default function HeroSection({siteSettings}: HeroSectionProps) {
                   transition: {staggerChildren: 0.12, delayChildren: 0.14},
                 },
               }}
-              className="font-display text-hero leading-[0.98] tracking-[-0.03em] text-white"
+              className="font-heading text-hero leading-[0.98] tracking-[-0.03em] text-white xl:text-[clamp(5rem,5.55vw,6.6rem)]"
             >
               <span className="mb-2 block overflow-hidden">
                 <m.span
-                  className="block"
+                  className="block lg:whitespace-nowrap"
                   variants={{
                     hidden: {y: '110%'},
                     visible: {
@@ -157,7 +161,7 @@ export default function HeroSection({siteSettings}: HeroSectionProps) {
               </span>
               <span className="mb-2 block overflow-hidden">
                 <m.span
-                  className="block"
+                  className="block lg:whitespace-nowrap"
                   variants={{
                     hidden: {y: '110%'},
                     visible: {
@@ -166,8 +170,8 @@ export default function HeroSection({siteSettings}: HeroSectionProps) {
                     },
                   }}
                 >
-                  <MorphingWord words={morphWords} fallback={HERO.headline.line2.replace(',', '')} />
-                  <span className="text-white">,</span>
+                  {HERO.headline.line2 ? <span className="mr-3 text-white/82">{HERO.headline.line2}</span> : null}
+                  <MorphingWord words={morphWords} fallback={DEFAULT_MORPH_WORDS[0]} />
                 </m.span>
               </span>
               <span className="block overflow-hidden">
@@ -240,10 +244,6 @@ export default function HeroSection({siteSettings}: HeroSectionProps) {
                 <span>Watch reel</span>
               </button>
             </m.div>
-          </div>
-
-          <div className="relative flex min-h-[34rem] items-end justify-end">
-            <FloatingMetrics metrics={metrics} />
           </div>
         </div>
 

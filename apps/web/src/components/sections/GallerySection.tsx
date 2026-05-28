@@ -27,7 +27,7 @@ export default function GallerySection({section}: Props) {
           {(section.eyebrow || section.title) ? (
             <div className="max-w-3xl space-y-4">
               {section.eyebrow ? <div className={getEyebrowClass(section.theme)}>{section.eyebrow}</div> : null}
-              {section.title ? <h2 className="font-display text-section text-balance">{section.title}</h2> : null}
+              {section.title ? <h2 className="font-heading text-section text-balance">{section.title}</h2> : null}
             </div>
           ) : null}
 

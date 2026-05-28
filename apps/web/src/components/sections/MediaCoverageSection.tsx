@@ -22,7 +22,7 @@ export default function MediaCoverageSection({section}: Props) {
           {(section.eyebrow || section.title) ? (
             <div className="max-w-3xl space-y-4">
               {section.eyebrow ? <div className={getEyebrowClass(section.theme)}>{section.eyebrow}</div> : null}
-              {section.title ? <h2 className="font-display text-section text-balance">{section.title}</h2> : null}
+              {section.title ? <h2 className="font-heading text-section text-balance">{section.title}</h2> : null}
             </div>
           ) : null}
           <div className={cn('grid grid-cols-1 gap-4 md:gap-5 lg:gap-6', count === 1 ? 'max-w-3xl' : count === 2 ? 'md:grid-cols-2' : 'md:grid-cols-2 xl:grid-cols-3')}>
@@ -34,7 +34,7 @@ export default function MediaCoverageSection({section}: Props) {
               const content = (
                 <>
                   {item.publication ? <div className="mb-4 text-xs font-bold uppercase tracking-[0.18em] text-accent">{item.publication}</div> : null}
-                  {item.headline ? <h3 className="font-display text-[clamp(1.6rem,3vw,2.1rem)] leading-[1.15] text-balance">{item.headline}</h3> : null}
+                  {item.headline ? <h3 className="font-heading text-[clamp(1.6rem,3vw,2.1rem)] leading-[1.15] text-balance">{item.headline}</h3> : null}
                   {item.summary ? <p className={cn('mt-4 text-base leading-7', getSectionMutedTextClass(section.theme))}>{item.summary}</p> : null}
                   {isValidDate ? <div className={cn('mt-6 text-xs uppercase tracking-[0.16em]', getSectionSubtleTextClass(section.theme))}>{publishedDate.toLocaleDateString('en-US', {month: 'short', day: 'numeric', year: 'numeric'})}</div> : null}
                 </>

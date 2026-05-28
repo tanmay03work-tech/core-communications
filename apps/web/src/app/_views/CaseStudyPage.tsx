@@ -3,10 +3,9 @@ import Link from 'next/link';
 import {notFound} from 'next/navigation';
 import {Container} from '@/components/layout/Container';
 import StructuredData from '@/components/seo/StructuredData';
-import {ClientWordmark} from '@/components/sections/ClientWordmarks';
 import SectionRenderer from '@/components/sections/SectionRenderer';
 import SectionLabel from '@/components/ui/SectionLabel';
-import {CASE_STUDIES, TICKER_CLIENTS} from '@/lib/constants';
+import {CASE_STUDIES} from '@/lib/constants';
 import {buildMetadata, buildOgImageUrl, getAbsoluteUrl, getSiteUrl} from '@/lib/metadata';
 import {sanityFetch} from '@/lib/sanity/client';
 import {getCaseStudyBySlug} from '@/lib/sanity/content';
@@ -20,6 +19,12 @@ type CaseStudyPageProps = {
 type StaticCaseStudy = (typeof CASE_STUDIES.items)[number];
 type CaseStudyRouteParams = {slug: string};
 type CaseStudySlugResult = {slug?: string | null};
+type CompactBlock = {
+  _key?: string;
+  title: string;
+  body?: string;
+  bullets?: readonly string[];
+};
 
 function getStaticCaseStudy(slug: string) {
   return CASE_STUDIES.items.find((item) => item.slug === slug) ?? null;
@@ -35,14 +40,6 @@ function getStudySections(study: SanityCaseStudy | StaticCaseStudy) {
 
 function getStudyTag(study: SanityCaseStudy | StaticCaseStudy) {
   return 'tag' in study ? study.tag : undefined;
-}
-
-function getStudyTitle(study: SanityCaseStudy | StaticCaseStudy) {
-  return study.title;
-}
-
-function getStudyClient(study: SanityCaseStudy | StaticCaseStudy) {
-  return study.client;
 }
 
 function getStudySector(study: SanityCaseStudy | StaticCaseStudy) {
@@ -65,6 +62,10 @@ function getStudyImage(study: SanityCaseStudy | StaticCaseStudy) {
   return null;
 }
 
+function getOptionalField(study: SanityCaseStudy | StaticCaseStudy, field: string): unknown {
+  return field in study ? (study as Record<string, unknown>)[field] : undefined;
+}
+
 function normalizeSlug(slug: string | null | undefined) {
   if (typeof slug !== 'string') {
     return null;
@@ -74,9 +75,79 @@ function normalizeSlug(slug: string | null | undefined) {
   return trimmedSlug.length > 0 ? trimmedSlug : null;
 }
 
+function getPlacementClass(name: string) {
+  const lowerName = name.toLowerCase();
+
+  if (['afr', 'riskybiz', 'cyber daily'].some((item) => lowerName.includes(item))) {
+    return 'bg-black text-white';
+  }
+
+  if (['aap', 'nhk', 'information age'].some((item) => lowerName.includes(item))) {
+    return 'bg-[#d90808] text-white';
+  }
+
+  if (['techday', 'abc', 'innovationaus', 'the adviser', 'dc dynamics'].some((item) => lowerName.includes(item))) {
+    return 'bg-white text-[#1768b8]';
+  }
+
+  if (lowerName.includes('fintech')) {
+    return 'bg-white text-[#00a66a]';
+  }
+
+  if (lowerName.includes('crypto')) {
+    return 'bg-black text-[#ffd400]';
+  }
+
+  if (lowerName.includes('australian')) {
+    return 'bg-white text-[#d90808]';
+  }
+
+  return 'bg-white text-navy/82';
+}
+
+function CompactInfoBlock({block, index}: {block: CompactBlock; index?: number}) {
+  const bodyParts = block.body?.split('\n').filter(Boolean) ?? [];
+  const hasContent = bodyParts.length > 0 || Boolean(block.bullets?.length);
+
+  if (!hasContent) {
+    return null;
+  }
+
+  return (
+    <div className="border border-navy/10 bg-white p-4 shadow-[0_10px_28px_rgba(28,46,74,0.035)]">
+      <div className="mb-3 flex items-center gap-3 border-b border-navy/10 bg-navy/[0.025] px-3 py-2">
+        {typeof index === 'number' ? <span className="text-[0.64rem] font-bold uppercase tracking-[0.18em] text-primary">{String(index + 1).padStart(2, '0')}</span> : null}
+        <h2 className="text-[0.72rem] font-bold uppercase tracking-[0.14em] text-navy">{block.title}</h2>
+      </div>
+      {bodyParts.map((part) => (
+        <p key={part} className="mb-3 whitespace-pre-line font-sans text-[0.82rem] leading-relaxed text-navy/76 last:mb-0">
+          {part}
+        </p>
+      ))}
+      {block.bullets?.length ? (
+        <ul className="space-y-2.5">
+          {block.bullets.map((bullet) => (
+            <li key={bullet} className="grid grid-cols-[0.35rem_1fr] gap-3 font-sans text-[0.82rem] leading-relaxed text-navy/78">
+              <span className="mt-2 h-1 w-1 rounded-full bg-navy" />
+              <span>{bullet}</span>
+            </li>
+          ))}
+        </ul>
+      ) : null}
+    </div>
+  );
+}
+
 async function getSafeCaseStudyBySlug(slug: string) {
   try {
-    return (await getCaseStudyBySlug(slug)) ?? getStaticCaseStudy(slug);
+    const cmsStudy = await getCaseStudyBySlug(slug);
+    const staticStudy = getStaticCaseStudy(slug);
+
+    if (cmsStudy?.caseNumber) {
+      return cmsStudy;
+    }
+
+    return staticStudy;
   } catch (error) {
     console.error(`getCaseStudyBySlug error for "${slug}":`, error);
     return getStaticCaseStudy(slug);
@@ -86,7 +157,7 @@ async function getSafeCaseStudyBySlug(slug: string) {
 async function getSanityCaseStudySlugs(): Promise<string[]> {
   try {
     const works = await sanityFetch<CaseStudySlugResult[]>({
-      query: `*[_type == "caseStudy" && defined(slug.current)]{
+      query: `*[_type == "caseStudy" && defined(slug.current) && defined(caseNumber)]{
         "slug": slug.current
       }`,
       tags: ['caseStudies'],
@@ -96,9 +167,7 @@ async function getSanityCaseStudySlugs(): Promise<string[]> {
       return [];
     }
 
-    return works
-      .map((work) => normalizeSlug(work?.slug))
-      .filter((slug): slug is string => Boolean(slug));
+    return works.map((work) => normalizeSlug(work?.slug)).filter((slug): slug is string => Boolean(slug));
   } catch (error) {
     console.error('generateStaticParams error:', error);
     return [];
@@ -107,9 +176,7 @@ async function getSanityCaseStudySlugs(): Promise<string[]> {
 
 export async function generateStaticParams(): Promise<CaseStudyRouteParams[]> {
   const cmsSlugs = await getSanityCaseStudySlugs();
-  const staticSlugs = CASE_STUDIES.items
-    .map((study) => normalizeSlug(study.slug))
-    .filter((slug): slug is string => Boolean(slug));
+  const staticSlugs = CASE_STUDIES.items.map((study) => normalizeSlug(study.slug)).filter((slug): slug is string => Boolean(slug));
 
   return [...new Set([...staticSlugs, ...cmsSlugs])].map((slug) => ({slug}));
 }
@@ -145,14 +212,20 @@ export default async function CaseStudyPage({params}: CaseStudyPageProps) {
   const stats = study.stats ?? [];
   const sections = getStudySections(study);
   const tag = getStudyTag(study);
-  const title = getStudyTitle(study);
-  const client = getStudyClient(study);
+  const title = study.title;
+  const client = study.client;
   const sector = getStudySector(study);
   const publishedAt = getStudyPublishedAt(study);
+  const caseNumber = getOptionalField(study, 'caseNumber') as string | undefined;
+  const kicker = getOptionalField(study, 'kicker') as string | undefined;
+  const intro = getOptionalField(study, 'intro') as string | undefined;
+  const detailBlocks = (getOptionalField(study, 'detailBlocks') ?? []) as CompactBlock[];
+  const milestoneBlocks = (getOptionalField(study, 'milestoneBlocks') ?? []) as CompactBlock[];
+  const outcome = getOptionalField(study, 'outcome') as {title?: string; body?: string; bullets?: string[]} | undefined;
+  const mediaPlacements = (getOptionalField(study, 'mediaPlacements') ?? []) as string[];
+  const resultNote = getOptionalField(study, 'resultNote') as string | undefined;
   const image = getStudyImage(study);
-  const imageUrl = image
-    ? getSanityImageUrl(image, {width: 1200, height: 630, fit: 'crop', quality: 85})
-    : buildOgImageUrl({title, description, type: 'case-study'});
+  const imageUrl = image ? getSanityImageUrl(image, {width: 1200, height: 630, fit: 'crop', quality: 85}) : buildOgImageUrl({title, description, type: 'case-study'});
 
   const structuredData = {
     '@context': 'https://schema.org',
@@ -173,69 +246,84 @@ export default async function CaseStudyPage({params}: CaseStudyPageProps) {
   };
 
   return (
-    <main className="bg-surface text-navy">
+    <main className="bg-[#f7f9fc] text-navy">
       <StructuredData data={structuredData} />
 
-      <section className="section-wrap py-16 md:py-20">
+      <section className="border-y border-navy/12 bg-white py-8 md:py-10">
         <Container className="max-w-7xl">
-          <SectionLabel className="text-primary">{client}</SectionLabel>
-          <h1 className="section-heading max-w-4xl text-navy">{title}</h1>
-          <p className="mt-6 max-w-2xl text-base leading-8 text-navy/68">{description}</p>
-          <div className="mt-6 flex flex-wrap gap-3">
-            {tag ? <span className="border border-neutral-100 px-4 py-2 text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-navy/62">{tag}</span> : null}
-            {sector ? <span className="border border-neutral-100 px-4 py-2 text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-navy/62">{sector}</span> : null}
-            {publishedAt ? <span className="border border-neutral-100 px-4 py-2 text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-navy/62">{new Date(publishedAt).getFullYear()}</span> : null}
+          <div className="flex flex-col gap-3">
+            <SectionLabel className="text-primary">{caseNumber ? `Case Study ${caseNumber}` : client}</SectionLabel>
+            <h1 className="max-w-5xl font-heading text-[clamp(2rem,4vw,3.9rem)] font-semibold leading-[0.98] tracking-[-0.035em] text-navy">{title}</h1>
+            {kicker ? <p className="max-w-4xl font-sans text-[0.88rem] leading-relaxed text-[#8ba4c0]">{kicker}</p> : null}
+            {intro ? <p className="max-w-5xl font-sans text-[0.95rem] italic leading-relaxed text-black">{intro}</p> : null}
+          </div>
+          <div className="mt-5 flex flex-wrap gap-2.5">
+            {tag ? <span className="border border-neutral-100 px-4 py-2 text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-navy/72">{tag}</span> : null}
+            {sector ? <span className="border border-neutral-100 px-4 py-2 text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-navy/72">{sector}</span> : null}
+            {publishedAt ? <span className="border border-neutral-100 px-4 py-2 text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-navy/72">{new Date(publishedAt).getFullYear()}</span> : null}
           </div>
         </Container>
       </section>
 
-      <section className="bg-primary py-14 text-white md:py-20">
-        <Container>
-          <div className="grid-quarters">
-            {stats.map((stat) => (
-              <div key={('_key' in stat ? stat._key : undefined) ?? stat.label}>
-                <div className="text-[1.9rem] font-semibold leading-none">{stat.value}</div>
-                <div className="mt-2 text-[0.72rem] uppercase tracking-[0.18em] text-white/72">{stat.label}</div>
-              </div>
-            ))}
-          </div>
-        </Container>
-      </section>
-
-      <section className="py-12">
-        <Container className="max-w-2xl">
-          <div className="border border-neutral-100 bg-white p-card-pad">
-            <SectionLabel className="text-primary">Overview</SectionLabel>
-            <p className="text-base leading-8 text-navy/72">{description}</p>
-            <div className="mt-6 grid-split">
-              <div>
-                <h2 className="mb-3 text-xl font-semibold text-navy">Goals</h2>
-                <p className="text-sm leading-7 text-navy/66">
-                  Build credibility, sharpen message-market fit, and create durable visibility in the conversations that matter.
-                </p>
-              </div>
-              <div>
-                <h2 className="mb-3 text-xl font-semibold text-navy">Approach</h2>
-                <p className="text-sm leading-7 text-navy/66">
-                  Focused media strategy, evidence-led storytelling, and disciplined rollout designed for market relevance over noise.
-                </p>
-              </div>
-            </div>
-            <div className="grid-auto mt-8 py-8">
-              {TICKER_CLIENTS.slice(0, 6).map((logo) => (
-                <div
-                  key={logo}
-                  className="flex min-h-[5.5rem] items-center justify-center rounded-[1.25rem] border border-neutral-100 bg-white px-5 py-3 shadow-[0_10px_30px_rgba(28,46,74,0.05)]"
-                >
-                  <ClientWordmark client={logo} className="h-7 w-auto max-w-[8.75rem]" />
+      <section className="py-8 md:py-10">
+        <Container className="max-w-7xl">
+          {stats.length ? (
+            <div className="mb-5 grid grid-cols-2 gap-3 md:grid-cols-4 lg:grid-cols-5">
+              {stats.map((stat) => (
+                <div key={('_key' in stat ? stat._key : undefined) ?? stat.label} className="border border-navy/10 bg-white p-4 text-center">
+                  <div className="font-heading text-[clamp(1.9rem,4vw,3rem)] font-semibold leading-none tracking-tight text-navy">{stat.value}</div>
+                  <div className="mx-auto mt-3 max-w-[11rem] text-[0.68rem] leading-snug text-navy/64">{stat.label}</div>
                 </div>
               ))}
             </div>
-            <div className="mt-6 border-t border-neutral-100 pt-6">
-              <Link href="/work" className="text-[0.72rem] font-semibold uppercase tracking-[0.2em] text-accent no-underline">
-                Back To Work →
-              </Link>
+          ) : null}
+
+          {resultNote ? <div className="mb-5 border border-navy/10 bg-white px-5 py-4 font-sans text-[0.86rem] italic leading-relaxed text-navy/76">{resultNote}</div> : null}
+
+          {milestoneBlocks.length ? (
+            <div className="grid gap-5 lg:grid-cols-[1fr_1.15fr]">
+              <div className="space-y-4">{detailBlocks.map((block) => <CompactInfoBlock key={block._key ?? block.title} block={block} />)}</div>
+              <div className="space-y-4">{milestoneBlocks.map((block, index) => <CompactInfoBlock key={block._key ?? block.title} block={block} index={index} />)}</div>
             </div>
+          ) : (
+            <div className="grid gap-4 lg:grid-cols-3">{detailBlocks.map((block) => <CompactInfoBlock key={block._key ?? block.title} block={block} />)}</div>
+          )}
+
+          {outcome ? (
+            <div className="mt-5 border border-navy/10 bg-white p-5">
+              <h2 className="mb-3 text-[0.72rem] font-bold uppercase tracking-[0.14em] text-navy">{outcome.title ?? 'Key Outcomes'}</h2>
+              {outcome.body ? <p className="font-sans text-[0.84rem] leading-relaxed text-navy/78">{outcome.body}</p> : null}
+              {outcome.bullets?.length ? (
+                <ul className="space-y-2.5">
+                  {outcome.bullets.map((bullet) => (
+                    <li key={bullet} className="grid grid-cols-[0.35rem_1fr] gap-3 font-sans text-[0.84rem] leading-relaxed text-navy/78">
+                      <span className="mt-2 h-1 w-1 rounded-full bg-navy" />
+                      <span>{bullet}</span>
+                    </li>
+                  ))}
+                </ul>
+              ) : null}
+            </div>
+          ) : null}
+
+          {mediaPlacements.length ? (
+            <div className="mt-8">
+              <SectionLabel className="text-primary">Media Placements</SectionLabel>
+              <div className="mt-3 grid grid-cols-2 gap-2.5 md:grid-cols-3 lg:grid-cols-5">
+                {mediaPlacements.map((placement) => (
+                  <div key={placement} className="border border-navy/10 bg-white p-2">
+                    <div className={`flex h-12 items-center justify-center px-3 text-center text-[0.78rem] font-black uppercase tracking-[0.08em] ${getPlacementClass(placement)}`}>{placement}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ) : null}
+
+          <div className="mt-7 flex flex-wrap items-center justify-between gap-4 border-t border-navy/10 pt-5">
+            <Link href="/work" className="text-[0.72rem] font-semibold uppercase tracking-[0.2em] text-accent no-underline">
+              Back To Work -&gt;
+            </Link>
+            {sector ? <div className="text-[0.72rem] text-navy/62">Sector: {sector}</div> : null}
           </div>
         </Container>
       </section>

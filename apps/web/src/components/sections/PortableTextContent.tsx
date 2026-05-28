@@ -14,7 +14,7 @@ function renderSpan(span: PortableTextSpan, block: PortableTextBlock) {
 
   return (span.marks ?? []).reduce<ReactNode>((content, mark) => {
     if (mark === 'strong') return <strong key={mark}>{content}</strong>;
-    if (mark === 'em') return <em key={mark}>{content}</em>;
+    if (mark === 'em') return <em key={mark} className="font-serif">{content}</em>;
 
     const annotation = markDefs.find((def) => def._key === mark && def._type === 'link');
     if (annotation?.href) {
@@ -47,11 +47,11 @@ function renderBlock(block: PortableTextBlock, invert?: boolean) {
 
   const tagClasses =
     Tag === 'h2'
-      ? 'font-display text-3xl md:text-4xl leading-tight'
+      ? 'font-heading text-3xl md:text-4xl leading-tight'
       : Tag === 'h3'
-        ? 'font-display text-2xl md:text-3xl leading-tight'
+        ? 'font-heading text-2xl md:text-3xl leading-tight'
         : Tag === 'blockquote'
-          ? 'border-l-2 pl-6 text-xl italic leading-8'
+          ? 'border-l-2 pl-6 font-serif text-xl italic leading-8'
           : 'text-base leading-8 md:text-lg';
 
   return (

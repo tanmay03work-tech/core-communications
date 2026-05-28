@@ -120,7 +120,11 @@ async function verifyTurnstileToken(token: string, ip: string) {
   const secret = process.env.CLOUDFLARE_TURNSTILE_SECRET;
 
   if (!secret) {
-    throw new Error('Turnstile secret is not configured.');
+    return true;
+  }
+
+  if (!token) {
+    return false;
   }
 
   const response = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
@@ -246,7 +250,6 @@ export async function POST(request: Request) {
       subject: 'Thanks for contacting Core Communications',
       react: AutoReplyEmail({
         name: contactResult.data.name,
-        service: contactResult.data.service,
       }),
     });
 

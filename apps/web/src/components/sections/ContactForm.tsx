@@ -6,7 +6,6 @@ import { CheckCircle2, LoaderCircle, Send } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import {
   contactFormSchema,
-  contactServiceOptions,
   type ContactApiResponse,
   type ContactFormInput,
 } from '@/lib/schema';
@@ -64,8 +63,6 @@ export function ContactForm() {
     defaultValues: {
       name: '',
       email: '',
-      company: '',
-      service: contactServiceOptions[0],
       message: '',
     },
   });
@@ -167,7 +164,7 @@ export function ContactForm() {
 
   const getTurnstileToken = async () => {
     if (!turnstileSiteKey) {
-      throw new Error('Turnstile is not configured.');
+      return '';
     }
 
     if (!window.turnstile || !widgetIdRef.current) {
@@ -236,8 +233,6 @@ export function ContactForm() {
       reset({
         name: '',
         email: '',
-        company: '',
-        service: contactServiceOptions[0],
         message: '',
       });
       setSubmitState({ status: 'success', message: payload.message });
@@ -254,7 +249,7 @@ export function ContactForm() {
     <>
       <form onSubmit={onSubmit} className="space-y-5" noValidate>
         <div className="grid gap-5 sm:grid-cols-2">
-          <Field label="Name" error={errors.name?.message}>
+          <Field label="Name" error={errors.name?.message} required>
             <input
               {...register('name')}
               autoComplete="name"
@@ -263,7 +258,7 @@ export function ContactForm() {
             />
           </Field>
 
-          <Field label="Email" error={errors.email?.message}>
+          <Field label="Email" error={errors.email?.message} required>
             <input
               {...register('email')}
               autoComplete="email"
@@ -274,32 +269,11 @@ export function ContactForm() {
           </Field>
         </div>
 
-        <div className="grid gap-5 sm:grid-cols-2">
-          <Field label="Company" error={errors.company?.message}>
-            <input
-              {...register('company')}
-              autoComplete="organization"
-              className={baseInputClassName}
-              placeholder="Company name"
-            />
-          </Field>
-
-          <Field label="Service" error={errors.service?.message}>
-            <select {...register('service')} className={baseInputClassName} defaultValue={contactServiceOptions[0]}>
-              {contactServiceOptions.map((service) => (
-                <option key={service} value={service}>
-                  {service}
-                </option>
-              ))}
-            </select>
-          </Field>
-        </div>
-
-        <Field label="Message" error={errors.message?.message}>
+        <Field label="Message" error={errors.message?.message} optional>
           <textarea
             {...register('message')}
-            className={`${baseInputClassName} min-h-[180px] resize-y`}
-            placeholder="Tell us what you're building, what you need, and what success looks like."
+            className={`${baseInputClassName} min-h-[150px] resize-y`}
+            placeholder="Anything you want to share? This is optional."
           />
         </Field>
 
@@ -308,7 +282,7 @@ export function ContactForm() {
         <div className="flex flex-col gap-4 border-t border-navy/10 pt-6">
           <button
             type="submit"
-            disabled={isSubmitting || !turnstileSiteKey}
+            disabled={isSubmitting}
             className="inline-flex min-h-12 items-center justify-center gap-3 overflow-hidden rounded-[1rem] bg-[linear-gradient(180deg,rgba(25,46,78,0.98),rgba(18,35,61,0.98))] px-6 py-3.5 text-sm font-medium uppercase tracking-[0.14em] text-white transition hover:bg-accent disabled:cursor-not-allowed disabled:opacity-60"
           >
             <span
@@ -335,12 +309,6 @@ export function ContactForm() {
               )}
             </span>
           </button>
-
-          {!turnstileSiteKey ? (
-            <p className="text-sm text-[#a33a32]">
-              Contact form is unavailable until `NEXT_PUBLIC_TURNSTILE_SITE_KEY` is configured.
-            </p>
-          ) : null}
 
           {submitState.status === 'success' ? (
             <div className="flex items-start gap-3 rounded-2xl border border-[#226b4b]/20 bg-[#226b4b]/5 px-4 py-3 text-[#226b4b] animate-in fade-in duration-300">
@@ -376,16 +344,22 @@ export function ContactForm() {
 function Field({
   label,
   error,
+  optional,
+  required,
   children,
 }: {
   label: string;
   error?: string;
+  optional?: boolean;
+  required?: boolean;
   children: React.ReactNode;
 }) {
   return (
     <label className="block space-y-2">
       <span className="text-[0.72rem] font-medium uppercase tracking-[0.2em] text-navy/60">
         {label}
+        {required ? <span className="ml-1 text-primary">*</span> : null}
+        {optional ? <span className="ml-2 text-navy/35">(Optional)</span> : null}
       </span>
       {children}
       {error ? <span className="text-sm text-[#a33a32]">{error}</span> : null}

@@ -66,15 +66,21 @@ export default function CTASection({section}: CTASectionProps) {
         <div className="relative z-10 mx-auto max-w-3xl px-5 text-center md:px-8 lg:px-16 xl:px-24">
           <SectionLabel className="justify-center">{eyebrow}</SectionLabel>
 
-          <SplitText
-            by="word"
-            stagger={70}
-            className="section-heading text-white"
-            text={title.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim()}
-          />
+          {title === CTA.heading ? (
+            <h2 className="section-heading text-white">
+              Ready to cut <span className="font-serif italic">through</span>?
+            </h2>
+          ) : (
+            <SplitText
+              by="word"
+              stagger={70}
+              className="section-heading text-white"
+              text={title.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim()}
+            />
+          )}
 
           <m.p
-            className="mx-auto mb-10 mt-6 max-w-lg text-[1rem] font-light leading-[1.85] text-white/58"
+            className="mx-auto mb-10 mt-6 max-w-lg font-sans text-[1rem] font-normal leading-relaxed text-white/72"
             initial={prefersReducedMotion ? {opacity: 0} : {opacity: 0, y: 16}}
             whileInView={prefersReducedMotion ? {opacity: 1} : {opacity: 1, y: 0}}
             viewport={{once: true, margin: '-60px'}}

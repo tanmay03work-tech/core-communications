@@ -20,7 +20,7 @@ export default function TeamSection() {
 
   return (
     <LazyMotion features={domAnimation}>
-      <section id="team" className="relative overflow-hidden bg-[#0D1B2E] py-[clamp(5rem,9vw,8rem)] text-white">
+      <section className="relative overflow-hidden bg-[#0D1B2E] py-[clamp(5rem,9vw,8rem)] text-white">
         {/* Subtle bg grid */}
         <div
           aria-hidden="true"
@@ -87,11 +87,11 @@ export default function TeamSection() {
 
                 {/* Content */}
                 <div className="min-w-0 flex-1">
-                  <h3 className="text-[1.1rem] font-semibold text-white">{member.name}</h3>
+                  <h3 className="font-heading text-[1.1rem] font-semibold tracking-tight text-white">{member.name}</h3>
                   <div className="mb-3 mt-1 text-[0.68rem] font-bold uppercase tracking-[0.18em] text-accent">
                     {member.role}
                   </div>
-                  <p className="line-clamp-4 text-[0.85rem] font-light leading-[1.85] text-white/55">
+                  <p className="line-clamp-4 font-sans text-[0.85rem] font-normal leading-relaxed text-white/72">
                     {member.bio}
                   </p>
                 </div>

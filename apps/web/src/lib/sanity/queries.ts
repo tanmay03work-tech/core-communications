@@ -86,6 +86,8 @@ export type CaseStudyListItem = {
   slug?: SanitySlug;
   client: string;
   tag: string;
+  caseNumber?: string;
+  sector?: string;
   description?: string;
   stats?: CaseStudyStat[];
   coverImage?: SanityImage;
@@ -111,6 +113,8 @@ export const getAllCaseStudiesQuery = groq`
     slug,
     client,
     tag,
+    caseNumber,
+    sector,
     description,
     "stats": stats[0...3]{
       ...
@@ -138,6 +142,8 @@ export const getFeaturedCaseStudiesQuery = groq`
     slug,
     client,
     tag,
+    caseNumber,
+    sector,
     description,
     "stats": stats[0...3]{
       ...
@@ -183,7 +189,7 @@ export const getAllServicesQuery = groq`
 `;
 
 export const getCaseStudySlugsQuery = groq`
-  *[_type == "caseStudy" && defined(slug.current)].slug.current
+  *[_type == "caseStudy" && defined(slug.current) && defined(caseNumber)].slug.current
 `;
 
 export const sanityQueries = {

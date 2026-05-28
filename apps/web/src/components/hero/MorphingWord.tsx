@@ -46,7 +46,7 @@ export default function MorphingWord({words, fallback}: MorphingWordProps) {
                 ? {duration: 0}
                 : {duration: 0.4, ease: [0.22, 1, 0.36, 1]}
             }
-            className="block whitespace-nowrap italic"
+            className="block whitespace-nowrap font-serif italic"
             style={prefersReducedMotion ? undefined : {willChange: 'transform, opacity, filter'}}
           >
             {safeWords[index]}

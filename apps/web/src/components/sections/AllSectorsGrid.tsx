@@ -113,7 +113,7 @@ export default function AllSectorsGrid() {
             <p className="text-xs font-semibold uppercase tracking-[0.28em] text-accent">
               Industry coverage
             </p>
-            <h2 className="mt-5 font-sans text-[clamp(2.4rem,4vw,4rem)] font-bold leading-[1.05] tracking-[-0.02em] text-primary">
+            <h2 className="mt-5 font-sans font-heading text-[clamp(2.4rem,4vw,4rem)] font-bold leading-[1.05] tracking-[-0.02em] text-primary">
               Broad sector fluency beyond the headlines
             </h2>
             <p className="mt-4 text-base leading-relaxed text-muted">
@@ -138,4 +138,3 @@ export default function AllSectorsGrid() {
     </section>
   );
 }
-

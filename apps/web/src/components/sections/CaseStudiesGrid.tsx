@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import SplitText from '@/components/animations/SplitText';
 import CaseStudiesGridClient from '@/components/sections/CaseStudiesGridClient';
 import SectionLabel from '@/components/ui/SectionLabel';
 import {CASE_STUDIES} from '@/lib/constants';
@@ -15,14 +14,17 @@ const fallbackCaseStudies: CaseStudyListItem[] = CASE_STUDIES.items.map((study, 
   title: study.title,
   slug: {current: study.slug},
   client: study.client,
-  tag: study.client,
+  tag: study.tag,
+  caseNumber: study.caseNumber,
+  sector: study.sector,
   description: study.desc,
   stats: study.stats.map((stat) => ({...stat})),
 }));
 
 export default async function CaseStudiesGrid({caseStudies}: CaseStudiesGridProps) {
   const fetchedCaseStudies = caseStudies ?? (await getFeaturedCaseStudies());
-  const resolvedCaseStudies = fetchedCaseStudies?.length ? fetchedCaseStudies : fallbackCaseStudies;
+  const newLayoutStudies = fetchedCaseStudies?.filter((study) => study.caseNumber);
+  const resolvedCaseStudies = newLayoutStudies?.length ? newLayoutStudies : fallbackCaseStudies;
 
   return (
     <section id="cases" className="relative overflow-hidden bg-[linear-gradient(180deg,#F5F7FA_0%,#ffffff_50%,#F5F7FA_100%)] py-[clamp(5rem,9vw,8rem)] text-navy">
@@ -34,12 +36,7 @@ export default async function CaseStudiesGrid({caseStudies}: CaseStudiesGridProp
         <div className="mb-12 flex flex-col justify-between gap-6 md:mb-14 lg:flex-row lg:items-end">
           <div>
             <SectionLabel className="text-primary">{CASE_STUDIES.tag}</SectionLabel>
-            <SplitText
-              by="word"
-              stagger={55}
-              className="section-heading text-navy"
-              text={CASE_STUDIES.heading.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim()}
-            />
+            <h2 className="section-heading text-navy">Results that speak for themselves.</h2>
           </div>
           <Link
             href="/work"
@@ -50,7 +47,7 @@ export default async function CaseStudiesGrid({caseStudies}: CaseStudiesGridProp
           </Link>
         </div>
 
-        <CaseStudiesGridClient caseStudies={resolvedCaseStudies.slice(0, 4)} />
+        <CaseStudiesGridClient caseStudies={resolvedCaseStudies.slice(0, 6)} />
       </div>
     </section>
   );

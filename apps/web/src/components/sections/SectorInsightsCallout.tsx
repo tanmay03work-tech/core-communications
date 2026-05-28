@@ -24,7 +24,7 @@ export default function SectorInsightsCallout() {
     <section className="bg-primary px-6 py-20 text-white lg:px-16">
       <ScrollReveal direction="up">
         <div className="mx-auto max-w-6xl text-center">
-          <h2 className="font-sans text-[clamp(2.4rem,4vw,4rem)] font-bold leading-[1.05] tracking-[-0.02em]">
+          <h2 className="font-sans font-heading text-[clamp(2.4rem,4vw,4rem)] font-bold leading-[1.05] tracking-[-0.02em]">
             Every sector tells a different story
           </h2>
           <p className="mx-auto mt-4 max-w-3xl text-base leading-relaxed text-white/70">

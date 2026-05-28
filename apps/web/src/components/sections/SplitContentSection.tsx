@@ -29,7 +29,7 @@ export default function SplitContentSection({section}: Props) {
         <div className="grid items-start gap-x-10 gap-y-8 lg:grid-cols-2 lg:gap-x-16 xl:gap-x-20">
           <ScrollReveal className={cn('order-1 space-y-5', imageOnLeft ? 'lg:order-2' : '')}>
             {section.eyebrow ? <div className={cn(getEyebrowClass(section.theme), 'mb-1')}>{section.eyebrow}</div> : null}
-            {section.title ? <h2 className="font-display text-section text-balance">{section.title}</h2> : null}
+            {section.title ? <h2 className="font-heading text-section text-balance">{section.title}</h2> : null}
             <PortableTextContent value={section.body} invert={invert} />
             {cta ? (
               <div className="pt-2">

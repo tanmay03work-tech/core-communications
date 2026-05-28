@@ -30,7 +30,7 @@ export default function SectorComparisonTable() {
             <p className="text-xs font-semibold uppercase tracking-[0.28em] text-accent">
               Compare sectors
             </p>
-            <h2 className="mt-5 font-sans text-[clamp(2.2rem,3.8vw,3.6rem)] font-bold leading-[1.05] tracking-[-0.02em] text-primary">
+            <h2 className="mt-5 font-sans font-heading text-[clamp(2.2rem,3.8vw,3.6rem)] font-bold leading-[1.05] tracking-[-0.02em] text-primary">
               A quick view of where our expertise goes deepest
             </h2>
           </div>
