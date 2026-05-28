@@ -69,10 +69,10 @@ export default function MobileMenu({
               aria-hidden="true"
             />
 
-            <div className="relative flex min-h-screen flex-col justify-between overflow-hidden bg-[linear-gradient(180deg,rgba(18,33,58,0.96),rgba(7,18,34,0.985))] px-6 pb-10 pt-28 text-white">
+            <div className="relative flex min-h-screen flex-col justify-between overflow-hidden bg-[linear-gradient(180deg,rgba(30,47,68,0.96),rgba(13,27,42,0.985))] px-6 pb-10 pt-28 text-white">
               {!lowPowerMode ? <div className="noise-overlay pointer-events-none absolute inset-0" aria-hidden="true" /> : null}
-              <div className="pointer-events-none absolute inset-x-6 top-6 h-px rounded-full bg-[linear-gradient(90deg,rgba(91,192,235,0),rgba(91,192,235,0.75),rgba(61,183,242,0))] opacity-90" />
-              <div className="pointer-events-none absolute inset-x-0 top-0 h-48 bg-[radial-gradient(circle_at_top,rgba(91,192,235,0.18),transparent_70%)]" />
+              <div className="pointer-events-none absolute inset-x-6 top-6 h-px rounded-full bg-[linear-gradient(90deg,rgba(0,184,150,0),rgba(0,184,150,0.75),rgba(201,149,42,0))] opacity-90" />
+              <div className="pointer-events-none absolute inset-x-0 top-0 h-48 bg-[radial-gradient(circle_at_top,rgba(0,184,150,0.18),transparent_70%)]" />
 
               <m.nav
                 aria-label="Mobile"
@@ -103,7 +103,7 @@ export default function MobileMenu({
                           {link.label}
                         </span>
                         <m.span
-                          className="h-px origin-left rounded-full bg-[rgba(91,192,235,0.88)]"
+                          className="h-px origin-left rounded-full bg-[rgba(0,184,150,0.88)]"
                           style={{ width: '2rem' }}
                           animate={{ scaleX: link.active ? 1 : 0.35, opacity: link.active ? 1 : 0.4 }}
                           whileHover={reducedMotion ? undefined : { scaleX: 1, opacity: 1 }}
@@ -125,7 +125,7 @@ export default function MobileMenu({
                 <Link
                   href="/contact"
                   onClick={onClose}
-                  className="inline-flex items-center gap-2 rounded-full border border-[rgba(91,192,235,0.45)] bg-[rgba(91,192,235,0.12)] px-5 py-3 text-[0.74rem] font-semibold uppercase tracking-[0.2em] text-white no-underline"
+                  className="inline-flex items-center gap-2 rounded-full border border-[rgba(0,184,150,0.45)] bg-[rgba(0,184,150,0.12)] px-5 py-3 text-[0.74rem] font-semibold uppercase tracking-[0.2em] text-white no-underline"
                 >
                   Start
                   <m.span

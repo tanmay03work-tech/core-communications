@@ -22,7 +22,7 @@ export default function SectorCard({
   return (
     <m.article
       variants={scaleIn}
-      className="relative overflow-hidden border border-neutral-100 bg-white p-6 transition-all duration-300 hover:-translate-y-1.5 hover:border-primary hover:shadow-[0_16px_40px_rgba(28,46,74,0.1)]"
+      className="relative overflow-hidden border border-neutral-100 bg-white p-6 transition-all duration-300 hover:-translate-y-1.5 hover:border-primary hover:shadow-[0_16px_40px_rgba(13,27,42,0.1)]"
     >
       <div className="text-3xl">{icon}</div>
       <h3 className="mt-3 text-base font-bold tracking-[-0.02em] text-primary">{title}</h3>

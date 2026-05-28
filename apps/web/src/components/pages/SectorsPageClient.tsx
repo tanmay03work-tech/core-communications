@@ -58,7 +58,7 @@ export default function SectorsPageClient() {
       </section>
 
       {/* ─── Featured Sectors (alternating rows) ──────────── */}
-      <section className="bg-[linear-gradient(180deg,#F5F7FA_0%,#ffffff_50%,#F5F7FA_100%)] py-[clamp(5rem,9vw,8rem)] text-navy">
+      <section className="bg-cinematic-blend py-[clamp(5rem,9vw,8rem)] text-navy">
         <Container className="max-w-7xl">
           <div className="mb-12">
             <SectionLabel className="text-primary">Featured Sectors</SectionLabel>
@@ -75,7 +75,7 @@ export default function SectorsPageClient() {
                   <div className={`grid grid-cols-1 gap-5 lg:grid-cols-2 ${isReversed ? 'lg:[direction:rtl]' : ''}`}>
                     {/* Text card */}
                     <div className={isReversed ? 'lg:[direction:ltr]' : ''}>
-                      <div className="h-full border border-navy/8 bg-white p-8 shadow-[0_8px_32px_rgba(28,46,74,0.05)] transition-shadow duration-300 hover:shadow-[0_16px_48px_rgba(28,46,74,0.09)]">
+                      <div className="h-full border border-navy/8 bg-white p-8 shadow-[0_8px_32px_rgba(13,27,42,0.05)] transition-shadow duration-300 hover:shadow-[0_16px_48px_rgba(13,27,42,0.09)]">
                         <SectionLabel className="text-primary">Featured Sector</SectionLabel>
                         <h3 className="mb-3 font-heading text-[1.5rem] font-semibold leading-snug tracking-tight text-navy">{sector}</h3>
                         <p className="font-sans text-[0.95rem] font-normal leading-relaxed text-navy/74">{context}</p>
@@ -88,7 +88,7 @@ export default function SectorsPageClient() {
                     {/* Visual card */}
                     <div className={isReversed ? 'lg:[direction:ltr]' : ''}>
                       <div
-                        className="flex h-full min-h-[18rem] flex-col justify-between border border-navy/[0.07] bg-[linear-gradient(135deg,rgba(28,46,74,0.06),rgba(91,192,235,0.08))] p-8"
+                        className="flex h-full min-h-[18rem] flex-col justify-between border border-navy/[0.07] bg-[linear-gradient(135deg,rgba(30,47,68,0.05),rgba(0,184,150,0.08))] p-8"
                       >
                         <div className="text-[0.62rem] font-bold uppercase tracking-[0.18em] text-navy/60">
                           Sector Context
@@ -118,12 +118,12 @@ export default function SectorsPageClient() {
       </section>
 
       {/* ─── All Other Sectors Grid ──────────────────────── */}
-      <section className="relative overflow-hidden bg-[#0D1B2E] py-[clamp(4.5rem,8vw,7rem)] text-white">
+      <section className="relative overflow-hidden bg-ink py-[clamp(4.5rem,8vw,7rem)] text-white">
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0"
           style={{
-            backgroundImage: 'linear-gradient(rgba(91,192,235,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(91,192,235,0.05) 1px, transparent 1px)',
+            backgroundImage: 'linear-gradient(rgba(0,184,150,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(0,184,150,0.05) 1px, transparent 1px)',
             backgroundSize: '52px 52px',
             maskImage: 'linear-gradient(180deg, transparent, rgba(0,0,0,0.5) 20%, rgba(0,0,0,0.5) 80%, transparent)',
           }}
@@ -150,7 +150,7 @@ export default function SectorsPageClient() {
       </section>
 
       {/* ─── Bottom CTA ──────────────────────────────────── */}
-      <section className="bg-[#0B1F33] py-16 text-white">
+      <section className="bg-navy py-16 text-white">
         <Container className="max-w-7xl">
           <div className="flex flex-col items-start gap-6 md:flex-row md:items-center md:justify-between">
             <div>

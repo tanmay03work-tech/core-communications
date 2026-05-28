@@ -27,10 +27,10 @@ export default function FeaturedSectorCard({
         transition: {duration: 0.3, ease: [0.22, 1, 0.36, 1]},
       }}
     >
-      <article className="group relative h-full overflow-hidden border-2 border-accent bg-[linear-gradient(135deg,rgba(91,192,235,0.15),rgba(28,46,74,0.2))] p-8">
+      <article className="group relative h-full overflow-hidden border-2 border-accent bg-[linear-gradient(135deg,rgba(0,184,150,0.14),rgba(30,47,68,0.2))] p-8">
         <m.div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(91,192,235,0.22),transparent_62%)] opacity-0 transition-opacity duration-400 group-hover:opacity-100"
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,184,150,0.22),transparent_62%)] opacity-0 transition-opacity duration-400 group-hover:opacity-100"
         />
         <div className="relative z-10">
           <div className="mb-4 text-5xl">{icon}</div>

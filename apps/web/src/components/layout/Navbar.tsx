@@ -34,8 +34,8 @@ function NavbarLogo({compact, scrolled}: {compact: boolean; scrolled: boolean}) 
         <AnimatedLogoMark size={compact ? 38 : 42} />
       </m.span>
       <div className="flex min-w-0 flex-col">
-        <span className={cn('text-[0.88rem] font-semibold uppercase tracking-[0.28em]', scrolled ? 'text-white' : 'text-[var(--navy)]')}>Core</span>
-        <span className={cn('text-[0.6rem] uppercase tracking-[0.24em]', scrolled ? 'text-white/58' : 'text-[rgba(28,46,74,0.56)]')}>Communications</span>
+        <span className={cn('text-[0.94rem] font-bold uppercase tracking-[0.3em]', scrolled ? 'text-white' : 'text-[var(--navy)]')}>Core</span>
+        <span className={cn('text-[0.62rem] font-semibold uppercase tracking-[0.24em]', scrolled ? 'text-white/78' : 'text-[rgba(13,27,42,0.78)]')}>Communications</span>
       </div>
     </Link>
   );
@@ -145,7 +145,7 @@ export default function Navbar() {
   return (
     <>
       <m.div
-        className="fixed inset-x-0 top-0 z-[120] h-[2px] origin-left bg-[linear-gradient(90deg,rgba(28,46,74,0.92),rgba(91,192,235,0.96),rgba(61,183,242,0.92))]"
+        className="fixed inset-x-0 top-0 z-[120] h-[2px] origin-left bg-[linear-gradient(90deg,rgba(13,27,42,0.92),rgba(201,149,42,0.78),rgba(0,184,150,0.96))]"
         style={{scaleX: progressScale}}
       />
 
@@ -212,12 +212,12 @@ export default function Navbar() {
                               : 'text-[var(--navy)]'
                             : scrolled
                               ? 'text-white/84 hover:text-white'
-                              : 'text-[rgba(28,46,74,0.84)] hover:text-[var(--navy)]',
+                              : 'text-[rgba(13,27,42,0.84)] hover:text-[var(--navy)]',
                         )}
                       >
                         <span className="relative z-[1]">{link.label}</span>
                         <m.span
-                          className="absolute inset-x-4 bottom-[7px] h-px origin-left rounded-full bg-[linear-gradient(90deg,rgba(91,192,235,0.96),rgba(61,183,242,0.62))]"
+                          className="absolute inset-x-4 bottom-[7px] h-px origin-left rounded-full bg-[linear-gradient(90deg,rgba(201,149,42,0.78),rgba(0,184,150,0.92))]"
                           variants={{
                             rest: {
                               scaleX: 0,
@@ -244,10 +244,10 @@ export default function Navbar() {
                     <Link
                       href="/contact"
                       onClick={handleCtaClick}
-                      className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full border border-[rgba(91,192,235,0.22)] bg-[linear-gradient(180deg,rgba(25,46,78,0.96),rgba(18,35,61,0.96))] px-5 py-2.5 text-[0.74rem] font-bold uppercase tracking-[0.2em] text-white no-underline shadow-[0_10px_30px_rgba(12,26,48,0.18)]"
+                      className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full border border-[rgba(0,184,150,0.22)] bg-[linear-gradient(180deg,rgba(13,27,42,0.96),rgba(30,47,68,0.96))] px-5 py-2.5 text-[0.74rem] font-bold uppercase tracking-[0.2em] text-white no-underline shadow-[0_10px_30px_rgba(12,26,48,0.18)]"
                     >
-                      <span className="pointer-events-none absolute inset-0 rounded-full bg-[radial-gradient(circle_at_top,rgba(91,192,235,0.22),transparent_60%)] opacity-80" />
-                      <span className="pointer-events-none absolute inset-x-6 bottom-0 h-px bg-[linear-gradient(90deg,rgba(91,192,235,0),rgba(91,192,235,0.95),rgba(91,192,235,0))] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                      <span className="pointer-events-none absolute inset-0 rounded-full bg-[radial-gradient(circle_at_top,rgba(0,184,150,0.22),transparent_60%)] opacity-80" />
+                      <span className="pointer-events-none absolute inset-x-6 bottom-0 h-px bg-[linear-gradient(90deg,rgba(0,184,150,0),rgba(0,184,150,0.95),rgba(0,184,150,0))] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                       {ripples.map((ripple) => (
                         <m.span
                           key={ripple.id}
@@ -279,8 +279,8 @@ export default function Navbar() {
                 className={cn(
                   'relative flex h-11 w-11 items-center justify-center overflow-hidden rounded-full transition-colors duration-200 lg:hidden',
                   scrolled
-                    ? 'border border-[rgba(91,192,235,0.24)] bg-white/8 text-white shadow-[0_8px_24px_rgba(4,10,20,0.22)] hover:border-[rgba(91,192,235,0.45)]'
-                    : 'border border-[rgba(28,46,74,0.08)] bg-white/55 text-[var(--navy)] shadow-[0_8px_24px_rgba(28,46,74,0.08)] hover:border-[rgba(91,192,235,0.32)]',
+                    ? 'border border-[rgba(0,184,150,0.24)] bg-white/8 text-white shadow-[0_8px_24px_rgba(4,10,20,0.22)] hover:border-[rgba(0,184,150,0.45)]'
+                    : 'border border-[rgba(13,27,42,0.08)] bg-white/55 text-[var(--navy)] shadow-[0_8px_24px_rgba(13,27,42,0.08)] hover:border-[rgba(0,184,150,0.32)]',
                 )}
               >
                 <span className="sr-only">{mobileOpen ? 'Close menu' : 'Open menu'}</span>

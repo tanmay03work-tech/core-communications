@@ -53,7 +53,7 @@ export async function GET(request: Request) {
           flexDirection: 'column',
           justifyContent: 'space-between',
           background:
-            'radial-gradient(circle at top right, rgba(91, 192, 235, 0.16), transparent 30%), linear-gradient(135deg, #071428 0%, #102947 52%, #17375d 100%)',
+            'radial-gradient(circle at top right, rgba(0, 184, 150, 0.16), transparent 30%), linear-gradient(135deg, #0D1B2A 0%, #1E2F44 52%, #2E4057 100%)',
           color: 'white',
           fontFamily: 'Open Sans',
           padding: '56px 64px',
@@ -67,7 +67,7 @@ export async function GET(request: Request) {
             left: 0,
             right: 0,
             height: 8,
-            background: 'linear-gradient(90deg, #5BC0EB 0%, rgba(91, 192, 235, 0.3) 100%)',
+            background: 'linear-gradient(90deg, #C9952A 0%, rgba(0, 184, 150, 0.7) 100%)',
           }}
         />
 
@@ -85,7 +85,7 @@ export async function GET(request: Request) {
                   position: 'absolute',
                   inset: 0,
                   borderRadius: '9999px',
-                  border: '4px solid #18365B',
+                  border: '4px solid #2E4057',
                 }}
               />
               <div
@@ -95,8 +95,8 @@ export async function GET(request: Request) {
                   left: 0,
                   width: 27,
                   height: 27,
-                  borderTop: '4px solid #5BC0EB',
-                  borderLeft: '4px solid #5BC0EB',
+                  borderTop: '4px solid #00B896',
+                  borderLeft: '4px solid #00B896',
                   borderTopLeftRadius: '9999px',
                 }}
               />
@@ -108,7 +108,7 @@ export async function GET(request: Request) {
                   width: 12,
                   height: 12,
                   borderRadius: '9999px',
-                  background: '#5BC0EB',
+                  background: '#00B896',
                 }}
               />
             </div>
@@ -141,7 +141,7 @@ export async function GET(request: Request) {
               padding: '10px 16px',
               borderRadius: 9999,
               border: '1px solid rgba(255,255,255,0.16)',
-              color: '#5BC0EB',
+              color: '#00D4AA',
               fontSize: 16,
               letterSpacing: '0.18em',
               textTransform: 'uppercase',
@@ -163,7 +163,7 @@ export async function GET(request: Request) {
             style={{
               width: 160,
               height: 3,
-              background: 'linear-gradient(90deg, #5BC0EB 0%, rgba(91, 192, 235, 0.15) 100%)',
+              background: 'linear-gradient(90deg, #C9952A 0%, rgba(0, 184, 150, 0.22) 100%)',
               borderRadius: 9999,
             }}
           />

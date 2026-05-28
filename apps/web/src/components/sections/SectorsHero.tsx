@@ -13,8 +13,8 @@ const stats = [
 
 export default function SectorsHero() {
   return (
-    <section className="relative min-h-[70vh] overflow-hidden bg-[linear-gradient(180deg,rgba(245,247,250,1)_0%,rgba(28,46,74,0.06)_100%)]">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(91,192,235,0.18),transparent_45%)]" aria-hidden="true" />
+    <section className="relative min-h-[70vh] overflow-hidden bg-[linear-gradient(180deg,rgba(244,246,249,1)_0%,rgba(30,47,68,0.06)_100%)]">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(0,184,150,0.18),transparent_45%)]" aria-hidden="true" />
       <div className="relative mx-auto flex min-h-[70vh] max-w-[900px] flex-col items-center justify-center px-6 py-32 text-center lg:px-16">
         <m.div
           initial="hidden"

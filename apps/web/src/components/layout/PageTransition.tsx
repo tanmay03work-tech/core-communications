@@ -37,7 +37,7 @@ export default function PageTransition({ children }: { children: ReactNode }) {
           {!shouldReduceMotion ? (
             <m.span
               aria-hidden="true"
-              className="pointer-events-none absolute inset-x-0 top-0 z-10 h-px bg-[linear-gradient(90deg,transparent,rgba(91,192,235,0.92),transparent)]"
+              className="pointer-events-none absolute inset-x-0 top-0 z-10 h-px bg-[linear-gradient(90deg,transparent,rgba(201,149,42,0.68),rgba(0,184,150,0.92),transparent)]"
               initial={{ opacity: 0, scaleX: 0.2 }}
               animate={{ opacity: [0, 1, 0], scaleX: [0.2, 1, 0.9] }}
               exit={{ opacity: 0 }}

@@ -26,13 +26,13 @@ export default async function SectorsCloud({sectors}: SectorsCloudProps) {
   const resolvedSectors = sectors?.length ? sectors : [...DEFAULT_SECTORS];
 
   return (
-    <section id="sectors" className="relative overflow-hidden bg-[#0D1B2E] py-[clamp(5rem,9vw,8rem)] text-white">
+    <section id="sectors" className="relative overflow-hidden bg-ink py-[clamp(5rem,9vw,8rem)] text-white">
       {/* Subtle grid */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0"
         style={{
-          backgroundImage: 'linear-gradient(90deg, rgba(91,192,235,0.04) 1px, transparent 1px)',
+          backgroundImage: 'linear-gradient(90deg, rgba(0,184,150,0.04) 1px, transparent 1px)',
           backgroundSize: '10vw 100%',
         }}
       />

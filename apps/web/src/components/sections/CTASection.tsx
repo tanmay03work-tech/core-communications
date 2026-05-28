@@ -37,8 +37,8 @@ export default function CTASection({section}: CTASectionProps) {
         className={cn(
           'relative overflow-hidden py-[clamp(5rem,9vw,8rem)]',
           isDark
-            ? 'bg-[linear-gradient(160deg,#1C2E4A_0%,#0D1B2E_60%,#0B1F33_100%)] text-white'
-            : 'bg-[linear-gradient(160deg,#F5F7FA_0%,#ffffff_56%,#E8F4FA_100%)] text-navy',
+            ? 'bg-[linear-gradient(160deg,#0D1B2A_0%,#1E2F44_60%,#2E4057_100%)] text-white'
+            : 'bg-[linear-gradient(160deg,#F4F6F9_0%,#ffffff_56%,#F4F6F9_100%)] text-navy',
         )}
       >
         {/* Diagonal stripe texture */}
@@ -48,7 +48,7 @@ export default function CTASection({section}: CTASectionProps) {
           style={{
             backgroundImage: isDark
               ? 'repeating-linear-gradient(-38deg, rgba(255,255,255,0.22) 0 1px, transparent 1px 20px)'
-              : 'repeating-linear-gradient(-38deg, rgba(28,46,74,0.16) 0 1px, transparent 1px 20px)',
+              : 'repeating-linear-gradient(-38deg, rgba(13,27,42,0.14) 0 1px, transparent 1px 20px)',
           }}
         />
 
@@ -60,8 +60,8 @@ export default function CTASection({section}: CTASectionProps) {
             width: '56rem',
             height: '56rem',
             background: isDark
-              ? 'radial-gradient(circle, rgba(91,192,235,0.1), transparent 60%)'
-              : 'radial-gradient(circle, rgba(91,192,235,0.18), transparent 60%)',
+              ? 'radial-gradient(circle, rgba(0,184,150,0.1), transparent 60%)'
+              : 'radial-gradient(circle, rgba(0,184,150,0.16), transparent 60%)',
             filter: 'blur(20px)',
           }}
         />
@@ -70,8 +70,8 @@ export default function CTASection({section}: CTASectionProps) {
         <div className={cn(
           'absolute inset-x-0 top-0 h-[2px]',
           isDark
-            ? 'bg-[linear-gradient(90deg,transparent,rgba(91,192,235,0.5),transparent)]'
-            : 'bg-[linear-gradient(90deg,transparent,rgba(28,46,74,0.18),rgba(91,192,235,0.45),transparent)]',
+            ? 'bg-[linear-gradient(90deg,transparent,rgba(201,149,42,0.32),rgba(0,184,150,0.52),transparent)]'
+            : 'bg-[linear-gradient(90deg,transparent,rgba(13,27,42,0.16),rgba(0,184,150,0.42),transparent)]',
         )} />
 
         {/* Decorative large quote mark */}

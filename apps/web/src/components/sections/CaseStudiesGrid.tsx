@@ -27,9 +27,9 @@ export default async function CaseStudiesGrid({caseStudies}: CaseStudiesGridProp
   const resolvedCaseStudies = newLayoutStudies?.length ? newLayoutStudies : fallbackCaseStudies;
 
   return (
-    <section id="cases" className="relative overflow-hidden bg-[linear-gradient(180deg,#F5F7FA_0%,#ffffff_50%,#F5F7FA_100%)] py-[clamp(5rem,9vw,8rem)] text-navy">
+    <section id="cases" className="relative overflow-hidden bg-[linear-gradient(180deg,#F4F6F9_0%,#ffffff_50%,#F4F6F9_100%)] py-[clamp(5rem,9vw,8rem)] text-navy">
       {/* Top accent line */}
-      <div className="absolute inset-x-0 top-0 h-px bg-[linear-gradient(90deg,transparent,rgba(28,46,74,0.1),transparent)]" />
+      <div className="absolute inset-x-0 top-0 h-px bg-[linear-gradient(90deg,transparent,rgba(13,27,42,0.1),transparent)]" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-5 md:px-8 lg:px-16 xl:px-24">
         {/* Header row */}

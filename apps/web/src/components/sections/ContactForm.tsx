@@ -34,7 +34,7 @@ declare global {
 const turnstileSiteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
 
 const baseInputClassName =
-  'w-full rounded-[1rem] border border-navy/12 bg-[rgba(245,247,250,0.95)] px-4 py-3.5 text-base text-navy outline-none transition placeholder:text-navy/35 focus:border-accent focus:bg-white disabled:cursor-not-allowed disabled:opacity-60';
+  'w-full rounded-[1rem] border border-navy/12 bg-[rgba(244,246,249,0.95)] px-4 py-3.5 text-base text-navy outline-none transition placeholder:text-navy/35 focus:border-accent focus:bg-white disabled:cursor-not-allowed disabled:opacity-60';
 
 type SubmitState =
   | { status: 'idle' }
@@ -327,7 +327,7 @@ export function ContactForm() {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="inline-flex min-h-12 items-center justify-center gap-3 overflow-hidden rounded-[1rem] bg-[linear-gradient(180deg,rgba(25,46,78,0.98),rgba(18,35,61,0.98))] px-6 py-3.5 text-sm font-medium uppercase tracking-[0.14em] text-white transition hover:bg-accent disabled:cursor-not-allowed disabled:opacity-60"
+            className="inline-flex min-h-12 items-center justify-center gap-3 overflow-hidden rounded-[1rem] bg-[linear-gradient(180deg,rgba(13,27,42,0.98),rgba(30,47,68,0.98))] px-6 py-3.5 text-sm font-medium uppercase tracking-[0.14em] text-white transition hover:bg-accent disabled:cursor-not-allowed disabled:opacity-60"
           >
             <span
               className={cn(
@@ -355,15 +355,13 @@ export function ContactForm() {
           </button>
 
           {submitState.status === 'success' ? (
-            <div className="flex items-start gap-3 rounded-2xl border border-[#226b4b]/20 bg-[#226b4b]/5 px-4 py-3 text-[#226b4b] animate-in fade-in duration-300">
+            <div className="flex items-start gap-3 rounded-2xl border border-accent/20 bg-accent/5 px-4 py-3 text-accent animate-in fade-in duration-300">
               <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0" />
               <p className="text-sm">{submitState.message}</p>
             </div>
           ) : null}
 
-          {submitState.status === 'error' && !toast ? (
-            <p className="text-sm text-[#a33a32]">{submitState.message}</p>
-          ) : null}
+          {submitState.status === 'error' && !toast ? <p className="text-sm text-gold-600">{submitState.message}</p> : null}
         </div>
       </form>
 
@@ -372,8 +370,8 @@ export function ContactForm() {
           className={cn(
             'fixed right-4 top-24 z-50 max-w-sm rounded-2xl border px-4 py-3 text-sm shadow-2xl backdrop-blur animate-in slide-in-from-top-3 duration-300',
             toast.tone === 'error'
-              ? 'border-[#a33a32]/20 bg-white text-[#a33a32]'
-              : 'border-[#226b4b]/20 bg-white text-[#226b4b]',
+              ? 'border-gold/20 bg-white text-gold-600'
+              : 'border-accent/20 bg-white text-accent',
           )}
           role="status"
           aria-live="polite"
@@ -406,7 +404,7 @@ function Field({
         {optional ? <span className="ml-2 text-navy/35">(Optional)</span> : null}
       </span>
       {children}
-      {error ? <span className="text-sm text-[#a33a32]">{error}</span> : null}
+      {error ? <span className="text-sm text-gold-600">{error}</span> : null}
     </label>
   );
 }

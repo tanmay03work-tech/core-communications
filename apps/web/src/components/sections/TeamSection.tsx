@@ -31,7 +31,7 @@ export default function TeamSection() {
 
   return (
     <LazyMotion features={domAnimation}>
-      <section className="relative overflow-hidden bg-[#0D1B2E] py-[clamp(5rem,9vw,8rem)] text-white">
+      <section className="relative overflow-hidden bg-ink py-[clamp(5rem,9vw,8rem)] text-white">
         {/* Subtle bg grid */}
         <div
           aria-hidden="true"
@@ -74,12 +74,12 @@ export default function TeamSection() {
                     transition: prefersReducedMotion ? {duration: 0} : {duration: 0.65, ease: [0.22, 1, 0.36, 1]},
                   },
                 }}
-                whileHover={prefersReducedMotion ? undefined : {borderColor: 'rgba(91,192,235,0.28)', transition: {duration: 0.3}}}
+                whileHover={prefersReducedMotion ? undefined : {borderColor: 'rgba(0,184,150,0.28)', transition: {duration: 0.3}}}
                 className="group relative flex items-start gap-6 overflow-hidden border border-white/[0.07] bg-white/[0.03] p-[var(--card-pad)]"
               >
                 {/* Top accent bar that slides on hover */}
                 <m.div
-                  className="absolute inset-x-0 top-0 h-[2px] origin-left bg-[linear-gradient(90deg,rgba(91,192,235,0.8),rgba(61,175,217,0.5))]"
+                  className="absolute inset-x-0 top-0 h-[2px] origin-left bg-[linear-gradient(90deg,rgba(201,149,42,0.78),rgba(0,184,150,0.72))]"
                   initial={{scaleX: 0}}
                   whileHover={prefersReducedMotion ? undefined : {scaleX: 1}}
                   transition={prefersReducedMotion ? {duration: 0} : {duration: 0.4, ease: [0.22, 1, 0.36, 1]}}
@@ -87,7 +87,7 @@ export default function TeamSection() {
 
                 {/* Avatar */}
                 <m.div
-                  className="flex h-[84px] w-[84px] shrink-0 items-center justify-center overflow-hidden rounded-full border border-accent/22 bg-[#162035] text-xl font-bold text-accent transition-shadow duration-300 group-hover:shadow-[0_0_20px_rgba(91,192,235,0.18)]"
+                  className="flex h-[84px] w-[84px] shrink-0 items-center justify-center overflow-hidden rounded-full border border-accent/22 bg-neutral-700 text-xl font-bold text-accent transition-shadow duration-300 group-hover:shadow-[0_0_20px_rgba(0,184,150,0.18)]"
                   initial={prefersReducedMotion ? {opacity: 0} : {clipPath: 'circle(0% at 50% 50%)', scale: 0.82}}
                   whileInView={prefersReducedMotion ? {opacity: 1} : {clipPath: 'circle(50% at 50% 50%)', scale: 1}}
                   viewport={{once: true}}

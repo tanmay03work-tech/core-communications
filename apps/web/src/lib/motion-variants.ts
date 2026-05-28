@@ -181,7 +181,7 @@ export const cardHover = {
   rest: { y: 0, boxShadow: '0 0 0 rgba(0,0,0,0)' },
   hover: {
     y: -6,
-    boxShadow: '0 20px 50px rgba(28,46,74,0.12)',
+    boxShadow: '0 20px 50px rgba(13,27,42,0.12)',
     transition: spring,
   },
 };

@@ -7,7 +7,7 @@ import { m, useReducedMotion } from 'framer-motion';
 import { Container } from '@/components/layout/Container';
 import ScrollReveal from '@/components/motion/ScrollReveal';
 import SectionLabel from '@/components/ui/SectionLabel';
-import { CASE_STUDIES, CTA } from '@/lib/constants';
+import { CTA } from '@/lib/constants';
 
 interface WorkPageClientProps {
   studies: readonly any[];
@@ -104,7 +104,7 @@ export default function WorkPageClient({ studies }: WorkPageClientProps) {
       </div>
 
       {/* ─── Work Cards Grid ─────────────────────────────── */}
-      <section className="bg-[linear-gradient(180deg,#F5F7FA_0%,#ffffff_50%,#F5F7FA_100%)] py-[clamp(4rem,7vw,6.5rem)] text-navy">
+      <section className="bg-[linear-gradient(180deg,#F4F6F9_0%,#ffffff_50%,#F4F6F9_100%)] py-[clamp(4rem,7vw,6.5rem)] text-navy">
         <Container className="max-w-7xl">
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             {filteredStudies.map((study, index) => (
@@ -117,7 +117,7 @@ export default function WorkPageClient({ studies }: WorkPageClientProps) {
                 <ScrollReveal delay={index * 0.03}>
                     <Link
                       href={`/work/${getStudySlug(study)}`}
-                      className="card-work group flex h-full min-w-0 flex-col justify-between rounded-[1.25rem] border border-navy/8 bg-white p-[clamp(1.25rem,5vw,2.5rem)] no-underline shadow-[0_4px_20px_rgba(28,46,74,0.02)] transition-all duration-300 hover:-translate-y-1 hover:border-accent/28 hover:shadow-[0_16px_48px_rgba(28,46,74,0.08)] sm:rounded-[1.5rem]"
+                      className="card-work group flex h-full min-w-0 flex-col justify-between rounded-[1.25rem] border border-navy/8 bg-white p-[clamp(1.25rem,5vw,2.5rem)] no-underline shadow-[0_4px_20px_rgba(13,27,42,0.02)] transition-all duration-300 hover:-translate-y-1 hover:border-accent/28 hover:shadow-[0_16px_48px_rgba(13,27,42,0.08)] sm:rounded-[1.5rem]"
                     >
                       <div>
                         {/* Tag + arrow */}
@@ -161,7 +161,7 @@ export default function WorkPageClient({ studies }: WorkPageClientProps) {
       </section>
 
       {/* ─── Bottom CTA ──────────────────────────────────── */}
-      <section className="relative overflow-hidden bg-[linear-gradient(160deg,#1C2E4A_0%,#0D1B2E_100%)] py-[clamp(4rem,7vw,6rem)] text-white">
+      <section className="relative overflow-hidden bg-[linear-gradient(160deg,#0D1B2A_0%,#1E2F44_100%)] py-[clamp(4rem,7vw,6rem)] text-white">
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 opacity-[0.04]"

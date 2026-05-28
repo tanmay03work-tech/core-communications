@@ -54,7 +54,7 @@ export default function RadarAnimation() {
           height: 100%;
           border-radius: 9999px;
           background:
-            radial-gradient(circle at center, rgba(91, 192, 235, 0.1) 0%, transparent 46%),
+            radial-gradient(circle at center, rgba(0, 184, 150, 0.1) 0%, transparent 46%),
             linear-gradient(180deg, rgba(255, 255, 255, 0.05), transparent);
         }
 
@@ -64,11 +64,11 @@ export default function RadarAnimation() {
           border-radius: inherit;
           background: conic-gradient(
             from 0deg,
-            rgba(91, 192, 235, 0) 0deg,
-            rgba(91, 192, 235, 0.02) 250deg,
-            rgba(91, 192, 235, 0.58) 315deg,
-            rgba(61, 175, 217, 0.2) 338deg,
-            rgba(91, 192, 235, 0) 360deg
+            rgba(0, 184, 150, 0) 0deg,
+            rgba(0, 184, 150, 0.02) 250deg,
+            rgba(0, 184, 150, 0.58) 315deg,
+            rgba(0, 212, 170, 0.2) 338deg,
+            rgba(0, 184, 150, 0) 360deg
           );
           animation: radarRotate 8s linear infinite;
         }
@@ -76,8 +76,8 @@ export default function RadarAnimation() {
         .radar-ring {
           position: absolute;
           border-radius: inherit;
-          border: 1px solid rgba(176, 224, 255, 0.28);
-          box-shadow: inset 0 0 30px rgba(91, 192, 235, 0.03);
+          border: 1px solid rgba(201, 149, 42, 0.18);
+          box-shadow: inset 0 0 30px rgba(0, 184, 150, 0.03);
         }
 
         .radar-dot {
@@ -87,8 +87,8 @@ export default function RadarAnimation() {
           width: 10px;
           height: 10px;
           border-radius: 9999px;
-          background: rgba(61, 175, 217, 0.9);
-          box-shadow: 0 0 0 0 rgba(61, 175, 217, 0.45);
+          background: rgba(0, 212, 170, 0.9);
+          box-shadow: 0 0 0 0 rgba(0, 212, 170, 0.45);
           animation: radarBlink var(--dot-duration) ease-in-out infinite;
           animation-delay: var(--dot-delay);
         }
@@ -100,11 +100,11 @@ export default function RadarAnimation() {
           width: 16px;
           height: 16px;
           border-radius: 9999px;
-          background: rgba(91, 192, 235, 0.9);
+          background: rgba(0, 184, 150, 0.9);
           transform: translate(-50%, -50%);
           box-shadow:
-            0 0 18px rgba(91, 192, 235, 0.8),
-            0 0 36px rgba(61, 175, 217, 0.35);
+            0 0 18px rgba(0, 184, 150, 0.8),
+            0 0 36px rgba(0, 212, 170, 0.35);
           animation: centerPulse 2.8s ease-in-out infinite;
         }
 
@@ -119,13 +119,13 @@ export default function RadarAnimation() {
           100% {
             opacity: 0.15;
             transform: scale(0.8);
-            box-shadow: 0 0 0 0 rgba(61, 175, 217, 0);
+            box-shadow: 0 0 0 0 rgba(0, 212, 170, 0);
           }
 
           45% {
             opacity: 1;
             transform: scale(1.2);
-            box-shadow: 0 0 0 14px rgba(61, 175, 217, 0);
+            box-shadow: 0 0 0 14px rgba(0, 212, 170, 0);
           }
         }
 

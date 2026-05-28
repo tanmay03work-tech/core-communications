@@ -114,7 +114,7 @@ function CompactInfoBlock({block, index}: {block: CompactBlock; index?: number})
   }
 
   return (
-    <div className="border border-navy/10 bg-white p-4 shadow-[0_10px_28px_rgba(28,46,74,0.035)]">
+    <div className="border border-navy/10 bg-white p-4 shadow-[0_10px_28px_rgba(13,27,42,0.035)]">
       <div className="mb-3 flex items-center gap-3 border-b border-navy/10 bg-navy/[0.025] px-3 py-2">
         {typeof index === 'number' ? <span className="text-[0.64rem] font-bold uppercase tracking-[0.18em] text-primary">{String(index + 1).padStart(2, '0')}</span> : null}
         <h2 className="text-[0.72rem] font-bold uppercase tracking-[0.14em] text-navy">{block.title}</h2>
@@ -246,7 +246,7 @@ export default async function CaseStudyPage({params}: CaseStudyPageProps) {
   };
 
   return (
-    <main className="bg-[#f7f9fc] text-navy">
+    <main className="bg-surface-light text-navy">
       <StructuredData data={structuredData} />
 
       <section className="border-y border-navy/12 bg-white pb-8 pt-32 md:pb-10 md:pt-36">
@@ -254,7 +254,7 @@ export default async function CaseStudyPage({params}: CaseStudyPageProps) {
           <div className="flex flex-col gap-3">
             <SectionLabel className="text-primary">{caseNumber ? `Case Study ${caseNumber}` : client}</SectionLabel>
             <h1 className="max-w-5xl font-heading text-[clamp(2rem,4vw,3.9rem)] font-semibold leading-[0.98] tracking-[-0.035em] text-navy">{title}</h1>
-            {kicker ? <p className="max-w-4xl font-sans text-[0.88rem] leading-relaxed text-[#8ba4c0]">{kicker}</p> : null}
+            {kicker ? <p className="max-w-4xl font-sans text-[0.88rem] leading-relaxed text-steel">{kicker}</p> : null}
             {intro ? <p className="max-w-5xl text-[0.95rem] italic leading-relaxed text-black">{intro}</p> : null}
           </div>
           <div className="mobile-scroll-pane -mx-5 mt-5 flex gap-2.5 px-5 pb-2 sm:mx-0 sm:flex-wrap sm:px-0">

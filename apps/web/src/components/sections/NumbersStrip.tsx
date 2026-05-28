@@ -1,8 +1,6 @@
 'use client';
 
 import { LazyMotion, domAnimation, m, useReducedMotion } from 'framer-motion';
-import { useInView } from 'framer-motion';
-import { useRef } from 'react';
 
 const PROVEN_RESULTS = [
   { value: '20M+',  label: 'Audience reach' },
@@ -50,7 +48,7 @@ export default function NumbersStrip() {
 
   return (
     <LazyMotion features={domAnimation}>
-      <section className="relative overflow-hidden bg-[linear-gradient(160deg,#1C2E4A_0%,#111E30_100%)] py-16 text-white md:py-20">
+      <section className="relative overflow-hidden bg-[linear-gradient(160deg,#1E2F44_0%,#0D1B2A_100%)] py-16 text-white md:py-20">
         {/* Diagonal stripe background */}
         <div
           aria-hidden="true"
@@ -60,9 +58,9 @@ export default function NumbersStrip() {
           }}
         />
         {/* Top accent line */}
-        <div className="absolute inset-x-0 top-0 h-px bg-[linear-gradient(90deg,transparent,rgba(91,192,235,0.5),transparent)]" />
+        <div className="absolute inset-x-0 top-0 h-px bg-[linear-gradient(90deg,transparent,rgba(201,149,42,0.42),rgba(0,184,150,0.55),transparent)]" />
         {/* Bottom accent line */}
-        <div className="absolute inset-x-0 bottom-0 h-px bg-[linear-gradient(90deg,transparent,rgba(91,192,235,0.3),transparent)]" />
+        <div className="absolute inset-x-0 bottom-0 h-px bg-[linear-gradient(90deg,transparent,rgba(0,184,150,0.32),transparent)]" />
 
         <div className="mx-auto max-w-7xl px-5 md:px-8 lg:px-16 xl:px-24">
           <div className="grid grid-cols-2 gap-8 md:gap-10 lg:grid-cols-4">

@@ -19,7 +19,7 @@ type Particle = {
 const PARTICLE_COUNT = 130;
 const CONNECTION_DISTANCE = 130;
 const MOUSE_RADIUS = 110;
-const COLORS = ['rgba(91, 192, 235, 0.9)', 'rgba(61, 175, 217, 0.78)'];
+const COLORS = ['rgba(0, 184, 150, 0.88)', 'rgba(0, 212, 170, 0.74)'];
 
 function randomBetween(min: number, max: number) {
   return Math.random() * (max - min) + min;
@@ -141,7 +141,7 @@ export default function ParticleCanvas() {
           if (distance < CONNECTION_DISTANCE) {
             const opacity = (1 - distance / CONNECTION_DISTANCE) * 0.28;
             context.beginPath();
-            context.strokeStyle = `rgba(91, 192, 235, ${opacity})`;
+            context.strokeStyle = `rgba(0, 184, 150, ${opacity})`;
             context.lineWidth = 0.8;
             context.moveTo(a.x, a.y);
             context.lineTo(b.x, b.y);

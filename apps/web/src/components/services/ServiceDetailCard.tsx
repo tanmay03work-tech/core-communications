@@ -41,7 +41,7 @@ export default function ServiceDetailCard({
       }}
     >
       <m.article
-        className="group h-full border-2 border-neutral-100 bg-white p-8 transition-[border-color,box-shadow] duration-300 hover:border-b-primary hover:shadow-[0_20px_50px_rgba(28,46,74,0.12)] lg:p-10"
+        className="group h-full border-2 border-neutral-100 bg-white p-8 transition-[border-color,box-shadow] duration-300 hover:border-b-primary hover:shadow-[0_20px_50px_rgba(13,27,42,0.12)] lg:p-10"
       >
         <div className="flex items-start justify-between gap-4">
           <button

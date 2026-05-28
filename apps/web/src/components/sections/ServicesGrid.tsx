@@ -85,14 +85,14 @@ export default function ServicesGrid() {
 
   return (
     <LazyMotion features={domAnimation}>
-      <section className="relative overflow-hidden bg-[#0D1B2E] py-[clamp(5rem,9vw,8rem)] text-white">
+      <section className="relative overflow-hidden bg-ink py-[clamp(5rem,9vw,8rem)] text-white">
         {/* Grid pattern */}
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0"
           style={{
             backgroundImage:
-              'linear-gradient(rgba(91,192,235,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(91,192,235,0.06) 1px, transparent 1px)',
+              'linear-gradient(rgba(0,184,150,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(0,184,150,0.06) 1px, transparent 1px)',
             backgroundSize: '52px 52px',
             maskImage: 'linear-gradient(180deg, transparent, rgba(0,0,0,0.6) 20%, rgba(0,0,0,0.6) 80%, transparent)',
           }}
@@ -133,8 +133,8 @@ export default function ServicesGrid() {
                   ease: [0.22, 1, 0.36, 1],
                 }}
                 whileHover={{
-                  borderColor: 'rgba(91,192,235,0.3)',
-                  backgroundColor: 'rgba(91,192,235,0.03)',
+                  borderColor: 'rgba(0,184,150,0.3)',
+                  backgroundColor: 'rgba(0,184,150,0.03)',
                   transition: {duration: prefersReducedMotion ? 0 : 0.25},
                 }}
               >

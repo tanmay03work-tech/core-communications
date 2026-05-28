@@ -2,7 +2,6 @@
 
 import {LazyMotion, domAnimation, m, useReducedMotion} from 'framer-motion';
 import Link from 'next/link';
-import SplitText from '@/components/animations/SplitText';
 import ScrollReveal from '@/components/motion/ScrollReveal';
 import SectionLabel from '@/components/ui/SectionLabel';
 import {ABOUT} from '@/lib/constants';
@@ -35,7 +34,7 @@ export default function AboutPageClient() {
     <LazyMotion features={domAnimation}>
       <main className="bg-surface text-navy">
         {/* Page Hero: Full dark navy hero banner (min-h-[40vh]) */}
-        <section className="relative min-h-[45vh] flex items-center justify-center overflow-hidden bg-[#111E30] text-white py-20">
+        <section className="relative min-h-[45vh] flex items-center justify-center overflow-hidden bg-ink text-white py-20">
           {/* Futuristic mesh-like grid overlay */}
           <div
             aria-hidden="true"
@@ -83,7 +82,7 @@ export default function AboutPageClient() {
                   { value: '15+', label: 'Years', detail: 'media relationships across APAC' },
                   { value: '2025', label: 'Founded', detail: 'by practitioners across India and Australia' },
                   { value: '02', label: 'Markets', detail: 'deep focus across Australia and India' },
-                ].map((item, index) => (
+                ].map((item) => (
                   <m.div
                     key={item.label}
                     variants={prefersReducedMotion ? undefined : fadeUpChild}
@@ -121,7 +120,7 @@ export default function AboutPageClient() {
 
               {/* Right: India-Australia callout with glass card treatment */}
               <ScrollReveal direction="left">
-                <div className="relative border border-navy/8 bg-surface p-[clamp(1.5rem,3vw,2.5rem)] rounded-[2rem] shadow-[0_12px_40px_rgba(28,46,74,0.03)] overflow-hidden group">
+                <div className="relative overflow-hidden rounded-[2rem] border border-navy/8 bg-surface p-[clamp(1.5rem,3vw,2.5rem)] shadow-[0_12px_40px_rgba(13,27,42,0.03)] group">
                   <div className="absolute inset-y-0 left-0 w-[4px] bg-gradient-to-b from-primary to-accent" />
                   <SectionLabel className="text-primary mb-3 block">India-Australia Corridor</SectionLabel>
                   <h3 className="mb-4 font-heading text-[1.25rem] font-semibold leading-snug tracking-tight text-navy">
@@ -137,7 +136,7 @@ export default function AboutPageClient() {
         </section>
 
         {/* Pillars Section: Dark bg, proper section header above grid-thirds */}
-        <section className="relative overflow-hidden bg-[#0B1F33] text-white py-[clamp(5rem,9vw,8rem)]">
+        <section className="relative overflow-hidden bg-navy py-[clamp(5rem,9vw,8rem)] text-white">
           {/* Subtle decorative background gradient */}
           <div
             aria-hidden="true"
@@ -171,7 +170,7 @@ export default function AboutPageClient() {
                       ? undefined
                       : {
                           y: -5,
-                          borderColor: 'rgba(91,192,235,0.4)',
+                          borderColor: 'rgba(0,184,150,0.4)',
                           backgroundColor: 'rgba(255,255,255,0.06)',
                           transition: {duration: 0.3},
                         }
@@ -191,7 +190,7 @@ export default function AboutPageClient() {
         </section>
 
         {/* Team Teaser: Full-width dark strip → heading + body → grid-split → then <TeamSection /> */}
-        <section className="relative overflow-hidden bg-[#111E30] text-white pt-[clamp(5rem,9vw,8rem)] pb-0">
+        <section className="relative overflow-hidden bg-ink pb-0 pt-[clamp(5rem,9vw,8rem)] text-white">
           <div className="mx-auto max-w-7xl px-5 md:px-8 lg:px-16 xl:px-24">
             <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-16 items-end mb-14">
               <div>

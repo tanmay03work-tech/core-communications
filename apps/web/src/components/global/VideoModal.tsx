@@ -41,14 +41,14 @@ export default function VideoModal({
     <AnimatePresence>
       {open ? (
         <m.div
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-[#08111f]/80 px-4 backdrop-blur-md"
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-ink/80 px-4 backdrop-blur-md"
           initial={{opacity: 0}}
           animate={{opacity: 1}}
           exit={{opacity: 0}}
           onClick={onClose}
         >
           <m.div
-            className="relative w-full max-w-4xl overflow-hidden rounded-[2rem] border border-white/12 bg-[#08111f] shadow-[0_30px_120px_rgba(0,0,0,0.45)]"
+            className="relative w-full max-w-4xl overflow-hidden rounded-[2rem] border border-white/12 bg-ink shadow-[0_30px_120px_rgba(13,27,42,0.45)]"
             initial={{opacity: 0, y: 24, scale: 0.96}}
             animate={{opacity: 1, y: 0, scale: 1}}
             exit={{opacity: 0, y: 20, scale: 0.97}}
@@ -73,7 +73,7 @@ export default function VideoModal({
                   allowFullScreen
                 />
               ) : (
-                <div className="flex h-full w-full flex-col items-center justify-center gap-3 bg-[radial-gradient(circle_at_top,rgba(91,192,235,0.22),transparent_46%),linear-gradient(135deg,rgba(28,46,74,0.3),rgba(8,17,31,0.92))] px-6 text-center">
+                <div className="flex h-full w-full flex-col items-center justify-center gap-3 bg-[radial-gradient(circle_at_top,rgba(0,184,150,0.22),transparent_46%),linear-gradient(135deg,rgba(30,47,68,0.3),rgba(13,27,42,0.92))] px-6 text-center">
                   <p className="text-xs uppercase tracking-[0.3em] text-accent/80">Video Preview</p>
                   <h3 className="font-heading text-3xl text-white">{title}</h3>
                   <p className="max-w-md text-sm leading-7 text-white/60">

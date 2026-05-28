@@ -108,7 +108,7 @@ export function ContactForm() {
         {submitState.message ? (
           <p
             className={`text-sm ${
-              submitState.status === 'error' ? 'text-[#a33a32]' : 'text-[#226b4b]'
+              submitState.status === 'error' ? 'text-gold-600' : 'text-accent'
             }`}
           >
             {submitState.message}
@@ -134,7 +134,7 @@ function Field({
         {label}
       </span>
       {children}
-      {error ? <span className="text-sm text-[#a33a32]">{error}</span> : null}
+      {error ? <span className="text-sm text-gold-600">{error}</span> : null}
     </label>
   );
 }

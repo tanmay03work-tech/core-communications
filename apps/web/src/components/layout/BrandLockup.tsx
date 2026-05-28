@@ -35,7 +35,7 @@ export default function BrandLockup({
             </span>
           </span>
         </span>
-        <span className="inline-flex w-fit rounded-full border border-[#3DB7F2]/20 bg-[#3DB7F2]/5 px-3 py-1.5 text-[0.58rem] uppercase tracking-[0.24em] text-[#3DB7F2]">
+        <span className="inline-flex w-fit rounded-full border border-accent/20 bg-accent/5 px-3 py-1.5 text-[0.58rem] uppercase tracking-[0.24em] text-accent">
           APAC Tech Communications
         </span>
       </Link>
@@ -65,7 +65,7 @@ export default function BrandLockup({
         />
       </span>
       {footer && (
-        <span className="mt-8 inline-flex w-fit rounded-full border border-[#3DB7F2]/20 bg-[#3DB7F2]/5 px-3 py-1.5 text-[0.58rem] uppercase tracking-[0.24em] text-[#3DB7F2]">
+        <span className="mt-8 inline-flex w-fit rounded-full border border-accent/20 bg-accent/5 px-3 py-1.5 text-[0.58rem] uppercase tracking-[0.24em] text-accent">
           APAC Tech Communications
         </span>
       )}

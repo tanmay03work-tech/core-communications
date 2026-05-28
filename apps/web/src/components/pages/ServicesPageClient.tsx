@@ -75,14 +75,14 @@ export default function ServicesPageClient() {
       </section>
 
       {/* ─── Services Cards Grid ─────────────────────────── */}
-      <section className="bg-[linear-gradient(180deg,#F5F7FA_0%,#ffffff_55%,#F5F7FA_100%)] py-[clamp(5rem,9vw,8rem)] text-navy">
+      <section className="bg-cinematic-blend py-[clamp(5rem,9vw,8rem)] text-navy">
         <Container className="max-w-7xl">
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {SERVICES.items.map((service, index) => (
               <ScrollReveal key={service.slug} delay={index * 0.07}>
-                <article className="group relative flex h-full min-h-[20rem] flex-col overflow-hidden border border-navy/8 bg-white p-[var(--card-pad)] transition-all duration-300 hover:-translate-y-1 hover:border-accent/28 hover:shadow-[0_16px_48px_rgba(28,46,74,0.09)]">
+                <article className="group relative flex h-full min-h-[20rem] flex-col overflow-hidden border border-navy/8 bg-white p-[var(--card-pad)] transition-all duration-300 hover:-translate-y-1 hover:border-accent/28 hover:shadow-[0_16px_48px_rgba(13,27,42,0.09)]">
                   {/* Top accent line on hover */}
-                  <div className="absolute inset-x-0 top-0 h-[2px] origin-left bg-[linear-gradient(90deg,#1C2E4A,#5BC0EB)] opacity-0 transition-all duration-400 group-hover:opacity-100" style={{ transform: 'scaleX(0)', transformOrigin: 'left' }} />
+                  <div className="absolute inset-x-0 top-0 h-[2px] origin-left bg-[linear-gradient(90deg,#C9952A,#00B896)] opacity-0 transition-all duration-400 group-hover:opacity-100" style={{ transform: 'scaleX(0)', transformOrigin: 'left' }} />
 
                   {/* Decorative large number */}
                   <div className="absolute right-4 top-4 text-[4rem] font-bold leading-none text-navy/[0.05]">
@@ -109,12 +109,12 @@ export default function ServicesPageClient() {
       </section>
 
       {/* ─── Expanded Services (dark, list layout) ────────── */}
-      <section className="relative overflow-hidden bg-[#0D1B2E] py-[clamp(5rem,9vw,8rem)] text-white">
+      <section className="relative overflow-hidden bg-ink py-[clamp(5rem,9vw,8rem)] text-white">
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0"
           style={{
-            backgroundImage: 'linear-gradient(rgba(91,192,235,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(91,192,235,0.05) 1px, transparent 1px)',
+            backgroundImage: 'linear-gradient(rgba(0,184,150,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(0,184,150,0.05) 1px, transparent 1px)',
             backgroundSize: '52px 52px',
             maskImage: 'linear-gradient(180deg, transparent, rgba(0,0,0,0.5) 15%, rgba(0,0,0,0.5) 85%, transparent)',
           }}
@@ -148,7 +148,7 @@ export default function ServicesPageClient() {
       </section>
 
       {/* ─── Process ─────────────────────────────────────── */}
-      <section className="relative overflow-hidden bg-[linear-gradient(160deg,#1C2E4A_0%,#111E30_100%)] py-[clamp(5rem,9vw,8rem)] text-white">
+      <section className="relative overflow-hidden bg-[linear-gradient(160deg,#1E2F44_0%,#0D1B2A_100%)] py-[clamp(5rem,9vw,8rem)] text-white">
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 opacity-[0.04]"
@@ -169,7 +169,7 @@ export default function ServicesPageClient() {
                 <article className="group relative overflow-hidden border border-white/[0.07] bg-white/[0.025] p-[var(--card-pad)] transition-colors duration-300 hover:border-accent/25">
                   {/* Top connecting dot */}
                   <div className="mb-6 flex items-center gap-3">
-                    <div className="h-2 w-2 rounded-full bg-accent shadow-[0_0_10px_rgba(91,192,235,0.5)]" />
+                    <div className="h-2 w-2 rounded-full bg-accent shadow-[0_0_10px_rgba(0,184,150,0.5)]" />
                     <div className="h-px flex-1 bg-white/10" />
                   </div>
                   <div className="mb-3 text-[0.65rem] font-bold uppercase tracking-[0.22em] text-accent">{step.num}</div>
@@ -183,7 +183,7 @@ export default function ServicesPageClient() {
       </section>
 
       {/* ─── Bottom CTA Strip ────────────────────────────── */}
-      <section className="bg-[#0B1F33] py-16 text-white">
+      <section className="bg-navy py-16 text-white">
         <Container className="max-w-7xl">
           <div className="flex flex-col items-start gap-6 md:flex-row md:items-center md:justify-between">
             <div>

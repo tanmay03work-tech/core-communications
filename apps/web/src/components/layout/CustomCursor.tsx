@@ -111,10 +111,10 @@ export default function CustomCursor() {
           width: isCoarsePointer ? (isPressed ? 18 : 14) : isPressed ? 10 : isHovering ? 22 : 12,
           height: isCoarsePointer ? (isPressed ? 18 : 14) : isPressed ? 10 : isHovering ? 22 : 12,
           opacity: isVisible ? 1 : 0,
-          backgroundColor: isPressed ? '#1C2E4A' : '#31728e',
+          backgroundColor: isPressed ? '#0D1B2A' : '#00B896',
           boxShadow: isPressed
-            ? '0 0 0 10px rgba(91, 192, 235, 0.16)'
-            : '0 0 0 0 rgba(91, 192, 235, 0)',
+            ? '0 0 0 10px rgba(0, 184, 150, 0.16)'
+            : '0 0 0 0 rgba(0, 184, 150, 0)',
         }}
         transition={{ duration: 0.15, ease: 'easeOut' }}
       />
@@ -124,7 +124,7 @@ export default function CustomCursor() {
         style={{
           x: ringX,
           y: ringY,
-          borderColor: '#5BC0EB',
+          borderColor: '#00D4AA',
         }}
         animate={{
           width: isCoarsePointer ? (isPressed ? 46 : 38) : isPressed ? 30 : isHovering ? 54 : 38,

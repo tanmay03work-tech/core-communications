@@ -65,7 +65,7 @@ export default function ContactPageClient() {
       </section>
 
       {/* ─── Contact + Form ───────────────────────────────── */}
-      <section className="bg-[linear-gradient(180deg,#F5F7FA_0%,#ffffff_55%,#F5F7FA_100%)] py-[clamp(5rem,9vw,8rem)] text-navy">
+      <section className="bg-[linear-gradient(180deg,#F4F6F9_0%,#ffffff_55%,#F4F6F9_100%)] py-[clamp(5rem,9vw,8rem)] text-navy">
         <Container className="max-w-7xl">
           <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16 xl:gap-20">
 
@@ -82,9 +82,9 @@ export default function ContactPageClient() {
                   <ScrollReveal key={label}>
                     <a
                       href={href}
-                      className="group flex items-start gap-4 border border-navy/8 bg-white p-5 no-underline shadow-[0_4px_20px_rgba(28,46,74,0.05)] transition-all duration-300 hover:-translate-y-1 hover:border-accent/25 hover:shadow-[0_12px_36px_rgba(28,46,74,0.09)]"
+                      className="group flex items-start gap-4 border border-navy/8 bg-white p-5 no-underline shadow-[0_4px_20px_rgba(13,27,42,0.05)] transition-all duration-300 hover:-translate-y-1 hover:border-accent/25 hover:shadow-[0_12px_36px_rgba(13,27,42,0.09)]"
                     >
-                      <div className="flex h-10 w-10 shrink-0 items-center justify-center border border-navy/10 bg-[#F5F7FA] text-primary transition-colors duration-300 group-hover:border-accent/28 group-hover:bg-accent/8">
+                      <div className="flex h-10 w-10 shrink-0 items-center justify-center border border-navy/10 bg-surface-light text-primary transition-colors duration-300 group-hover:border-accent/28 group-hover:bg-accent/8">
                         <Icon size={18} strokeWidth={1.5} />
                       </div>
                       <div className="min-w-0">
@@ -99,8 +99,8 @@ export default function ContactPageClient() {
 
                 {/* Locations card */}
                 <ScrollReveal delay={0.12}>
-                  <div className="flex items-start gap-4 border border-navy/8 bg-white p-5 shadow-[0_4px_20px_rgba(28,46,74,0.05)]">
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center border border-navy/10 bg-[#F5F7FA] text-primary">
+                  <div className="flex items-start gap-4 border border-navy/8 bg-white p-5 shadow-[0_4px_20px_rgba(13,27,42,0.05)]">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center border border-navy/10 bg-surface-light text-primary">
                       <MapPin size={18} strokeWidth={1.5} />
                     </div>
                     <div>
@@ -127,9 +127,9 @@ export default function ContactPageClient() {
 
             {/* Right — form card */}
             <ScrollReveal delay={0.1}>
-              <div className="relative overflow-hidden border border-navy/8 bg-white shadow-[0_24px_64px_rgba(28,46,74,0.09)]">
+              <div className="relative overflow-hidden border border-navy/8 bg-white shadow-[0_24px_64px_rgba(13,27,42,0.09)]">
                 {/* Top gradient bar */}
-                <div className="h-[3px] w-full bg-[linear-gradient(90deg,#1C2E4A,#5BC0EB)]" />
+                <div className="h-[3px] w-full bg-[linear-gradient(90deg,#C9952A,#00B896)]" />
                 <div className="p-8 lg:p-10">
                   <SectionLabel className="text-primary">Quick Contact</SectionLabel>
                   <h2 className="mb-6 font-heading text-[1.35rem] font-semibold leading-snug tracking-tight text-navy">

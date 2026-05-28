@@ -135,7 +135,7 @@ export default function HeroSection({siteSettings}: HeroSectionProps) {
               }}
               className="max-w-full font-heading text-[clamp(2.45rem,11.5vw,3.2rem)] leading-[1.06] text-white sm:text-hero sm:leading-[0.98] xl:text-[clamp(4.05rem,4.45vw,5.45rem)]"
             >
-              <span className="mb-2 block overflow-x-visible overflow-y-hidden">
+              <span className="mb-2 block overflow-x-visible overflow-y-hidden pb-[0.14em]">
                 <m.span
                   className="block max-w-full break-words xl:whitespace-nowrap"
                   variants={{
@@ -149,7 +149,7 @@ export default function HeroSection({siteSettings}: HeroSectionProps) {
                   {headlineLines[0]}
                 </m.span>
               </span>
-              <span className="mb-2 block overflow-x-visible overflow-y-hidden">
+              <span className="mb-2 block overflow-x-visible overflow-y-hidden pb-[0.14em]">
                 <m.span
                   className="block max-w-full break-words"
                   variants={{
@@ -164,7 +164,7 @@ export default function HeroSection({siteSettings}: HeroSectionProps) {
                   <MorphingWord words={morphWords} fallback={DEFAULT_MORPH_WORDS[0]} />
                 </m.span>
               </span>
-              <span className="block overflow-x-visible overflow-y-hidden">
+              <span className="block overflow-x-visible overflow-y-hidden pb-[0.14em]">
                 <m.span
                   className="block max-w-full break-words"
                   variants={{
@@ -223,7 +223,7 @@ export default function HeroSection({siteSettings}: HeroSectionProps) {
                   key={`${metric.label}-${metric.value}-${index}`}
                   className="flex min-h-[5rem] w-[17rem] shrink-0 items-center gap-3 rounded-full border border-white/10 bg-white/[0.06] px-4 py-3 text-white backdrop-blur-xl"
                 >
-                  <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-accent shadow-[0_0_0_6px_rgba(91,192,235,0.12)]" />
+                  <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-accent shadow-[0_0_0_6px_rgba(0,184,150,0.12)]" />
                   <span className="font-heading text-lg font-bold tracking-tight">{metric.value}</span>
                   <span className="text-[0.68rem] uppercase leading-snug tracking-[0.14em] text-white/58">{metric.label}</span>
                 </div>
@@ -269,8 +269,8 @@ export default function HeroSection({siteSettings}: HeroSectionProps) {
           position: absolute;
           inset: 0;
           background-image:
-            linear-gradient(rgba(91, 192, 235, 0.08) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(91, 192, 235, 0.08) 1px, transparent 1px);
+            linear-gradient(rgba(0, 184, 150, 0.08) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(0, 184, 150, 0.08) 1px, transparent 1px);
           background-size: 58px 58px;
           mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.95), transparent 92%);
           animation: heroGridShift 18s linear infinite;
@@ -298,7 +298,7 @@ export default function HeroSection({siteSettings}: HeroSectionProps) {
           left: -6rem;
           width: 24rem;
           height: 24rem;
-          background: radial-gradient(circle, rgba(91, 192, 235, 0.24), transparent 68%);
+          background: radial-gradient(circle, rgba(0, 184, 150, 0.22), transparent 68%);
         }
 
         .hero-blob-two {
@@ -306,7 +306,7 @@ export default function HeroSection({siteSettings}: HeroSectionProps) {
           top: 18%;
           width: 30rem;
           height: 30rem;
-          background: radial-gradient(circle, rgba(91, 192, 235, 0.14), transparent 70%);
+          background: radial-gradient(circle, rgba(201, 149, 42, 0.12), transparent 70%);
         }
 
         .hero-blob-three {
@@ -314,7 +314,7 @@ export default function HeroSection({siteSettings}: HeroSectionProps) {
           right: 22%;
           width: 26rem;
           height: 26rem;
-          background: radial-gradient(circle, rgba(91, 192, 235, 0.18), transparent 72%);
+          background: radial-gradient(circle, rgba(0, 212, 170, 0.16), transparent 72%);
         }
 
         .hero-primary-button {
@@ -330,7 +330,7 @@ export default function HeroSection({siteSettings}: HeroSectionProps) {
           border: 1px solid rgba(255, 255, 255, 0.18);
           background:
             linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.04)),
-            linear-gradient(135deg, rgba(91, 192, 235, 0.18), rgba(17, 30, 48, 0.28));
+            linear-gradient(135deg, rgba(0, 184, 150, 0.18), rgba(13, 27, 42, 0.28));
           backdrop-filter: blur(18px);
           padding: 1rem 1.45rem;
           line-height: 1;
@@ -371,10 +371,10 @@ export default function HeroSection({siteSettings}: HeroSectionProps) {
 
         .hero-primary-button:hover {
           transform: translateY(-2px);
-          border-color: rgba(91, 192, 235, 0.32);
+          border-color: rgba(0, 184, 150, 0.32);
           box-shadow:
             0 18px 40px rgba(5, 12, 24, 0.28),
-            0 0 24px rgba(91, 192, 235, 0.12),
+            0 0 24px rgba(0, 184, 150, 0.12),
             inset 0 1px 0 rgba(255, 255, 255, 0.14);
         }
 
@@ -406,7 +406,7 @@ export default function HeroSection({siteSettings}: HeroSectionProps) {
           bottom: -0.3rem;
           width: 100%;
           height: 1px;
-          background: linear-gradient(90deg, rgba(91, 192, 235, 0.95), rgba(61, 175, 217, 0.7));
+          background: linear-gradient(90deg, rgba(201, 149, 42, 0.78), rgba(0, 184, 150, 0.9));
           transform: scaleX(0);
           transform-origin: left;
           transition: transform 0.35s ease;
@@ -441,7 +441,7 @@ export default function HeroSection({siteSettings}: HeroSectionProps) {
           content: '';
           position: absolute;
           inset: 0;
-          background: linear-gradient(90deg, transparent, rgba(91, 192, 235, 0.95), transparent);
+          background: linear-gradient(90deg, transparent, rgba(0, 184, 150, 0.95), transparent);
           animation: scrollLine 1.8s ease-in-out infinite;
         }
 

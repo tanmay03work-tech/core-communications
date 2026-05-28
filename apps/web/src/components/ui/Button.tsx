@@ -18,7 +18,7 @@ export default function Button({
       className={clsx(
         'inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-semibold uppercase tracking-[0.14em] transition-all',
         variant === 'primary'
-          ? 'bg-[#3DB7F2] text-[#081931] hover:bg-[#081931] hover:text-white'
+          ? 'bg-accent text-ink hover:bg-navy hover:text-white'
           : 'border border-current text-current hover:bg-current hover:text-white',
         className,
       )}
@@ -28,4 +28,3 @@ export default function Button({
     </button>
   );
 }
-

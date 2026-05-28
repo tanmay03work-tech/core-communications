@@ -30,9 +30,9 @@ export default function Footer() {
   };
 
   return (
-    <footer className="relative overflow-hidden bg-[linear-gradient(180deg,#0D1B2E_0%,#0B1F33_100%)] text-white">
+    <footer className="relative overflow-hidden bg-[linear-gradient(180deg,#0D1B2A_0%,#1E2F44_100%)] text-white">
       {/* Top accent bar */}
-      <div className="h-[3px] w-full bg-[linear-gradient(90deg,#1C2E4A_0%,#5BC0EB_50%,#1C2E4A_100%)]" />
+      <div className="h-[3px] w-full bg-[linear-gradient(90deg,#0D1B2A_0%,#C9952A_42%,#00B896_58%,#0D1B2A_100%)]" />
 
       {/* Subtle grid overlay */}
       <div
@@ -40,7 +40,7 @@ export default function Footer() {
         className="pointer-events-none absolute inset-0"
         style={{
           backgroundImage:
-            'linear-gradient(rgba(91,192,235,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(91,192,235,0.04) 1px, transparent 1px)',
+            'linear-gradient(rgba(0,184,150,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0,184,150,0.04) 1px, transparent 1px)',
           backgroundSize: '52px 52px',
           maskImage: 'linear-gradient(180deg, transparent, rgba(0,0,0,0.5) 40%, rgba(0,0,0,0.6))',
         }}
@@ -57,7 +57,7 @@ export default function Footer() {
               {SITE.description}
             </p>
             <div className="flex items-center gap-3">
-              <span className="h-2 w-2 rounded-full bg-accent shadow-[0_0_12px_rgba(91,192,235,0.5)]" />
+              <span className="h-2 w-2 rounded-full bg-accent shadow-[0_0_12px_rgba(0,184,150,0.5)]" />
               <span className="text-[0.64rem] font-bold uppercase tracking-[0.16em] text-white/72 sm:tracking-[0.2em]">
                 Sydney · Mumbai
               </span>
@@ -92,7 +92,7 @@ export default function Footer() {
             </h4>
             <div className="rounded-[1rem] border border-white/12 bg-white/[0.04] p-4 backdrop-blur-sm">
               {/* Top gradient line */}
-              <div className="mb-3 h-px w-full bg-[linear-gradient(90deg,rgba(91,192,235,0.6),transparent)]" />
+              <div className="mb-3 h-px w-full bg-[linear-gradient(90deg,rgba(201,149,42,0.6),rgba(0,184,150,0.24),transparent)]" />
               <div className="flex flex-col gap-2.5">
                 <a
                   href={`mailto:${SITE.email}`}
