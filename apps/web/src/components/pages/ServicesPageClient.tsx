@@ -8,12 +8,11 @@ import SectionLabel from '@/components/ui/SectionLabel';
 import {SERVICES} from '@/lib/constants';
 
 const serviceDetails = [
-  'Precision media relations and distribution',
-  'Editorial engagement and thought leadership',
-  'Issues and crisis communications',
-  'Creator and influencer outreach',
-  'Trade-body partnerships and branded engagements',
-  'Content development and opinion research',
+  'Strategy, campaigns and reputation programs',
+  'Media relations and earned influence',
+  'Content programs across owned and earned channels',
+  'Social, search and speaker visibility',
+  'Web experiences and conversion journeys',
 ];
 
 const processSteps = [
@@ -68,7 +67,7 @@ export default function ServicesPageClient() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.22, ease: [0.22, 1, 0.36, 1] }}
             >
-              Six focused services built for B2B brands that need clearer positioning, stronger visibility, and market-facing credibility.
+              Core communications services designed to build visibility, credibility and commercial impact.
             </m.p>
           </div>
         </Container>

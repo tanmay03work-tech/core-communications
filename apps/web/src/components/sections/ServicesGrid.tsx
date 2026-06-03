@@ -7,65 +7,73 @@ import {SERVICES} from '@/lib/constants';
 const SERVICES_DATA = [
   {
     number: '01',
-    category: 'Media Relations',
+    category: 'Strategy & Reputation',
     icon: '\u{1F4E1}',
     items: [
-      'Media Strategy',
-      'Editorial Engagement',
-      'Issues & Crisis Communications',
-      'Media and Trends Research',
+      'Communication Strategy',
+      'Project & Retainer Campaigns',
+      'Media Releases',
+      'Stakeholder Profiling',
+      'Targeted B2B Media Outreach',
+      'Branded Content',
+      'Media Tracking & Analysis',
+      'Media Partnerships',
+      'Event Sponsorships',
+      'Media Training',
     ],
   },
   {
     number: '02',
-    category: 'Content Marketing',
-    icon: '\u{270D}\u{FE0F}',
+    category: 'Media & Influence',
+    icon: '\u{1F3AF}',
     items: [
-      'Press Releases & Leadership Articles',
-      'Blogs, Newsletters & Whitepapers',
-      'Website Content & Research Papers',
-      'Case Studies & Social Media Posts',
-      'Product, Animated & Social Videos',
+      'Media Relations',
+      'Journalist Engagement',
+      'Executive Profiling',
+      'Thought Leadership',
+      'Industry Influence',
+      'Earned Media Programs',
     ],
   },
   {
     number: '03',
-    category: 'Digital Marketing',
-    icon: '\u{1F4CA}',
+    category: 'Content & Creative',
+    icon: '\u{270D}\u{FE0F}',
     items: [
-      'Social Media Management',
-      'Graphic Designing',
-      'SEO / SEM Services',
+      'Press Releases',
+      'Leadership Articles',
+      'Blogs & Newsletters',
+      'Whitepapers',
+      'Website Content',
+      'Research Papers',
+      'Case Studies',
+      'Social Content',
+      'Video Content',
     ],
   },
   {
     number: '04',
-    category: 'GEO Services',
+    category: 'Digital Visibility',
     icon: '\u{1F50D}',
     items: [
-      'GEO Content Audit & Visibility Analysis',
-      'Campaign Strategy',
-      'AI Search Optimisation',
+      'Paid Social Strategy',
+      'Earned Social Strategy',
+      'Talent Curation',
+      'Speaker Curation',
+      'Social Visibility',
+      'Search Visibility',
     ],
   },
   {
     number: '05',
-    category: 'Influencer & Creator Marketing',
-    icon: '\u{1F3AF}',
-    items: [
-      'Influencer Strategy & Selection',
-      'Creator Campaigns',
-      'Trends & Virality Programs',
-    ],
-  },
-  {
-    number: '06',
-    category: 'Website Development',
+    category: 'Web & Digital Experiences',
     icon: '\u{1F4BB}',
     items: [
-      'Website Development & Management',
+      'Website Development',
       'Landing Pages',
-      'Performance Optimisation',
+      'Digital Experiences',
+      'Conversion Journeys',
+      'UX Optimisation',
     ],
   },
 ] as const;
@@ -104,7 +112,7 @@ export default function ServicesGrid() {
             <div>
               <SectionLabel>What We Do</SectionLabel>
               <h2 className="section-heading text-white">
-                Services built for <span className="font-serif italic">growth.</span>
+                Core Services
               </h2>
             </div>
             <div className="flex flex-col justify-end gap-6">
@@ -114,7 +122,7 @@ export default function ServicesGrid() {
 
           {/* Services cards grid */}
           <m.div
-            className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3"
+            className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-6"
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
@@ -123,7 +131,7 @@ export default function ServicesGrid() {
             {SERVICES_DATA.map((service, index) => (
               <m.div
                 key={service.number}
-                className="relative flex cursor-default flex-col gap-4 overflow-hidden border border-white/8 bg-white/3 p-7"
+                className="relative flex cursor-default flex-col gap-3 overflow-hidden border border-white/8 bg-white/3 p-5 sm:p-6 lg:col-span-2 [&:nth-child(4)]:lg:col-span-3 [&:nth-child(5)]:lg:col-span-3"
                 initial={prefersReducedMotion ? {opacity: 1, y: 0} : {opacity: 0, y: 24}}
                 whileInView={{opacity: 1, y: 0}}
                 viewport={{once: true, margin: '-60px'}}
@@ -152,11 +160,11 @@ export default function ServicesGrid() {
                 </div>
 
                 {/* Sub-items list */}
-                <ul className="relative z-10 flex flex-col gap-1.5">
+                <ul className="relative z-10 flex flex-col gap-1">
                   {service.items.map((item, i) => (
                     <m.li
                       key={item}
-                      className="flex items-start gap-2 font-sans text-sm leading-relaxed text-white/55"
+                      className="flex items-start gap-2 font-sans text-[0.82rem] leading-relaxed text-white/55"
                       initial={prefersReducedMotion ? {opacity: 1, x: 0} : {opacity: 0, x: -8}}
                       whileInView={{opacity: 1, x: 0}}
                       viewport={{once: true}}

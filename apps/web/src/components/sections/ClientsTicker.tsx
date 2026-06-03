@@ -5,16 +5,40 @@ import {m} from 'framer-motion';
 
 const CLIENTS = [
   {
-    name: 'SunPower Renewables',
-    logo: '/images/client-logos/sunpower-renewables.jpg',
+    name: 'Zoom',
+    logo: '/images/client-logos/zoom.svg',
   },
   {
     name: 'TDK Ventures',
     logo: null, // text fallback - no logo file available yet
   },
   {
-    name: 'Vodafone',
+    name: 'Vodafone India',
     logo: '/images/client-logos/vodafone.png',
+  },
+  {
+    name: 'HealtHdirect',
+    logo: '/images/client-logos/healthdirect.png',
+  },
+  {
+    name: 'Banjo Loans',
+    logo: '/images/client-logos/banjo.png',
+  },
+  {
+    name: 'Tiiik Money',
+    logo: '/images/client-logos/tiik-money.png',
+  },
+  {
+    name: 'Matific Education',
+    logo: '/images/client-logos/matific.png',
+  },
+  {
+    name: 'Sunpower Renewables',
+    logo: '/images/client-logos/sunpower-renewables.jpg?v=sunpower-reference',
+  },
+  {
+    name: 'Global Himalayan Expedition',
+    logo: '/images/client-logos/global-himalayan-expedition.png?v=ghe-reference-latest',
   },
 ];
 
@@ -23,7 +47,7 @@ export function ClientsTicker() {
     <section className="relative overflow-hidden border-y border-navy/[0.08] bg-[linear-gradient(180deg,#ffffff_0%,#F4F6F9_100%)] px-5 py-12 md:px-10">
       <div className="absolute inset-x-0 top-0 h-px bg-[linear-gradient(90deg,transparent,rgba(0,184,150,0.55),transparent)]" />
       <p className="mb-8 text-center font-heading text-[0.72rem] font-semibold uppercase tracking-[0.32em] text-navy/45">
-        Trusted by
+        Team experience includes working with
       </p>
       <div className="mx-auto flex max-w-3xl flex-wrap items-center justify-center gap-5 md:gap-7 lg:gap-9">
         {CLIENTS.map((client, i) => (

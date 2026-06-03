@@ -29,12 +29,11 @@ export default async function MarketingHomePage() {
       '@type': 'OfferCatalog',
       name: 'PR and Communications Services',
       itemListElement: [
-        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Media Relations' } },
-        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Content Marketing' } },
-        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Digital Marketing' } },
-        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'GEO Services' } },
-        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Influencer Marketing' } },
-        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Website Development' } },
+        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Strategy & Reputation' } },
+        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Media & Influence' } },
+        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Content & Creative' } },
+        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Digital Visibility' } },
+        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Web & Digital Experiences' } },
       ],
     },
   };

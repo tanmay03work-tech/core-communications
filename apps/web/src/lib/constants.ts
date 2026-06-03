@@ -69,11 +69,15 @@ export const ABOUT = {
   tag: 'About Core',
   heading: 'About Core',
   paragraphs: [
-    'We help B2B companies and SMBs get visibility that leads to real outcomes, not just coverage.',
-    'Core specialises in cybersecurity, identity, healthtech, and emerging technology, delivering clear storytelling, strong media engagement, and targeted digital amplification that reaches decision-makers.',
-    'With over 15 years of media relationships across APAC, particularly Australia and India, Core supports brand positioning, corporate communications, influencer engagement, sustainability narratives, listening and issues or crisis management.',
-    'Founded in 2025 by practitioners with deep experience across India, Australia, and the PR and digital ecosystem, Core Communications works with startups and scale-ups to build sustained credibility with investors, partners, and stakeholders.',
-    'We also work closely across the India-Australia trade corridor, running focused media, digital PR, social, and influencer programs that connect the right audiences on both sides.',
+    'Most technology companies are invisible to the audiences that matter most.',
+    'Core Communications is a full service communications consultancy helping B2B, Enterprises and SMBs get visibility that leads to real business outcomes, not just coverage.',
+    'We specialise in cybersecurity, identity, healthtech, and emerging technology, delivering clear storytelling, strong media engagement, content creation, and targeted digital amplification that reaches decision-makers.',
+    'Core has been designed to address your problem.',
+    'In complex, regulated sectors, the companies with the best technology rarely win the narrative. Buyers, investors, and regulators make decisions based on visibility, credibility, and trust. Most technology companies underinvest in all three.',
+    'Strong Core means strong communications infrastructure - not just coverage.',
+    'The India-Australia Advantage',
+    "The only corridor most comms agencies don't speak fluently.",
+    'Two of the fastest-growing technology and infrastructure markets in the Asia-Pacific share regulatory complexity, ambitious policy agendas, and a growing bilateral trade relationship. Core Communications is built to operate in both, with practitioner relationships, media networks, and market intelligence on each side.',
   ],
   pillars: [
     {
@@ -97,45 +101,39 @@ export const ABOUT = {
 
 export const SERVICES = {
   tag: 'Services',
-  heading: 'Services',
+  heading: 'Core Services',
   subtitle:
-    'Six focused services built for B2B brands that need clearer positioning, stronger visibility, and market-facing credibility.',
+    'Core communications services designed to build visibility, credibility and commercial impact.',
   items: [
     {
       num: '01',
-      title: 'PR distribution and media relations',
-      desc: 'Precision media outreach built on strong journalist relationships, timed for relevance and decision-maker visibility.',
-      slug: 'pr-distribution-and-media-relations',
+      title: 'Strategy & Reputation',
+      desc: 'Communication strategy, stakeholder mapping, campaigns, media training, and reputation programs built for commercial relevance.',
+      slug: 'strategy-and-reputation',
     },
     {
       num: '02',
-      title: 'Media tracking and editorial engagement',
-      desc: 'Editorial programs, thought leadership, and tracking that help executive voices stay visible in the right conversations.',
-      slug: 'media-tracking-and-editorial-engagement',
+      title: 'Media & Influence',
+      desc: 'Media relations, journalist engagement, executive profiling, thought leadership, and earned media programs that build authority.',
+      slug: 'media-and-influence',
     },
     {
       num: '03',
-      title: 'Issues and crises communications',
-      desc: 'Structured message handling and response planning for sensitive moments where clarity and control matter most.',
-      slug: 'issues-and-crises-communications',
+      title: 'Content & Creative',
+      desc: 'Press releases, leadership articles, blogs, newsletters, whitepapers, case studies, social content, and video content.',
+      slug: 'content-and-creative',
     },
     {
       num: '04',
-      title: 'Content creators/Influencer outreach',
-      desc: 'Creator, influencer, and expert outreach designed to add authority, relevance, and audience trust.',
-      slug: 'content-creators-influencer-outreach',
+      title: 'Digital Visibility',
+      desc: 'Paid and earned social strategy, talent and speaker curation, social visibility, and search visibility for B2B audiences.',
+      slug: 'digital-visibility',
     },
     {
       num: '05',
-      title: 'Trade body, Media partnerships and branded engagements',
-      desc: 'Strategic partnerships and branded engagement opportunities that extend visibility beyond one-off coverage.',
-      slug: 'trade-body-media-partnerships-and-branded-engagements',
-    },
-    {
-      num: '06',
-      title: 'Content development and Opinion research',
-      desc: 'Research-led content and opinion assets created for media impact, search visibility, and long-term narrative value.',
-      slug: 'content-development-and-opinion-research',
+      title: 'Web & Digital Experiences',
+      desc: 'Website development, landing pages, digital experiences, conversion journeys, and UX optimisation for clearer buyer paths.',
+      slug: 'web-and-digital-experiences',
     },
   ],
 } as const;
