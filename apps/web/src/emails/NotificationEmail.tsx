@@ -14,6 +14,7 @@ import type { ContactFormData } from '@/lib/schema';
 export function NotificationEmail({
   name,
   email,
+  services,
   message,
 }: ContactFormData) {
   return (
@@ -31,6 +32,9 @@ export function NotificationEmail({
           <Section style={card}>
             <Detail label="Name" value={name} />
             <Detail label="Email" value={email} />
+            {services.length > 0 ? (
+              <Detail label="Services" value={services.join(', ')} />
+            ) : null}
           </Section>
 
           {message ? (

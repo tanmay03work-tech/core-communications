@@ -1,8 +1,25 @@
 import { z } from 'zod';
 
+export const SERVICE_INTEREST_OPTIONS = [
+  'Communications Strategy',
+  'Go-To-Market Strategy',
+  'Brand Narrative',
+  'Brand Creative',
+  'Experience Marketing + Activations',
+  'Paid + Earned Social Media Strategy',
+  'Content Development',
+  'Media Relations',
+  'Influencer Relations',
+  'Creative Fabrications',
+  'Talent + Speaker Curation',
+  'Production + AV',
+  'Other',
+] as const;
+
 export const contactFormSchema = z.object({
   name: z.string().trim().min(2, 'Name must be at least 2 characters.'),
   email: z.string().trim().email('A valid email is required.'),
+  services: z.array(z.enum(SERVICE_INTEREST_OPTIONS)).optional().default([]),
   message: z.string().trim().optional().default(''),
 });
 

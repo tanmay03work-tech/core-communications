@@ -20,7 +20,7 @@ const contactItems = [
     icon: Phone,
     label: 'Phone',
     value: SITE.phone,
-    href: `tel:${SITE.phone}`,
+    href: 'tel:+61452330923',
   },
 ];
 
@@ -133,7 +133,7 @@ export default function ContactPageClient() {
                 <div className="p-8 lg:p-10">
                   <SectionLabel className="text-primary">Quick Contact</SectionLabel>
                   <h2 className="mb-6 font-heading text-[1.35rem] font-semibold leading-snug tracking-tight text-navy">
-                    Start a conversation
+                    Service enquiry
                   </h2>
                   <ContactForm />
                 </div>

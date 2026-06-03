@@ -4,6 +4,7 @@ import CaseStudiesGrid from '@/components/sections/CaseStudiesGrid';
 import ClientsTicker from '@/components/sections/ClientsTicker';
 import CTASection from '@/components/sections/CTASection';
 import ServicesGrid from '@/components/sections/ServicesGrid';
+import SectorsFocusSection from '@/components/sections/SectorsFocusSection';
 import TeamSection from '@/components/sections/TeamSection';
 import type {SiteSettings} from '@/types';
 
@@ -22,6 +23,7 @@ export default function HomePage({siteSettings}: HomePageProps) {
       <div id="services">
         <ServicesGrid />
       </div>
+      <SectorsFocusSection />
       <CaseStudiesGrid />
       <div id="team">
         <TeamSection />

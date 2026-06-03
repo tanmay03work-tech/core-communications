@@ -9,13 +9,14 @@ export const SITE = {
   description:
     'B2B PR and communications for tech-led companies across APAC. Sydney - Mumbai.',
   email: 'bharat.joshi@corecommunication.biz',
-  phone: '+61 452 330 923',
-  locations: ['Sydney, Australia', 'Mumbai, India'],
+  phone: 'Sydney: +61 452330923 | New Delhi: +91 9811859775',
+  locations: ['Sydney, Australia', 'New Delhi, India'],
 } as const;
 
 export const NAV_LINKS = [
   { label: 'About', href: '/#about' },
   { label: 'Services', href: '/#services' },
+  { label: 'Sectors', href: '/#sectors' },
   { label: 'Work', href: '/work' },
   { label: 'Team', href: '/#team' },
 ] as const;
@@ -148,6 +149,75 @@ export const SECTORS = {
     { label: 'Startup and SMBs', active: true },
     { label: 'Cybersecurity, Identity and Critical Infrastructure', active: true },
     { label: 'Sustainability and CSR communications', active: true },
+  ],
+} as const;
+
+export const HOMEPAGE_SECTORS = {
+  eyebrow: 'SECTORS',
+  heading: 'Sectors We Focus On',
+  subheading:
+    "Sector fluency that means you don't spend budget educating your communications partner.",
+  items: [
+    {
+      title: 'Identity Verification',
+      descriptor: 'KYC, AML/CTF, digital identity',
+      badge: 'Trust',
+    },
+    {
+      title: 'Data Centres Infrastructure',
+      descriptor: 'Hyperscale, colocation, sovereign cloud',
+      badge: 'Infra',
+    },
+    {
+      title: 'Cybersecurity & Critical Infrastructure',
+      descriptor: 'Threat intelligence, enterprise security',
+      badge: 'Core',
+    },
+    {
+      title: 'Solar & Renewable',
+      descriptor: 'Utility-scale and clean energy',
+      badge: 'Energy',
+    },
+    {
+      title: 'XaaS',
+      descriptor: 'B2B platforms and SaaS products',
+      badge: 'Platform',
+    },
+    {
+      title: 'Health & Med-Tech',
+      descriptor: 'Digital health and clinical innovation',
+      badge: 'Health',
+    },
+    {
+      title: 'Fintech & Payments',
+      descriptor: 'Payments, embedded finance, BNPL',
+      badge: 'Finance',
+    },
+    {
+      title: 'Telecom',
+      descriptor: 'Connectivity and communications infrastructure',
+      badge: 'Network',
+    },
+    {
+      title: 'Water Management',
+      descriptor: 'Utilities and sustainability',
+      badge: 'Utility',
+    },
+    {
+      title: 'Start-ups & SMBs',
+      descriptor: 'Growth-stage and scaling businesses',
+      badge: 'Growth',
+    },
+    {
+      title: 'Trade Corridor Marketing',
+      descriptor: 'Cross-border business visibility',
+      badge: 'APAC',
+    },
+    {
+      title: 'Industry & Trade Association Outreach',
+      descriptor: 'Industry engagement and stakeholder communications',
+      badge: 'Outreach',
+    },
   ],
 } as const;
 
@@ -498,6 +568,7 @@ export const FOOTER = {
   services: [
     { label: 'About', href: '/#about' },
     { label: 'Services', href: '/#services' },
+    { label: 'Sectors', href: '/#sectors' },
     { label: 'Work', href: '/work' },
     { label: 'Team', href: '/#team' },
     { label: 'Contact', href: '/contact' },

@@ -5,6 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { CheckCircle2, LoaderCircle, Send } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import {
+  SERVICE_INTEREST_OPTIONS,
   contactFormSchema,
   type ContactApiResponse,
   type ContactFormInput,
@@ -65,6 +66,7 @@ export function ContactForm() {
     defaultValues: {
       name: '',
       email: '',
+      services: [],
       message: '',
     },
   });
@@ -277,6 +279,7 @@ export function ContactForm() {
       reset({
         name: '',
         email: '',
+        services: [],
         message: '',
       });
       setSubmitState({ status: 'success', message: payload.message });
@@ -312,6 +315,33 @@ export function ContactForm() {
             />
           </Field>
         </div>
+
+        <fieldset className="space-y-3">
+          <legend className="text-[0.72rem] font-medium uppercase tracking-[0.2em] text-navy/60">
+            What services are you interested in?
+          </legend>
+          <div className="grid gap-3 sm:grid-cols-2">
+            {SERVICE_INTEREST_OPTIONS.map((service) => (
+              <label
+                key={service}
+                className="group flex items-start gap-3 rounded-[0.875rem] border border-navy/10 bg-[rgba(244,246,249,0.7)] px-3.5 py-3 text-sm text-navy/78 transition duration-200 hover:border-accent/28 hover:bg-white"
+              >
+                <input
+                  {...register('services')}
+                  type="checkbox"
+                  value={service}
+                  className="mt-0.5 h-4 w-4 shrink-0 rounded border-navy/20 text-primary accent-primary focus:ring-accent"
+                />
+                <span className="leading-snug transition-colors duration-200 group-hover:text-navy">
+                  {service}
+                </span>
+              </label>
+            ))}
+          </div>
+          {errors.services?.message ? (
+            <span className="text-sm text-gold-600">{errors.services.message}</span>
+          ) : null}
+        </fieldset>
 
         <Field label="Message" error={errors.message?.message} optional>
           <textarea
