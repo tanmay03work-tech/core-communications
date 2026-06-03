@@ -15,7 +15,7 @@ type HeroSectionProps = {
   siteSettings?: SiteSettings | null;
 };
 
-const DEFAULT_MORPH_WORDS = ['clarity', 'credibility', 'cut-through'];
+const DEFAULT_MORPH_WORDS = ['Credibility,', 'Cut-through,', 'Clarity,'];
 const DEFAULT_METRICS = HERO.stats.map((stat) => ({
   value: `${stat.value}${stat.suffix}`,
   label: stat.label,
@@ -28,6 +28,16 @@ const TAGLINES = [
   'Built for ambitious B2B narratives.',
   'Shaped for AI, search, and earned media.',
   'Calibrated for credibility across APAC.',
+];
+const PROBLEM_STATEMENTS = [
+  'Raising capital and need investors to understand your story?',
+  'Entering Australia and need local market intelligence?',
+  'Looking for earned media to amplify your marketing campaigns?',
+  'Need greater visibility among customers, suppliers and partners?',
+  'Want executives recognised as trusted industry voices?',
+  'Launching innovative technology but struggling to explain its value?',
+  'Expanding into new markets and need people to know who you are?',
+  'Looking for a go-to-market communications strategy that resonates locally?',
 ];
 
 function useTypedTagline(phrases: string[]) {
@@ -70,17 +80,14 @@ function useTypedTagline(phrases: string[]) {
 }
 
 export default function HeroSection({siteSettings}: HeroSectionProps) {
+  void siteSettings;
+
   const sectionRef = useRef<HTMLElement | null>(null);
   const primaryMagnetic = useMagnetic<HTMLDivElement>(10);
   const typedTagline = useTypedTagline(TAGLINES);
-  const morphWords = useMemo(
-    () => (siteSettings?.heroMorphWords?.filter(Boolean).length ? siteSettings.heroMorphWords.filter(Boolean) : DEFAULT_MORPH_WORDS),
-    [siteSettings?.heroMorphWords],
-  );
-  const metrics = useMemo(
-    () => (siteSettings?.heroMetrics?.length ? siteSettings.heroMetrics : DEFAULT_METRICS),
-    [siteSettings?.heroMetrics],
-  );
+  const [problemIndex, setProblemIndex] = useState(0);
+  const morphWords = useMemo(() => DEFAULT_MORPH_WORDS, []);
+  const metrics = useMemo(() => DEFAULT_METRICS, []);
   const {scrollYProgress} = useScroll({
     target: sectionRef,
     offset: ['start start', 'end start'],
@@ -92,6 +99,14 @@ export default function HeroSection({siteSettings}: HeroSectionProps) {
   const blobTwoY = useTransform(scrollYProgress, [0, 1], [0, -80]);
   const blobThreeX = useTransform(scrollYProgress, [0, 1], [0, -70]);
   const blobThreeY = useTransform(scrollYProgress, [0, 1], [0, -120]);
+
+  useEffect(() => {
+    const interval = window.setInterval(() => {
+      setProblemIndex((current) => (current + 1) % PROBLEM_STATEMENTS.length);
+    }, 3600);
+
+    return () => window.clearInterval(interval);
+  }, []);
 
   const headlineLines = [
     HERO.headline.line1,
@@ -121,8 +136,26 @@ export default function HeroSection({siteSettings}: HeroSectionProps) {
               transition={{duration: 0.7, ease: [0.22, 1, 0.36, 1]}}
               className="section-tag mb-8"
             >
-              {siteSettings?.tagline ?? HERO.tag}
+              {HERO.tag}
             </m.div>
+
+            <m.p
+              initial={{opacity: 0, y: 18}}
+              animate={{opacity: 1, y: 0}}
+              transition={{duration: 0.7, delay: 0.08, ease: [0.22, 1, 0.36, 1]}}
+              className="mb-4 max-w-[52rem] text-[clamp(1.05rem,2.4vw,1.5rem)] font-light leading-snug text-white/72"
+            >
+              Your tech needs a story investors and customers actually care about.
+            </m.p>
+
+            <m.p
+              initial={{opacity: 0, y: 16}}
+              animate={{opacity: 1, y: 0}}
+              transition={{duration: 0.7, delay: 0.12, ease: [0.22, 1, 0.36, 1]}}
+              className="mb-5 text-xs font-semibold uppercase tracking-[0.26em] text-accent/78"
+            >
+              Welcome to Core Communications
+            </m.p>
 
             <m.h1
               initial="hidden"
@@ -184,16 +217,26 @@ export default function HeroSection({siteSettings}: HeroSectionProps) {
               initial={{opacity: 0, y: 28}}
               animate={{opacity: 1, y: 0}}
               transition={{duration: 0.8, delay: 0.5, ease: [0.22, 1, 0.36, 1]}}
-              className="mt-8 max-w-[42rem] text-body-lg text-white/68"
+              className="mt-7 max-w-[48rem] text-body-lg text-white/68"
             >
               {HERO.subtitle}
             </m.p>
 
             <m.div
+              initial={{opacity: 0, y: 24}}
+              animate={{opacity: 1, y: 0}}
+              transition={{duration: 0.8, delay: 0.56, ease: [0.22, 1, 0.36, 1]}}
+              className="mt-5 max-w-[45rem] font-serif text-lg font-light italic leading-relaxed text-white/78 sm:text-xl"
+            >
+              <span>Communication strategy that builds</span>
+              <span className="mt-1 block text-accent/90">Credibility · Cut-through · Clarity</span>
+            </m.div>
+
+            <m.div
               initial={{opacity: 0, y: 28}}
               animate={{opacity: 1, y: 0}}
               transition={{duration: 0.8, delay: 0.62, ease: [0.22, 1, 0.36, 1]}}
-              className="mt-10 flex flex-wrap items-center gap-4 sm:gap-8 lg:gap-10"
+              className="mt-8 flex flex-wrap items-center gap-4 sm:gap-8 lg:gap-10"
             >
               <m.div
                 ref={primaryMagnetic.ref}
@@ -215,17 +258,36 @@ export default function HeroSection({siteSettings}: HeroSectionProps) {
             <m.div
               initial={{opacity: 0, y: 20}}
               animate={{opacity: 1, y: 0}}
+              transition={{duration: 0.7, delay: 0.68, ease: [0.22, 1, 0.36, 1]}}
+              className="mt-6 max-w-[46rem] rounded-3xl border border-white/10 bg-white/[0.045] p-4 text-white shadow-[0_18px_48px_rgba(12,20,40,0.14)] backdrop-blur-xl sm:p-5"
+            >
+              <div className="mb-2 text-[0.68rem] font-semibold uppercase tracking-[0.26em] text-accent/75">You are:</div>
+              <m.p
+                key={problemIndex}
+                initial={{opacity: 0, y: 8}}
+                animate={{opacity: 1, y: 0}}
+                exit={{opacity: 0, y: -8}}
+                transition={{duration: 0.45, ease: [0.22, 1, 0.36, 1]}}
+                className="min-h-[3.25rem] text-base leading-relaxed text-white/74 sm:min-h-[1.9rem] sm:text-lg"
+              >
+                {PROBLEM_STATEMENTS[problemIndex]}
+              </m.p>
+            </m.div>
+
+            <m.div
+              initial={{opacity: 0, y: 20}}
+              animate={{opacity: 1, y: 0}}
               transition={{duration: 0.7, delay: 0.7, ease: [0.22, 1, 0.36, 1]}}
               className="mobile-scroll-pane -mx-5 mt-8 flex gap-3 px-5 pb-2 lg:hidden"
             >
               {metrics.map((metric, index) => (
                 <div
                   key={`${metric.label}-${metric.value}-${index}`}
-                  className="flex min-h-[5rem] w-[17rem] shrink-0 items-center gap-3 rounded-full border border-white/10 bg-white/[0.06] px-4 py-3 text-white backdrop-blur-xl"
+                  className="flex min-h-[5.8rem] w-[19rem] shrink-0 items-center gap-3 rounded-[2rem] border border-white/10 bg-white/[0.06] px-4 py-3 text-white backdrop-blur-xl"
                 >
                   <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-accent shadow-[0_0_0_6px_rgba(0,184,150,0.12)]" />
-                  <span className="font-heading text-lg font-bold tracking-tight">{metric.value}</span>
-                  <span className="text-[0.68rem] uppercase leading-snug tracking-[0.14em] text-white/58">{metric.label}</span>
+                  <span className="w-[5.6rem] shrink-0 font-heading text-base font-bold tracking-tight">{metric.value}</span>
+                  <span className="min-w-0 text-[0.72rem] leading-snug tracking-[0.06em] text-white/62">{metric.label}</span>
                 </div>
               ))}
             </m.div>

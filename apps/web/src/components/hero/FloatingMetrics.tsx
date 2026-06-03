@@ -26,11 +26,11 @@ export default function FloatingMetrics({metrics}: FloatingMetricsProps) {
           animate={{opacity: 1, x: 0, y: 0}}
           transition={{duration: 0.6, delay: index * 0.12, ease: [0.22, 1, 0.36, 1]}}
           whileHover={{x: -6, borderColor: 'rgba(0, 184, 150, 0.4)'}}
-          className="metric-pill flex min-h-[5.2rem] w-full items-center gap-4 rounded-full border border-white/10 bg-white/[0.06] px-5 py-3 backdrop-blur-xl"
+          className="metric-pill flex min-h-[6.1rem] w-full items-center gap-4 rounded-[2rem] border border-white/10 bg-white/[0.06] px-5 py-3 backdrop-blur-xl"
         >
           <span className="metric-dot" />
-          <span className="font-heading text-lg font-bold tracking-tight text-white">{metric.value}</span>
-          <span className="text-sm uppercase leading-snug tracking-[0.18em] text-white/55">{metric.label}</span>
+          <span className="w-[7rem] shrink-0 font-heading text-lg font-bold tracking-tight text-white">{metric.value}</span>
+          <span className="min-w-0 text-sm leading-snug tracking-[0.08em] text-white/58">{metric.label}</span>
         </m.div>
       ))}
       <style jsx>{`

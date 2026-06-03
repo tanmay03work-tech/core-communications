@@ -36,8 +36,6 @@ const merriweather = Merriweather({
 });
 
 const siteUrl = getSiteUrl();
-const canonicalUrl = getAbsoluteUrl('/');
-const defaultOgImage = getAbsoluteUrl('/logo.png');
 const organizationSchema = {
   '@context': 'https://schema.org',
   '@type': 'Organization',

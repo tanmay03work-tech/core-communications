@@ -22,11 +22,11 @@ export const NAV_LINKS = [
 ] as const;
 
 export const HERO = {
-  tag: 'B2B PR and Communications',
+  tag: 'B2B Communications',
   headline: {
-    line1: 'Strategic communication',
-    line2: 'that builds',
-    line3: 'not just noise.',
+    line1: 'Strategic communications',
+    line2: '',
+    line3: 'not noise.',
   },
   subtitle:
     'Specialising in XaaS, SMBs, Cybersecurity, Identity, Healthtech and Tech-enabled companies.',
@@ -35,10 +35,10 @@ export const HERO = {
     secondary: { label: 'Start a Conversation', href: '/contact' },
   },
   stats: [
-    { value: '20', suffix: 'M+', label: 'Audience reach, Verizon DBIR 2025' },
-    { value: '50', suffix: '+', label: 'Unique media stories in 2 weeks' },
-    { value: '15', suffix: '+', label: 'Years APAC media relationships' },
-    { value: '95', suffix: '%', label: 'Media relevance (Banjo Loans)' },
+    { value: 'Sectors', suffix: '', label: 'Telecom, XaaS, SMBs. Cybersecurity, Identity & Tech businesses' },
+    { value: 'Services', suffix: '', label: 'Strategy & Reputation. Media, Content, Digital & GEO' },
+    { value: 'Markets', suffix: '', label: 'Australia · India · APAC' },
+    { value: '20+ years', suffix: '', label: 'Combined experience' },
   ],
   marquee:
     'CLARITY  -  CREDIBILITY  -  CUT-THROUGH  -  B2B PR  -  CYBERSECURITY  -  HEALTHTECH  -  XAAS  -  APAC  -  INDIA-AUSTRALIA  -  ',

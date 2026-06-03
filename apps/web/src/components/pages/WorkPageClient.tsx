@@ -10,18 +10,34 @@ import SectionLabel from '@/components/ui/SectionLabel';
 import { CTA } from '@/lib/constants';
 
 interface WorkPageClientProps {
-  studies: readonly any[];
+  studies: readonly WorkStudy[];
 }
+
+type WorkStudyStat = {
+  label: string;
+  value: string;
+};
+
+type WorkStudy = {
+  title: string;
+  client: string;
+  tag?: string;
+  sector?: string;
+  description?: string;
+  desc?: string;
+  slug?: string | {current?: string};
+  stats?: readonly WorkStudyStat[];
+};
 
 const filterTabs = ['All', 'Cybersecurity', 'Identity', 'Infrastructure', 'AI', 'Fintech'];
 
-function getStudyDescription(study: any) {
+function getStudyDescription(study: WorkStudy) {
   return 'desc' in study ? study.desc : study.description ?? '';
 }
-function getStudyStats(study: any) {
+function getStudyStats(study: WorkStudy) {
   return study.stats ?? [];
 }
-function getStudySlug(study: any) {
+function getStudySlug(study: WorkStudy) {
   return typeof study.slug === 'string' ? study.slug : study.slug?.current ?? '';
 }
 
@@ -141,7 +157,7 @@ export default function WorkPageClient({ studies }: WorkPageClientProps) {
 
                       {/* Stats */}
                       <div className="mt-6 grid grid-cols-2 gap-4 border-t border-navy/[0.07] pt-6 sm:gap-5">
-                        {getStudyStats(study).slice(0, 4).map((stat: any) => (
+                        {getStudyStats(study).slice(0, 4).map((stat) => (
                           <div key={stat.label}>
                             <div className="font-heading text-[1.8rem] font-semibold leading-none tracking-tight text-navy">
                               {stat.value}
