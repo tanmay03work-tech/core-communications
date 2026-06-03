@@ -59,7 +59,7 @@ export const metadata: Metadata = {
       'Core Communications — B2B PR for Cybersecurity, Healthtech & Tech Companies',
   },
   description:
-    'B2B PR and communications agency specialising in XaaS, SMBs, Cybersecurity, Identity, Healthtech and Tech-enabled companies. Strategic communications across APAC — Sydney and Mumbai.',
+    'B2B PR and communications agency specialising in XaaS, SMBs, Cybersecurity, Identity, Healthtech and Tech-enabled companies. Strategic communications across APAC - Sydney, Mumbai and New Delhi.',
   keywords: [
     'B2B PR agency Australia',
     'cybersecurity PR',

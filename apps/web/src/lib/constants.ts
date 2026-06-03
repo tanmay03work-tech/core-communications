@@ -7,10 +7,15 @@ export const SITE = {
   name: 'Core Communications',
   tagline: 'Clarity. Credibility. Cut-through.',
   description:
-    'B2B PR and communications for tech-led companies across APAC. Sydney - Mumbai.',
+    'B2B PR and communications for tech-led companies across APAC. Sydney, Mumbai and New Delhi.',
   email: 'bharat.joshi@corecommunication.biz',
-  phone: 'Sydney: +61 452330923 | New Delhi: +91 9811859775',
-  locations: ['Sydney, Australia', 'New Delhi, India'],
+  phone: 'Sydney: +61 452330923 | Mumbai: +91 9035190371 | New Delhi: +91 9811859775',
+  phones: [
+    { city: 'Sydney', number: '+61 452330923', href: 'tel:+61452330923' },
+    { city: 'Mumbai', number: '+91 9035190371', href: 'tel:+919035190371' },
+    { city: 'New Delhi', number: '+91 9811859775', href: 'tel:+919811859775' },
+  ],
+  locations: ['Sydney, Australia', 'Mumbai, India', 'New Delhi, India'],
 } as const;
 
 export const NAV_LINKS = [
@@ -24,8 +29,8 @@ export const NAV_LINKS = [
 export const HERO = {
   tag: 'B2B Communications',
   headline: {
-    line1: 'Strategic communications',
-    line2: '',
+    line1: 'Communication strategy',
+    line2: 'that builds',
     line3: 'not noise.',
   },
   subtitle:

@@ -1,7 +1,7 @@
 'use client';
 
 import dynamic from 'next/dynamic';
-import {m, useScroll, useTransform} from 'framer-motion';
+import {AnimatePresence, m, useScroll, useTransform} from 'framer-motion';
 import Link from 'next/link';
 import {useEffect, useMemo, useRef, useState} from 'react';
 import FloatingMetrics from '@/components/hero/FloatingMetrics';
@@ -15,7 +15,7 @@ type HeroSectionProps = {
   siteSettings?: SiteSettings | null;
 };
 
-const DEFAULT_MORPH_WORDS = ['Credibility,', 'Cut-through,', 'Clarity,'];
+const DEFAULT_MORPH_WORDS = ['Credibility', 'Cut-through', 'Clarity'];
 const DEFAULT_METRICS = HERO.stats.map((stat) => ({
   value: `${stat.value}${stat.suffix}`,
   label: stat.label,
@@ -24,10 +24,8 @@ const ParticleCanvas = dynamic(() => import('@/components/hero/ParticleCanvas'),
   ssr: false,
   loading: () => null,
 });
-const TAGLINES = [
-  'Built for ambitious B2B narratives.',
-  'Shaped for AI, search, and earned media.',
-  'Calibrated for credibility across APAC.',
+const HERO_LEAD_LINES = [
+  'Your tech needs a story investors and customers actually care about.',
 ];
 const PROBLEM_STATEMENTS = [
   'Raising capital and need investors to understand your story?',
@@ -84,7 +82,7 @@ export default function HeroSection({siteSettings}: HeroSectionProps) {
 
   const sectionRef = useRef<HTMLElement | null>(null);
   const primaryMagnetic = useMagnetic<HTMLDivElement>(10);
-  const typedTagline = useTypedTagline(TAGLINES);
+  const typedLeadLine = useTypedTagline(HERO_LEAD_LINES);
   const [problemIndex, setProblemIndex] = useState(0);
   const morphWords = useMemo(() => DEFAULT_MORPH_WORDS, []);
   const metrics = useMemo(() => DEFAULT_METRICS, []);
@@ -145,7 +143,8 @@ export default function HeroSection({siteSettings}: HeroSectionProps) {
               transition={{duration: 0.7, delay: 0.08, ease: [0.22, 1, 0.36, 1]}}
               className="mb-4 max-w-[52rem] text-[clamp(1.05rem,2.4vw,1.5rem)] font-light leading-snug text-white/72"
             >
-              Your tech needs a story investors and customers actually care about.
+              <span>{typedLeadLine}</span>
+              <span className="ml-1 inline-block h-[1.05em] w-px animate-pulse bg-accent/80 align-middle" />
             </m.p>
 
             <m.p
@@ -223,16 +222,6 @@ export default function HeroSection({siteSettings}: HeroSectionProps) {
             </m.p>
 
             <m.div
-              initial={{opacity: 0, y: 24}}
-              animate={{opacity: 1, y: 0}}
-              transition={{duration: 0.8, delay: 0.56, ease: [0.22, 1, 0.36, 1]}}
-              className="mt-5 max-w-[45rem] font-serif text-lg font-light italic leading-relaxed text-white/78 sm:text-xl"
-            >
-              <span>Communication strategy that builds</span>
-              <span className="mt-1 block text-accent/90">Credibility · Cut-through · Clarity</span>
-            </m.div>
-
-            <m.div
               initial={{opacity: 0, y: 28}}
               animate={{opacity: 1, y: 0}}
               transition={{duration: 0.8, delay: 0.62, ease: [0.22, 1, 0.36, 1]}}
@@ -262,16 +251,21 @@ export default function HeroSection({siteSettings}: HeroSectionProps) {
               className="mt-6 max-w-[46rem] rounded-3xl border border-white/10 bg-white/[0.045] p-4 text-white shadow-[0_18px_48px_rgba(12,20,40,0.14)] backdrop-blur-xl sm:p-5"
             >
               <div className="mb-2 text-[0.68rem] font-semibold uppercase tracking-[0.26em] text-accent/75">You are:</div>
-              <m.p
-                key={problemIndex}
-                initial={{opacity: 0, y: 8}}
-                animate={{opacity: 1, y: 0}}
-                exit={{opacity: 0, y: -8}}
-                transition={{duration: 0.45, ease: [0.22, 1, 0.36, 1]}}
-                className="min-h-[3.25rem] text-base leading-relaxed text-white/74 sm:min-h-[1.9rem] sm:text-lg"
-              >
-                {PROBLEM_STATEMENTS[problemIndex]}
-              </m.p>
+              <div className="relative min-h-[3.25rem] overflow-hidden sm:min-h-[1.9rem]">
+                <AnimatePresence mode="wait" initial={false}>
+                  <m.p
+                    key={problemIndex}
+                    initial={{opacity: 0, y: 14, filter: 'blur(6px)'}}
+                    animate={{opacity: 1, y: 0, filter: 'blur(0px)'}}
+                    exit={{opacity: 0, y: -12, filter: 'blur(6px)'}}
+                    transition={{duration: 0.5, ease: [0.22, 1, 0.36, 1]}}
+                    className="text-base leading-relaxed text-white/74 sm:text-lg"
+                    style={{willChange: 'transform, opacity, filter'}}
+                  >
+                    {PROBLEM_STATEMENTS[problemIndex]}
+                  </m.p>
+                </AnimatePresence>
+              </div>
             </m.div>
 
             <m.div
@@ -292,18 +286,6 @@ export default function HeroSection({siteSettings}: HeroSectionProps) {
               ))}
             </m.div>
 
-            <m.div
-              initial={{opacity: 0, y: 20}}
-              animate={{opacity: 1, y: 0}}
-              transition={{duration: 0.7, delay: 0.78, ease: [0.22, 1, 0.36, 1]}}
-              className="mt-8 flex flex-wrap items-center gap-5"
-            >
-              <span className="text-xs uppercase tracking-[0.28em] text-accent/75">Signal</span>
-              <span className="text-sm text-white/62">
-                {typedTagline}
-                <span className="ml-1 inline-block h-[1.05em] w-px animate-pulse bg-accent/80 align-middle" />
-              </span>
-            </m.div>
           </div>
 
           <div className="hidden lg:flex lg:min-h-[34rem] lg:items-center lg:justify-end">
@@ -315,7 +297,7 @@ export default function HeroSection({siteSettings}: HeroSectionProps) {
           initial={{opacity: 0, y: 20}}
           animate={{opacity: 1, y: 0}}
           transition={{duration: 0.7, delay: 1, ease: [0.22, 1, 0.36, 1]}}
-          className="absolute bottom-6 left-1/2 z-10 flex -translate-x-1/2 items-center gap-3 text-white/45"
+          className="absolute bottom-6 left-1/2 z-10 flex w-max max-w-[calc(100%-2.5rem)] -translate-x-1/2 items-center justify-center gap-3 text-white/45"
         >
           <span className="hero-scroll-line" aria-hidden="true" />
           <span className="text-[0.7rem] uppercase tracking-[0.24em]">Scroll to explore</span>

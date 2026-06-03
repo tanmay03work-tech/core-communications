@@ -28,6 +28,7 @@ export interface SiteSettings {
   phone?: string;
   sydneyAddress?: string;
   mumbaiAddress?: string;
+  newDelhiAddress?: string;
   socialLinks?: SocialLink[];
   seo?: {
     _type?: 'seo';
@@ -118,7 +119,7 @@ export const siteSettings = defineType({
       name: 'phone',
       title: 'Phone',
       type: 'string',
-      validation: (rule) => rule.max(40),
+      validation: (rule) => rule.max(120),
     }),
     defineField({
       name: 'sydneyAddress',
@@ -130,6 +131,13 @@ export const siteSettings = defineType({
     defineField({
       name: 'mumbaiAddress',
       title: 'Mumbai address',
+      type: 'text',
+      rows: 3,
+      validation: (rule) => rule.max(240),
+    }),
+    defineField({
+      name: 'newDelhiAddress',
+      title: 'New Delhi address',
       type: 'text',
       rows: 3,
       validation: (rule) => rule.max(240),

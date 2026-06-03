@@ -16,12 +16,6 @@ const contactItems = [
     value: SITE.email,
     href: `mailto:${SITE.email}`,
   },
-  {
-    icon: Phone,
-    label: 'Phone',
-    value: SITE.phone,
-    href: 'tel:+61452330923',
-  },
 ];
 
 export default function ContactPageClient() {
@@ -96,6 +90,29 @@ export default function ContactPageClient() {
                     </a>
                   </ScrollReveal>
                 ))}
+
+                {/* Phone numbers card */}
+                <ScrollReveal delay={0.08}>
+                  <div className="flex items-start gap-4 border border-navy/8 bg-white p-5 shadow-[0_4px_20px_rgba(13,27,42,0.05)]">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center border border-navy/10 bg-surface-light text-primary">
+                      <Phone size={18} strokeWidth={1.5} />
+                    </div>
+                    <div>
+                      <div className="text-[0.62rem] font-bold uppercase tracking-[0.18em] text-navy/62">Phone</div>
+                      <div className="mt-1 flex flex-col gap-1">
+                        {SITE.phones.map(({ city, number, href }) => (
+                          <a
+                            key={city}
+                            href={href}
+                            className="font-sans text-[0.95rem] font-medium text-navy no-underline transition-colors duration-200 hover:text-primary hover:underline"
+                          >
+                            {city}: {number}
+                          </a>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </ScrollReveal>
 
                 {/* Locations card */}
                 <ScrollReveal delay={0.12}>

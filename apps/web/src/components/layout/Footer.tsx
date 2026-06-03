@@ -59,7 +59,7 @@ export default function Footer() {
             <div className="flex items-center gap-3">
               <span className="h-2 w-2 rounded-full bg-accent shadow-[0_0_12px_rgba(0,184,150,0.5)]" />
               <span className="text-[0.64rem] font-bold uppercase tracking-[0.16em] text-white/72 sm:tracking-[0.2em]">
-                Sydney · Mumbai
+                Sydney / Mumbai / New Delhi
               </span>
             </div>
           </div>
@@ -100,12 +100,15 @@ export default function Footer() {
                 >
                   {SITE.email}
                 </a>
-                <a
-                  href={`tel:${SITE.phone}`}
-                  className="font-sans text-[0.88rem] font-semibold text-white/84 no-underline transition-colors hover:text-white"
-                >
-                  {SITE.phone}
-                </a>
+                {SITE.phones.map(({ city, number, href }) => (
+                  <a
+                    key={city}
+                    href={href}
+                    className="font-sans text-[0.88rem] font-semibold text-white/84 no-underline transition-colors hover:text-white"
+                  >
+                    {city}: {number}
+                  </a>
+                ))}
               </div>
               <div className="my-3 h-px w-full bg-white/8" />
               <div className="flex flex-col gap-1">

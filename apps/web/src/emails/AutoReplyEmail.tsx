@@ -57,7 +57,7 @@ export function AutoReplyEmail({ name }: AutoReplyEmailProps) {
           <Text style={footer}>
             Core Communications
             <br />
-            Sydney and Mumbai
+            Sydney, Mumbai and New Delhi
           </Text>
         </Container>
       </Body>

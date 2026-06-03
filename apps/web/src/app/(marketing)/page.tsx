@@ -10,7 +10,7 @@ export default async function MarketingHomePage() {
     description:
       'B2B PR and communications specialising in XaaS, SMBs, Cybersecurity, Identity, Healthtech and Tech-enabled companies',
     url: 'https://www.corecommunication.biz',
-    telephone: '+61452330923',
+    telephone: ['+61452330923', '+919035190371', '+919811859775'],
     email: 'bharatcorecommunication@gmail.com',
     areaServed: ['AU', 'IN'],
     address: [
@@ -22,6 +22,11 @@ export default async function MarketingHomePage() {
       {
         '@type': 'PostalAddress',
         addressLocality: 'Mumbai',
+        addressCountry: 'IN',
+      },
+      {
+        '@type': 'PostalAddress',
+        addressLocality: 'New Delhi',
         addressCountry: 'IN',
       },
     ],

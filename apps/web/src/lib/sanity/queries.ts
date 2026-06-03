@@ -162,6 +162,7 @@ export const getSiteSettingsQuery = groq`
     phone,
     sydneyAddress,
     mumbaiAddress,
+    newDelhiAddress,
     socialLinks,
     seo${seoFields},
     pageSeo{

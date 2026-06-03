@@ -43,8 +43,8 @@ export const aboutData = {
       detail: ABOUT.paragraphs[1],
     },
     {
-      value: '2',
-      label: 'Sydney, Australia / Mumbai, India',
+      value: '3',
+      label: 'Sydney, Australia / Mumbai, India / New Delhi, India',
       detail: SITE.description,
     },
     {

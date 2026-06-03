@@ -308,6 +308,7 @@ export type SiteSettings = {
   phone?: string;
   sydneyAddress?: string;
   mumbaiAddress?: string;
+  newDelhiAddress?: string;
   socialLinks?: Array<{_key?: string; platform: string; url: string}>;
   seo?: SeoData;
   pageSeo?: PageSeoData;
