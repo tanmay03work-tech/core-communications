@@ -2,12 +2,10 @@
 
 import dynamic from 'next/dynamic';
 import {AnimatePresence, m, useScroll, useTransform} from 'framer-motion';
-import Link from 'next/link';
 import {useEffect, useMemo, useRef, useState} from 'react';
 import FloatingMetrics from '@/components/hero/FloatingMetrics';
 import MorphingWord from '@/components/hero/MorphingWord';
 import RadarAnimation from '@/components/hero/RadarAnimation';
-import {useMagnetic} from '@/hooks/useMagnetic';
 import {HERO} from '@/lib/constants';
 import type {SiteSettings} from '@/types';
 
@@ -25,7 +23,7 @@ const ParticleCanvas = dynamic(() => import('@/components/hero/ParticleCanvas'),
   loading: () => null,
 });
 const HERO_LEAD_LINES = [
-  'Your tech needs a story investors and customers actually care about.',
+  'Your business needs a story investors and customers care about',
 ];
 const PROBLEM_STATEMENTS = [
   'Raising capital and need investors to understand your story?',
@@ -81,7 +79,6 @@ export default function HeroSection({siteSettings}: HeroSectionProps) {
   void siteSettings;
 
   const sectionRef = useRef<HTMLElement | null>(null);
-  const primaryMagnetic = useMagnetic<HTMLDivElement>(10);
   const typedLeadLine = useTypedTagline(HERO_LEAD_LINES);
   const [problemIndex, setProblemIndex] = useState(0);
   const morphWords = useMemo(() => DEFAULT_MORPH_WORDS, []);
@@ -151,7 +148,7 @@ export default function HeroSection({siteSettings}: HeroSectionProps) {
               initial={{opacity: 0, y: 16}}
               animate={{opacity: 1, y: 0}}
               transition={{duration: 0.7, delay: 0.12, ease: [0.22, 1, 0.36, 1]}}
-              className="mb-5 text-xs font-semibold uppercase tracking-[0.26em] text-accent/78"
+              className="mb-5 text-xs font-semibold uppercase tracking-[0.26em] text-[#E8B84B]"
             >
               Welcome to Core Communications
             </m.p>
@@ -222,36 +219,13 @@ export default function HeroSection({siteSettings}: HeroSectionProps) {
             </m.p>
 
             <m.div
-              initial={{opacity: 0, y: 28}}
-              animate={{opacity: 1, y: 0}}
-              transition={{duration: 0.8, delay: 0.62, ease: [0.22, 1, 0.36, 1]}}
-              className="mt-8 flex flex-wrap items-center gap-4 sm:gap-8 lg:gap-10"
-            >
-              <m.div
-                ref={primaryMagnetic.ref}
-                style={primaryMagnetic.style}
-                onMouseMove={primaryMagnetic.onMouseMove}
-                onMouseLeave={primaryMagnetic.onMouseLeave}
-                className="shrink-0"
-              >
-                <Link href={HERO.cta.secondary.href} className="inline-flex min-h-12 shrink-0 items-center justify-center rounded-full border border-white/15 bg-white/[0.08] px-5 text-xs font-semibold uppercase tracking-[0.14em] text-white shadow-[0_14px_32px_rgba(5,12,24,0.22)] backdrop-blur-xl transition hover:-translate-y-0.5 hover:border-accent/40 hover:bg-accent/15 sm:px-6 sm:tracking-[0.18em]">
-                  <span className="relative z-[1]">Start a Conversation</span>
-                </Link>
-              </m.div>
-              <Link href={HERO.cta.primary.href} className="inline-flex min-h-12 shrink-0 items-center justify-center gap-2 rounded-full border border-white/15 bg-white/[0.06] px-5 text-xs font-semibold uppercase tracking-[0.14em] text-white/90 shadow-[0_14px_32px_rgba(5,12,24,0.18)] backdrop-blur-xl transition hover:-translate-y-0.5 hover:border-accent/40 hover:bg-white/[0.1] hover:text-white sm:px-6 sm:tracking-[0.18em]">
-                <span>See Our Work</span>
-                <span aria-hidden="true">→</span>
-              </Link>
-            </m.div>
-
-            <m.div
               initial={{opacity: 0, y: 20}}
               animate={{opacity: 1, y: 0}}
               transition={{duration: 0.7, delay: 0.68, ease: [0.22, 1, 0.36, 1]}}
-              className="mt-6 max-w-[46rem] rounded-3xl border border-white/10 bg-white/[0.045] p-4 text-white shadow-[0_18px_48px_rgba(12,20,40,0.14)] backdrop-blur-xl sm:p-5"
+              className="mt-8 flex max-w-[62rem] flex-wrap items-baseline gap-x-3 gap-y-2 text-white"
             >
-              <div className="mb-2 text-[0.68rem] font-semibold uppercase tracking-[0.26em] text-accent/75">You are:</div>
-              <div className="relative min-h-[3.25rem] overflow-hidden sm:min-h-[1.9rem]">
+              <div className="shrink-0 text-[clamp(1.05rem,1.7vw,1.35rem)] font-semibold text-[#00D4AA]">You are</div>
+              <div className="relative min-h-[2.2rem] min-w-0 flex-1 overflow-hidden sm:min-h-[2.45rem]">
                 <AnimatePresence mode="wait" initial={false}>
                   <m.p
                     key={problemIndex}
@@ -259,7 +233,7 @@ export default function HeroSection({siteSettings}: HeroSectionProps) {
                     animate={{opacity: 1, y: 0, filter: 'blur(0px)'}}
                     exit={{opacity: 0, y: -12, filter: 'blur(6px)'}}
                     transition={{duration: 0.5, ease: [0.22, 1, 0.36, 1]}}
-                    className="text-base leading-relaxed text-white/74 sm:text-lg"
+                    className="text-[clamp(1.05rem,2vw,1.45rem)] leading-snug text-white/78"
                     style={{willChange: 'transform, opacity, filter'}}
                   >
                     {PROBLEM_STATEMENTS[problemIndex]}

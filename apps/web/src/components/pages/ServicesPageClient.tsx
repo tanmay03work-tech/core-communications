@@ -61,14 +61,6 @@ export default function ServicesPageClient() {
             >
               Services that turn visibility into business relevance.
             </m.h1>
-            <m.p
-              className="mt-6 max-w-xl font-sans text-[1rem] font-normal leading-relaxed text-white/74"
-              initial={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.22, ease: [0.22, 1, 0.36, 1] }}
-            >
-              Core communications services designed to build visibility, credibility and commercial impact.
-            </m.p>
           </div>
         </Container>
       </section>

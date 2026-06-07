@@ -1,7 +1,6 @@
 'use client';
 
 import {LazyMotion, domAnimation, m} from 'framer-motion';
-import SplitText from '@/components/animations/SplitText';
 import ScrollReveal from '@/components/motion/ScrollReveal';
 import {ABOUT} from '@/lib/constants';
 
@@ -34,10 +33,26 @@ const dividerChild = {
   },
 };
 
+const headingRevealText = {
+  hidden: {y: '115%', opacity: 0},
+  visible: {
+    y: '0%',
+    opacity: 1,
+    transition: {duration: 0.86, ease: [0.22, 1, 0.36, 1]},
+  },
+};
+
+const headingRevealMask = {
+  hidden: {x: '-112%'},
+  visible: {
+    x: '112%',
+    transition: {duration: 0.95, ease: [0.22, 1, 0.36, 1], delay: 0.08},
+  },
+};
+
 export default function AboutSection() {
   const opening = ABOUT.paragraphs[0];
-  const intro = ABOUT.paragraphs[1];
-  const problem = ABOUT.paragraphs[3];
+  const bodyParagraphs = ABOUT.paragraphs.slice(1, 5);
   const signature = ABOUT.paragraphs[5];
   const corridorHeading = ABOUT.paragraphs[6];
   const corridorSubheading = ABOUT.paragraphs[7];
@@ -67,7 +82,7 @@ export default function AboutSection() {
               variants={containerVariants}
               initial="hidden"
               whileInView="visible"
-              viewport={{once: true, margin: '-60px'}}
+              viewport={{once: false, margin: '-60px', amount: 0.2}}
             >
               <div
                 aria-hidden="true"
@@ -78,13 +93,6 @@ export default function AboutSection() {
                 className="absolute -right-20 -top-20 h-52 w-52 rounded-full border border-accent/25"
               />
               <div className="relative mx-auto max-w-6xl">
-                <SplitText
-                  by="word"
-                  stagger={60}
-                  className="section-heading mb-6 max-w-4xl text-navy"
-                  text="About Core Communications"
-                />
-
                 <div className="space-y-[clamp(1.1rem,2vw,1.75rem)]">
                   <m.div variants={fadeUpChild} className="max-w-none">
                     <p className="font-heading text-[clamp(1.15rem,1.55vw,1.55rem)] font-semibold leading-[1.35] tracking-[-0.01em] text-navy text-balance md:whitespace-nowrap">
@@ -100,71 +108,28 @@ export default function AboutSection() {
 
                   <div className="relative">
                     <div className="mx-auto max-w-5xl space-y-5">
-                      <m.p
-                        variants={fadeUpChild}
-                        className="font-sans text-[clamp(0.95rem,1.12vw,1.04rem)] leading-[1.62] text-navy/76"
-                      >
-                        {intro}
+                      <m.p className="overflow-hidden font-heading text-[clamp(2rem,4.5vw,4rem)] font-semibold leading-[1.08] tracking-[-0.015em] text-navy">
+                        <span className="relative inline-block overflow-hidden pb-1">
+                          <m.span variants={headingRevealText} className="inline-block">
+                            {ABOUT.heading}
+                          </m.span>
+                          <m.span
+                            aria-hidden="true"
+                            variants={headingRevealMask}
+                            className="absolute inset-y-0 left-0 w-full bg-[linear-gradient(90deg,transparent,rgba(0,184,150,0.18),rgba(201,149,42,0.2),transparent)]"
+                          />
+                        </span>
                       </m.p>
 
-                      <m.p
-                        variants={fadeUpChild}
-                        className="font-sans text-[clamp(0.95rem,1.12vw,1.04rem)] leading-[1.7] text-navy/76"
-                      >
-                        We specialise in{' '}
-                        <span className="inline-flex translate-y-[-0.08em] items-center border border-navy/10 bg-white/70 px-2.5 py-0.5 align-middle font-sans text-[0.68rem] font-bold tracking-[0.035em] text-navy/80 shadow-[0_6px_18px_rgba(13,27,42,0.05)]">
-                          cybersecurity
-                        </span>
-                        ,{' '}
-                        <span className="inline-flex translate-y-[-0.08em] items-center border border-navy/10 bg-white/70 px-2.5 py-0.5 align-middle font-sans text-[0.68rem] font-bold tracking-[0.035em] text-navy/80 shadow-[0_6px_18px_rgba(13,27,42,0.05)]">
-                          identity
-                        </span>
-                        ,{' '}
-                        <span className="inline-flex translate-y-[-0.08em] items-center border border-navy/10 bg-white/70 px-2.5 py-0.5 align-middle font-sans text-[0.68rem] font-bold tracking-[0.035em] text-navy/80 shadow-[0_6px_18px_rgba(13,27,42,0.05)]">
-                          healthtech
-                        </span>
-                        , and{' '}
-                        <span className="inline-flex translate-y-[-0.08em] items-center border border-navy/10 bg-white/70 px-2.5 py-0.5 align-middle font-sans text-[0.68rem] font-bold tracking-[0.035em] text-navy/80 shadow-[0_6px_18px_rgba(13,27,42,0.05)]">
-                          emerging technology
-                        </span>
-                        , delivering clear storytelling, strong media engagement, content creation, and targeted digital
-                        amplification that reaches decision-makers.
-                      </m.p>
-
-                      <m.p
-                        variants={fadeUpChild}
-                        className="font-sans text-[clamp(0.95rem,1.12vw,1.04rem)] leading-[1.62] text-navy/76"
-                      >
-                        {problem}
-                      </m.p>
-
-                      <m.div variants={fadeUpChild} className="space-y-3">
-                        <p className="font-sans text-[clamp(0.95rem,1.12vw,1.04rem)] leading-[1.62] text-navy/76">
-                          In complex, regulated sectors, the companies with the best technology rarely win the narrative.
-                          Buyers, investors, and regulators make decisions based on{' '}
-                          <span className="font-semibold text-navy">visibility</span>,{' '}
-                          <span className="font-semibold text-navy">credibility</span>, and{' '}
-                          <span className="font-semibold text-navy">trust</span>. Most technology companies underinvest in
-                          all three.
-                        </p>
-
-                        <div className="grid gap-3 sm:grid-cols-3">
-                          {['Visibility', 'Credibility', 'Trust'].map((item, index) => (
-                            <m.div
-                              key={item}
-                              variants={fadeUpChild}
-                              className="border-l border-navy/[0.12] bg-white/45 px-4 py-2.5"
-                            >
-                              <span className="block font-heading text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-accent">
-                                {String(index + 1).padStart(2, '0')}
-                              </span>
-                              <span className="mt-1 block font-heading text-[clamp(0.98rem,1.5vw,1.2rem)] font-semibold text-navy">
-                                {item}
-                              </span>
-                            </m.div>
-                          ))}
-                        </div>
-                      </m.div>
+                      {bodyParagraphs.map((paragraph) => (
+                        <m.p
+                          key={paragraph}
+                          variants={fadeUpChild}
+                          className="font-sans text-[clamp(0.95rem,1.12vw,1.04rem)] leading-[1.62] text-navy/76"
+                        >
+                          {paragraph}
+                        </m.p>
+                      ))}
 
                       <m.blockquote
                         variants={fadeUpChild}

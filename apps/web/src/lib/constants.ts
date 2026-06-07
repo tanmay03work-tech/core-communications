@@ -34,7 +34,7 @@ export const HERO = {
     line3: 'not noise.',
   },
   subtitle:
-    'Specialising in XaaS, SMBs, Cybersecurity, Identity, Healthtech and Tech-enabled companies.',
+    'Strategic communications for XaaS, cybersecurity, digital identity, healthtech and technology-enabled businesses - translating complexity into commercial clarity.',
   cta: {
     primary: { label: 'See Our Work', href: '/work' },
     secondary: { label: 'Start a Conversation', href: '/contact' },
@@ -59,26 +59,29 @@ export const TICKER_CLIENTS = [
   'Zoom',
   'Veolia',
   'AirTrunk',
-  'Healthdirect',
-  'Banjo',
   'Vodafone',
+  'TDK Ventures',
+  'Matific Education',
+  'GHE',
+  'Deepworkz',
+  'Ojas Media',
   'Asset Vision',
   'Cisco',
   'Adyen',
-  'Matific',
   'Parallel Wireless',
+  'Tiiik',
   'Huawei',
 ] as const;
 
 export const ABOUT = {
   tag: 'About Core',
-  heading: 'About Core',
+  heading: 'About Core Communications',
   paragraphs: [
     'Most technology companies are invisible to the audiences that matter most.',
-    'Core Communications is a full service communications consultancy helping B2B, Enterprises and SMBs get visibility that leads to real business outcomes, not just coverage.',
-    'We specialise in cybersecurity, identity, healthtech, and emerging technology, delivering clear storytelling, strong media engagement, content creation, and targeted digital amplification that reaches decision-makers.',
-    'Core has been designed to address your problem.',
-    'In complex, regulated sectors, the companies with the best technology rarely win the narrative. Buyers, investors, and regulators make decisions based on visibility, credibility, and trust. Most technology companies underinvest in all three.',
+    'Core Communications is a communications consultancy built for B2B, enterprise and growth-stage businesses operating in cybersecurity, digital identity, healthtech and emerging technology. We help organisations turn complex products, services and expertise into clear stories that customers, investors, partners, regulators and media can understand.',
+    'In many organisations, communications is fragmented across agencies, internal teams and suppliers. The result is activity without momentum. We act as an extension of your marketing and communications team, bringing together media relations, content, executive profiling, digital amplification, stakeholder engagement and issues management under one strategy.',
+    "Founded by communications practitioners and Journalists with more than 20 years of experience across Australia, India and the wider APAC region, including leadership roles with some of the industry's leading agencies, Core understands both the technology and the audiences shaping business outcomes.",
+    'Our focus is simple: Communicate with Clarity, to support Credibility and get the Cut-through that catalyses growth, strengthens reputation and helps organisations be recognised for the work they are already doing.',
     'Strong Core means strong communications infrastructure - not just coverage.',
     'The India-Australia Advantage',
     "The only corridor most comms agencies don't speak fluently.",
@@ -107,8 +110,7 @@ export const ABOUT = {
 export const SERVICES = {
   tag: 'Services',
   heading: 'Core Services',
-  subtitle:
-    'Core communications services designed to build visibility, credibility and commercial impact.',
+  subtitle: '',
   items: [
     {
       num: '01',
@@ -158,8 +160,7 @@ export const SECTORS = {
 export const HOMEPAGE_SECTORS = {
   eyebrow: 'SECTORS',
   heading: 'Sectors We Focus On',
-  subheading:
-    "Sector fluency that means you don't spend budget educating your communications partner.",
+  subheading: '',
   items: [
     {
       title: 'Identity Verification',

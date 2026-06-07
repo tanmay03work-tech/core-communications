@@ -115,9 +115,11 @@ export default function ServicesGrid() {
                 Core Services
               </h2>
             </div>
-            <div className="flex flex-col justify-end gap-6">
-              <p className="font-sans text-[0.92rem] font-normal leading-relaxed text-white/72">{SERVICES.subtitle}</p>
-            </div>
+            {SERVICES.subtitle ? (
+              <div className="flex flex-col justify-end gap-6">
+                <p className="font-sans text-[0.92rem] font-normal leading-relaxed text-white/72">{SERVICES.subtitle}</p>
+              </div>
+            ) : null}
           </div>
 
           {/* Services cards grid */}

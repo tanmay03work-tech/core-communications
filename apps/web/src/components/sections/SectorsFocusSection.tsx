@@ -75,13 +75,15 @@ export default function SectorsFocusSection() {
             viewport={{once: true, margin: '-80px'}}
             transition={prefersReducedMotion ? {duration: 0} : {duration: 0.6, ease: [0.22, 1, 0.36, 1]}}
           >
-            <div>
+            <div className={HOMEPAGE_SECTORS.subheading ? undefined : 'lg:col-span-2'}>
               <SectionLabel className="text-primary">{HOMEPAGE_SECTORS.eyebrow}</SectionLabel>
-              <h2 className="section-heading text-navy">{HOMEPAGE_SECTORS.heading}</h2>
+              <h2 className="section-heading text-navy sm:whitespace-nowrap">{HOMEPAGE_SECTORS.heading}</h2>
             </div>
-            <p className="max-w-2xl font-sans text-[0.92rem] font-normal leading-relaxed text-navy/70 lg:ml-auto">
-              {HOMEPAGE_SECTORS.subheading}
-            </p>
+            {HOMEPAGE_SECTORS.subheading ? (
+              <p className="max-w-2xl font-sans text-[0.92rem] font-normal leading-relaxed text-navy/70 lg:ml-auto">
+                {HOMEPAGE_SECTORS.subheading}
+              </p>
+            ) : null}
           </m.div>
 
           <m.div
