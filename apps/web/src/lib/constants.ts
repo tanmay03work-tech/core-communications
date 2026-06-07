@@ -4,7 +4,7 @@
 */
 
 export const SITE = {
-  name: 'Core Communications',
+  name: 'CORE COMMUNICATIONS',
   tagline: 'Clarity. Credibility. Cut-through.',
   description:
     'B2B PR and communications for tech-led companies across APAC. Sydney, Mumbai and New Delhi.',

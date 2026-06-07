@@ -27,11 +27,11 @@ export default function BrandLockup({
             />
           </span>
           <span className="flex min-w-0 flex-col">
-            <span className="text-[1.08rem] font-bold uppercase leading-none tracking-[0.28em] text-white">
-              Core
+            <span className="text-[1.08rem] font-bold uppercase leading-none tracking-[0.34em] text-white">
+              CORE
             </span>
-            <span className="mt-1 text-[0.68rem] font-semibold uppercase leading-none tracking-[0.22em] text-white/78">
-              Communications
+            <span className="mt-1 text-[0.68rem] font-bold uppercase leading-none tracking-[0.28em] text-white/86">
+              COMMUNICATIONS
             </span>
           </span>
         </span>

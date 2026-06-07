@@ -34,8 +34,8 @@ function NavbarLogo({compact, scrolled}: {compact: boolean; scrolled: boolean}) 
         <AnimatedLogoMark size={compact ? 38 : 42} />
       </m.span>
       <div className="flex min-w-0 flex-col">
-        <span className={cn('text-[0.94rem] font-bold uppercase tracking-[0.3em]', scrolled ? 'text-white' : 'text-[var(--navy)]')}>Core</span>
-        <span className={cn('text-[0.62rem] font-semibold uppercase tracking-[0.24em]', scrolled ? 'text-white/78' : 'text-[rgba(13,27,42,0.78)]')}>Communications</span>
+        <span className={cn('text-[0.94rem] font-bold uppercase leading-none tracking-[0.34em]', scrolled ? 'text-white' : 'text-[var(--navy)]')}>CORE</span>
+        <span className={cn('mt-1 text-[0.62rem] font-bold uppercase leading-none tracking-[0.28em]', scrolled ? 'text-white/86' : 'text-[rgba(13,27,42,0.82)]')}>COMMUNICATIONS</span>
       </div>
     </Link>
   );
