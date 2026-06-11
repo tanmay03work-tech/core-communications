@@ -3,8 +3,6 @@ import type {Config} from 'sanity';
 import {deskTool} from 'sanity/desk';
 import {schemaTypes} from './schemas';
 
-const singletonTypes = new Set(['siteSettings']);
-
 const config: Config = defineConfig({
   name: 'default',
   title: 'Core Communications Studio',
@@ -22,20 +20,12 @@ const config: Config = defineConfig({
         S.list()
           .title('Content')
           .items([
-            S.listItem()
-              .title('Site Settings')
-              .id('siteSettings')
-              .child(S.document().schemaType('siteSettings').documentId('siteSettings')),
-            ...S.documentTypeListItems().filter(
-              (listItem) => !singletonTypes.has(listItem.getId() ?? ''),
-            ),
+            ...S.documentTypeListItems(),
           ]),
     }),
   ],
   schema: {
     types: schemaTypes,
-    templates: (templates) =>
-      templates.filter(({schemaType}) => !singletonTypes.has(schemaType ?? '')),
   },
 });
 

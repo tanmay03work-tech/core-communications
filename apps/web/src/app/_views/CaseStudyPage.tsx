@@ -4,6 +4,7 @@ import {notFound} from 'next/navigation';
 import {Container} from '@/components/layout/Container';
 import StructuredData from '@/components/seo/StructuredData';
 import SectionRenderer from '@/components/sections/SectionRenderer';
+import PortableTextContent from '@/components/sections/PortableTextContent';
 import SectionLabel from '@/components/ui/SectionLabel';
 import {CASE_STUDIES} from '@/lib/constants';
 import {buildMetadata, buildOgImageUrl, getAbsoluteUrl, getSiteUrl} from '@/lib/metadata';
@@ -226,6 +227,7 @@ export default async function CaseStudyPage({params}: CaseStudyPageProps) {
   const resultNote = getOptionalField(study, 'resultNote') as string | undefined;
   const image = getStudyImage(study);
   const imageUrl = image ? getSanityImageUrl(image, {width: 1200, height: 630, fit: 'crop', quality: 85}) : buildOgImageUrl({title, description, type: 'case-study'});
+  const bodyContent = getOptionalField(study, 'bodyContent') as import('@/types').PortableTextNode[] | undefined;
 
   const structuredData = {
     '@context': 'https://schema.org',
@@ -303,6 +305,12 @@ export default async function CaseStudyPage({params}: CaseStudyPageProps) {
                   ))}
                 </ul>
               ) : null}
+            </div>
+          ) : null}
+
+          {bodyContent && bodyContent.length > 0 ? (
+            <div className="mt-8 border border-navy/10 bg-white p-5 md:p-8">
+              <PortableTextContent value={bodyContent} />
             </div>
           ) : null}
 

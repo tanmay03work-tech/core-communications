@@ -41,7 +41,7 @@ const organizationSchema = {
   '@type': 'Organization',
   name: 'Core Communications',
   url: siteUrl,
-  logo: getAbsoluteUrl('/logo.png'),
+  logo: getAbsoluteUrl('/logo_final.svg'),
   sameAs: [],
 };
 
@@ -94,8 +94,11 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
   },
   icons: {
-    icon: '/icon.png',
-    apple: '/apple-touch-icon.png',
+    icon: [
+      {url: '/logo_final.svg', type: 'image/svg+xml'},
+    ],
+    shortcut: '/logo_final.svg',
+    apple: '/logo_final.svg',
   },
   robots: {
     index: true,

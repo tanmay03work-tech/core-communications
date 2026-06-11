@@ -194,8 +194,14 @@ export const caseStudy = defineType({
       validation: (rule) => rule.max(6),
     }),
     defineField({
+      name: 'bodyContent',
+      title: 'Body Content (Simple)',
+      type: 'blockContent',
+      description: 'Use this for simpler case studies. You can use this instead of, or alongside, the modular sections.',
+    }),
+    defineField({
       name: 'sections',
-      title: 'Sections',
+      title: 'Sections (Advanced)',
       type: 'array',
       of: [
         defineArrayMember({type: 'heroSection'}),
@@ -208,7 +214,6 @@ export const caseStudy = defineType({
         defineArrayMember({type: 'splitContentSection'}),
         defineArrayMember({type: 'logoCloudSection'}),
       ],
-      validation: (rule) => rule.required().min(1),
     }),
     defineField({
       name: 'coverImage',
@@ -220,16 +225,14 @@ export const caseStudy = defineType({
           name: 'alt',
           title: 'Alt text',
           type: 'string',
-          validation: (rule) => rule.required().max(160),
+          validation: (rule) => rule.max(160),
         }),
       ],
-      validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'publishedAt',
       title: 'Published at',
       type: 'datetime',
-      validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'featured',
