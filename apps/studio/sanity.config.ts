@@ -6,14 +6,8 @@ import {schemaTypes} from './schemas';
 const config: Config = defineConfig({
   name: 'default',
   title: 'Core Communications Studio',
-  projectId:
-    process.env.SANITY_STUDIO_PROJECT_ID ??
-    process.env.NEXT_PUBLIC_SANITY_PROJECT_ID ??
-    'demo1234',
-  dataset:
-    process.env.SANITY_STUDIO_DATASET ??
-    process.env.NEXT_PUBLIC_SANITY_DATASET ??
-    'production',
+  projectId: process.env.SANITY_STUDIO_PROJECT_ID || 'vnioiwzw',
+  dataset: process.env.SANITY_STUDIO_DATASET || 'production',
   plugins: [
     deskTool({
       structure: (S) =>
