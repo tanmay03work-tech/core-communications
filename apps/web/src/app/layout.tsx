@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import dynamic from 'next/dynamic';
 import Script from 'next/script';
+import { GoogleAnalytics } from '@next/third-parties/google';
 import {Poppins, Open_Sans, Merriweather} from 'next/font/google';
 import { LazyMotion, domAnimation } from 'framer-motion';
 import { Analytics } from '@vercel/analytics/react';
@@ -48,6 +49,8 @@ const organizationSchema = {
 const CustomCursor = dynamic(() => import('@/components/layout/CustomCursor'), {
   ssr: false,
 });
+
+const gaMeasurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
 
 export const metadata: Metadata = {
   metadataBase: new URL(
@@ -133,6 +136,7 @@ export default function RootLayout({
         </LazyMotion>
         <Analytics />
         <SpeedInsights />
+        {gaMeasurementId ? <GoogleAnalytics gaId={gaMeasurementId} /> : null}
       </body>
     </html>
   );
