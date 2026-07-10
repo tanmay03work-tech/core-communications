@@ -60,7 +60,6 @@ export const TICKER_CLIENTS = [
   'Veolia',
   'AirTrunk',
   'Vodafone',
-  'TDK Ventures',
   'Matific Education',
   'GHE',
   'Deepworkz',

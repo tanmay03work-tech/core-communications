@@ -9,10 +9,6 @@ const CLIENTS = [
     logo: '/images/client-logos/zoom.svg',
   },
   {
-    name: 'TDK Ventures',
-    logo: null,
-  },
-  {
     name: 'Vodafone',
     logo: '/images/client-logos/vodafone.png',
   },
