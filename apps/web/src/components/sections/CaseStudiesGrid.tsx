@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import CaseStudiesGridClient from '@/components/sections/CaseStudiesGridClient';
-import SectionLabel from '@/components/ui/SectionLabel';
 import {CASE_STUDIES} from '@/lib/constants';
 import {getFeaturedCaseStudies} from '@/lib/sanity/content';
 import type {CaseStudyListItem} from '@/lib/sanity/queries';
@@ -23,8 +22,7 @@ const fallbackCaseStudies: CaseStudyListItem[] = CASE_STUDIES.items.map((study, 
 
 export default async function CaseStudiesGrid({caseStudies}: CaseStudiesGridProps) {
   const fetchedCaseStudies = caseStudies ?? (await getFeaturedCaseStudies());
-  const newLayoutStudies = fetchedCaseStudies?.filter((study) => study.caseNumber);
-  const resolvedCaseStudies = newLayoutStudies?.length ? newLayoutStudies : fallbackCaseStudies;
+  const resolvedCaseStudies = fetchedCaseStudies ?? fallbackCaseStudies;
 
   return (
     <section id="cases" className="relative overflow-hidden bg-[linear-gradient(180deg,#F4F6F9_0%,#ffffff_50%,#F4F6F9_100%)] py-[clamp(5rem,9vw,8rem)] text-navy">
@@ -35,7 +33,7 @@ export default async function CaseStudiesGrid({caseStudies}: CaseStudiesGridProp
         {/* Header row */}
         <div className="mb-12 flex flex-col justify-between gap-6 md:mb-14 lg:flex-row lg:items-end">
           <div>
-            <SectionLabel className="text-primary">{CASE_STUDIES.tag}</SectionLabel>
+            <div className="section-tag section-tag-dark mb-5">{CASE_STUDIES.tag}</div>
             <h2 className="section-heading text-navy">Results that speak for themselves.</h2>
           </div>
           <Link

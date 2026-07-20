@@ -49,12 +49,26 @@ export async function POST(request: Request) {
     revalidateTag('teamMembers');
   }
 
+  if (documentType === 'clientLogo') {
+    revalidateTag('clientLogos');
+  }
+
   if (documentType === 'caseStudy') {
     revalidateTag('caseStudies');
     if (slug) {
       revalidateTag(`caseStudy:${slug}`);
       revalidatePath(`/work/${slug}`);
     }
+  }
+
+  if (documentType === 'blogPost') {
+    revalidateTag('blogPosts');
+    if (slug) {
+      revalidateTag(`blogPost:${slug}`);
+      revalidatePath(`/blogs/${slug}`);
+      revalidatePath(`/blog/${slug}`);
+    }
+    revalidatePath('/blogs');
   }
 
   revalidatePath('/');

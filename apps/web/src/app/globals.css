@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,700;1,300;1,700&family=Open+Sans:wght@300;400;600&family=Poppins:wght@400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -49,6 +51,9 @@
     --color-navy-80:  rgba(13,27,42,0.08);
 
     /* ── Font ────────────────────────────────────────── */
+    --font-poppins:   'Poppins', sans-serif;
+    --font-open-sans: 'Open Sans', sans-serif;
+    --font-merriweather: 'Merriweather', serif;
     --font-sans:      var(--font-open-sans);
     --font-Sans-serif:var(--font-open-sans);
     --font-heading:   var(--font-poppins);

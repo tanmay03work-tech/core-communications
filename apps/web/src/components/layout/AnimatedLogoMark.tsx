@@ -30,7 +30,7 @@ export default function AnimatedLogoMark({
         fill
         sizes={`${size}px`}
         className={light ? 'object-contain brightness-0 invert' : 'object-contain'}
-        priority={size >= 56}
+        priority={true}
       />
     </span>
   );

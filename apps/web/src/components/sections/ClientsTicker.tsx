@@ -3,7 +3,12 @@
 import Image from 'next/image';
 import {m} from 'framer-motion';
 
-const CLIENTS = [
+type ClientTickerItem = {
+  name: string;
+  logo?: string;
+};
+
+const CLIENTS: ClientTickerItem[] = [
   {
     name: 'Zoom',
     logo: '/images/client-logos/zoom.svg',
@@ -46,7 +51,9 @@ const CLIENTS = [
   },
 ];
 
-export function ClientsTicker() {
+export function ClientsTicker({clients = CLIENTS}: {clients?: ClientTickerItem[]}) {
+  const visibleClients = clients;
+
   return (
     <section className="relative overflow-hidden border-y border-navy/[0.08] bg-[linear-gradient(180deg,#ffffff_0%,#F4F6F9_100%)] px-4 py-12 sm:px-6 md:px-10 lg:px-14">
       <div className="absolute inset-x-0 top-0 h-px bg-[linear-gradient(90deg,transparent,rgba(0,184,150,0.55),transparent)]" />
@@ -54,7 +61,7 @@ export function ClientsTicker() {
         Team experience includes working with
       </p>
       <div className="mx-auto flex w-full max-w-[92rem] flex-wrap items-stretch justify-center gap-4 md:gap-6">
-        {CLIENTS.map((client, i) => (
+        {visibleClients.map((client, i) => (
           <m.div
             key={client.name}
             className="group relative flex min-h-[5.5rem] basis-[calc((100%-1rem)/2)] items-center justify-center overflow-hidden rounded-[1rem] border border-navy/[0.08] bg-white/85 px-4 py-5 shadow-[0_14px_42px_rgba(13,27,42,0.08)] backdrop-blur-sm sm:min-h-[6rem] sm:basis-[calc((100%-2rem)/3)] sm:px-5 md:min-h-[6.5rem] md:basis-[calc((100%-3rem)/3)] lg:basis-[calc((100%-4.5rem)/4)] xl:basis-[calc((100%-6rem)/5)] 2xl:basis-[calc((100%-7.5rem)/6)]"

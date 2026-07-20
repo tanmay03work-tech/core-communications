@@ -46,6 +46,10 @@ function isRouteActive(pathname: string, href: string) {
     return pathname === '/work' || pathname.startsWith('/work/');
   }
 
+  if (href === '/blogs') {
+    return pathname === '/blogs' || pathname.startsWith('/blogs/');
+  }
+
   if (href === '/') {
     return pathname === '/';
   }

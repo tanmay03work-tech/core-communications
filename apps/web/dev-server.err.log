@@ -1,0 +1,233 @@
+Warning: Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:
+1. You might have mismatching versions of React and the renderer (such as React DOM)
+2. You might be breaking the Rules of Hooks
+3. You might have more than one copy of React in the same app
+See https://reactjs.org/link/invalid-hook-call for tips about how to debug and fix this problem.
+ ⨯ TypeError: Cannot read properties of null (reading 'useState')
+    at useReducedMotion (E:\CORE_COMMUNICATION\apps\web\.next\server\chunks\ssr\25309_framer-motion_dist_es_8c46d0._.js:1583:386)
+    at SectionLabel (E:\CORE_COMMUNICATION\apps\web\.next\server\chunks\ssr\src_7f8d29._.js:1813:450)
+digest: "3787133997"
+Warning: Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:
+1. You might have mismatching versions of React and the renderer (such as React DOM)
+2. You might be breaking the Rules of Hooks
+3. You might have more than one copy of React in the same app
+See https://reactjs.org/link/invalid-hook-call for tips about how to debug and fix this problem.
+TypeError: Cannot read properties of null (reading 'useContext')
+    at t.useContext (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:162242)
+    at usePathname (E:\CORE_COMMUNICATION\apps\web\.next\server\chunks\ssr\dda84_next_dist_esm_client_components_433757._.js:558:366)
+    at ErrorBoundary (E:\CORE_COMMUNICATION\apps\web\.next\server\chunks\ssr\dda84_next_dist_esm_client_components_433757._.js:868:355)
+    at au (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:10446)
+    at E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:15122
+    at aw (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:16908)
+    at a_ (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:49776)
+    at ab (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:11808)
+    at E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:16871
+    at aw (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:16908)
+    at aw (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:46505)
+    at a_ (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:49776)
+    at ab (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:11808)
+    at E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:16871
+    at aw (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:16908)
+    at a_ (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:49776)
+    at E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:58612
+    at E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:59270
+    at aN (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:59278)
+    at Timeout._onTimeout (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:6939)
+    at listOnTimeout (node:internal/timers:605:17)
+    at process.processTimers (node:internal/timers:541:7)
+ ⨯ TypeError: Cannot read properties of null (reading 'useContext')
+    at t.useContext (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:162242)
+    at usePathname (E:\CORE_COMMUNICATION\apps\web\.next\server\chunks\ssr\dda84_next_dist_esm_client_components_433757._.js:558:366)
+    at ErrorBoundary (E:\CORE_COMMUNICATION\apps\web\.next\server\chunks\ssr\dda84_next_dist_esm_client_components_433757._.js:868:355)
+    at au (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:10446)
+    at E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:15122
+    at aw (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:16908)
+    at a_ (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:49776)
+    at ab (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:11808)
+    at E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:16871
+    at aw (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:16908)
+    at aw (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:46505)
+    at a_ (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:49776)
+    at ab (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:11808)
+    at E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:16871
+    at aw (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:16908)
+    at a_ (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:49776)
+    at E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:58612
+    at E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:59270
+    at aN (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:59278)
+    at Timeout._onTimeout (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:6939)
+    at listOnTimeout (node:internal/timers:605:17)
+    at process.processTimers (node:internal/timers:541:7) {
+  page: '/blogs'
+}
+ ⨯     at instantiateModule (E:\CORE_COMMUNICATION\apps\web\.next\server\chunks\ssr\[turbopack]_runtime.js:492:15)
+    at getOrInstantiateModuleFromParent (E:\CORE_COMMUNICATION\apps\web\.next\server\chunks\ssr\[turbopack]_runtime.js:572:12)
+    at commonJsRequire (E:\CORE_COMMUNICATION\apps\web\.next\server\chunks\ssr\[turbopack]_runtime.js:136:20)
+digest: "3510488802"
+Warning: Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:
+1. You might have mismatching versions of React and the renderer (such as React DOM)
+2. You might be breaking the Rules of Hooks
+3. You might have more than one copy of React in the same app
+See https://reactjs.org/link/invalid-hook-call for tips about how to debug and fix this problem.
+TypeError: Cannot read properties of null (reading 'useContext')
+    at t.useContext (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:162242)
+    at usePathname (E:\CORE_COMMUNICATION\apps\web\.next\server\chunks\ssr\dda84_next_dist_esm_client_components_433757._.js:558:366)
+    at ErrorBoundary (E:\CORE_COMMUNICATION\apps\web\.next\server\chunks\ssr\dda84_next_dist_esm_client_components_433757._.js:868:355)
+    at au (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:10446)
+    at E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:15122
+    at aw (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:16908)
+    at a_ (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:49776)
+    at ab (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:11808)
+    at E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:16871
+    at aw (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:16908)
+    at aw (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:46505)
+    at a_ (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:49776)
+    at ab (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:11808)
+    at E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:16871
+    at aw (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:16908)
+    at a_ (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:49776)
+    at E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:58612
+    at E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:59270
+    at aN (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:59278)
+    at Timeout._onTimeout (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:6939)
+    at listOnTimeout (node:internal/timers:605:17)
+    at process.processTimers (node:internal/timers:541:7)
+ ⨯ TypeError: Cannot read properties of null (reading 'useContext')
+    at t.useContext (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:162242)
+    at usePathname (E:\CORE_COMMUNICATION\apps\web\.next\server\chunks\ssr\dda84_next_dist_esm_client_components_433757._.js:558:366)
+    at ErrorBoundary (E:\CORE_COMMUNICATION\apps\web\.next\server\chunks\ssr\dda84_next_dist_esm_client_components_433757._.js:868:355)
+    at au (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:10446)
+    at E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:15122
+    at aw (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:16908)
+    at a_ (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:49776)
+    at ab (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:11808)
+    at E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:16871
+    at aw (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:16908)
+    at aw (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:46505)
+    at a_ (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:49776)
+    at ab (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:11808)
+    at E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:16871
+    at aw (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:16908)
+    at a_ (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:49776)
+    at E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:58612
+    at E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:59270
+    at aN (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:59278)
+    at Timeout._onTimeout (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:6939)
+    at listOnTimeout (node:internal/timers:605:17)
+    at process.processTimers (node:internal/timers:541:7) {
+  page: '/work'
+}
+ ⨯     at instantiateModule (E:\CORE_COMMUNICATION\apps\web\.next\server\chunks\ssr\[turbopack]_runtime.js:492:15)
+    at getOrInstantiateModuleFromParent (E:\CORE_COMMUNICATION\apps\web\.next\server\chunks\ssr\[turbopack]_runtime.js:572:12)
+    at commonJsRequire (E:\CORE_COMMUNICATION\apps\web\.next\server\chunks\ssr\[turbopack]_runtime.js:136:20)
+digest: "1750897410"
+Warning: Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:
+1. You might have mismatching versions of React and the renderer (such as React DOM)
+2. You might be breaking the Rules of Hooks
+3. You might have more than one copy of React in the same app
+See https://reactjs.org/link/invalid-hook-call for tips about how to debug and fix this problem.
+TypeError: Cannot read properties of null (reading 'useContext')
+    at t.useContext (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:162242)
+    at usePathname (E:\CORE_COMMUNICATION\apps\web\.next\server\chunks\ssr\dda84_next_dist_esm_client_components_433757._.js:558:366)
+    at ErrorBoundary (E:\CORE_COMMUNICATION\apps\web\.next\server\chunks\ssr\dda84_next_dist_esm_client_components_433757._.js:868:355)
+    at au (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:10446)
+    at E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:15122
+    at aw (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:16908)
+    at a_ (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:49776)
+    at ab (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:11808)
+    at E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:16871
+    at aw (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:16908)
+    at aw (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:46505)
+    at a_ (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:49776)
+    at ab (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:11808)
+    at E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:16871
+    at aw (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:16908)
+    at a_ (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:49776)
+    at E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:58612
+    at E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:59270
+    at aN (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:59278)
+    at Timeout._onTimeout (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:6939)
+    at listOnTimeout (node:internal/timers:605:17)
+    at process.processTimers (node:internal/timers:541:7)
+ ⨯ TypeError: Cannot read properties of null (reading 'useContext')
+    at t.useContext (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:162242)
+    at usePathname (E:\CORE_COMMUNICATION\apps\web\.next\server\chunks\ssr\dda84_next_dist_esm_client_components_433757._.js:558:366)
+    at ErrorBoundary (E:\CORE_COMMUNICATION\apps\web\.next\server\chunks\ssr\dda84_next_dist_esm_client_components_433757._.js:868:355)
+    at au (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:10446)
+    at E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:15122
+    at aw (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:16908)
+    at a_ (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:49776)
+    at ab (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:11808)
+    at E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:16871
+    at aw (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:16908)
+    at aw (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:46505)
+    at a_ (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:49776)
+    at ab (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:11808)
+    at E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:16871
+    at aw (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:16908)
+    at a_ (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:49776)
+    at E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:58612
+    at E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:59270
+    at aN (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:59278)
+    at Timeout._onTimeout (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:6939)
+    at listOnTimeout (node:internal/timers:605:17)
+    at process.processTimers (node:internal/timers:541:7) {
+  page: '/'
+}
+ ⨯     at instantiateModule (E:\CORE_COMMUNICATION\apps\web\.next\server\chunks\ssr\[turbopack]_runtime.js:492:15)
+    at getOrInstantiateModuleFromParent (E:\CORE_COMMUNICATION\apps\web\.next\server\chunks\ssr\[turbopack]_runtime.js:572:12)
+    at commonJsRequire (E:\CORE_COMMUNICATION\apps\web\.next\server\chunks\ssr\[turbopack]_runtime.js:136:20)
+digest: "143684322"
+Warning: Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:
+1. You might have mismatching versions of React and the renderer (such as React DOM)
+2. You might be breaking the Rules of Hooks
+3. You might have more than one copy of React in the same app
+See https://reactjs.org/link/invalid-hook-call for tips about how to debug and fix this problem.
+TypeError: Cannot read properties of null (reading 'useContext')
+    at t.useContext (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:162242)
+    at usePathname (E:\CORE_COMMUNICATION\apps\web\.next\server\chunks\ssr\dda84_next_dist_esm_client_components_433757._.js:558:366)
+    at ErrorBoundary (E:\CORE_COMMUNICATION\apps\web\.next\server\chunks\ssr\dda84_next_dist_esm_client_components_433757._.js:868:355)
+    at au (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:10446)
+    at E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:15122
+    at aw (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:16908)
+    at a_ (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:49776)
+    at ab (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:11808)
+    at E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:16871
+    at aw (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:16908)
+    at aw (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:46505)
+    at a_ (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:49776)
+    at ab (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:11808)
+    at E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:16871
+    at aw (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:16908)
+    at a_ (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:49776)
+    at E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:58612
+    at E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:59270
+    at aN (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:59278)
+    at Timeout._onTimeout (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:6939)
+    at listOnTimeout (node:internal/timers:605:17)
+    at process.processTimers (node:internal/timers:541:7)
+ ⨯ TypeError: Cannot read properties of null (reading 'useContext')
+    at t.useContext (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:162242)
+    at usePathname (E:\CORE_COMMUNICATION\apps\web\.next\server\chunks\ssr\dda84_next_dist_esm_client_components_433757._.js:558:366)
+    at ErrorBoundary (E:\CORE_COMMUNICATION\apps\web\.next\server\chunks\ssr\dda84_next_dist_esm_client_components_433757._.js:868:355)
+    at au (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:10446)
+    at E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:15122
+    at aw (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:16908)
+    at a_ (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:49776)
+    at ab (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:11808)
+    at E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:16871
+    at aw (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:16908)
+    at aw (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:46505)
+    at a_ (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:49776)
+    at ab (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:11808)
+    at E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:16871
+    at aw (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:16908)
+    at a_ (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:49776)
+    at E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:58612
+    at E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:59270
+    at aN (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:59278)
+    at Timeout._onTimeout (E:\CORE_COMMUNICATION\node_modules\.pnpm\next@14.2.29_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:6939)
+    at listOnTimeout (node:internal/timers:605:17)
+    at process.processTimers (node:internal/timers:541:7) {
+  page: '/work'
+}

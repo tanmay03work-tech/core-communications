@@ -20,7 +20,7 @@ export const client = createClient({
   projectId: fallbackProjectId,
   dataset: fallbackDataset,
   apiVersion,
-  useCdn: true,
+  useCdn: false,
   perspective: 'published',
 });
 
@@ -62,11 +62,11 @@ export async function sanityFetch<T>({
   try {
     return await activeClient.fetch<T>(query, params, {
       next: {
-        revalidate: 60,
+        revalidate: isEnabled ? 0 : 60,
         tags: ['sanity', ...tags],
       },
       perspective: isEnabled ? 'previewDrafts' : 'published',
-      useCdn: !isEnabled,
+      useCdn: false,
       token: isEnabled ? token : undefined,
     });
   } catch {

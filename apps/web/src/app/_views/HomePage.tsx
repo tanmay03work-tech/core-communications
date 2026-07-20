@@ -6,17 +6,29 @@ import CTASection from '@/components/sections/CTASection';
 import ServicesGrid from '@/components/sections/ServicesGrid';
 import SectorsFocusSection from '@/components/sections/SectorsFocusSection';
 import TeamSection from '@/components/sections/TeamSection';
-import type {SiteSettings} from '@/types';
+import type {ClientLogo, SiteSettings} from '@/types';
 
 type HomePageProps = {
   siteSettings?: SiteSettings | null;
+  clientLogos?: ClientLogo[] | null;
 };
 
-export default function HomePage({siteSettings}: HomePageProps) {
+export default function HomePage({siteSettings, clientLogos}: HomePageProps) {
+  const tickerClients =
+    clientLogos == null || clientLogos.length === 0
+      ? undefined
+      : clientLogos
+          .filter((client) => client.featured !== false)
+          .map((client) => ({
+            name: client.name,
+            logo: client.logo?.asset?.url,
+          }))
+          .filter((client) => client.name);
+
   return (
     <>
       <HeroSection siteSettings={siteSettings} />
-      <ClientsTicker />
+      <ClientsTicker clients={tickerClients} />
       <div id="about">
         <AboutSection />
       </div>

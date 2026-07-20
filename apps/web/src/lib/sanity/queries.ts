@@ -1,7 +1,9 @@
 import {groq} from 'next-sanity';
 import type {
+  BlogPost,
   CaseStudy,
   CaseStudyStat,
+  ClientLogo,
   SanityImage,
   SanitySlug,
   Service,
@@ -101,13 +103,17 @@ export type AuthorSummary = {
 export type GetAllCaseStudiesResult = CaseStudyListItem[];
 export type GetCaseStudyBySlugResult = CaseStudy | null;
 export type GetFeaturedCaseStudiesResult = CaseStudyListItem[];
+export type GetAllBlogPostsResult = BlogPost[];
+export type GetBlogPostBySlugResult = BlogPost | null;
+export type GetBlogPostSlugsResult = string[];
+export type GetClientLogosResult = ClientLogo[];
 export type GetSiteSettingsResult = SiteSettings | null;
 export type GetAllTeamMembersResult = TeamMember[];
 export type GetAllServicesResult = Service[];
 export type GetCaseStudySlugsResult = string[];
 
 export const getAllCaseStudiesQuery = groq`
-  *[_type == "caseStudy"] | order(featured desc, publishedAt desc){
+  *[_type == "caseStudy" && defined(slug.current)] | order(featured desc, publishedAt desc, _createdAt desc){
     _id,
     title,
     slug,
@@ -136,7 +142,7 @@ export const getCaseStudyBySlugQuery = groq`
 `;
 
 export const getFeaturedCaseStudiesQuery = groq`
-  *[_type == "caseStudy" && featured == true] | order(publishedAt desc)[0...4]{
+  *[_type == "caseStudy" && defined(slug.current)] | order(featured desc, publishedAt desc, _createdAt desc)[0...6]{
     _id,
     title,
     slug,
@@ -149,6 +155,49 @@ export const getFeaturedCaseStudiesQuery = groq`
       ...
     },
     coverImage${imageFields}
+  }
+`;
+
+export const getAllBlogPostsQuery = groq`
+  *[_type == "blogPost" && defined(slug.current)] | order(featured desc, publishedAt desc){
+    _id,
+    _type,
+    title,
+    slug,
+    category,
+    excerpt,
+    author,
+    readTime,
+    publishedAt,
+    featured,
+    coverImage${imageFields}
+  }
+`;
+
+export const getBlogPostBySlugQuery = groq`
+  *[_type == "blogPost" && slug.current == $slug][0]{
+    ...,
+    coverImage${imageFields},
+    seo${seoFields},
+    bodyContent[]${portableTextFields},
+    sections[]${sectionFields}
+  }
+`;
+
+export const getBlogPostSlugsQuery = groq`
+  *[_type == "blogPost" && defined(slug.current)].slug.current
+`;
+
+export const getClientLogosQuery = groq`
+  *[_type == "clientLogo"] | order(order asc, name asc){
+    _id,
+    _type,
+    name,
+    logo${imageFields},
+    url,
+    category,
+    order,
+    featured
   }
 `;
 
@@ -190,7 +239,7 @@ export const getAllServicesQuery = groq`
 `;
 
 export const getCaseStudySlugsQuery = groq`
-  *[_type == "caseStudy" && defined(slug.current) && defined(caseNumber)].slug.current
+  *[_type == "caseStudy" && defined(slug.current)].slug.current
 `;
 
 export const sanityQueries = {
@@ -198,6 +247,10 @@ export const sanityQueries = {
   caseStudies: getAllCaseStudiesQuery,
   caseStudySlugs: getCaseStudySlugsQuery,
   caseStudyBySlug: getCaseStudyBySlugQuery,
+  blogPosts: getAllBlogPostsQuery,
+  blogPostSlugs: getBlogPostSlugsQuery,
+  blogPostBySlug: getBlogPostBySlugQuery,
+  clientLogos: getClientLogosQuery,
   services: getAllServicesQuery,
   teamMembers: getAllTeamMembersQuery,
   featuredCaseStudies: getFeaturedCaseStudiesQuery,

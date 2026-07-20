@@ -3,10 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
-import { m, useReducedMotion } from 'framer-motion';
 import { Container } from '@/components/layout/Container';
-import ScrollReveal from '@/components/motion/ScrollReveal';
-import SectionLabel from '@/components/ui/SectionLabel';
 import { CTA } from '@/lib/constants';
 
 interface WorkPageClientProps {
@@ -42,7 +39,6 @@ function getStudySlug(study: WorkStudy) {
 }
 
 export default function WorkPageClient({ studies }: WorkPageClientProps) {
-  const prefersReducedMotion = useReducedMotion();
   const [activeTab, setActiveTab] = useState('All');
 
   // Filter logic
@@ -65,31 +61,20 @@ export default function WorkPageClient({ studies }: WorkPageClientProps) {
         <div className="page-hero-glow" aria-hidden="true" />
         <Container className="relative z-10 max-w-7xl">
           <div className="max-w-3xl">
-            <m.div
-              className="section-tag mb-6"
-              initial={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y: 14 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.36, ease: [0.22, 1, 0.36, 1] }}
-            >
+            <div className="section-tag mb-6">
               Our Work
-            </m.div>
-            <m.h1
+            </div>
+            <h1
               className="font-semibold leading-[1.02] tracking-[-0.03em] text-white"
               style={{ fontSize: 'var(--step-h1)' }}
-              initial={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.42, delay: 0.04, ease: [0.22, 1, 0.36, 1] }}
             >
               Results that move credibility, reach, and business momentum.
-            </m.h1>
-            <m.p
+            </h1>
+            <p
               className="mt-6 max-w-xl font-sans text-[1rem] font-normal leading-relaxed text-white/74"
-              initial={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.38, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
             >
               We measure success in institutional credibility, market authority, and outcomes that keep compounding beyond the first headline.
-            </m.p>
+            </p>
           </div>
         </Container>
       </section>
@@ -123,54 +108,50 @@ export default function WorkPageClient({ studies }: WorkPageClientProps) {
       <section className="bg-[linear-gradient(180deg,#F4F6F9_0%,#ffffff_50%,#F4F6F9_100%)] py-[clamp(4rem,7vw,6.5rem)] text-navy">
         <Container className="max-w-7xl">
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-            {filteredStudies.map((study, index) => (
-              <m.div
+            {filteredStudies.map((study) => (
+              <div
                 key={getStudySlug(study)}
-                initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.26, delay: prefersReducedMotion ? 0 : index * 0.03, ease: [0.16, 1, 0.3, 1] }}
+                className="h-full"
               >
-                <ScrollReveal delay={index * 0.03}>
-                    <Link
-                      href={`/work/${getStudySlug(study)}`}
-                      className="card-work group flex h-full min-w-0 flex-col justify-between rounded-[1.25rem] border border-navy/8 bg-white p-[clamp(1.25rem,5vw,2.5rem)] no-underline shadow-[0_4px_20px_rgba(13,27,42,0.02)] transition-all duration-300 hover:-translate-y-1 hover:border-accent/28 hover:shadow-[0_16px_48px_rgba(13,27,42,0.08)] sm:rounded-[1.5rem]"
-                    >
-                      <div>
-                        {/* Tag + arrow */}
-                        <div className="mb-3 flex items-center justify-between gap-4">
-                          <div className="min-w-0 break-words text-[0.65rem] font-bold uppercase tracking-[0.16em] text-primary/72">
-                            {study.client}
-                          </div>
-                          <ArrowUpRight className="h-5 w-5 shrink-0 text-navy/28 transition-all duration-300 group-hover:rotate-45 group-hover:text-accent" />
+                <Link
+                  href={`/work/${getStudySlug(study)}`}
+                  className="card-work group flex h-full min-w-0 flex-col justify-between rounded-[1.25rem] border border-navy/8 bg-white p-[clamp(1.25rem,5vw,2.5rem)] no-underline shadow-[0_4px_20px_rgba(13,27,42,0.02)] transition-all duration-300 hover:-translate-y-1 hover:border-accent/28 hover:shadow-[0_16px_48px_rgba(13,27,42,0.08)] sm:rounded-[1.5rem]"
+                >
+                  <div>
+                    {/* Tag + arrow */}
+                    <div className="mb-3 flex items-center justify-between gap-4">
+                      <div className="min-w-0 break-words text-[0.65rem] font-bold uppercase tracking-[0.16em] text-primary/72">
+                        {study.client}
+                      </div>
+                      <ArrowUpRight className="h-5 w-5 shrink-0 text-navy/28 transition-all duration-300 group-hover:rotate-45 group-hover:text-accent" />
+                    </div>
+
+                    {/* Title */}
+                    <h3 className="mb-3 font-heading text-[1.35rem] font-semibold leading-snug tracking-tight text-navy">
+                      {study.title}
+                    </h3>
+
+                    {/* Description */}
+                    <p className="line-clamp-3 font-sans text-[0.9rem] font-normal leading-relaxed text-navy/74">
+                      {getStudyDescription(study)}
+                    </p>
+                  </div>
+
+                  {/* Stats */}
+                  <div className="mt-6 grid grid-cols-2 gap-4 border-t border-navy/[0.07] pt-6 sm:gap-5">
+                    {getStudyStats(study).slice(0, 4).map((stat) => (
+                      <div key={stat.label}>
+                        <div className="font-heading text-[1.8rem] font-semibold leading-none tracking-tight text-navy">
+                          {stat.value}
                         </div>
-
-                        {/* Title */}
-                        <h3 className="mb-3 font-heading text-[1.35rem] font-semibold leading-snug tracking-tight text-navy">
-                          {study.title}
-                        </h3>
-
-                        {/* Description */}
-                        <p className="line-clamp-3 font-sans text-[0.9rem] font-normal leading-relaxed text-navy/74">
-                          {getStudyDescription(study)}
-                        </p>
+                        <div className="mt-1.5 text-[0.62rem] font-bold uppercase tracking-[0.16em] text-navy/62">
+                          {stat.label}
+                        </div>
                       </div>
-
-                      {/* Stats */}
-                      <div className="mt-6 grid grid-cols-2 gap-4 border-t border-navy/[0.07] pt-6 sm:gap-5">
-                        {getStudyStats(study).slice(0, 4).map((stat) => (
-                          <div key={stat.label}>
-                            <div className="font-heading text-[1.8rem] font-semibold leading-none tracking-tight text-navy">
-                              {stat.value}
-                            </div>
-                            <div className="mt-1.5 text-[0.62rem] font-bold uppercase tracking-[0.16em] text-navy/62">
-                              {stat.label}
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </Link>
-                </ScrollReveal>
-              </m.div>
+                    ))}
+                  </div>
+                </Link>
+              </div>
             ))}
           </div>
         </Container>
@@ -184,7 +165,7 @@ export default function WorkPageClient({ studies }: WorkPageClientProps) {
           style={{ backgroundImage: 'repeating-linear-gradient(-38deg, rgba(255,255,255,0.22) 0 1px, transparent 1px 18px)' }}
         />
         <Container className="relative z-10 max-w-3xl text-center">
-          <SectionLabel className="justify-center">Next Step</SectionLabel>
+          <div className="section-tag mb-5 justify-center">Next Step</div>
           <h2 className="section-heading mt-2 text-white">Ready for outcomes like these?</h2>
           <p className="mx-auto mt-5 max-w-md font-sans text-[1rem] font-normal leading-relaxed text-white/72">{CTA.subtitle}</p>
           <div className="mt-8 flex flex-wrap justify-center gap-4">

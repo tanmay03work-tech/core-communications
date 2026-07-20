@@ -1,17 +1,25 @@
 import {sanityFetch} from '@/lib/sanity/client';
 import {
   getAllCaseStudiesQuery,
+  getAllBlogPostsQuery,
   getAllServicesQuery,
   getAllTeamMembersQuery,
+  getBlogPostBySlugQuery,
+  getBlogPostSlugsQuery,
   getCaseStudyBySlugQuery,
   getCaseStudySlugsQuery,
+  getClientLogosQuery,
   getFeaturedCaseStudiesQuery,
   getSiteSettingsQuery,
+  type GetAllBlogPostsResult,
   type GetAllCaseStudiesResult,
   type GetAllServicesResult,
   type GetAllTeamMembersResult,
+  type GetBlogPostBySlugResult,
+  type GetBlogPostSlugsResult,
   type GetCaseStudyBySlugResult,
   type GetCaseStudySlugsResult,
+  type GetClientLogosResult,
   type GetFeaturedCaseStudiesResult,
   type GetSiteSettingsResult,
 } from '@/lib/sanity/queries';
@@ -49,6 +57,35 @@ export async function getFeaturedCaseStudies() {
   return sanityFetch<GetFeaturedCaseStudiesResult>({
     query: getFeaturedCaseStudiesQuery,
     tags: ['caseStudies'],
+  });
+}
+
+export async function getBlogPosts() {
+  return sanityFetch<GetAllBlogPostsResult>({
+    query: getAllBlogPostsQuery,
+    tags: ['blogPosts'],
+  });
+}
+
+export async function getBlogPostBySlug(slug: string) {
+  return sanityFetch<GetBlogPostBySlugResult>({
+    query: getBlogPostBySlugQuery,
+    params: {slug},
+    tags: ['blogPosts', `blogPost:${slug}`],
+  });
+}
+
+export async function getBlogPostSlugs() {
+  return sanityFetch<GetBlogPostSlugsResult>({
+    query: getBlogPostSlugsQuery,
+    tags: ['blogPosts'],
+  });
+}
+
+export async function getClientLogos() {
+  return sanityFetch<GetClientLogosResult>({
+    query: getClientLogosQuery,
+    tags: ['clientLogos'],
   });
 }
 

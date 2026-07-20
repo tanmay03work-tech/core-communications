@@ -270,6 +270,37 @@ export type CaseStudy = {
   seo?: SeoData;
 };
 
+export type BlogPost = {
+  _id?: string;
+  _type: 'blogPost';
+  title: string;
+  slug?: SanitySlug;
+  category: string;
+  excerpt: string;
+  author?: string;
+  authorRole?: string;
+  readTime?: string;
+  storyLead?: string;
+  keyTakeaways?: string[];
+  bodyContent?: PortableTextNode[];
+  sections?: ModularSection[];
+  coverImage?: SanityImage;
+  publishedAt?: string;
+  featured?: boolean;
+  seo?: SeoData;
+};
+
+export type ClientLogo = {
+  _id?: string;
+  _type: 'clientLogo';
+  name: string;
+  logo?: SanityImage;
+  url?: string;
+  category?: string;
+  order?: number;
+  featured?: boolean;
+};
+
 export type Service = {
   _id?: string;
   _type: 'service';

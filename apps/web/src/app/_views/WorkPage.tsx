@@ -16,8 +16,7 @@ export default async function WorkPage() {
     cmsStudies = null;
   }
 
-  const newLayoutStudies = cmsStudies?.filter((study) => study.caseNumber);
-  const studies = newLayoutStudies?.length ? newLayoutStudies : CASE_STUDIES.items;
+  const studies = cmsStudies ?? CASE_STUDIES.items;
 
   return <WorkPageClient studies={studies} />;
 }

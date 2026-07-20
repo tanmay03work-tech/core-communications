@@ -1,8 +1,11 @@
 import HomePage from '@/app/_views/HomePage';
-import { getSiteSettings } from '@/lib/sanity/content';
+import { getClientLogos, getSiteSettings } from '@/lib/sanity/content';
 
 export default async function MarketingHomePage() {
-  const siteSettings = await getSiteSettings();
+  const [siteSettings, clientLogos] = await Promise.all([
+    getSiteSettings(),
+    getClientLogos(),
+  ]);
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'ProfessionalService',
@@ -49,7 +52,7 @@ export default async function MarketingHomePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <HomePage siteSettings={siteSettings} />
+      <HomePage siteSettings={siteSettings} clientLogos={clientLogos} />
     </>
   );
 }

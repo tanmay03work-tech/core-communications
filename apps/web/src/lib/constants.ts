@@ -23,6 +23,7 @@ export const NAV_LINKS = [
   { label: 'Services', href: '/#services' },
   { label: 'Sectors', href: '/#sectors' },
   { label: 'Work', href: '/work' },
+  { label: 'Blogs', href: '/blogs' },
   { label: 'Team', href: '/#team' },
 ] as const;
 
@@ -573,6 +574,7 @@ export const FOOTER = {
     { label: 'Services', href: '/#services' },
     { label: 'Sectors', href: '/#sectors' },
     { label: 'Work', href: '/work' },
+    { label: 'Blogs', href: '/blogs' },
     { label: 'Team', href: '/#team' },
     { label: 'Contact', href: '/contact' },
   ],

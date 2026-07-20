@@ -141,14 +141,8 @@ function CompactInfoBlock({block, index}: {block: CompactBlock; index?: number})
 
 async function getSafeCaseStudyBySlug(slug: string) {
   try {
-    const cmsStudy = await getCaseStudyBySlug(slug);
-    const staticStudy = getStaticCaseStudy(slug);
-
-    if (cmsStudy?.caseNumber) {
-      return cmsStudy;
-    }
-
-    return staticStudy;
+    const study = await getCaseStudyBySlug(slug);
+    return study ?? getStaticCaseStudy(slug);
   } catch (error) {
     console.error(`getCaseStudyBySlug error for "${slug}":`, error);
     return getStaticCaseStudy(slug);
@@ -158,7 +152,7 @@ async function getSafeCaseStudyBySlug(slug: string) {
 async function getSanityCaseStudySlugs(): Promise<string[]> {
   try {
     const works = await sanityFetch<CaseStudySlugResult[]>({
-      query: `*[_type == "caseStudy" && defined(slug.current) && defined(caseNumber)]{
+      query: `*[_type == "caseStudy" && defined(slug.current)]{
         "slug": slug.current
       }`,
       tags: ['caseStudies'],
@@ -177,9 +171,7 @@ async function getSanityCaseStudySlugs(): Promise<string[]> {
 
 export async function generateStaticParams(): Promise<CaseStudyRouteParams[]> {
   const cmsSlugs = await getSanityCaseStudySlugs();
-  const staticSlugs = CASE_STUDIES.items.map((study) => normalizeSlug(study.slug)).filter((slug): slug is string => Boolean(slug));
-
-  return [...new Set([...staticSlugs, ...cmsSlugs])].map((slug) => ({slug}));
+  return [...new Set(cmsSlugs)].map((slug) => ({slug}));
 }
 
 export async function generateMetadata({params}: CaseStudyPageProps): Promise<Metadata> {
