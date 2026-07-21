@@ -124,7 +124,7 @@ export default async function BlogPage() {
               <div className="section-tag section-tag-dark mb-5 justify-center">Coming Soon</div>
               <h2 className="mt-4 font-heading text-3xl font-semibold tracking-tight text-navy md:text-4xl">Blog stories are being prepared.</h2>
               <p className="mx-auto mt-4 max-w-xl font-sans text-base leading-8 text-navy/68">
-                Add Blog Post documents in Sanity Studio and they will appear here automatically.
+                Blogs will be updated soon.
               </p>
             </div>
           )}
