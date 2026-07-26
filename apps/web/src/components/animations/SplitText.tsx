@@ -1,6 +1,7 @@
 'use client';
 
-import {LazyMotion, domAnimation, m, useInView, useReducedMotion} from 'framer-motion';
+import {LazyMotion, domAnimation, m, useInView} from 'framer-motion';
+import {useReducedMotionSafe} from '@/hooks/useReducedMotionSafe';
 import {Fragment, useMemo, useRef} from 'react';
 
 type SplitTextProps = {
@@ -20,7 +21,7 @@ export default function SplitText({
   by = 'char',
   className,
 }: SplitTextProps) {
-  const prefersReducedMotion = useReducedMotion();
+  const prefersReducedMotion = useReducedMotionSafe();
   const source = children ?? text ?? '';
   const ref = useRef<HTMLSpanElement | null>(null);
   const isInView = useInView(ref, {once: true, margin: '-40px'});

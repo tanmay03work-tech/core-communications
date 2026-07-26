@@ -1,6 +1,7 @@
 'use client';
 
-import {LazyMotion, domAnimation, m, useInView, useReducedMotion} from 'framer-motion';
+import {LazyMotion, domAnimation, m, useInView} from 'framer-motion';
+import {useReducedMotionSafe} from '@/hooks/useReducedMotionSafe';
 import {useEffect, useMemo, useRef, useState} from 'react';
 
 type CounterAnimationProps = {
@@ -46,7 +47,7 @@ export default function CounterAnimation({
   duration = 1400,
   value,
 }: CounterAnimationProps) {
-  const prefersReducedMotion = useReducedMotion();
+  const prefersReducedMotion = useReducedMotionSafe();
   const ref = useRef<HTMLSpanElement | null>(null);
   const isInView = useInView(ref, {once: true, margin: '-80px'});
   const parsedValue = useMemo(() => parseValue(value), [value]);

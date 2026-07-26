@@ -130,7 +130,7 @@ export const getAllCaseStudiesQuery = groq`
 `;
 
 export const getCaseStudyBySlugQuery = groq`
-  *[_type == "caseStudy" && slug.current == $slug][0]{
+  *[_type == "caseStudy" && (slug.current == $slug || slug.current == "/" + $slug)][0]{
     ...,
     coverImage${imageFields},
     seo${seoFields},
@@ -175,11 +175,27 @@ export const getAllBlogPostsQuery = groq`
 `;
 
 export const getBlogPostBySlugQuery = groq`
-  *[_type == "blogPost" && slug.current == $slug][0]{
+  *[_type == "blogPost" && (
+    slug.current == $slug ||
+    slug.current == "/" + $slug ||
+    slug.current == "blog/" + $slug ||
+    slug.current == "/blog/" + $slug ||
+    slug.current == "blogs/" + $slug ||
+    slug.current == "/blogs/" + $slug ||
+    slug.current == $slug + "/" ||
+    slug.current match $slug
+  )][0]{
     ...,
     coverImage${imageFields},
     seo${seoFields},
     bodyContent[]${portableTextFields},
+    downloadableResources[]{
+      ...,
+      "fileUrl": coalesce(fileUrl, fileAsset.asset->url)
+    },
+    relatedLinks[]{
+      ...
+    },
     sections[]${sectionFields}
   }
 `;

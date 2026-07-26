@@ -40,6 +40,7 @@ export type PortableTextBlock = {
   _key?: string;
   _type: 'block';
   style?: string;
+  listItem?: 'bullet' | 'number' | string;
   children?: PortableTextSpan[];
   markDefs?: PortableTextMarkDef[];
 };
@@ -270,6 +271,21 @@ export type CaseStudy = {
   seo?: SeoData;
 };
 
+export type DownloadableResource = {
+  _key?: string;
+  title: string;
+  description?: string;
+  fileUrl?: string;
+  fileSize?: string;
+};
+
+export type RelatedLink = {
+  _key?: string;
+  label: string;
+  url: string;
+  description?: string;
+};
+
 export type BlogPost = {
   _id?: string;
   _type: 'blogPost';
@@ -283,6 +299,8 @@ export type BlogPost = {
   storyLead?: string;
   keyTakeaways?: string[];
   bodyContent?: PortableTextNode[];
+  downloadableResources?: DownloadableResource[];
+  relatedLinks?: RelatedLink[];
   sections?: ModularSection[];
   coverImage?: SanityImage;
   publishedAt?: string;

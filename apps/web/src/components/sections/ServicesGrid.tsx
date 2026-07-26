@@ -1,6 +1,7 @@
 'use client';
 
-import {LazyMotion, domAnimation, m, useReducedMotion} from 'framer-motion';
+import {LazyMotion, domAnimation, m} from 'framer-motion';
+import {useReducedMotionSafe} from '@/hooks/useReducedMotionSafe';
 import SectionLabel from '@/components/ui/SectionLabel';
 import {SERVICES} from '@/lib/constants';
 
@@ -89,7 +90,7 @@ const containerVariants = {
 };
 
 export default function ServicesGrid() {
-  const prefersReducedMotion = useReducedMotion();
+  const prefersReducedMotion = useReducedMotionSafe();
 
   return (
     <LazyMotion features={domAnimation}>
@@ -101,8 +102,6 @@ export default function ServicesGrid() {
           style={{
             backgroundImage:
               'linear-gradient(rgba(0,184,150,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(0,184,150,0.06) 1px, transparent 1px)',
-            backgroundSize: '52px 52px',
-            maskImage: 'linear-gradient(180deg, transparent, rgba(0,0,0,0.6) 20%, rgba(0,0,0,0.6) 80%, transparent)',
           }}
         />
 

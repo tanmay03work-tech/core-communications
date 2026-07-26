@@ -1,6 +1,7 @@
 'use client';
 
-import {LazyMotion, domAnimation, m, useReducedMotion} from 'framer-motion';
+import {LazyMotion, domAnimation, m} from 'framer-motion';
+import {useReducedMotionSafe} from '@/hooks/useReducedMotionSafe';
 import Link from 'next/link';
 import ScrollReveal from '@/components/motion/ScrollReveal';
 import SectionLabel from '@/components/ui/SectionLabel';
@@ -28,7 +29,7 @@ const fadeUpChild = {
 };
 
 export default function AboutPageClient() {
-  const prefersReducedMotion = useReducedMotion();
+  const prefersReducedMotion = useReducedMotionSafe();
 
   return (
     <LazyMotion features={domAnimation}>

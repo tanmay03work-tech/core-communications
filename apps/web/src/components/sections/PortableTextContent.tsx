@@ -9,22 +9,107 @@ type PortableTextContentProps = {
   invert?: boolean;
 };
 
-function renderSpan(span: PortableTextSpan, block: PortableTextBlock) {
+function renderTextWithLinks(text: string, invert?: boolean) {
+  if (!text || typeof text !== 'string') return text;
+
+  // Master Regex matching Emails (user@domain.com) OR Web URLs (http://..., https://..., www...., domain.com)
+  const masterRegex = /([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}|https?:\/\/[^\s]+|www\.[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+(?:\/[^\s]*)?|[a-zA-Z0-9-]+\.(?:biz|com|org|net|io|co|au|in|tech|edu|gov|xyz|me|info|app|us|uk)(?:\/[^\s]*)?)/gi;
+
+  if (!masterRegex.test(text)) {
+    return text;
+  }
+
+  const parts = text.split(masterRegex);
+
+  return parts.map((part, idx) => {
+    if (!part) return null;
+
+    const isEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/i.test(part);
+    const isUrl = /^(https?:\/\/[^\s]+|www\.[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+(?:\/[^\s]*)?|[a-zA-Z0-9-]+\.(?:biz|com|org|net|io|co|au|in|tech|edu|gov|xyz|me|info|app|us|uk)(?:\/[^\s]*)?)$/i.test(part);
+
+    if (isEmail || isUrl) {
+      let cleanTarget = part;
+      let trailingPunctuation = '';
+      const matchPunct = part.match(/([.,;:!?)]+)$/);
+      if (matchPunct) {
+        trailingPunctuation = matchPunct[1];
+        cleanTarget = part.slice(0, -trailingPunctuation.length);
+      }
+
+      if (isEmail) {
+        return (
+          <span key={idx}>
+            <a
+              href={`mailto:${cleanTarget}`}
+              className={cn(
+                'font-semibold underline underline-offset-4 transition-colors duration-200 cursor-pointer',
+                invert
+                  ? 'text-accent decoration-accent/60 hover:text-white hover:decoration-white'
+                  : 'text-accent decoration-accent/60 hover:text-gold hover:decoration-gold'
+              )}
+            >
+              {cleanTarget}
+            </a>
+            {trailingPunctuation}
+          </span>
+        );
+      }
+
+      const href = cleanTarget.toLowerCase().startsWith('http') ? cleanTarget : `https://${cleanTarget}`;
+
+      return (
+        <span key={idx}>
+          <a
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={cn(
+              'font-semibold underline underline-offset-4 transition-colors duration-200 cursor-pointer',
+              invert
+                ? 'text-accent decoration-accent/60 hover:text-white hover:decoration-white'
+                : 'text-accent decoration-accent/60 hover:text-gold hover:decoration-gold'
+            )}
+          >
+            {cleanTarget}
+          </a>
+          {trailingPunctuation}
+        </span>
+      );
+    }
+    return part;
+  });
+}
+
+function renderSpan(span: PortableTextSpan, block: PortableTextBlock, invert?: boolean) {
   const markDefs = block.markDefs ?? [];
+  const baseContent = renderTextWithLinks(span.text ?? '', invert);
 
-  return (span.marks ?? []).reduce<ReactNode>((content, mark) => {
-    if (mark === 'strong') return <strong key={mark}>{content}</strong>;
-    if (mark === 'em') return <em key={mark} className="font-serif">{content}</em>;
+  if (!span.marks || span.marks.length === 0) {
+    return baseContent;
+  }
 
-    const annotation = markDefs.find((def) => def._key === mark && def._type === 'link');
+  return span.marks.reduce<ReactNode>((content, mark) => {
+    if (mark === 'strong') return <strong key={mark} className="font-bold">{content}</strong>;
+    if (mark === 'em') return <em key={mark} className="font-serif italic">{content}</em>;
+
+    const annotation = markDefs.find((def) => def._key === mark && (def._type === 'link' || Boolean(def.href)));
     if (annotation?.href) {
+      const rawHref = annotation.href;
+      const href = rawHref.toLowerCase().startsWith('www.') ? `https://${rawHref}` : rawHref;
+      const isExternal = href.startsWith('http') || href.startsWith('//');
+
       return (
         <a
           key={mark}
-          href={annotation.href}
-          target={annotation.href.startsWith('http') ? '_blank' : undefined}
-          rel={annotation.href.startsWith('http') ? 'noreferrer' : undefined}
-          className="underline decoration-current/30 underline-offset-4 transition-opacity hover:opacity-70"
+          href={href}
+          target={isExternal ? '_blank' : undefined}
+          rel={isExternal ? 'noopener noreferrer' : undefined}
+          className={cn(
+            'font-semibold underline underline-offset-4 transition-colors duration-200 cursor-pointer',
+            invert
+              ? 'text-accent decoration-accent/60 hover:text-white hover:decoration-white'
+              : 'text-accent decoration-accent/60 hover:text-gold hover:decoration-gold'
+          )}
         >
           {content}
         </a>
@@ -32,27 +117,31 @@ function renderSpan(span: PortableTextSpan, block: PortableTextBlock) {
     }
 
     return content;
-  }, span.text);
+  }, baseContent);
 }
 
 function renderBlock(block: PortableTextBlock, invert?: boolean) {
   const Tag =
-    block.style === 'h2'
-      ? 'h2'
-      : block.style === 'h3'
-        ? 'h3'
-        : block.style === 'blockquote'
-          ? 'blockquote'
-          : 'p';
+    block.listItem === 'bullet' || block.listItem === 'number'
+      ? 'li'
+      : block.style === 'h2'
+        ? 'h2'
+        : block.style === 'h3'
+          ? 'h3'
+          : block.style === 'blockquote'
+            ? 'blockquote'
+            : 'p';
 
   const tagClasses =
-    Tag === 'h2'
-      ? 'font-heading text-3xl md:text-4xl leading-tight'
-      : Tag === 'h3'
-        ? 'font-heading text-2xl md:text-3xl leading-tight'
-        : Tag === 'blockquote'
-          ? 'border-l-2 pl-6 font-serif text-xl italic leading-8'
-          : 'text-base leading-8 md:text-lg';
+    Tag === 'li'
+      ? 'text-base leading-8 md:text-lg'
+      : Tag === 'h2'
+        ? 'font-heading text-3xl md:text-4xl leading-tight'
+        : Tag === 'h3'
+          ? 'font-heading text-2xl md:text-3xl leading-tight'
+          : Tag === 'blockquote'
+            ? 'border-l-2 pl-6 font-serif text-xl italic leading-8'
+            : 'text-base leading-8 md:text-lg';
 
   return (
     <Tag
@@ -60,7 +149,7 @@ function renderBlock(block: PortableTextBlock, invert?: boolean) {
       className={cn(tagClasses, invert ? 'text-white/90 border-white/20' : 'text-current border-navy/15')}
     >
       {block.children?.map((span) => (
-        <span key={span._key}>{renderSpan(span, block)}</span>
+        <span key={span._key}>{renderSpan(span, block, invert)}</span>
       ))}
     </Tag>
   );
@@ -91,6 +180,20 @@ export default function PortableTextContent({value, className, invert = false}: 
     <div className={cn('flex flex-col gap-6', className)}>
       {value.map((node) => {
         if (node._type === 'block') {
+          if (node.listItem === 'bullet') {
+            return (
+              <ul key={node._key} className="list-disc pl-6 space-y-2">
+                {renderBlock(node, invert)}
+              </ul>
+            );
+          }
+          if (node.listItem === 'number') {
+            return (
+              <ol key={node._key} className="list-decimal pl-6 space-y-2">
+                {renderBlock(node, invert)}
+              </ol>
+            );
+          }
           return renderBlock(node, invert);
         }
 

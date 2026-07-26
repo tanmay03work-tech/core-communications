@@ -1,11 +1,11 @@
 'use client';
 
 import { ReactNode, useEffect, useState } from 'react';
-import { useReducedMotion } from 'framer-motion';
+import { useReducedMotionSafe } from '@/hooks/useReducedMotionSafe';
 import { ReactLenis } from 'lenis/react';
 
 export default function LenisProvider({ children }: { children: ReactNode }) {
-  const prefersReducedMotion = useReducedMotion();
+  const prefersReducedMotion = useReducedMotionSafe();
   const [lowPowerMode, setLowPowerMode] = useState(false);
 
   useEffect(() => {

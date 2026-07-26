@@ -1,6 +1,7 @@
 'use client';
 
-import {AnimatePresence, LazyMotion, domAnimation, m, useReducedMotion} from 'framer-motion';
+import {AnimatePresence, LazyMotion, domAnimation, m} from 'framer-motion';
+import {useReducedMotionSafe} from '@/hooks/useReducedMotionSafe';
 import {useEffect, useMemo, useState} from 'react';
 
 type MorphingWordProps = {
@@ -9,7 +10,7 @@ type MorphingWordProps = {
 };
 
 export default function MorphingWord({words, fallback}: MorphingWordProps) {
-  const prefersReducedMotion = useReducedMotion();
+  const prefersReducedMotion = useReducedMotionSafe();
   const safeWords = useMemo(() => {
     if (words.length > 0) {
       return words;

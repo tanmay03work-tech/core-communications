@@ -39,18 +39,20 @@ export async function getCaseStudies() {
 }
 
 export async function getCaseStudyBySlug(slug: string) {
+  const cleanSlug = slug.replace(/^\/+|\/+$/g, '');
   return sanityFetch<GetCaseStudyBySlugResult>({
     query: getCaseStudyBySlugQuery,
-    params: {slug},
-    tags: ['caseStudies', `caseStudy:${slug}`],
+    params: {slug: cleanSlug},
+    tags: ['caseStudies', `caseStudy:${cleanSlug}`],
   });
 }
 
 export async function getCaseStudySlugs() {
-  return sanityFetch<GetCaseStudySlugsResult>({
+  const slugs = await sanityFetch<GetCaseStudySlugsResult>({
     query: getCaseStudySlugsQuery,
     tags: ['caseStudies'],
   });
+  return (slugs ?? []).map((s) => s.replace(/^\/+|\/+$/g, ''));
 }
 
 export async function getFeaturedCaseStudies() {
@@ -68,18 +70,59 @@ export async function getBlogPosts() {
 }
 
 export async function getBlogPostBySlug(slug: string) {
-  return sanityFetch<GetBlogPostBySlugResult>({
+  const rawSlug = slug.replace(/^\/+|\/+$/g, '');
+  const lastSegment = rawSlug.split('/').pop() || rawSlug;
+
+  const post = await sanityFetch<GetBlogPostBySlugResult>({
     query: getBlogPostBySlugQuery,
-    params: {slug},
-    tags: ['blogPosts', `blogPost:${slug}`],
+    params: {slug: rawSlug},
+    tags: ['blogPosts', `blogPost:${rawSlug}`],
   });
+
+  if (post) {
+    return post;
+  }
+
+  if (lastSegment !== rawSlug) {
+    const postBySegment = await sanityFetch<GetBlogPostBySlugResult>({
+      query: getBlogPostBySlugQuery,
+      params: {slug: lastSegment},
+      tags: ['blogPosts', `blogPost:${lastSegment}`],
+    });
+
+    if (postBySegment) {
+      return postBySegment;
+    }
+  }
+
+  const allPosts = await getBlogPosts();
+  if (!allPosts || allPosts.length === 0) {
+    return null;
+  }
+
+  const targetLower = lastSegment.toLowerCase();
+  return (
+    allPosts.find((p) => {
+      if (!p.slug?.current) return false;
+      const s = p.slug.current.replace(/^\/+|\/+$/g, '').toLowerCase();
+      const seg = s.split('/').pop() || s;
+      return s === targetLower || seg === targetLower;
+    }) ?? null
+  );
 }
 
 export async function getBlogPostSlugs() {
-  return sanityFetch<GetBlogPostSlugsResult>({
+  const slugs = await sanityFetch<GetBlogPostSlugsResult>({
     query: getBlogPostSlugsQuery,
     tags: ['blogPosts'],
   });
+  return (slugs ?? [])
+    .map((s) => {
+      const clean = s.replace(/^\/+|\/+$/g, '');
+      const seg = clean.split('/').pop() || clean;
+      return seg;
+    })
+    .filter(Boolean);
 }
 
 export async function getClientLogos() {

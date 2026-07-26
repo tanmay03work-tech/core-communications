@@ -5,5 +5,7 @@ type BlogRedirectPageProps = {
 };
 
 export default function BlogPostRedirectPage({params}: BlogRedirectPageProps) {
-  redirect(`/blogs/${params.slug}`);
+  const rawSlug = (params?.slug ?? '').replace(/^\/+|\/+$/g, '');
+  const cleanSlug = rawSlug.split('/').pop() || rawSlug;
+  redirect(`/blogs/${cleanSlug}`);
 }

@@ -1,7 +1,8 @@
 'use client';
 
 import Image from 'next/image';
-import {LazyMotion, domAnimation, m, useReducedMotion} from 'framer-motion';
+import {LazyMotion, domAnimation, m} from 'framer-motion';
+import {useReducedMotionSafe} from '@/hooks/useReducedMotionSafe';
 import ScrollReveal from '@/components/motion/ScrollReveal';
 import SectionLabel from '@/components/ui/SectionLabel';
 import {TEAM} from '@/lib/constants';
@@ -27,7 +28,7 @@ type TeamCardMember = {
 const teamMembers = TEAM.members as readonly TeamCardMember[];
 
 export default function TeamSection() {
-  const prefersReducedMotion = useReducedMotion();
+  const prefersReducedMotion = useReducedMotionSafe();
 
   return (
     <LazyMotion features={domAnimation}>

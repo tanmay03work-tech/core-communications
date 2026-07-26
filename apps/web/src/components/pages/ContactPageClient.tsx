@@ -2,7 +2,8 @@
 
 import Link from 'next/link';
 import { Mail, Phone, MapPin } from 'lucide-react';
-import { m, useReducedMotion } from 'framer-motion';
+import { m } from 'framer-motion';
+import { useReducedMotionSafe } from '@/hooks/useReducedMotionSafe';
 import { Container } from '@/components/layout/Container';
 import ScrollReveal from '@/components/motion/ScrollReveal';
 import SectionLabel from '@/components/ui/SectionLabel';
@@ -19,7 +20,7 @@ const contactItems = [
 ];
 
 export default function ContactPageClient() {
-  const prefersReducedMotion = useReducedMotion();
+  const prefersReducedMotion = useReducedMotionSafe();
 
   return (
     <main>

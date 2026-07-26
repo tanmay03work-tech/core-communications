@@ -1,9 +1,7 @@
-import {draftMode} from 'next/headers';
 import {createClient, type QueryParams} from 'next-sanity';
+import {apiVersion, dataset, projectId} from './env';
 
-export const apiVersion = process.env.NEXT_PUBLIC_SANITY_API_VERSION ?? '2024-10-01';
-export const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET ?? 'production';
-export const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID ?? '';
+export {apiVersion, dataset, projectId};
 export const token = process.env.SANITY_API_READ_TOKEN;
 const fallbackProjectId = projectId || 'sanity-project-id';
 const fallbackDataset = dataset || 'production';
@@ -39,8 +37,9 @@ type SanityFetchOptions = {
   tags?: string[];
 };
 
-function isDraftModeEnabled() {
+async function isDraftModeEnabled() {
   try {
+    const {draftMode} = await import('next/headers');
     return draftMode().isEnabled;
   } catch {
     return false;
@@ -56,7 +55,7 @@ export async function sanityFetch<T>({
     return null;
   }
 
-  const isEnabled = isDraftModeEnabled();
+  const isEnabled = await isDraftModeEnabled();
   const activeClient = isEnabled ? previewClient : client;
 
   try {

@@ -15,7 +15,8 @@ import {
   Waves,
   type LucideIcon,
 } from 'lucide-react';
-import {LazyMotion, domAnimation, m, useReducedMotion} from 'framer-motion';
+import {LazyMotion, domAnimation, m} from 'framer-motion';
+import {useReducedMotionSafe} from '@/hooks/useReducedMotionSafe';
 import SectionLabel from '@/components/ui/SectionLabel';
 import {HOMEPAGE_SECTORS} from '@/lib/constants';
 
@@ -45,7 +46,7 @@ const containerVariants = {
 };
 
 export default function SectorsFocusSection() {
-  const prefersReducedMotion = useReducedMotion();
+  const prefersReducedMotion = useReducedMotionSafe();
 
   return (
     <LazyMotion features={domAnimation}>

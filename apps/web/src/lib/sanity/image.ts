@@ -1,7 +1,7 @@
 import Image, {type ImageProps} from 'next/image';
 import {createElement} from 'react';
 import {createImageUrlBuilder} from '@sanity/image-url';
-import {dataset, projectId} from '@/lib/sanity/client';
+import {dataset, projectId} from '@/lib/sanity/env';
 import type {SanityImage as SanityImageSource} from '@/types';
 
 const builder = createImageUrlBuilder({

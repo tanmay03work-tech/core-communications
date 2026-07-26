@@ -7,7 +7,7 @@ function normalizeSlug(slug: string | null | undefined) {
     return null;
   }
 
-  const trimmedSlug = slug.trim();
+  const trimmedSlug = slug.trim().replace(/^\/+|\/+$/g, '');
   return trimmedSlug.length > 0 ? trimmedSlug : null;
 }
 

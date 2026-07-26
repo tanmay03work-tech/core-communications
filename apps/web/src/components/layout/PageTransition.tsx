@@ -1,8 +1,9 @@
 'use client';
 
 import { ReactNode } from 'react';
-import { AnimatePresence, m, useReducedMotion } from 'framer-motion';
+import { AnimatePresence, m } from 'framer-motion';
 import { usePathname } from 'next/navigation';
+import { useReducedMotionSafe } from '@/hooks/useReducedMotionSafe';
 
 const contentTransition = {
   duration: 0.28,
@@ -16,7 +17,7 @@ const exitTransition = {
 
 export default function PageTransition({ children }: { children: ReactNode }) {
   const pathname = usePathname();
-  const shouldReduceMotion = useReducedMotion();
+  const shouldReduceMotion = useReducedMotionSafe();
   const routeKey = pathname || '/';
 
   return (

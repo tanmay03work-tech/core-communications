@@ -1,12 +1,13 @@
 'use client';
 
-import { m, useReducedMotion } from 'framer-motion';
+import { m } from 'framer-motion';
+import { useReducedMotionSafe } from '@/hooks/useReducedMotionSafe';
 import { Container } from '@/components/layout/Container';
 import CTASection from '@/components/sections/CTASection';
 import TeamSection from '@/components/sections/TeamSection';
 
 export default function TeamPageClient() {
-  const prefersReducedMotion = useReducedMotion();
+  const prefersReducedMotion = useReducedMotionSafe();
 
   return (
     <>

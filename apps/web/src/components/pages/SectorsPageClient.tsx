@@ -1,7 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import { m, useReducedMotion } from 'framer-motion';
+import { m } from 'framer-motion';
+import { useReducedMotionSafe } from '@/hooks/useReducedMotionSafe';
 import { Container } from '@/components/layout/Container';
 import ScrollReveal from '@/components/motion/ScrollReveal';
 import SectionLabel from '@/components/ui/SectionLabel';
@@ -18,7 +19,7 @@ const featuredSectors = SECTORS_AND_CLIENTS.sectoralExpertise.slice(0, 4);
 const remainingSectors = SECTORS_AND_CLIENTS.sectoralExpertise.slice(4);
 
 export default function SectorsPageClient() {
-  const prefersReducedMotion = useReducedMotion();
+  const prefersReducedMotion = useReducedMotionSafe();
 
   return (
     <main>

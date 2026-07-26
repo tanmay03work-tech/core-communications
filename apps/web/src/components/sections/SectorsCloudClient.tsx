@@ -1,6 +1,7 @@
 'use client';
 
-import {LazyMotion, domAnimation, m, useReducedMotion} from 'framer-motion';
+import {LazyMotion, domAnimation, m} from 'framer-motion';
+import {useReducedMotionSafe} from '@/hooks/useReducedMotionSafe';
 import {useState} from 'react';
 
 type SectorsCloudClientProps = {
@@ -9,7 +10,7 @@ type SectorsCloudClientProps = {
 
 export default function SectorsCloudClient({sectors}: SectorsCloudClientProps) {
   const [activeSectors, setActiveSectors] = useState(() => new Set<string>());
-  const prefersReducedMotion = useReducedMotion();
+  const prefersReducedMotion = useReducedMotionSafe();
 
   return (
     <LazyMotion features={domAnimation}>

@@ -1,6 +1,7 @@
 'use client';
 
-import {LazyMotion, domAnimation, m, useAnimation, useReducedMotion} from 'framer-motion';
+import {LazyMotion, domAnimation, m, useAnimation} from 'framer-motion';
+import {useReducedMotionSafe} from '@/hooks/useReducedMotionSafe';
 import {ArrowUpRight} from 'lucide-react';
 import Link from 'next/link';
 import type {CaseStudyListItem} from '@/lib/sanity/queries';
@@ -14,7 +15,7 @@ function getSlug(caseStudy: CaseStudyListItem) {
 }
 
 export default function CaseStudiesGridClient({caseStudies}: CaseStudiesGridClientProps) {
-  const prefersReducedMotion = useReducedMotion();
+  const prefersReducedMotion = useReducedMotionSafe();
   const statsControls = useAnimation();
 
   return (

@@ -1,7 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import { m, useReducedMotion } from 'framer-motion';
+import { m } from 'framer-motion';
+import { useReducedMotionSafe } from '@/hooks/useReducedMotionSafe';
 import { Container } from '@/components/layout/Container';
 import ScrollReveal from '@/components/motion/ScrollReveal';
 import SectionLabel from '@/components/ui/SectionLabel';
@@ -34,7 +35,7 @@ const processSteps = [
 ];
 
 export default function ServicesPageClient() {
-  const prefersReducedMotion = useReducedMotion();
+  const prefersReducedMotion = useReducedMotionSafe();
 
   return (
     <main>

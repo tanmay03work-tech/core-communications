@@ -1,7 +1,8 @@
 'use client';
 
 import {useEffect, useMemo, useState, type MouseEvent as ReactMouseEvent} from 'react';
-import {m, useMotionValueEvent, useReducedMotion, useScroll, useSpring} from 'framer-motion';
+import {m, useMotionValueEvent, useScroll, useSpring} from 'framer-motion';
+import {useReducedMotionSafe} from '@/hooks/useReducedMotionSafe';
 import Link from 'next/link';
 import {usePathname} from 'next/navigation';
 import {NAV_LINKS} from '@/lib/constants';
@@ -58,7 +59,7 @@ function isRouteActive(pathname: string, href: string) {
 }
 
 export default function Navbar() {
-  const reducedMotion = useReducedMotion();
+  const reducedMotion = useReducedMotionSafe();
   const pathname = usePathname() ?? '/';
   const {activeHref} = useActiveSection(NAV_LINKS);
   const [mobileOpen, setMobileOpen] = useState(false);

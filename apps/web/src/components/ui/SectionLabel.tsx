@@ -2,13 +2,14 @@
 
 import type { PropsWithChildren } from 'react';
 import clsx from 'clsx';
-import { LazyMotion, domAnimation, m, useReducedMotion } from 'framer-motion';
+import { LazyMotion, domAnimation, m } from 'framer-motion';
+import { useReducedMotionSafe } from '@/hooks/useReducedMotionSafe';
 
 export default function SectionLabel({
   children,
   className,
 }: PropsWithChildren<{ className?: string }>) {
-  const prefersReducedMotion = useReducedMotion();
+  const prefersReducedMotion = useReducedMotionSafe();
 
   return (
     <LazyMotion features={domAnimation}>

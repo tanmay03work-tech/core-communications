@@ -1,6 +1,7 @@
 'use client';
 
-import {LazyMotion, domAnimation, m, useReducedMotion, type Transition, type Variants} from 'framer-motion';
+import {LazyMotion, domAnimation, m, type Transition, type Variants} from 'framer-motion';
+import {useReducedMotionSafe} from '@/hooks/useReducedMotionSafe';
 import type {ReactNode} from 'react';
 
 type ScrollRevealDirection = 'up' | 'left' | 'right' | 'fade' | 'scale';
@@ -43,7 +44,7 @@ export default function ScrollReveal({
   direction = 'up',
   variants,
 }: ScrollRevealProps) {
-  const prefersReducedMotion = useReducedMotion();
+  const prefersReducedMotion = useReducedMotionSafe();
   const resolvedVariants =
     variants ??
     (prefersReducedMotion

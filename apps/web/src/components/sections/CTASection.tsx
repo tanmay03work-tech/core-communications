@@ -1,6 +1,7 @@
 'use client';
 
-import {LazyMotion, domAnimation, m, useReducedMotion} from 'framer-motion';
+import {LazyMotion, domAnimation, m} from 'framer-motion';
+import {useReducedMotionSafe} from '@/hooks/useReducedMotionSafe';
 import Link from 'next/link';
 import SplitText from '@/components/animations/SplitText';
 import SectionLabel from '@/components/ui/SectionLabel';
@@ -21,7 +22,7 @@ type CTASectionProps = {
 };
 
 export default function CTASection({section}: CTASectionProps) {
-  const prefersReducedMotion = useReducedMotion();
+  const prefersReducedMotion = useReducedMotionSafe();
   const title = section?.title ?? CTA.heading;
   const body = section?.body ?? CTA.subtitle;
   const primary = section?.actions?.[0] ?? CTA.primary;

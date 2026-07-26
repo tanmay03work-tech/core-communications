@@ -1,6 +1,7 @@
 'use client';
 
-import { LazyMotion, domAnimation, m, useReducedMotion } from 'framer-motion';
+import { LazyMotion, domAnimation, m } from 'framer-motion';
+import { useReducedMotionSafe } from '@/hooks/useReducedMotionSafe';
 
 const PROVEN_RESULTS = [
   { value: '20M+',  label: 'Audience reach' },
@@ -44,7 +45,7 @@ function StatItem({
 }
 
 export default function NumbersStrip() {
-  const prefersReducedMotion = useReducedMotion();
+  const prefersReducedMotion = useReducedMotionSafe();
 
   return (
     <LazyMotion features={domAnimation}>

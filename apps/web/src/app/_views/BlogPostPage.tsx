@@ -1,8 +1,9 @@
+import BlogLeadGate from '@/components/blog/BlogLeadGate';
+import DownloadableResources from '@/components/blog/DownloadableResources';
 import type {Metadata} from 'next';
 import Link from 'next/link';
 import {notFound} from 'next/navigation';
 import {Container} from '@/components/layout/Container';
-import PortableTextContent from '@/components/sections/PortableTextContent';
 import SectionRenderer from '@/components/sections/SectionRenderer';
 import StructuredData from '@/components/seo/StructuredData';
 import SectionLabel from '@/components/ui/SectionLabel';
@@ -21,8 +22,9 @@ function normalizeSlug(slug: string | null | undefined) {
     return null;
   }
 
-  const trimmedSlug = slug.trim();
-  return trimmedSlug.length > 0 ? trimmedSlug : null;
+  const trimmedSlug = slug.trim().replace(/^\/+|\/+$/g, '');
+  const seg = trimmedSlug.split('/').pop() || trimmedSlug;
+  return seg.length > 0 ? seg : null;
 }
 
 function formatDate(date?: string) {
@@ -36,10 +38,17 @@ function formatDate(date?: string) {
 }
 
 async function getSafeBlogPostBySlug(slug: string) {
+  const cleanSlug = slug.replace(/^\/+|\/+$/g, '');
+  const seg = cleanSlug.split('/').pop() || cleanSlug;
   try {
-    return await getBlogPostBySlug(slug);
+    const post = await getBlogPostBySlug(cleanSlug);
+    if (post) return post;
+    if (seg !== cleanSlug) {
+      return await getBlogPostBySlug(seg);
+    }
+    return null;
   } catch (error) {
-    console.error(`getBlogPostBySlug error for "${slug}":`, error);
+    console.error(`getBlogPostBySlug error for "${cleanSlug}":`, error);
     return null;
   }
 }
@@ -59,8 +68,10 @@ export async function generateStaticParams(): Promise<BlogPostRouteParams[]> {
 }
 
 export async function generateMetadata({params}: BlogPostPageProps): Promise<Metadata> {
-  const post = await getSafeBlogPostBySlug(params.slug);
-  const pathname = `/blogs/${params.slug}`;
+  const rawSlug = (params?.slug ?? '').replace(/^\/+|\/+$/g, '');
+  const cleanSlug = rawSlug.split('/').pop() || rawSlug;
+  const post = await getSafeBlogPostBySlug(cleanSlug);
+  const pathname = `/blogs/${cleanSlug}`;
 
   if (!post) {
     return buildMetadata({
@@ -79,7 +90,9 @@ export async function generateMetadata({params}: BlogPostPageProps): Promise<Met
 }
 
 export default async function BlogPostPage({params}: BlogPostPageProps) {
-  const post = await getSafeBlogPostBySlug(params.slug);
+  const rawSlug = (params?.slug ?? '').replace(/^\/+|\/+$/g, '');
+  const cleanSlug = rawSlug.split('/').pop() || rawSlug;
+  const post = await getSafeBlogPostBySlug(cleanSlug);
 
   if (!post) {
     notFound();
@@ -95,7 +108,7 @@ export default async function BlogPostPage({params}: BlogPostPageProps) {
     '@type': 'BlogPosting',
     headline: post.title,
     description: post.excerpt,
-    url: getAbsoluteUrl(`/blogs/${params.slug}`),
+    url: getAbsoluteUrl(`/blogs/${cleanSlug}`),
     image: [imageUrl],
     datePublished: post.publishedAt,
     author: {
@@ -161,11 +174,10 @@ export default async function BlogPostPage({params}: BlogPostPageProps) {
             </div>
           ) : null}
 
-          {post.bodyContent && post.bodyContent.length > 0 ? (
-            <div className="mt-8 border border-navy/10 bg-white p-5 md:p-8">
-              <PortableTextContent value={post.bodyContent} className="text-navy" />
-            </div>
-          ) : null}
+          {/* Gated Blog Content & Downloadable Guides */}
+          <BlogLeadGate blogTitle={post.title} blogSlug={cleanSlug} bodyContent={post.bodyContent}>
+            <DownloadableResources resources={post.downloadableResources} relatedLinks={post.relatedLinks} />
+          </BlogLeadGate>
 
           <div className="mt-7 flex flex-wrap items-center justify-between gap-4 border-t border-navy/10 pt-5">
             <Link href="/blogs" className="text-[0.72rem] font-semibold uppercase tracking-[0.2em] text-accent no-underline">
