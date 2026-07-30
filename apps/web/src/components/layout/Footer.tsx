@@ -111,12 +111,22 @@ export default function Footer() {
                 ))}
               </div>
               <div className="my-3 h-px w-full bg-white/8" />
-              <div className="flex flex-col gap-1">
+              <div className="flex flex-col gap-1.5">
                 {SITE.locations.map((loc) => (
                   <span key={loc} className="font-sans text-[0.82rem] font-semibold text-white/72">
                     {loc}
                   </span>
                 ))}
+              </div>
+              <div className="mt-3 flex items-center gap-3 border-t border-white/8 pt-3">
+                <a
+                  href="https://www.linkedin.com/company/core-communications-biz"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 text-[0.72rem] font-bold uppercase tracking-wider text-accent transition-colors hover:text-white no-underline"
+                >
+                  LinkedIn ↗
+                </a>
               </div>
             </div>
           </div>

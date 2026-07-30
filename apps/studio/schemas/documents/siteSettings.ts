@@ -12,6 +12,7 @@ export interface SocialLink {
   _type: 'socialLink';
   platform: string;
   url: string;
+  label?: string;
 }
 
 export interface SiteSettings {
@@ -29,6 +30,10 @@ export interface SiteSettings {
   sydneyAddress?: string;
   mumbaiAddress?: string;
   newDelhiAddress?: string;
+  websiteUrl?: string;
+  linkedinUrl?: string;
+  twitterUrl?: string;
+  instagramUrl?: string;
   socialLinks?: SocialLink[];
   seo?: {
     _type?: 'seo';
@@ -143,32 +148,86 @@ export const siteSettings = defineType({
       validation: (rule) => rule.max(240),
     }),
     defineField({
+      name: 'websiteUrl',
+      title: 'Main Website URL',
+      type: 'string',
+      description: 'Official website address (e.g. https://www.corecommunication.biz)',
+    }),
+    defineField({
+      name: 'linkedinUrl',
+      title: 'LinkedIn Company Page URL',
+      type: 'string',
+      description: 'Official LinkedIn company or profile URL',
+    }),
+    defineField({
+      name: 'twitterUrl',
+      title: 'Twitter / X Profile URL',
+      type: 'string',
+      description: 'Official Twitter / X profile URL',
+    }),
+    defineField({
+      name: 'instagramUrl',
+      title: 'Instagram Profile URL',
+      type: 'string',
+      description: 'Official Instagram profile URL',
+    }),
+    defineField({
       name: 'socialLinks',
-      title: 'Social links',
+      title: 'Additional Social & Web Links',
       type: 'array',
+      description: 'Add any extra social channels or external website links here.',
       of: [
         defineArrayMember({
           name: 'socialLink',
-          title: 'Social link',
+          title: 'Social & Web Link',
           type: 'object',
           fields: [
             defineField({
               name: 'platform',
-              title: 'Platform',
+              title: 'Platform / Channel Name',
               type: 'string',
-              validation: (rule) => rule.required().max(40),
+              description: 'Select or enter platform name (e.g. LinkedIn, Twitter / X, Instagram, Medium)',
+              options: {
+                list: [
+                  {title: 'LinkedIn', value: 'LinkedIn'},
+                  {title: 'Twitter / X', value: 'Twitter'},
+                  {title: 'Instagram', value: 'Instagram'},
+                  {title: 'Facebook', value: 'Facebook'},
+                  {title: 'YouTube', value: 'YouTube'},
+                  {title: 'Medium', value: 'Medium'},
+                  {title: 'Substack', value: 'Substack'},
+                  {title: 'GitHub', value: 'GitHub'},
+                  {title: 'Company Website', value: 'Website'},
+                  {title: 'Other Link', value: 'Other'},
+                ],
+              },
+              validation: (rule) => rule.required(),
             }),
             defineField({
               name: 'url',
-              title: 'URL',
-              type: 'url',
-              validation: (rule) => rule.required().uri({scheme: ['http', 'https']}),
+              title: 'Link URL',
+              type: 'string',
+              description: 'Target website or profile URL (e.g. https://linkedin.com/company/...)',
+              validation: (rule) => rule.required(),
+            }),
+            defineField({
+              name: 'label',
+              title: 'Display Label (Optional)',
+              type: 'string',
+              description: 'Custom button or text label (e.g. Follow us on LinkedIn)',
             }),
           ],
           preview: {
             select: {
-              title: 'platform',
+              title: 'label',
+              platform: 'platform',
               subtitle: 'url',
+            },
+            prepare({title, platform, subtitle}) {
+              return {
+                title: title || platform || 'Social Link',
+                subtitle: subtitle || '',
+              };
             },
           },
         }),

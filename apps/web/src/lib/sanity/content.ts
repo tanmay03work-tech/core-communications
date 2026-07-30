@@ -39,12 +39,39 @@ export async function getCaseStudies() {
 }
 
 export async function getCaseStudyBySlug(slug: string) {
-  const cleanSlug = slug.replace(/^\/+|\/+$/g, '');
-  return sanityFetch<GetCaseStudyBySlugResult>({
+  let decoded = slug;
+  try {
+    decoded = decodeURIComponent(slug).trim();
+  } catch (_) {
+    // fallback to original slug
+  }
+
+  const cleanSlug = decoded.replace(/^\/+|\/+$/g, '');
+  const seg = cleanSlug.split('/').pop() || cleanSlug;
+
+  const study = await sanityFetch<GetCaseStudyBySlugResult>({
     query: getCaseStudyBySlugQuery,
     params: {slug: cleanSlug},
     tags: ['caseStudies', `caseStudy:${cleanSlug}`],
   });
+
+  if (study) {
+    return study;
+  }
+
+  if (seg !== cleanSlug) {
+    const studyBySeg = await sanityFetch<GetCaseStudyBySlugResult>({
+      query: getCaseStudyBySlugQuery,
+      params: {slug: seg},
+      tags: ['caseStudies', `caseStudy:${seg}`],
+    });
+
+    if (studyBySeg) {
+      return studyBySeg;
+    }
+  }
+
+  return null;
 }
 
 export async function getCaseStudySlugs() {
@@ -70,7 +97,14 @@ export async function getBlogPosts() {
 }
 
 export async function getBlogPostBySlug(slug: string) {
-  const rawSlug = slug.replace(/^\/+|\/+$/g, '');
+  let decoded = slug;
+  try {
+    decoded = decodeURIComponent(slug).trim();
+  } catch (_) {
+    // fallback
+  }
+
+  const rawSlug = decoded.replace(/^\/+|\/+$/g, '');
   const lastSegment = rawSlug.split('/').pop() || rawSlug;
 
   const post = await sanityFetch<GetBlogPostBySlugResult>({
@@ -79,7 +113,7 @@ export async function getBlogPostBySlug(slug: string) {
     tags: ['blogPosts', `blogPost:${rawSlug}`],
   });
 
-  if (post) {
+  if (post && post.title) {
     return post;
   }
 
@@ -90,7 +124,7 @@ export async function getBlogPostBySlug(slug: string) {
       tags: ['blogPosts', `blogPost:${lastSegment}`],
     });
 
-    if (postBySegment) {
+    if (postBySegment && postBySegment.title) {
       return postBySegment;
     }
   }
@@ -100,15 +134,25 @@ export async function getBlogPostBySlug(slug: string) {
     return null;
   }
 
-  const targetLower = lastSegment.toLowerCase();
-  return (
-    allPosts.find((p) => {
-      if (!p.slug?.current) return false;
-      const s = p.slug.current.replace(/^\/+|\/+$/g, '').toLowerCase();
-      const seg = s.split('/').pop() || s;
-      return s === targetLower || seg === targetLower;
-    }) ?? null
-  );
+  const normalize = (s: string) => s.toLowerCase().replace(/[^a-z0-9]/g, '');
+  const targetNorm = normalize(lastSegment);
+
+  const matched = allPosts.find((p) => {
+    if (!p.slug?.current) return false;
+    const s = p.slug.current.replace(/^\/+|\/+$/g, '');
+    const seg = s.split('/').pop() || s;
+    return normalize(s) === targetNorm || normalize(seg) === targetNorm;
+  });
+
+  if (matched?.slug?.current) {
+    return sanityFetch<GetBlogPostBySlugResult>({
+      query: getBlogPostBySlugQuery,
+      params: {slug: matched.slug.current},
+      tags: ['blogPosts', `blogPost:${matched.slug.current}`],
+    });
+  }
+
+  return null;
 }
 
 export async function getBlogPostSlugs() {

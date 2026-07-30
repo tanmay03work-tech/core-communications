@@ -140,13 +140,38 @@ function CompactInfoBlock({block, index}: {block: CompactBlock; index?: number})
 }
 
 async function getSafeCaseStudyBySlug(slug: string) {
+  let decoded = slug;
   try {
-    const study = await getCaseStudyBySlug(slug);
-    return study ?? getStaticCaseStudy(slug);
-  } catch (error) {
-    console.error(`getCaseStudyBySlug error for "${slug}":`, error);
-    return getStaticCaseStudy(slug);
+    decoded = decodeURIComponent(slug).trim();
+  } catch (_) {
+    // fallback
   }
+
+  const cleanSlug = decoded.replace(/^\/+|\/+$/g, '');
+  const seg = cleanSlug.split('/').pop() || cleanSlug;
+
+  try {
+    const study = await getCaseStudyBySlug(cleanSlug);
+    if (study) return study;
+    if (seg !== cleanSlug) {
+      const studyBySeg = await getCaseStudyBySlug(seg);
+      if (studyBySeg) return studyBySeg;
+    }
+  } catch (error) {
+    console.error(`getCaseStudyBySlug error for "${cleanSlug}":`, error);
+  }
+
+  const normalize = (s: string) => s.toLowerCase().replace(/[^a-z0-9]/g, '');
+  const targetNorm = normalize(seg);
+
+  return (
+    CASE_STUDIES.items.find((item) => {
+      const normSlug = normalize(item.slug);
+      const normTitle = normalize(item.title);
+      const normClient = normalize(item.client);
+      return normSlug === targetNorm || normTitle === targetNorm || normClient === targetNorm;
+    }) ?? null
+  );
 }
 
 async function getSanityCaseStudySlugs(): Promise<string[]> {

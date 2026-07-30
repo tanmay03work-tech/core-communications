@@ -277,6 +277,8 @@ export type DownloadableResource = {
   description?: string;
   fileUrl?: string;
   fileSize?: string;
+  detectedFormat?: string;
+  detectedSize?: number;
 };
 
 export type RelatedLink = {
@@ -295,6 +297,7 @@ export type BlogPost = {
   excerpt: string;
   author?: string;
   authorRole?: string;
+  authorUrl?: string;
   readTime?: string;
   storyLead?: string;
   keyTakeaways?: string[];
@@ -342,6 +345,8 @@ export type TeamMember = {
   bio?: string;
   photo?: SanityImage;
   linkedIn?: string;
+  twitterUrl?: string;
+  websiteUrl?: string;
   order?: number;
   sections?: ModularSection[];
 };
@@ -358,7 +363,11 @@ export type SiteSettings = {
   sydneyAddress?: string;
   mumbaiAddress?: string;
   newDelhiAddress?: string;
-  socialLinks?: Array<{_key?: string; platform: string; url: string}>;
+  websiteUrl?: string;
+  linkedinUrl?: string;
+  twitterUrl?: string;
+  instagramUrl?: string;
+  socialLinks?: Array<{_key?: string; platform: string; url: string; label?: string}>;
   seo?: SeoData;
   pageSeo?: PageSeoData;
 };

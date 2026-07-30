@@ -48,12 +48,24 @@ export function getSanityImageUrl(source?: ImageSource | null, options: ImageOpt
 
   let chain = image.auto('format');
 
-  if (options.width) chain = chain.width(options.width);
-  if (options.height) chain = chain.height(options.height);
+  // Cap maximum dimensions to 2560px for safe CDN delivery
+  const reqWidth = options.width ? Math.min(options.width, 2560) : undefined;
+  const reqHeight = options.height ? Math.min(options.height, 4096) : undefined;
+
+  if (reqWidth) chain = chain.width(reqWidth);
+  if (reqHeight) chain = chain.height(reqHeight);
   if (options.fit) chain = chain.fit(options.fit);
-  if (options.quality) chain = chain.quality(options.quality);
+  chain = chain.quality(options.quality ?? 85);
 
   return chain.url();
+}
+
+export function getRawSanityImageUrl(source?: ImageSource | null): string {
+  if (!source) return '';
+  if (typeof source === 'string') return source;
+  if (source.asset?.url) return source.asset.url;
+  const image = urlFor(source);
+  return image ? image.url() : '';
 }
 
 type SanityImageProps = Omit<ImageProps, 'src' | 'alt'> & {
@@ -73,9 +85,12 @@ export function SanityImage({
 }: SanityImageProps) {
   const intrinsicWidth = image?.asset?.metadata?.dimensions?.width ?? width;
   const intrinsicHeight = image?.asset?.metadata?.dimensions?.height ?? height;
+  const safeWidth = Math.min(intrinsicWidth, 2560);
+  const safeHeight = Math.min(intrinsicHeight, 4096);
+
   const src = getSanityImageUrl(image, {
-    width: intrinsicWidth,
-    height: intrinsicHeight,
+    width: safeWidth,
+    height: safeHeight,
     quality: 85,
     fit: 'max',
   });
@@ -87,8 +102,8 @@ export function SanityImage({
   return createElement(Image, {
     src,
     alt: alt ?? image?.alt ?? '',
-    width: intrinsicWidth,
-    height: intrinsicHeight,
+    width: safeWidth,
+    height: safeHeight,
     sizes,
     ...props,
   });

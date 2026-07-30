@@ -2,6 +2,7 @@ import {defineArrayMember, defineField, defineType} from 'sanity';
 import type {ModularSection} from '../sections';
 import type {SanityImageValue, SanitySlugValue} from '../sections/shared';
 import type {Seo} from '../objects/seo';
+import {SmartImageInput} from '../../components/SmartImageInput';
 
 export interface BlogPost {
   _id?: string;
@@ -99,6 +100,12 @@ export const blogPost = defineType({
       validation: (rule) => rule.max(120),
     }),
     defineField({
+      name: 'authorUrl',
+      title: 'Author Social / Website Link',
+      type: 'string',
+      description: 'Author LinkedIn profile, X profile, or website URL',
+    }),
+    defineField({
       name: 'readTime',
       title: 'Read time',
       type: 'string',
@@ -144,9 +151,12 @@ export const blogPost = defineType({
     }),
     defineField({
       name: 'coverImage',
-      title: 'Cover image',
+      title: 'Cover image & Infographic',
       type: 'image',
       options: {hotspot: true},
+      components: {
+        input: SmartImageInput,
+      },
       fields: [
         defineField({
           name: 'alt',
@@ -178,11 +188,56 @@ export const blogPost = defineType({
           name: 'resource',
           title: 'Resource',
           fields: [
-            defineField({name: 'title', title: 'Resource Title', type: 'string', validation: (rule) => rule.required()}),
-            defineField({name: 'description', title: 'Description', type: 'text', rows: 2}),
-            defineField({name: 'fileUrl', title: 'Download File URL', type: 'url', description: 'Direct link or PDF URL to download'}),
-            defineField({name: 'fileSize', title: 'File Size / Format', type: 'string', description: 'Example: PDF • 2.4 MB'}),
+            defineField({
+              name: 'title',
+              title: 'Resource Title',
+              type: 'string',
+              description: 'Title of the guide or document (e.g. Crisis Communications Playbook)',
+              validation: (rule) => rule.required().min(2).max(120),
+            }),
+            defineField({
+              name: 'fileAsset',
+              title: 'Upload File Directly (PDF, DOCX, ZIP, etc.)',
+              type: 'file',
+              description: '📁 Drag & drop or click to upload your PDF, Whitepaper, or Guide directly from your device.',
+              options: {
+                storeOriginalFilename: true,
+              },
+            }),
+            defineField({
+              name: 'fileUrl',
+              title: 'Or External Link / Google Drive URL',
+              type: 'string',
+              description: 'Direct link, PDF URL, or Google Drive / Dropbox link (used if no file uploaded above).',
+            }),
+            defineField({
+              name: 'description',
+              title: 'Short Description',
+              type: 'text',
+              rows: 2,
+              description: 'Brief overview of what readers will learn in this resource.',
+            }),
+            defineField({
+              name: 'fileSize',
+              title: 'File Size / Format Label',
+              type: 'string',
+              description: 'Example: PDF • 2.4 MB (Auto-generated if left blank).',
+            }),
           ],
+          preview: {
+            select: {
+              title: 'title',
+              fileUrl: 'fileUrl',
+              fileName: 'fileAsset.asset.originalFilename',
+              fileSize: 'fileSize',
+            },
+            prepare({title, fileUrl, fileName, fileSize}) {
+              return {
+                title: title || fileName || 'Untitled Resource',
+                subtitle: fileSize || fileName || fileUrl || 'File Resource',
+              };
+            },
+          },
         }),
       ],
     }),

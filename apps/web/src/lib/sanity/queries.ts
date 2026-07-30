@@ -130,7 +130,13 @@ export const getAllCaseStudiesQuery = groq`
 `;
 
 export const getCaseStudyBySlugQuery = groq`
-  *[_type == "caseStudy" && (slug.current == $slug || slug.current == "/" + $slug)][0]{
+  *[_type == "caseStudy" && (
+    slug.current == $slug ||
+    slug.current == "/" + $slug ||
+    slug.current == "work/" + $slug ||
+    slug.current == "/work/" + $slug ||
+    slug.current match $slug
+  )][0]{
     ...,
     coverImage${imageFields},
     seo${seoFields},
@@ -167,6 +173,8 @@ export const getAllBlogPostsQuery = groq`
     category,
     excerpt,
     author,
+    authorRole,
+    authorUrl,
     readTime,
     publishedAt,
     featured,
@@ -191,7 +199,9 @@ export const getBlogPostBySlugQuery = groq`
     bodyContent[]${portableTextFields},
     downloadableResources[]{
       ...,
-      "fileUrl": coalesce(fileUrl, fileAsset.asset->url)
+      "fileUrl": coalesce(fileUrl, fileAsset.asset->url),
+      "detectedFormat": upper(fileAsset.asset->extension),
+      "detectedSize": fileAsset.asset->size
     },
     relatedLinks[]{
       ...
@@ -228,7 +238,16 @@ export const getSiteSettingsQuery = groq`
     sydneyAddress,
     mumbaiAddress,
     newDelhiAddress,
-    socialLinks,
+    websiteUrl,
+    linkedinUrl,
+    twitterUrl,
+    instagramUrl,
+    socialLinks[]{
+      ...,
+      platform,
+      url,
+      label
+    },
     seo${seoFields},
     pageSeo{
       about${seoFields},

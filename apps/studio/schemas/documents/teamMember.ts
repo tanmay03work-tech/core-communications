@@ -76,15 +76,21 @@ export const teamMember = defineType({
     }),
     defineField({
       name: 'linkedIn',
-      title: 'LinkedIn',
-      type: 'url',
-      validation: (rule) =>
-        rule.uri({scheme: ['http', 'https']}).custom((value) => {
-          if (!value) return true;
-          return value.includes('linkedin.com')
-            ? true
-            : 'Use a valid LinkedIn profile URL.';
-        }),
+      title: 'LinkedIn Profile URL',
+      type: 'string',
+      description: 'LinkedIn profile link (e.g. https://www.linkedin.com/in/...)',
+    }),
+    defineField({
+      name: 'twitterUrl',
+      title: 'Twitter / X Profile URL',
+      type: 'string',
+      description: 'Twitter / X profile link',
+    }),
+    defineField({
+      name: 'websiteUrl',
+      title: 'Personal / Portfolio Website URL',
+      type: 'string',
+      description: 'Personal or company website link',
     }),
     defineField({
       name: 'order',

@@ -2,6 +2,7 @@ import {defineArrayMember, defineField, defineType} from 'sanity';
 import type {ModularSection} from '../sections';
 import type {SanityImageValue, SanitySlugValue} from '../sections/shared';
 import type {Seo} from '../objects/seo';
+import {SmartImageInput} from '../../components/SmartImageInput';
 
 export interface CaseStudy {
   _id?: string;
@@ -217,9 +218,12 @@ export const caseStudy = defineType({
     }),
     defineField({
       name: 'coverImage',
-      title: 'Cover image',
+      title: 'Cover image & Infographic',
       type: 'image',
       options: {hotspot: true},
+      components: {
+        input: SmartImageInput,
+      },
       fields: [
         defineField({
           name: 'alt',

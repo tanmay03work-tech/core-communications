@@ -6,6 +6,40 @@ type DownloadableResourcesProps = {
   relatedLinks?: RelatedLink[];
 };
 
+function formatDownloadUrl(url?: string): string {
+  if (!url) return '#';
+  const cleanUrl = url.trim();
+
+  // Convert Google Drive view/share link to direct export/download link
+  const driveMatch = cleanUrl.match(/drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)/);
+  if (driveMatch && driveMatch[1]) {
+    return `https://drive.google.com/uc?export=download&id=${driveMatch[1]}`;
+  }
+
+  // Handle Dropbox download links
+  if (cleanUrl.includes('dropbox.com') && cleanUrl.includes('dl=0')) {
+    return cleanUrl.replace('dl=0', 'dl=1');
+  }
+
+  if (!cleanUrl.startsWith('http://') && !cleanUrl.startsWith('https://') && !cleanUrl.startsWith('/')) {
+    return `https://${cleanUrl}`;
+  }
+
+  return cleanUrl;
+}
+
+function formatResourceBadge(res: DownloadableResource): string {
+  if (res.fileSize) return res.fileSize;
+
+  const fmt = res.detectedFormat || 'PDF';
+  if (res.detectedSize) {
+    const mb = (res.detectedSize / (1024 * 1024)).toFixed(1);
+    return `${fmt} • ${mb} MB`;
+  }
+
+  return `${fmt} Resource`;
+}
+
 export default function DownloadableResources({ resources, relatedLinks }: DownloadableResourcesProps) {
   const safeResources = (resources ?? []).filter(Boolean);
   const safeLinks = (relatedLinks ?? []).filter(Boolean);
@@ -35,44 +69,49 @@ export default function DownloadableResources({ resources, relatedLinks }: Downl
           </div>
 
           <div className="grid gap-4 sm:grid-cols-2">
-            {safeResources.map((res, index) => (
-              <div
-                key={res._key ?? `${res.title}-${index}`}
-                className="group flex flex-col justify-between border border-navy/10 bg-surface-light p-4 transition-all duration-300 hover:border-primary/40 hover:bg-white hover:shadow-md"
-              >
-                <div>
-                  <div className="mb-2 flex items-center justify-between gap-2">
-                    <span className="inline-flex items-center gap-1.5 text-[0.68rem] font-bold uppercase tracking-wider text-primary">
-                      <FileText className="h-3.5 w-3.5" />
-                      {res.fileSize || 'PDF Resource'}
-                    </span>
-                  </div>
-                  <h4 className="font-heading text-base font-semibold leading-snug text-navy group-hover:text-primary">
-                    {res.title}
-                  </h4>
-                  {res.description ? (
-                    <p className="mt-2 line-clamp-2 text-xs leading-relaxed text-navy/70">
-                      {res.description}
-                    </p>
-                  ) : null}
-                </div>
+            {safeResources.map((res, index) => {
+              const downloadHref = formatDownloadUrl(res.fileUrl);
+              const badgeLabel = formatResourceBadge(res);
 
-                {res.fileUrl ? (
-                  <a
-                    href={res.fileUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    download
-                    className="mt-4 inline-flex items-center justify-center gap-2 border border-navy bg-navy px-4 py-2 text-[0.7rem] font-bold uppercase tracking-widest text-white transition-colors duration-200 hover:bg-primary"
-                  >
-                    <Download className="h-3.5 w-3.5 text-accent" />
-                    <span>Download Resource</span>
-                  </a>
-                ) : (
-                  <span className="mt-4 text-[0.7rem] italic text-navy/40">Download link coming soon</span>
-                )}
-              </div>
-            ))}
+              return (
+                <div
+                  key={res._key ?? `${res.title}-${index}`}
+                  className="group flex flex-col justify-between border border-navy/10 bg-surface-light p-4 transition-all duration-300 hover:border-primary/40 hover:bg-white hover:shadow-md"
+                >
+                  <div>
+                    <div className="mb-2 flex items-center justify-between gap-2">
+                      <span className="inline-flex items-center gap-1.5 text-[0.68rem] font-bold uppercase tracking-wider text-primary">
+                        <FileText className="h-3.5 w-3.5" />
+                        {badgeLabel}
+                      </span>
+                    </div>
+                    <h4 className="font-heading text-base font-semibold leading-snug text-navy group-hover:text-primary">
+                      {res.title}
+                    </h4>
+                    {res.description ? (
+                      <p className="mt-2 line-clamp-2 text-xs leading-relaxed text-navy/70">
+                        {res.description}
+                      </p>
+                    ) : null}
+                  </div>
+
+                  {res.fileUrl ? (
+                    <a
+                      href={downloadHref}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      download
+                      className="mt-4 inline-flex items-center justify-center gap-2 border border-navy bg-navy px-4 py-2 text-[0.7rem] font-bold uppercase tracking-widest text-white transition-colors duration-200 hover:bg-primary"
+                    >
+                      <Download className="h-3.5 w-3.5 text-accent" />
+                      <span>Download Resource</span>
+                    </a>
+                  ) : (
+                    <span className="mt-4 text-[0.7rem] italic text-navy/40">Download link coming soon</span>
+                  )}
+                </div>
+              );
+            })}
           </div>
         </div>
       ) : null}

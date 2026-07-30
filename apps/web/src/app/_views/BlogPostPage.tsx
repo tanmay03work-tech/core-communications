@@ -38,8 +38,16 @@ function formatDate(date?: string) {
 }
 
 async function getSafeBlogPostBySlug(slug: string) {
-  const cleanSlug = slug.replace(/^\/+|\/+$/g, '');
+  let decoded = slug;
+  try {
+    decoded = decodeURIComponent(slug).trim();
+  } catch (_) {
+    // fallback
+  }
+
+  const cleanSlug = decoded.replace(/^\/+|\/+$/g, '');
   const seg = cleanSlug.split('/').pop() || cleanSlug;
+
   try {
     const post = await getBlogPostBySlug(cleanSlug);
     if (post) return post;
@@ -137,7 +145,20 @@ export default async function BlogPostPage({params}: BlogPostPageProps) {
             {post.storyLead ? <p className="max-w-5xl text-[0.95rem] italic leading-relaxed text-black">{post.storyLead}</p> : null}
           </div>
           <div className="mobile-scroll-pane -mx-5 mt-5 flex gap-2.5 px-5 pb-2 sm:mx-0 sm:flex-wrap sm:px-0">
-            {post.author ? <span className="shrink-0 border border-neutral-100 px-4 py-2 text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-navy/72">{post.author}</span> : null}
+            {post.author ? (
+              post.authorUrl ? (
+                <a
+                  href={post.authorUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="shrink-0 border border-neutral-100 px-4 py-2 text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-accent transition-colors hover:text-navy no-underline"
+                >
+                  {post.author} ↗
+                </a>
+              ) : (
+                <span className="shrink-0 border border-neutral-100 px-4 py-2 text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-navy/72">{post.author}</span>
+              )
+            ) : null}
             {post.authorRole ? <span className="shrink-0 border border-neutral-100 px-4 py-2 text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-navy/72">{post.authorRole}</span> : null}
             {post.readTime ? <span className="shrink-0 border border-neutral-100 px-4 py-2 text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-navy/72">{post.readTime}</span> : null}
             {date ? <span className="shrink-0 border border-neutral-100 px-4 py-2 text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-navy/72">{date}</span> : null}
